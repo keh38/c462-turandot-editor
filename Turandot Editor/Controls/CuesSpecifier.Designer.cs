@@ -1,6 +1,6 @@
 ﻿namespace Turandot_Editor.Controls
 {
-    partial class AllCuesControl
+    partial class CuesSpecifier
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,71 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label21 = new System.Windows.Forms.Label();
             this.cueListBox = new System.Windows.Forms.ListBox();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cueDropDown = new System.Windows.Forms.ComboBox();
+            this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(11, 22);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(40, 17);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Cues";
             // 
             // cueListBox
             // 
             this.cueListBox.FormattingEnabled = true;
             this.cueListBox.ItemHeight = 16;
-            this.cueListBox.Location = new System.Drawing.Point(19, 51);
+            this.cueListBox.Location = new System.Drawing.Point(14, 42);
             this.cueListBox.Name = "cueListBox";
-            this.cueListBox.Size = new System.Drawing.Size(189, 164);
-            this.cueListBox.TabIndex = 0;
+            this.cueListBox.Size = new System.Drawing.Size(180, 180);
+            this.cueListBox.TabIndex = 2;
             this.cueListBox.SelectedIndexChanged += new System.EventHandler(this.cueListBox_SelectedIndexChanged);
             // 
             // propertyGrid
             // 
-            this.propertyGrid.Location = new System.Drawing.Point(234, 22);
+            this.propertyGrid.Location = new System.Drawing.Point(213, 11);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(259, 381);
-            this.propertyGrid.TabIndex = 1;
+            this.propertyGrid.Size = new System.Drawing.Size(244, 364);
+            this.propertyGrid.TabIndex = 4;
+            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
-            // label1
+            // addButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Cues";
-            // 
-            // cueDropDown
-            // 
-            this.cueDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cueDropDown.FormattingEnabled = true;
-            this.cueDropDown.Location = new System.Drawing.Point(19, 259);
-            this.cueDropDown.Name = "cueDropDown";
-            this.cueDropDown.Size = new System.Drawing.Size(189, 24);
-            this.cueDropDown.TabIndex = 3;
-            this.cueDropDown.SelectedIndexChanged += new System.EventHandler(this.cueDropDown_SelectedIndexChanged);
+            this.addButton.Location = new System.Drawing.Point(14, 228);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 29);
+            this.addButton.TabIndex = 5;
+            this.addButton.Text = "Add";
+            this.addButton.UseVisualStyleBackColor = true;
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(19, 221);
+            this.removeButton.Location = new System.Drawing.Point(119, 228);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(189, 32);
-            this.removeButton.TabIndex = 4;
+            this.removeButton.Size = new System.Drawing.Size(75, 29);
+            this.removeButton.TabIndex = 6;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
-            // AllCuesControl
+            // CuesSpecifier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.removeButton);
-            this.Controls.Add(this.cueDropDown);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.addButton);
             this.Controls.Add(this.propertyGrid);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.cueListBox);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "AllCuesControl";
-            this.Size = new System.Drawing.Size(522, 443);
+            this.Name = "CuesSpecifier";
+            this.Size = new System.Drawing.Size(468, 392);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,10 +98,10 @@
 
         #endregion
 
+        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ListBox cueListBox;
         private System.Windows.Forms.PropertyGrid propertyGrid;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cueDropDown;
+        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button removeButton;
     }
 }

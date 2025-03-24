@@ -105,11 +105,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Cues\ImageControl.cs">
+    <Compile Include="Controls\CuesSpecifier.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Cues\ImageControl.Designer.cs">
-      <DependentUpon>ImageControl.cs</DependentUpon>
+    <Compile Include="Controls\CuesSpecifier.Designer.cs">
+      <DependentUpon>CuesSpecifier.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Inputs\RandomProcessControl.cs">
       <SubType>UserControl</SubType>
@@ -128,18 +128,6 @@
     </Compile>
     <Compile Include="Controls\Cues\AllCuesControl.Designer.cs">
       <DependentUpon>AllCuesControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Cues\ScoreboardActionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Cues\ScoreboardActionControl.Designer.cs">
-      <DependentUpon>ScoreboardActionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Cues\CounterActionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Cues\CounterActionControl.Designer.cs">
-      <DependentUpon>CounterActionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExpressionEditor.cs">
       <SubType>UserControl</SubType>
@@ -171,89 +159,17 @@
     <Compile Include="Controls\Inputs\ScalerControl.Designer.cs">
       <DependentUpon>ScalerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Screen\AllButtonControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\AllButtonControl.Designer.cs">
-      <DependentUpon>AllButtonControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Inputs\AllSAMControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Inputs\AllSAMControl.Designer.cs">
       <DependentUpon>AllSAMControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Cues\CueControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Cues\CueControl.Designer.cs">
-      <DependentUpon>CueControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Cues\FixationPointActionCtl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Cues\FixationPointActionCtl.Designer.cs">
-      <DependentUpon>FixationPointActionCtl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\CheckBoxList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\CheckBoxList.Designer.cs">
-      <DependentUpon>CheckBoxList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\MessageLayoutControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\MessageLayoutControl.Designer.cs">
-      <DependentUpon>MessageLayoutControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\ParamSliderLayoutControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\ParamSliderLayoutControl.Designer.cs">
-      <DependentUpon>ParamSliderLayoutControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\ProgressBarLayoutControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\ProgressBarLayoutControl.Designer.cs">
-      <DependentUpon>ProgressBarLayoutControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\ScoreboardProperties.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\ScoreboardProperties.Designer.cs">
-      <DependentUpon>ScoreboardProperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\CounterProperties.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\CounterProperties.Designer.cs">
-      <DependentUpon>CounterProperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\FixationPointControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\FixationPointControl.Designer.cs">
-      <DependentUpon>FixationPointControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\FlagControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\FlagControl.Designer.cs">
       <DependentUpon>FlagControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Cues\HelpControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Cues\HelpControl.Designer.cs">
-      <DependentUpon>HelpControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\ButtonControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\ButtonControl.Designer.cs">
-      <DependentUpon>ButtonControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Inputs\InputControl.cs">
       <SubType>UserControl</SubType>
@@ -279,12 +195,6 @@
     <Compile Include="Controls\InstructionEditor.Designer.cs">
       <DependentUpon>InstructionEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Cues\ProgressBarActionCtl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Cues\ProgressBarActionCtl.Designer.cs">
-      <DependentUpon>ProgressBarActionCtl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Inputs\SAMControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -296,24 +206,6 @@
     </Compile>
     <Compile Include="Controls\Schedules\ScheduleControl.Designer.cs">
       <DependentUpon>ScheduleControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\GrapherLayoutControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\GrapherLayoutControl.Designer.cs">
-      <DependentUpon>GrapherLayoutControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\ThumbSliderLayoutControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\ThumbSliderLayoutControl.Designer.cs">
-      <DependentUpon>ThumbSliderLayoutControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Screen\XboxLinkControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Screen\XboxLinkControl.Designer.cs">
-      <DependentUpon>XboxLinkControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CreateAFCDialog.cs">
       <SubType>Form</SubType>
@@ -358,8 +250,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Turandot\Turandot.Layout.cs" />
-    <EmbeddedResource Include="Controls\Cues\ImageControl.resx">
-      <DependentUpon>ImageControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\CuesSpecifier.resx">
+      <DependentUpon>CuesSpecifier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Inputs\RandomProcessControl.resx">
       <DependentUpon>RandomProcessControl.cs</DependentUpon>
@@ -369,12 +261,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Cues\AllCuesControl.resx">
       <DependentUpon>AllCuesControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Cues\ScoreboardActionControl.resx">
-      <DependentUpon>ScoreboardActionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Cues\CounterActionControl.resx">
-      <DependentUpon>CounterActionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ExpressionEditor.resx">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
@@ -391,47 +277,11 @@
     <EmbeddedResource Include="Controls\Inputs\ScalerControl.resx">
       <DependentUpon>ScalerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\AllButtonControl.resx">
-      <DependentUpon>AllButtonControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Inputs\AllSAMControl.resx">
       <DependentUpon>AllSAMControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Cues\CueControl.resx">
-      <DependentUpon>CueControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Cues\FixationPointActionCtl.resx">
-      <DependentUpon>FixationPointActionCtl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\CheckBoxList.resx">
-      <DependentUpon>CheckBoxList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\MessageLayoutControl.resx">
-      <DependentUpon>MessageLayoutControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\ParamSliderLayoutControl.resx">
-      <DependentUpon>ParamSliderLayoutControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\ProgressBarLayoutControl.resx">
-      <DependentUpon>ProgressBarLayoutControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\ScoreboardProperties.resx">
-      <DependentUpon>ScoreboardProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\CounterProperties.resx">
-      <DependentUpon>CounterProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\FixationPointControl.resx">
-      <DependentUpon>FixationPointControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\FlagControl.resx">
       <DependentUpon>FlagControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Cues\HelpControl.resx">
-      <DependentUpon>HelpControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\ButtonControl.resx">
-      <DependentUpon>ButtonControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Inputs\InputControl.resx">
       <DependentUpon>InputControl.cs</DependentUpon>
@@ -445,23 +295,11 @@
     <EmbeddedResource Include="Controls\InstructionEditor.resx">
       <DependentUpon>InstructionEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Cues\ProgressBarActionCtl.resx">
-      <DependentUpon>ProgressBarActionCtl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Inputs\SAMControl.resx">
       <DependentUpon>SAMControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Schedules\ScheduleControl.resx">
       <DependentUpon>ScheduleControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\GrapherLayoutControl.resx">
-      <DependentUpon>GrapherLayoutControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\ThumbSliderLayoutControl.resx">
-      <DependentUpon>ThumbSliderLayoutControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Screen\XboxLinkControl.resx">
-      <DependentUpon>XboxLinkControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateAFCDialog.resx">
       <DependentUpon>CreateAFCDialog.cs</DependentUpon>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿extern alias KLibUnity;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,6 +30,8 @@ using Turandot.Optimizations;
 using Turandot.Schedules;
 using Turandot.Screen;
 
+
+using Expressions = KLibUnity::KLib.Expressions;
 
 namespace Turandot_Editor
 {
@@ -91,9 +95,6 @@ namespace Turandot_Editor
             endActionDropDown.AddItem(EndAction.None, "None");
             endActionDropDown.AddItem(EndAction.EndRun, "End run");
             endActionDropDown.AddItem(EndAction.AbortAll, "Abort all");
-
-            cuesList.SetItems(_params.screen.cues.ValidValues);
-            inputsList.SetItems(_params.screen.inputs.ValidValues);
 
             schedModeDropDown.Clear();
             schedModeDropDown.AddItem(Mode.Sequence, "Sequence");
@@ -297,9 +298,10 @@ namespace Turandot_Editor
                 linktoBrowser.DefaultFolder = Path.GetDirectoryName(_filePath);
             linktoBrowser.Value = p.linkTo;
 
-            allButtonControl.Value = p.buttons;
+            //p.screen.Cues = new List<CueLayout>() { new MessageLayout() { Name = "Message" } };
+            cuesSpecifier.Value = p.screen.Cues;
 
-            allCuesControl.SetAvailableCues(p.screen.cues.elements);
+            allCuesControl.SetAvailableCues(p.screen.Cues);
             inputControl.SetAvailableInputs(p.screen.inputs.elements, p.buttons.Select(o => o.name).ToList());
 
             ShowScreenElements(p.screen, p.buttons);
@@ -330,39 +332,6 @@ namespace Turandot_Editor
 
         void ShowScreenElements(ScreenElements screen, List<ButtonSpec> buttons)
         {
-            // Cues
-            cuesList.CheckItems(screen.cues.elements);
-
-            counterProperties.Value = screen.counter;
-            ShowScreenElementTabPage(screenCuesTab, counterPage, screen.cues.elements.Contains("counter"));
-
-            fixationPointControl.Value = screen.fixationPoint;
-            ShowScreenElementTabPage(screenCuesTab, fixationPtPage, screen.cues.elements.Contains("fixation point"));
-
-            messageLayoutControl.Value = screen.messageLayout;
-            ShowScreenElementTabPage(screenCuesTab, messagePage, screen.cues.elements.Contains("message"));
-
-            progressBarLayoutControl.Value = screen.progressBarLayout;
-            ShowScreenElementTabPage(screenCuesTab, progressBarPage, screen.cues.elements.Contains("progress bar"));
-
-            scoreboardProperties.Value = screen.scoreboard;
-            ShowScreenElementTabPage(screenCuesTab, scoreboardPage, screen.cues.elements.Contains("scoreboard"));
-
-            // Inputs
-            inputsList.CheckItems(screen.inputs.elements);
-
-            grapherLayoutControl.Value = screen.grapherLayout;
-            ShowScreenElementTabPage(screenInputsTab, grapherLayoutPage, screen.inputs.elements.Contains("grapher"));
-
-            paramSliderLayoutControl.Value = screen.paramSliderLayout;
-            ShowScreenElementTabPage(screenInputsTab, paramSliderPage, screen.inputs.elements.Contains("param slider"));
-
-            thumbSliderLayoutControl.Value = screen.thumbSliderLayout;
-            ShowScreenElementTabPage(screenInputsTab, thumbSliderPage, screen.inputs.elements.Contains("thumb slider"));
-
-            allButtonControl.AllowXbox = screen.inputs.elements.Contains("xbox");
-
-            finalPromptTextBox.Text = screen.finalPrompt;
         }
 
         void ShowInstructions(Turandot.Instructions instructions)
@@ -1067,16 +1036,16 @@ namespace Turandot_Editor
 
         private void EvaluateTimeoutExpression(string expr)
         {
-            //if (Expressions.TryEvaluate(expr))
-            //{
-            //    exprEvalResultTextBox.ForeColor = Color.Black;
-            //    exprEvalResultTextBox.Text = "Expression OK.";
-            //}
-            //else
-            //{
-            //    exprEvalResultTextBox.ForeColor = Color.Red;
-            //    exprEvalResultTextBox.Text = "Expression error:" + Environment.NewLine + Environment.NewLine + Expressions.LastError;
-            //}
+            if (Expressions.TryEvaluate(expr))
+            {
+                exprEvalResultTextBox.ForeColor = Color.Black;
+                exprEvalResultTextBox.Text = "Expression OK.";
+            }
+            else
+            {
+                exprEvalResultTextBox.ForeColor = Color.Red;
+                exprEvalResultTextBox.Text = "Expression error:" + Environment.NewLine + Environment.NewLine + Expressions.LastError;
+            }
         }
 
         private void eventListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)
@@ -1273,11 +1242,11 @@ namespace Turandot_Editor
                 signalGraph.GraphPane.CurveList.Clear();
 
 
-                //float T = Expressions.Evaluate(to.expr).Min();
-                //if (T <= 0) T = 0.001f * sigman.GetMaxInterval(1000);
-                //T = Math.Min(T, 25);
+                float T = Expressions.Evaluate(to.expr).Min();
+                if (T <= 0) T = 0.001f * sigman.GetMaxInterval(1000);
+                T = Math.Min(T, 25);
 
-                //npts = (int)(_Fs * T);
+                npts = (int)(_Fs * T);
 
                 //sigman.Initialize(_settings.transducer, _Fs, npts);
                 channelView.UpdateMaxLevel();
@@ -1395,9 +1364,9 @@ namespace Turandot_Editor
 
         private void MetricTableToMetricDictionary()
         {
-            //Expressions.Metrics.Clear();
-            //foreach (MetricTableEntry te in _settings.metricTable)
-            //    Expressions.Metrics.Add(te.name, new MetricData(DateTime.Now, te.value));
+            Expressions.Metrics.Clear();
+            foreach (MetricTableEntry te in _settings.metricTable)
+                Expressions.Metrics.Add(te.name, new MetricData(DateTime.Now, te.value));
 
         }
 
@@ -1428,8 +1397,6 @@ namespace Turandot_Editor
 
                 transducerTextBox.Text = _settings.transducer;
 
-                pingLED.On = false;
-
                 metricGridView.Rows.Clear();
                 foreach (MetricTableEntry t in _settings.metricTable)
                 {
@@ -1442,8 +1409,8 @@ namespace Turandot_Editor
 
         private void ApplyAudiogramDataToExpressions()
         {
-            //Expressions.Audiogram = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "agram.xml");
-            //Expressions.LDL = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "ldlgram.xml");
+            Expressions.Audiogram = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "agram.xml");
+            Expressions.LDL = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "ldlgram.xml");
         }
 
         public class MetricTableEntry
@@ -1578,39 +1545,6 @@ namespace Turandot_Editor
                 _params.linkTo = Path.GetFileName(linktoBrowser.Value);
                 SetDirty();
             }
-        }
-
-        private void allButtonControl_ItemAdded(object sender, Controls.Inputs.AllButtonControl.ChangedItem e)
-        {
-            inputControl.SetAvailableInputs(_params.screen.inputs.elements, _params.buttons.Select(b => b.name).ToList());
-            SetDirty();
-        }
-
-        private void allButtonControl_ItemRenamed(object sender, Controls.Inputs.AllButtonControl.ChangedItem e)
-        {
-            _params.RenameButton(e.name, e.oldName, e.index);
-
-            inputControl.SetAvailableInputs(_params.screen.inputs.elements, _params.buttons.Select(b => b.name).ToList());
-            UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
-            ShowEventCriteria(_params.inputEvents.Count > 0 ? _params.inputEvents[0] : null);
-
-            SetDirty();
-        }
-
-        private void allButtonControl_ItemsDeleted(object sender, Controls.Inputs.AllButtonControl.ChangedItems e)
-        {
-            _params.RemoveButtons(e.names);
-
-            inputControl.SetAvailableInputs(_params.screen.inputs.elements, _params.buttons.Select(b => b.name).ToList());
-            UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
-            ShowEventCriteria(_params.inputEvents.Count > 0 ? _params.inputEvents[0] : null);
-
-            if (!ValidateInputEvents())
-            {
-                System.Windows.Forms.MessageBox.Show("One or more Events have become invalid. Go to the Events tab to correct it.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            SetDirty();
         }
 
         private void CreateAFCButton_Click(object sender, EventArgs e)
@@ -1764,87 +1698,6 @@ namespace Turandot_Editor
             }
         }
 
-        private void finalPromptTextBox_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                _params.screen.finalPrompt = finalPromptTextBox.Text;
-                SetDirty();
-            }
-        }
-
-        private void cuesList_ItemCheckedChanged(object sender, Controls.Screen.CheckBoxList.CheckedItem e)
-        {
-            if (!_ignoreEvents)
-            {
-                if (e.isChecked) _params.screen.cues.elements.Add(e.name.ToLower());
-                else
-                {
-                    _params.screen.cues.elements.Remove(e.name.ToLower());
-                    _params.RemoveCue(e.name);
-                    Turandot.Layout.RefreshBadges(_params.flowChart, graphViewer);
-                }
-
-                if (e.name.ToLower().Equals("counter"))
-                    ShowScreenElementTabPage(screenCuesTab, counterPage, e.isChecked);
-                else if (e.name.ToLower().Equals("fixation point"))
-                    ShowScreenElementTabPage(screenCuesTab, fixationPtPage, e.isChecked);
-                else if (e.name.ToLower().Equals("message"))
-                    ShowScreenElementTabPage(screenCuesTab, messagePage, e.isChecked);
-                else if (e.name.ToLower().Equals("progress bar"))
-                    ShowScreenElementTabPage(screenCuesTab, progressBarPage, e.isChecked);
-                else if (e.name.ToLower().Equals("scoreboard"))
-                    ShowScreenElementTabPage(screenCuesTab, scoreboardPage, e.isChecked);
-
-                allCuesControl.SetAvailableCues(_params.screen.cues.elements);
-
-                SetDirty();
-            }
-        }
-
-        private void inputsList_ItemCheckedChanged(object sender, Controls.Screen.CheckBoxList.CheckedItem e)
-        {
-            if (!_ignoreEvents)
-            {
-                if (e.isChecked) _params.screen.inputs.elements.Add(e.name.ToLower());
-                else
-                {
-                    _params.screen.inputs.elements.Remove(e.name.ToLower());
-                    _params.RemoveInput(e.name);
-                    Turandot.Layout.RefreshBadges(_params.flowChart, graphViewer);
-                }
-
-                if (e.name.ToLower().Equals("grapher"))
-                    ShowScreenElementTabPage(screenInputsTab, grapherLayoutPage, e.isChecked);
-
-                if (e.name.ToLower().Equals("thumb slider"))
-                    ShowScreenElementTabPage(screenInputsTab, thumbSliderPage, e.isChecked);
-
-                inputControl.SetAvailableInputs(_params.screen.inputs.elements, _params.buttons.Select(b => b.name).ToList());
-
-                if (e.name.ToLower().Equals("xbox"))
-                {
-                    allButtonControl.AllowXbox = e.isChecked;
-                    _params.screen.xboxControllerLayout.allowUse = e.isChecked;
-                }
-
-                SetDirty();
-            }
-        }
-
-        private void grapherLayoutControl_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents) SetDirty();
-        }
-        private void thumbSliderLayoutControl_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents) SetDirty();
-        }
-        private void progressBarLayoutControl_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents) SetDirty();
-        }
-
         private void expertCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (!_ignoreEvents)
@@ -1881,80 +1734,12 @@ namespace Turandot_Editor
             SaveDefaults();
         }
 
-        private void pingButton_Click(object sender, EventArgs e)
-        {
-            pingLED.On = false;
-
-            try
-            {
-                _ipEndPoint = Discovery.Discover("TURANDOT");
-                if (_ipEndPoint == null)
-                {
-                    serverTextBox.Text = "no response";
-                }
-                else
-                {
-                    KTcpClient.ReverseBytes = Discovery.ByteFormat.ToLower().Equals("bigendian");
-                    serverTextBox.Text = _ipEndPoint.ToString();
-                    var result = KTcpClient.SendMessage(_ipEndPoint, "Ping");
-
-                    pingLED.On = true;
-                    ledTimer.Enabled = true;
-
-                    _ignoreEvents = true;
-                    EnumerateProjects();
-                    EnumerateSubjects();
-                    GetCurrentSubject();
-                    GetMetrics();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            _ignoreEvents = false;
-        }
-
-        private void ledTimer_Tick(object sender, EventArgs e)
-        {
-            pingLED.On = false;
-            ledTimer.Enabled = false;
-        }
-
-        private void EnumerateProjects()
-        {
-            var response = KTcpClient.SendMessageReceiveString(_ipEndPoint, "GetProjects");
-            projectDropdown.Items.Clear();
-            var projects = new List<string>(response.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries));
-            projectDropdown.Items.AddRange(projects.ToArray());
-
-            var current = KTcpClient.SendMessageReceiveString(_ipEndPoint, "GetCurrentProject");
-            projectDropdown.SelectedIndex = projects.IndexOf(current);
-        }
-
-        private void EnumerateSubjects()
-        {
-            var response = KTcpClient.SendMessageReceiveString(_ipEndPoint, $"GetSubjects;{projectDropdown.SelectedItem as string}");
-            subjectDropdown.Items.Clear();
-            var subjects = new List<string>(response.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries));
-
-            subjectDropdown.Items.Clear();
-            subjectDropdown.Items.AddRange(subjects.ToArray());
-
-            metricGridView.Rows.Clear();
-        }
-
-        private void GetCurrentSubject()
-        {
-            var current = KTcpClient.SendMessageReceiveString(_ipEndPoint, "GetCurrentSubject");
-            subjectDropdown.SelectedIndex = subjectDropdown.Items.IndexOf(current);
-        }
 
         private void GetMetrics()
         {
             var response = KTcpClient.SendMessageReceiveString(_ipEndPoint, "GetMetrics");
             var metrics = KFile.JSONDeserializeFromString<Dictionary<string, MetricData>>(response);
-            //Expressions.Metrics = metrics;
+            Expressions.Metrics = metrics;
 
             metricGridView.Rows.Clear();
             foreach (var key in metrics.Keys)
@@ -1998,22 +1783,5 @@ namespace Turandot_Editor
                 _selectedState.actionFamily = actionFamilyComboBox.SelectedItem as string;
             }
         }
-
-        private void projectDropdown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                EnumerateSubjects();
-            }
-        }
-
-        private void applyButton_Click(object sender, EventArgs e)
-        {
-            string data = (projectDropdown.SelectedItem as string) + ";" + (subjectDropdown.SelectedItem as string);
-
-            KTcpClient.SendMessage(_ipEndPoint, "SetSubject", data);
-            GetMetrics();
-        }
-
     }
 }
