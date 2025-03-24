@@ -20,14 +20,6 @@ namespace Turandot_Editor.Controls
 {
     public partial class AllCuesControl : KUserControl
     {
-        private const UInt32 CB_SETCUEBANNER = 0x1703;
-        private const UInt32 CB_GETCUEBANNER = 0x1704;
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "SendMessage")]
-        private static extern IntPtr SendMessageSetCueBanner([In()] IntPtr hWnd,
-            [In()] UInt32 Msg,
-            [In()] IntPtr wParam,
-            [In()] StringBuilder lParam);
-
         private List<Cue> _value = null;
         private List<CueLayout> _available;
 
@@ -53,7 +45,7 @@ namespace Turandot_Editor.Controls
 
             cueDropDown.Items.Clear();
             foreach (var a in _available) cueDropDown.Items.Add(a.Name);
-            SendMessageSetCueBanner(cueDropDown.Handle, CB_SETCUEBANNER, new IntPtr(1), new StringBuilder("Select One"));
+            KLib.Controls.Utilities.SetCueBanner(cueDropDown.Handle, "Add cue");
 
             ShowCues();
         }

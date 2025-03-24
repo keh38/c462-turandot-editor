@@ -46,8 +46,6 @@ namespace Turandot_Editor
 
         bool _controlKeyDown = false;
 
-        IPEndPoint _ipEndPoint;
-
         readonly float _Fs = 44100f;
 
         public MainForm()
@@ -120,6 +118,8 @@ namespace Turandot_Editor
                 _filePath = _settings.lastFile;
                 LoadParameterFile(_settings.lastFile);
             }
+
+            channelView.AdapterMap = AdapterMap.DefaultStereoMap("HD280");
 
             ShowParameters(_params);
         }
@@ -1114,7 +1114,8 @@ namespace Turandot_Editor
         private void channelListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)
         {
             Channel ch = new Channel(e.name, new KLib.Signals.Waveforms.Waveform());
-            //ch.Destination = KLib.Signals.Enumerations.Laterality.Diotic;
+            ch.Modality = KLib.Signals.Enumerations.Modality.Audio;
+            ch.Laterality = Laterality.Diotic;
             channelView.Value = ch;
 
             if (_selectedState.sigMan == null)
@@ -1248,7 +1249,8 @@ namespace Turandot_Editor
 
                 npts = (int)(_Fs * T);
 
-                //sigman.Initialize(_settings.transducer, _Fs, npts);
+                sigman.AdapterMap = AdapterMap.DefaultStereoMap("HD280");
+                sigman.Initialize(_Fs, npts);
                 channelView.UpdateMaxLevel();
 
                 time = new double[npts];
@@ -1737,42 +1739,28 @@ namespace Turandot_Editor
 
         private void GetMetrics()
         {
-            var response = KTcpClient.SendMessageReceiveString(_ipEndPoint, "GetMetrics");
-            var metrics = KFile.JSONDeserializeFromString<Dictionary<string, MetricData>>(response);
-            Expressions.Metrics = metrics;
+            //var response = KTcpClient.SendMessageReceiveString(_ipEndPoint, "GetMetrics");
+            //var metrics = KFile.JSONDeserializeFromString<Dictionary<string, MetricData>>(response);
+            //Expressions.Metrics = metrics;
 
-            metricGridView.Rows.Clear();
-            foreach (var key in metrics.Keys)
-            {
-                metricGridView.Rows.Add(key, metrics[key].val);
-            }
+            //metricGridView.Rows.Clear();
+            //foreach (var key in metrics.Keys)
+            //{
+            //    metricGridView.Rows.Add(key, metrics[key].val);
+            //}
         }
 
         private void showStateButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                KTcpClient.SendMessage(_ipEndPoint, "Set", KFile.ToXMLString(_params.ToBase()));
-                KTcpClient.SendMessage(_ipEndPoint, "Show", _selectedState.name);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void runButton_Click(object sender, EventArgs e)
-        {
-            KTcpClient tcpClient = new KTcpClient();
-            try
-            {
-                KTcpClient.SendMessage(_ipEndPoint, "Set", KFile.ToXMLString(_params.ToBase()));
-                KTcpClient.SendMessage(_ipEndPoint, "Run");
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //try
+            //{
+            //    KTcpClient.SendMessage(_ipEndPoint, "Set", KFile.ToXMLString(_params.ToBase()));
+            //    KTcpClient.SendMessage(_ipEndPoint, "Show", _selectedState.name);
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void actionFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
