@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFB9521D-05C2-42BF-98D2-FE39353FF951}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Turandot_Editor</RootNamespace>
+    <AssemblyName>Turandot Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\c462-diagnostics\Diagnostics\Library\ScriptAssemblies\Assembly-CSharp.dll</HintPath>
+      <Aliases>global, KLibUnity</Aliases>
+    </Reference>
+    <Reference Include="KLib">
+      <HintPath>..\..\..\KLib\Framework\KLib.dll</HintPath>
+    </Reference>
+    <Reference Include="KLib.Controls">
+      <HintPath>..\..\..\KLib\Framework\KLib.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="KLib.Net">
+      <HintPath>..\..\..\KLib\Framework\KLib.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="KLib.Unity.Controls.Signals, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\c462-hts-controller\Controls\bin\Debug\KLib.Unity.Controls.Signals.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\..\3rd Party\protobuf-net r668\Full\net30\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\c462-hts-controller\Unity Assemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\c462-hts-controller\Unity Assemblies\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\c462-hts-controller\Unity Assemblies\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph, Version=5.1.5.33417, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\KLib\Framework\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\Cues\ImageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\ImageControl.Designer.cs">
+      <DependentUpon>ImageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\RandomProcessControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\RandomProcessControl.Designer.cs">
+      <DependentUpon>RandomProcessControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Schedules\AdaptationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Schedules\AdaptationControl.Designer.cs">
+      <DependentUpon>AdaptationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cues\AllCuesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\AllCuesControl.Designer.cs">
+      <DependentUpon>AllCuesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cues\ScoreboardActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\ScoreboardActionControl.Designer.cs">
+      <DependentUpon>ScoreboardActionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cues\CounterActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\CounterActionControl.Designer.cs">
+      <DependentUpon>CounterActionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExpressionEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ExpressionEditor.Designer.cs">
+      <DependentUpon>ExpressionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\ButtonActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\ButtonActionControl.Designer.cs">
+      <DependentUpon>ButtonActionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\GrapherActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\GrapherActionControl.Designer.cs">
+      <DependentUpon>GrapherActionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\ParamSliderActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\ParamSliderActionControl.Designer.cs">
+      <DependentUpon>ParamSliderActionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\ScalerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\ScalerControl.Designer.cs">
+      <DependentUpon>ScalerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\AllButtonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\AllButtonControl.Designer.cs">
+      <DependentUpon>AllButtonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\AllSAMControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\AllSAMControl.Designer.cs">
+      <DependentUpon>AllSAMControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cues\CueControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\CueControl.Designer.cs">
+      <DependentUpon>CueControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cues\FixationPointActionCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\FixationPointActionCtl.Designer.cs">
+      <DependentUpon>FixationPointActionCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\CheckBoxList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\CheckBoxList.Designer.cs">
+      <DependentUpon>CheckBoxList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\MessageLayoutControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\MessageLayoutControl.Designer.cs">
+      <DependentUpon>MessageLayoutControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\ParamSliderLayoutControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\ParamSliderLayoutControl.Designer.cs">
+      <DependentUpon>ParamSliderLayoutControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\ProgressBarLayoutControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\ProgressBarLayoutControl.Designer.cs">
+      <DependentUpon>ProgressBarLayoutControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\ScoreboardProperties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\ScoreboardProperties.Designer.cs">
+      <DependentUpon>ScoreboardProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\CounterProperties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\CounterProperties.Designer.cs">
+      <DependentUpon>CounterProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\FixationPointControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\FixationPointControl.Designer.cs">
+      <DependentUpon>FixationPointControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FlagControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FlagControl.Designer.cs">
+      <DependentUpon>FlagControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cues\HelpControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\HelpControl.Designer.cs">
+      <DependentUpon>HelpControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\ButtonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\ButtonControl.Designer.cs">
+      <DependentUpon>ButtonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\InputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\InputControl.Designer.cs">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InputCriteria.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InputCriteria.Designer.cs">
+      <DependentUpon>InputCriteria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InputCriterionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InputCriterionControl.Designer.cs">
+      <DependentUpon>InputCriterionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstructionEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InstructionEditor.Designer.cs">
+      <DependentUpon>InstructionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cues\ProgressBarActionCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cues\ProgressBarActionCtl.Designer.cs">
+      <DependentUpon>ProgressBarActionCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\SAMControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\SAMControl.Designer.cs">
+      <DependentUpon>SAMControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Schedules\ScheduleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Schedules\ScheduleControl.Designer.cs">
+      <DependentUpon>ScheduleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\GrapherLayoutControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\GrapherLayoutControl.Designer.cs">
+      <DependentUpon>GrapherLayoutControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\ThumbSliderLayoutControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\ThumbSliderLayoutControl.Designer.cs">
+      <DependentUpon>ThumbSliderLayoutControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Screen\XboxLinkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Screen\XboxLinkControl.Designer.cs">
+      <DependentUpon>XboxLinkControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateAFCDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateAFCDialog.Designer.cs">
+      <DependentUpon>CreateAFCDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FSMGraph\FSMGraph.Badge.cs" />
+    <Compile Include="FSMGraph\FSMGraph.Edge.cs" />
+    <Compile Include="FSMGraph\FSMGraph.EdgeEnd.cs" />
+    <Compile Include="FSMGraph\FSMGraph.FSMGraphContainer.cs" />
+    <Compile Include="FSMGraph\FSMGraph.Graph.cs" />
+    <Compile Include="FSMGraph\FSMGraph.GraphViewAttributes.cs" />
+    <Compile Include="FSMGraph\FSMGraph.Label.cs" />
+    <Compile Include="FSMGraph\FSMGraph.Node.cs" />
+    <Compile Include="FSMGraph\FSMGraph.Port.cs" />
+    <Compile Include="FSMGraph\FSMGraphViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FSMGraph\FSMGraphViewer.Designer.cs">
+      <DependentUpon>FSMGraphViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NestedPropertyGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NestedPropertyGridView.Designer.cs">
+      <DependentUpon>NestedPropertyGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Turandot\Turandot.AvailableTransitions.cs" />
+    <Compile Include="Turandot\Turandot.EditorParameters.cs" />
+    <Compile Include="FSMGraph\FSMGraphAttributes.cs" />
+    <Compile Include="Turandot\Turandot.GraphViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Turandot\Turandot.Layout.cs" />
+    <EmbeddedResource Include="Controls\Cues\ImageControl.resx">
+      <DependentUpon>ImageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\RandomProcessControl.resx">
+      <DependentUpon>RandomProcessControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Schedules\AdaptationControl.resx">
+      <DependentUpon>AdaptationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cues\AllCuesControl.resx">
+      <DependentUpon>AllCuesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cues\ScoreboardActionControl.resx">
+      <DependentUpon>ScoreboardActionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cues\CounterActionControl.resx">
+      <DependentUpon>CounterActionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ExpressionEditor.resx">
+      <DependentUpon>ExpressionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\ButtonActionControl.resx">
+      <DependentUpon>ButtonActionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\GrapherActionControl.resx">
+      <DependentUpon>GrapherActionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\ParamSliderActionControl.resx">
+      <DependentUpon>ParamSliderActionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\ScalerControl.resx">
+      <DependentUpon>ScalerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\AllButtonControl.resx">
+      <DependentUpon>AllButtonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\AllSAMControl.resx">
+      <DependentUpon>AllSAMControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cues\CueControl.resx">
+      <DependentUpon>CueControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cues\FixationPointActionCtl.resx">
+      <DependentUpon>FixationPointActionCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\CheckBoxList.resx">
+      <DependentUpon>CheckBoxList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\MessageLayoutControl.resx">
+      <DependentUpon>MessageLayoutControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\ParamSliderLayoutControl.resx">
+      <DependentUpon>ParamSliderLayoutControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\ProgressBarLayoutControl.resx">
+      <DependentUpon>ProgressBarLayoutControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\ScoreboardProperties.resx">
+      <DependentUpon>ScoreboardProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\CounterProperties.resx">
+      <DependentUpon>CounterProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\FixationPointControl.resx">
+      <DependentUpon>FixationPointControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FlagControl.resx">
+      <DependentUpon>FlagControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cues\HelpControl.resx">
+      <DependentUpon>HelpControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\ButtonControl.resx">
+      <DependentUpon>ButtonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\InputControl.resx">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InputCriteria.resx">
+      <DependentUpon>InputCriteria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InputCriterionControl.resx">
+      <DependentUpon>InputCriterionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InstructionEditor.resx">
+      <DependentUpon>InstructionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cues\ProgressBarActionCtl.resx">
+      <DependentUpon>ProgressBarActionCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\SAMControl.resx">
+      <DependentUpon>SAMControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Schedules\ScheduleControl.resx">
+      <DependentUpon>ScheduleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\GrapherLayoutControl.resx">
+      <DependentUpon>GrapherLayoutControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\ThumbSliderLayoutControl.resx">
+      <DependentUpon>ThumbSliderLayoutControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Screen\XboxLinkControl.resx">
+      <DependentUpon>XboxLinkControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAFCDialog.resx">
+      <DependentUpon>CreateAFCDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSMGraph\FSMGraphViewer.resx">
+      <DependentUpon>FSMGraphViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NestedPropertyGridView.resx">
+      <DependentUpon>NestedPropertyGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Info.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\information.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Light on.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Music.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Pencil.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\star_green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Stop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Target.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Turandot.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Release" ("C:\Program Files (x86)\Inno Setup 6\Compil32.exe" /cc "D:\Development\Diagnostics\diag-turandot-editor\Installer\Turandot Editor.iss")</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
