@@ -37,12 +37,16 @@ namespace Turandot_Editor
 {
     public partial class MainForm : Form
     {
+        EditorNetwork _network;
         EditorParameters _params = new EditorParameters();
         bool _setupIsDirty = false;
         string _filePath = "";
         FlowElement _selectedState = null;
+        bool _remoteStart = false;
         bool _ignoreEvents = false;
         Settings _settings = new Settings();
+
+        AdapterMap _adapterMap = AdapterMap.Default7point1Map("HD280");
 
         bool _controlKeyDown = false;
 
@@ -113,16 +117,39 @@ namespace Turandot_Editor
             Version currentVersion = assembly.GetName().Version;
             versionLabel.Text = $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
 
+            channelView.AdapterMap = _adapterMap;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            _network = new EditorNetwork();
+            _network.RemoteMessageHandler = HandleRemoteMessage;
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            _network.StartListener();
+
             if (!string.IsNullOrEmpty(_settings.lastFile) && File.Exists(_settings.lastFile))
             {
                 _filePath = _settings.lastFile;
                 LoadParameterFile(_settings.lastFile);
             }
 
-            channelView.AdapterMap = AdapterMap.DefaultStereoMap("HD280");
-
             ShowParameters(_params);
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _network.Disconnect();
+            e.Cancel = !PassesDirtyCheck();
+            _settings.lastPosition.X = Location.X;
+            _settings.lastPosition.Y = Location.Y;
+            _settings.lastPosition.Width = Width;
+            _settings.lastPosition.Height = Height;
+            SaveDefaults();
+        }
+
 
         bool LoadParameterFile(string path)
         {
@@ -612,13 +639,11 @@ namespace Turandot_Editor
                 channelListBox.SetItems(state.sigMan.channels.Select(c => c.Name).ToList());
                 channelListBox.SelectedIndex = 0;
                 ShowSignalChannel(state.sigMan.channels[0]);
-                normalizeCheckBox.Visible = true;
                 signalGraph.Visible = true;
                 PlotSignals(state.sigMan, state.timeOuts[0]);
             }
             else
             {
-                normalizeCheckBox.Visible = false;
                 signalGraph.Visible = false;
                 audioErrorTextBox.Text = "";
                 channelListBox.Clear();
@@ -1000,16 +1025,6 @@ namespace Turandot_Editor
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = !PassesDirtyCheck();
-            _settings.lastPosition.X = Location.X;
-            _settings.lastPosition.Y = Location.Y;
-            _settings.lastPosition.Width = Width;
-            _settings.lastPosition.Height = Height;
-            SaveDefaults();
-        }
-
         private bool PassesDirtyCheck()
         {
             bool result = true;
@@ -1233,7 +1248,6 @@ namespace Turandot_Editor
             sigman.WavFolder = Path.Combine(_settings.wavFolder, _params.wavFolder);
 
             audioErrorTextBox.Text = "";
-            audioErrorTextBox.Visible = false;
 
             string chanName = "";
             int npts = 0;
@@ -1249,7 +1263,7 @@ namespace Turandot_Editor
 
                 npts = (int)(_Fs * T);
 
-                sigman.AdapterMap = AdapterMap.DefaultStereoMap("HD280");
+                sigman.AdapterMap = _adapterMap;
                 sigman.Initialize(_Fs, npts);
                 channelView.UpdateMaxLevel();
 
@@ -1258,8 +1272,8 @@ namespace Turandot_Editor
             catch (Exception ex)
             {
                 audioErrorTextBox.Text = ex.Message;
-                audioErrorTextBox.Visible = true;
                 signalGraph.Refresh();
+                graphTabControl.SelectedTab = errorPage;
 
                 return;
             }
@@ -1273,7 +1287,7 @@ namespace Turandot_Editor
                     ch.Create();
 
                     double[] y = new double[npts];
-                    double scaleFactor = normalizeCheckBox.Checked ? 1/ch.Data.Max() : 1;
+                    double scaleFactor = 1/ch.Data.Max();
 
                     for (int k = 0; k < npts; k++)
                     {
@@ -1286,7 +1300,7 @@ namespace Turandot_Editor
                 catch (Exception ex)
                 {
                     audioErrorTextBox.Text += chanName + ": " + ex.Message + System.Environment.NewLine;
-                    audioErrorTextBox.Visible = true;
+                    graphTabControl.SelectedTab = errorPage;
                 }
                 --irow;
             }
@@ -1297,6 +1311,7 @@ namespace Turandot_Editor
             signalGraph.GraphPane.YAxis.Scale.Max = 1.25;
             signalGraph.GraphPane.YAxis.IsVisible = false;
             signalGraph.Refresh();
+            graphTabControl.SelectedTab = string.IsNullOrEmpty(audioErrorTextBox.Text) ? graphPage : errorPage;
         }
 
         private void schedModeDropDown_ValueChanged(object sender, EventArgs e)
@@ -1390,8 +1405,6 @@ namespace Turandot_Editor
             {
                 _settings = KFile.XmlDeserialize<Settings>(fn);
 
-                normalizeCheckBox.Checked = _settings.normalize;
-
                 calfolderBrowser.Value = _settings.calFolder;
 
                 wavfolderBrowser.Value = _settings.wavFolder;
@@ -1434,15 +1447,6 @@ namespace Turandot_Editor
                 SetDirty();
                 UpdateTime();
             }
-        }
-
-        private void normalizeCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            _settings.normalize = normalizeCheckBox.Checked;
-            SaveDefaults();
-
-            if (_selectedState!=null && _selectedState.sigMan!=null)
-                PlotSignals(_selectedState.sigMan, _selectedState.timeOuts[0]);
         }
 
         private void calfolderBrowser_ValueChanged(object sender, EventArgs e)
@@ -1771,5 +1775,35 @@ namespace Turandot_Editor
                 _selectedState.actionFamily = actionFamilyComboBox.SelectedItem as string;
             }
         }
+
+        private void HandleRemoteMessage(string fullMessage)
+        {
+            var parts = fullMessage.Split(new char[] { ':' }, 2);
+            string message = parts[0];
+            string data = (parts.Length > 1) ? parts[1] : null;
+
+            switch (message)
+            {
+                case "OpenFile":
+                    RpcOpenFile(parts[1]);
+                    break;
+            }
+        }
+
+        private void RpcOpenFile(string filePath)
+        {
+            if (!PassesDirtyCheck()) return;
+            if (LoadParameterFile(filePath))
+            {
+                _filePath = filePath;
+                _setupIsDirty = false;
+                Invoke(new Action(() =>
+                {
+                    ShowParameters(_params);
+                    SelectNothing();
+                }));
+            }
+        }
+
     }
 }
