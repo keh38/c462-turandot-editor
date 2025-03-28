@@ -31,6 +31,8 @@ namespace Turandot_Editor.Controls
         public CuesSpecifier()
         {
             InitializeComponent();
+
+            KLib.Controls.Utilities.SetCueBanner(cueDropDown.Handle, "Add...");
         }
 
         private void ShowValue()
@@ -61,6 +63,21 @@ namespace Turandot_Editor.Controls
                 cueListBox.Items[index] = e.ChangedItem.Value.ToString();
                 cueListBox.SelectedIndex = index;
             }
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var newCue = new Turandot.Screen.MessageLayout() { Name = "Message" };
+            _value.Add(newCue);
+
+            cueListBox.Items.Add(newCue.Name);
+            cueListBox.SelectedItem = _value.Count - 1;
+
         }
     }
 }

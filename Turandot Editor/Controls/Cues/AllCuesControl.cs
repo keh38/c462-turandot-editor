@@ -68,6 +68,8 @@ namespace Turandot_Editor.Controls
 
         private void cueListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cueListBox.SelectedIndex < 0) return;
+
             propertyGrid.SelectedObject = _value[cueListBox.SelectedIndex];
         }
 

@@ -38,26 +38,28 @@
             // cueListBox
             // 
             this.cueListBox.FormattingEnabled = true;
-            this.cueListBox.ItemHeight = 16;
-            this.cueListBox.Location = new System.Drawing.Point(19, 51);
+            this.cueListBox.Location = new System.Drawing.Point(14, 41);
+            this.cueListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cueListBox.Name = "cueListBox";
-            this.cueListBox.Size = new System.Drawing.Size(189, 164);
+            this.cueListBox.Size = new System.Drawing.Size(143, 134);
             this.cueListBox.TabIndex = 0;
             this.cueListBox.SelectedIndexChanged += new System.EventHandler(this.cueListBox_SelectedIndexChanged);
             // 
             // propertyGrid
             // 
-            this.propertyGrid.Location = new System.Drawing.Point(234, 22);
+            this.propertyGrid.Location = new System.Drawing.Point(176, 18);
+            this.propertyGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(259, 381);
+            this.propertyGrid.Size = new System.Drawing.Size(194, 310);
             this.propertyGrid.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 31);
+            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 17);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Cues";
             // 
@@ -65,17 +67,21 @@
             // 
             this.cueDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cueDropDown.FormattingEnabled = true;
-            this.cueDropDown.Location = new System.Drawing.Point(19, 259);
+            this.cueDropDown.Items.AddRange(new object[] {
+            "Message"});
+            this.cueDropDown.Location = new System.Drawing.Point(14, 210);
+            this.cueDropDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cueDropDown.Name = "cueDropDown";
-            this.cueDropDown.Size = new System.Drawing.Size(189, 24);
+            this.cueDropDown.Size = new System.Drawing.Size(143, 21);
             this.cueDropDown.TabIndex = 3;
             this.cueDropDown.SelectedIndexChanged += new System.EventHandler(this.cueDropDown_SelectedIndexChanged);
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(19, 221);
+            this.removeButton.Location = new System.Drawing.Point(14, 180);
+            this.removeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(189, 32);
+            this.removeButton.Size = new System.Drawing.Size(142, 26);
             this.removeButton.TabIndex = 4;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -83,16 +89,15 @@
             // 
             // AllCuesControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.cueDropDown);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.cueListBox);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AllCuesControl";
-            this.Size = new System.Drawing.Size(522, 443);
+            this.Size = new System.Drawing.Size(392, 360);
             this.ResumeLayout(false);
             this.PerformLayout();
 
