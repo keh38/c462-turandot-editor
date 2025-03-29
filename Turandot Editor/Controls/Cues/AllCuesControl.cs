@@ -41,7 +41,7 @@ namespace Turandot_Editor.Controls
         public void SetAvailableCues(List<CueLayout> available)
         {
             _available = available;
-            _available.Sort();
+            _available.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             cueDropDown.Items.Clear();
             foreach (var a in _available) cueDropDown.Items.Add(a.Name);
@@ -55,7 +55,7 @@ namespace Turandot_Editor.Controls
             if (_value == null) return;
 
             cueListBox.Items.Clear();
-            cueListBox.Items.AddRange(_value.Select(x => x.Name).ToArray());
+            cueListBox.Items.AddRange(_value.Select(x => x.Target).ToArray());
             if (_value.Count > 0)
             {
                 cueListBox.SelectedIndex = 0;
@@ -73,8 +73,6 @@ namespace Turandot_Editor.Controls
             propertyGrid.SelectedObject = _value[cueListBox.SelectedIndex];
         }
 
-  
-
         #region Events
         public event EventHandler<CueAddRemoveArgs> CueAddRemove;
         protected virtual void OnCueAddRemove(CueAddRemoveArgs args)
@@ -91,21 +89,25 @@ namespace Turandot_Editor.Controls
 
         private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cueListBox.Items.Contains(cueDropDown.SelectedText)) return;
+            if (cueListBox.Items.Contains(cueDropDown.SelectedItem.ToString())) return;
 
             var c = _available[cueDropDown.SelectedIndex];
             if (c is MessageLayout)
             {
                 cueListBox.Items.Add(c.Name);
                 _value.Add((c as MessageLayout).GetDefaultCue());
-                cueListBox.SelectedItem = _value.Count - 1;
             }
+            _value[_value.Count - 1].Target = c.Name;
+            cueListBox.SelectedItem = _value.Count - 1;
+            OnValueChanged();
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-
+            if (cueListBox.SelectedIndex < 0) return;
+            var toDelete = _value.Find(x => x.Target.Equals(cueListBox.SelectedItem.ToString()));
+            if (toDelete != null) _value.Remove(toDelete);
+            OnValueChanged();
         }
-
-    }
+   }
 }

@@ -449,11 +449,12 @@
             // cuesSpecifier
             // 
             this.cuesSpecifier.Location = new System.Drawing.Point(18, 19);
-            this.cuesSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cuesSpecifier.Margin = new System.Windows.Forms.Padding(2);
             this.cuesSpecifier.Name = "cuesSpecifier";
-            this.cuesSpecifier.Size = new System.Drawing.Size(351, 391);
+            this.cuesSpecifier.Size = new System.Drawing.Size(351, 316);
             this.cuesSpecifier.TabIndex = 0;
             this.cuesSpecifier.Value = null;
+            this.cuesSpecifier.ValueChanged += new System.EventHandler(this.cuesSpecifier_ValueChanged);
             // 
             // InstructionsPage
             // 
@@ -1187,6 +1188,7 @@
             // audioErrorTextBox
             // 
             this.audioErrorTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.audioErrorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.audioErrorTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.audioErrorTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.audioErrorTextBox.Location = new System.Drawing.Point(3, 47);

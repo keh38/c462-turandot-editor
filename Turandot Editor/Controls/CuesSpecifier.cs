@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 using KLib.Controls;
 
-using Turandot.Cues;
+using Turandot.Screen;
 
 namespace Turandot_Editor.Controls
 {
@@ -27,6 +27,11 @@ namespace Turandot_Editor.Controls
                 ShowValue();
             }
         }
+
+        public delegate void NameChangeDelegate(string oldName, string newName);
+        public NameChangeDelegate NameChange;
+        private void OnNameChange(string oldName, string newName) { NameChange?.Invoke(oldName, newName); }
+
 
         public CuesSpecifier()
         {
@@ -62,22 +67,47 @@ namespace Turandot_Editor.Controls
                 int index = cueListBox.SelectedIndex;
                 cueListBox.Items[index] = e.ChangedItem.Value.ToString();
                 cueListBox.SelectedIndex = index;
+                OnNameChange(e.OldValue.ToString(), e.ChangedItem.Value.ToString());
             }
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-
+            if (cueListBox.SelectedIndex < 0) return;
+            var toRemove = _value.Find(x => x.Name == cueListBox.SelectedItem.ToString());
+            if (toRemove != null)
+            {
+                _value.Remove(toRemove);
+            }
+            ShowValue();
+            OnValueChanged();
         }
 
         private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var newCue = new Turandot.Screen.MessageLayout() { Name = "Message" };
+            string baseName = "Message";
+            string name = baseName;
+            int num = 1;
+            while (true)
+            {
+                if (_value.Find(x => x.Name.Equals(name)) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    num++;
+                    name = $"{baseName}_{num}";
+                }
+            }
+
+            //var newCue = new Turandot.Screen.MessageLayout() { Name = name };
+            var newCue = new Turandot.Screen.MessageLayout();
             _value.Add(newCue);
 
             cueListBox.Items.Add(newCue.Name);
             cueListBox.SelectedItem = _value.Count - 1;
-
+            OnValueChanged();
         }
     }
 }

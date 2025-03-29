@@ -76,6 +76,8 @@ namespace Turandot_Editor
 
             trialLogOptionEnum.Fill<TrialLogOption>();
 
+            cuesSpecifier.NameChange = cuesSpecifier_NameChanged;
+
             tabControl.TabPages.Remove(StatePage);
             tabControl.TabPages.Remove(AudioPage);
             tabControl.TabPages.Remove(CuePage);
@@ -1310,6 +1312,7 @@ namespace Turandot_Editor
             signalGraph.GraphPane.YAxis.Scale.Min = -sigman.channels.Count * 2 + 0.75;
             signalGraph.GraphPane.YAxis.Scale.Max = 1.25;
             signalGraph.GraphPane.YAxis.IsVisible = false;
+            signalGraph.Visible = true;
             signalGraph.Refresh();
             graphTabControl.SelectedTab = string.IsNullOrEmpty(audioErrorTextBox.Text) ? graphPage : errorPage;
         }
@@ -1803,6 +1806,44 @@ namespace Turandot_Editor
                     SelectNothing();
                 }));
             }
+        }
+
+        private void cuesSpecifier_ValueChanged(object sender, EventArgs e)
+        {
+            foreach (var fe in _params.flowChart)
+            {
+                CurateCues(fe, _params.screen.Cues);             
+            }
+            allCuesControl.SetAvailableCues(_params.screen.Cues);
+            SetDirty();
+        }
+
+        private void CurateCues(FlowElement flowElement, List<CueLayout> screenCues)
+        {
+            var toDelete = new List<Cue>();
+            foreach (var c in flowElement.cues)
+            {
+                if (screenCues.Find(x => x.Name.Equals(c.Target)) == null)
+                {
+                    toDelete.Add(c);
+                }
+            }
+
+            foreach (var c in toDelete) flowElement.cues.Remove(c);
+        }
+
+        private void cuesSpecifier_NameChanged(string oldName, string newName)
+        {
+            foreach (var fe in _params.flowChart)
+            {
+                var c = fe.cues.Find(x => x.Target == oldName);
+                if (c != null)
+                {
+                    c.Target = newName;
+                }
+            }
+            allCuesControl.SetAvailableCues(_params.screen.Cues);
+            SetDirty();
         }
 
     }
