@@ -139,6 +139,7 @@
             this.pathLabel = new System.Windows.Forms.Label();
             this.graphViewer = new Turandot.GraphViewer();
             this.ledTimer = new System.Windows.Forms.Timer(this.components);
+            this.inputLayout1 = new Turandot_Editor.Controls.InputLayout();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -438,6 +439,7 @@
             // ScreenPage
             // 
             this.ScreenPage.BackColor = System.Drawing.SystemColors.Control;
+            this.ScreenPage.Controls.Add(this.inputLayout1);
             this.ScreenPage.Controls.Add(this.cuesSpecifier);
             this.ScreenPage.Location = new System.Drawing.Point(4, 22);
             this.ScreenPage.Name = "ScreenPage";
@@ -1461,6 +1463,15 @@
             // 
             this.ledTimer.Interval = 2500;
             // 
+            // inputLayout1
+            // 
+            this.inputLayout1.Location = new System.Drawing.Point(18, 339);
+            this.inputLayout1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputLayout1.Name = "inputLayout1";
+            this.inputLayout1.Size = new System.Drawing.Size(351, 318);
+            this.inputLayout1.TabIndex = 1;
+            this.inputLayout1.Value = null;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1630,6 +1641,7 @@
         private System.Windows.Forms.TabPage graphPage;
         private System.Windows.Forms.TabPage errorPage;
         private System.Windows.Forms.Label label21;
+        private Controls.InputLayout inputLayout1;
     }
 }
 

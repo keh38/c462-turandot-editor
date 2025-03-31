@@ -26,7 +26,6 @@ using KLib.Signals;
 
 using Turandot;
 using Turandot.Cues;
-using Turandot.Optimizations;
 using Turandot.Schedules;
 using Turandot.Screen;
 
@@ -331,15 +330,14 @@ namespace Turandot_Editor
             cuesSpecifier.Value = p.screen.Cues;
 
             allCuesControl.SetAvailableCues(p.screen.Cues);
-            inputControl.SetAvailableInputs(p.screen.inputs.elements, p.buttons.Select(o => o.name).ToList());
+            //inputControl.SetAvailableInputs(p.screen.inputs.elements, p.buttons.Select(o => o.name).ToList());
 
-            ShowScreenElements(p.screen, p.buttons);
             ShowInstructions(p.instructions);
 
             _ignoreEvents = false;
 
-            ShowEventParameters(p.buttons, p.GetActiveInputControls(), p.flags, p.GetActiveScalarControls(), p.inputEvents);
-            ShowScheduleParameters(p.schedule, p.adapt, p.optimization);
+            //ShowEventParameters(p.buttons, p.GetActiveInputControls(), p.flags, p.GetActiveScalarControls(), p.inputEvents);
+            ShowScheduleParameters(p.schedule, p.adapt);
 
             FillActionFamilyComboBox();
         }
@@ -359,10 +357,6 @@ namespace Turandot_Editor
 
         }
 
-        void ShowScreenElements(ScreenElements screen, List<ButtonSpec> buttons)
-        {
-        }
-
         void ShowInstructions(Turandot.Instructions instructions)
         {
             instructionEditor.Value = instructions;
@@ -378,19 +372,19 @@ namespace Turandot_Editor
             _ignoreEvents = false;
         }
 
-        void ShowEventParameters(List<ButtonSpec> buttons, List<string> inputControls, List<Flag> flags, List<string> scalarControls, List<InputEvent> events)
-        {
-            UpdateInputSources(inputControls, scalarControls);
-            ShowFlags(flags);
+        //void ShowEventParameters(List<ButtonSpec> buttons, List<string> inputControls, List<Flag> flags, List<string> scalarControls, List<InputEvent> events)
+        //{
+        //    UpdateInputSources(inputControls, scalarControls);
+        //    ShowFlags(flags);
 
-            _ignoreEvents = true;
+        //    _ignoreEvents = true;
 
-            eventListBox.SetItems(events.Select(e => e.name).ToList());
-            eventListBox.SelectedIndex = events.Count > 0 ? 0 : -1;
-            _ignoreEvents = false;
+        //    eventListBox.SetItems(events.Select(e => e.name).ToList());
+        //    eventListBox.SelectedIndex = events.Count > 0 ? 0 : -1;
+        //    _ignoreEvents = false;
 
-            ShowEventCriteria(events.Count > 0 ? events[0] : null);
-        }
+        //    ShowEventCriteria(events.Count > 0 ? events[0] : null);
+        //}
 
         private void ShowEventCriteria(InputEvent inputEvent)
         {
@@ -417,7 +411,7 @@ namespace Turandot_Editor
             inputCriteria.FlagNames = _params.flags.Select(f => f.name).ToArray();
         }
 
-        private void ShowScheduleParameters(Schedule sched, Adaptation adapt, Optimization optim)
+        private void ShowScheduleParameters(Schedule sched, Adaptation adapt)
         {
             schedModeDropDown.SetEnumValue(sched.mode);
             SelectScheduleTab(sched.mode);
@@ -860,7 +854,7 @@ namespace Turandot_Editor
                     _params.RenameState(oldName, newName);
                     _params.RenameStateInSchedule(oldName, newName);
 
-                    ShowScheduleParameters(_params.schedule, _params.adapt, _params.optimization);
+                    ShowScheduleParameters(_params.schedule, _params.adapt);
 
                     SetDirty();
                 }

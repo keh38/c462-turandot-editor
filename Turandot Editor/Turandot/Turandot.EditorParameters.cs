@@ -15,7 +15,6 @@ namespace Turandot
     {
         public EditorParameters() : base()
         {
-            CreateDefaultButtons();
         }
 
         public void Read(string path)
@@ -24,7 +23,6 @@ namespace Turandot
             {
                 default:
                     Parameters p = KFile.XmlDeserialize<Parameters>(path);
-                    p.CheckParameters();
                     FromBase(p);
                     break;
             }
@@ -186,10 +184,10 @@ namespace Turandot
                 }
             }
 
-            foreach (ButtonSpec b in buttons)
-            {
-                if (active.Find(a => a == b.name) == null) active.Add(b.name);
-            }
+            //foreach (ButtonSpec b in buttons)
+            //{
+            //    if (active.Find(a => a == b.name) == null) active.Add(b.name);
+            //}
 
             if (flowChart.Find(o => o.nI_mAFC) != null)
             {
@@ -205,10 +203,10 @@ namespace Turandot
         public List<string> GetActiveScalarControls()
         {
             var active = new List<string>();
-            if (screen.inputs.elements.Contains("pupillometer"))
-            {
-                active.Add("Pupil");
-            }
+            //if (screen.inputs.elements.Contains("pupillometer"))
+            //{
+            //    active.Add("Pupil");
+            //}
 
             foreach (FlowElement fe in flowChart)
             {
@@ -299,7 +297,6 @@ namespace Turandot
             Parameters p = new Parameters();
 
             p.instructions = instructions;
-            p.buttons = buttons;
             p.screen = screen;
             p.inputEvents = inputEvents;
             p.flowChart = flowChart;
@@ -315,7 +312,6 @@ namespace Turandot
             p.flags = flags;
             p.schedule = schedule;
             p.adapt = adapt;
-            p.optimization = optimization;
             p.tag = tag;
             p.linkTo = linkTo;
             p.wavFolder = wavFolder;
@@ -329,7 +325,6 @@ namespace Turandot
         public void FromBase(Parameters p)
         {
             instructions = p.instructions;
-            buttons = p.buttons;
             screen = p.screen;
             inputEvents = p.inputEvents;
             flowChart = p.flowChart;
@@ -337,7 +332,6 @@ namespace Turandot
             flags = p.flags;
             schedule = p.schedule;
             adapt = p.adapt;
-            optimization = p.optimization;
             tag = p.tag;
             linkTo = p.linkTo;
             wavFolder = p.wavFolder;
@@ -420,40 +414,40 @@ namespace Turandot
             // Buttons
             FlowElement startState = flowChart.Find(o => o.name == firstState);
             FlowElement nextState = flowChart.Find(o => o.name == state.timeOuts[0].linkTo);
-            foreach (ButtonSpec b in buttons.FindAll(o => o.style == ButtonSpec.ButtonStyle.Square)) buttons.Remove(b);
+            //foreach (ButtonSpec b in buttons.FindAll(o => o.style == ButtonSpec.ButtonStyle.Square)) buttons.Remove(b);
 
             int dx = 1160 / (numIntervals - 1);
             int x = -580;
             for (int k=0; k<numIntervals; k++)
             {
-                ButtonSpec b = new ButtonSpec("Button" + (k + 1).ToString(), (k + 1).ToString());
-                b.style = ButtonSpec.ButtonStyle.Square;
-                b.x = x;
-                buttons.Add(b);
-                x += dx;
+                //ButtonSpec b = new ButtonSpec("Button" + (k + 1).ToString(), (k + 1).ToString());
+                //b.style = ButtonSpec.ButtonStyle.Square;
+                //b.x = x;
+                //buttons.Add(b);
+                //x += dx;
 
-                Button i = new Button(b.name);
-                i.startVisible = true;
-                i.endVisible = true;
-                i.numFlash = 0;
-                i.enabled = false;
-                startState.inputs.Add(i);
+                //Button i = new Button(b.name);
+                //i.startVisible = true;
+                //i.endVisible = true;
+                //i.numFlash = 0;
+                //i.enabled = false;
+                //startState.inputs.Add(i);
 
-                i = new Button(b.name);
-                i.startVisible = true;
-                i.numFlash = 1;
-                i.delay_ms = k * ISI_ms;
-                i.duration_ms = ISI_ms - 100; // state.sigMan["Test"].gate.Duration_ms;
-                i.interval_ms = float.PositiveInfinity;
-                i.enabled = false;
-                i.tweenScale = true;
-                i.scaleTo = 1.25f;
-                state.inputs.Add(i);
+                //i = new Button(b.name);
+                //i.startVisible = true;
+                //i.numFlash = 1;
+                //i.delay_ms = k * ISI_ms;
+                //i.duration_ms = ISI_ms - 100; // state.sigMan["Test"].gate.Duration_ms;
+                //i.interval_ms = float.PositiveInfinity;
+                //i.enabled = false;
+                //i.tweenScale = true;
+                //i.scaleTo = 1.25f;
+                //state.inputs.Add(i);
 
-                i = new Button(b.name);
-                i.startVisible = true;
-                i.numFlash = 0;
-                nextState.inputs.Add(i);
+                //i = new Button(b.name);
+                //i.startVisible = true;
+                //i.numFlash = 0;
+                //nextState.inputs.Add(i);
             }
         }
 

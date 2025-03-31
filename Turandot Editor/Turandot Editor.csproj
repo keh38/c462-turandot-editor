@@ -105,11 +105,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CuesSpecifier.cs">
+    <Compile Include="Controls\Cues\CuesSpecifier.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CuesSpecifier.Designer.cs">
+    <Compile Include="Controls\Cues\CuesSpecifier.Designer.cs">
       <DependentUpon>CuesSpecifier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Inputs\InputLayout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Inputs\InputLayout.Designer.cs">
+      <DependentUpon>InputLayout.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Inputs\RandomProcessControl.cs">
       <SubType>UserControl</SubType>
@@ -251,8 +257,11 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Turandot\Turandot.Layout.cs" />
-    <EmbeddedResource Include="Controls\CuesSpecifier.resx">
+    <EmbeddedResource Include="Controls\Cues\CuesSpecifier.resx">
       <DependentUpon>CuesSpecifier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Inputs\InputLayout.resx">
+      <DependentUpon>InputLayout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Inputs\RandomProcessControl.resx">
       <DependentUpon>RandomProcessControl.cs</DependentUpon>
