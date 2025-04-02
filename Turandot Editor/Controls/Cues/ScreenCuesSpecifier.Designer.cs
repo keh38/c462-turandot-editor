@@ -1,6 +1,6 @@
 ﻿namespace Turandot_Editor.Controls
 {
-    partial class CuesSpecifier
+    partial class ScreenCuesSpecifier
     {
         /// <summary> 
         /// Required designer variable.

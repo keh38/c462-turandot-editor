@@ -14,11 +14,11 @@ using Turandot.Screen;
 
 namespace Turandot_Editor.Controls
 {
-    public partial class InputLayout : KUserControl
+    public partial class ScreenCuesSpecifier : KUserControl
     {
-        private List<InputLayout> _value;
+        private List<CueLayout> _value;
 
-        public List<InputLayout> Value
+        public List<CueLayout> Value
         {
             get { return _value; }
             set
@@ -33,22 +33,22 @@ namespace Turandot_Editor.Controls
         private void OnNameChange(string oldName, string newName) { NameChange?.Invoke(oldName, newName); }
 
 
-        public InputLayout()
+        public ScreenCuesSpecifier()
         {
             InitializeComponent();
 
-            KLib.Controls.Utilities.SetCueBanner(inputDropDown.Handle, "Add...");
+            KLib.Controls.Utilities.SetCueBanner(cueDropDown.Handle, "Add...");
         }
 
         private void ShowValue()
         {
             if (_value == null) return;
 
-            inputListBox.Items.Clear();
-            inputListBox.Items.AddRange(_value.Select(x => x.Name).ToArray());
+            cueListBox.Items.Clear();
+            cueListBox.Items.AddRange(_value.Select(x => x.Name).ToArray());
             if (_value.Count > 0)
             {
-                inputListBox.SelectedIndex = 0;
+                cueListBox.SelectedIndex = 0;
             }
         }
 
@@ -56,7 +56,7 @@ namespace Turandot_Editor.Controls
         {
             if (_ignoreEvents) return;
 
-            propertyGrid.SelectedObject = _value[inputListBox.SelectedIndex];
+            propertyGrid.SelectedObject = _value[cueListBox.SelectedIndex];
         }
 
         private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -64,17 +64,17 @@ namespace Turandot_Editor.Controls
             if (e.ChangedItem.Label == "Name")
             {
                 _ignoreEvents = true;
-                int index = inputListBox.SelectedIndex;
-                inputListBox.Items[index] = e.ChangedItem.Value.ToString();
-                inputListBox.SelectedIndex = index;
+                int index = cueListBox.SelectedIndex;
+                cueListBox.Items[index] = e.ChangedItem.Value.ToString();
+                cueListBox.SelectedIndex = index;
                 OnNameChange(e.OldValue.ToString(), e.ChangedItem.Value.ToString());
             }
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            if (inputListBox.SelectedIndex < 0) return;
-            var toRemove = _value.Find(x => x.Name == inputListBox.SelectedItem.ToString());
+            if (cueListBox.SelectedIndex < 0) return;
+            var toRemove = _value.Find(x => x.Name == cueListBox.SelectedItem.ToString());
             if (toRemove != null)
             {
                 _value.Remove(toRemove);
@@ -102,11 +102,11 @@ namespace Turandot_Editor.Controls
             }
 
             //var newCue = new Turandot.Screen.MessageLayout() { Name = name };
-            //var newCue = new Turandot.Screen.MessageLayout();
-            //_value.Add(newCue);
+            var newCue = new Turandot.Screen.MessageLayout();
+            _value.Add(newCue);
 
-            //inputListBox.Items.Add(newCue.Name);
-            inputListBox.SelectedItem = _value.Count - 1;
+            cueListBox.Items.Add(newCue.Name);
+            cueListBox.SelectedItem = _value.Count - 1;
             OnValueChanged();
         }
     }

@@ -18,12 +18,12 @@ using KLib.ExtensionMethods;
 
 namespace Turandot_Editor.Controls
 {
-    public partial class AllCuesControl : KUserControl
+    public partial class StateCuesControl : KUserControl
     {
         private List<Cue> _value = null;
         private List<CueLayout> _available;
 
-        public AllCuesControl()
+        public StateCuesControl()
         {
             InitializeComponent();
         }

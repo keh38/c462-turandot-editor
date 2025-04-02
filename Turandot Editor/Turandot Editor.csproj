@@ -105,23 +105,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Cues\CuesSpecifier.cs">
+    <Compile Include="Controls\Cues\ScreenCuesSpecifier.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Cues\CuesSpecifier.Designer.cs">
-      <DependentUpon>CuesSpecifier.cs</DependentUpon>
+    <Compile Include="Controls\Cues\ScreenCuesSpecifier.Designer.cs">
+      <DependentUpon>ScreenCuesSpecifier.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Inputs\InputLayout.cs">
+    <Compile Include="Controls\Inputs\ScreenInputsSpecifier.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Inputs\InputLayout.Designer.cs">
-      <DependentUpon>InputLayout.cs</DependentUpon>
+    <Compile Include="Controls\Inputs\ScreenInputsSpecifier.Designer.cs">
+      <DependentUpon>ScreenInputsSpecifier.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Inputs\RandomProcessControl.cs">
+    <Compile Include="Controls\Inputs\StateInputsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Inputs\RandomProcessControl.Designer.cs">
-      <DependentUpon>RandomProcessControl.cs</DependentUpon>
+    <Compile Include="Controls\Inputs\StateInputsControl.Designer.cs">
+      <DependentUpon>StateInputsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Schedules\AdaptationControl.cs">
       <SubType>UserControl</SubType>
@@ -129,11 +129,11 @@
     <Compile Include="Controls\Schedules\AdaptationControl.Designer.cs">
       <DependentUpon>AdaptationControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Cues\AllCuesControl.cs">
+    <Compile Include="Controls\Cues\StateCuesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Cues\AllCuesControl.Designer.cs">
-      <DependentUpon>AllCuesControl.cs</DependentUpon>
+    <Compile Include="Controls\Cues\StateCuesControl.Designer.cs">
+      <DependentUpon>StateCuesControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExpressionEditor.cs">
       <SubType>UserControl</SubType>
@@ -141,47 +141,11 @@
     <Compile Include="Controls\ExpressionEditor.Designer.cs">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Inputs\ButtonActionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Inputs\ButtonActionControl.Designer.cs">
-      <DependentUpon>ButtonActionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Inputs\GrapherActionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Inputs\GrapherActionControl.Designer.cs">
-      <DependentUpon>GrapherActionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Inputs\ParamSliderActionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Inputs\ParamSliderActionControl.Designer.cs">
-      <DependentUpon>ParamSliderActionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Inputs\ScalerControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Inputs\ScalerControl.Designer.cs">
-      <DependentUpon>ScalerControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Inputs\AllSAMControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Inputs\AllSAMControl.Designer.cs">
-      <DependentUpon>AllSAMControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\FlagControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\FlagControl.Designer.cs">
       <DependentUpon>FlagControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Inputs\InputControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Inputs\InputControl.Designer.cs">
-      <DependentUpon>InputControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\InputCriteria.cs">
       <SubType>UserControl</SubType>
@@ -200,12 +164,6 @@
     </Compile>
     <Compile Include="Controls\InstructionEditor.Designer.cs">
       <DependentUpon>InstructionEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Inputs\SAMControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Inputs\SAMControl.Designer.cs">
-      <DependentUpon>SAMControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Schedules\ScheduleControl.cs">
       <SubType>UserControl</SubType>
@@ -257,44 +215,26 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Turandot\Turandot.Layout.cs" />
-    <EmbeddedResource Include="Controls\Cues\CuesSpecifier.resx">
-      <DependentUpon>CuesSpecifier.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Cues\ScreenCuesSpecifier.resx">
+      <DependentUpon>ScreenCuesSpecifier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\InputLayout.resx">
-      <DependentUpon>InputLayout.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Inputs\ScreenInputsSpecifier.resx">
+      <DependentUpon>ScreenInputsSpecifier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\RandomProcessControl.resx">
-      <DependentUpon>RandomProcessControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Inputs\StateInputsControl.resx">
+      <DependentUpon>StateInputsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Schedules\AdaptationControl.resx">
       <DependentUpon>AdaptationControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Cues\AllCuesControl.resx">
-      <DependentUpon>AllCuesControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Cues\StateCuesControl.resx">
+      <DependentUpon>StateCuesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ExpressionEditor.resx">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\ButtonActionControl.resx">
-      <DependentUpon>ButtonActionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\GrapherActionControl.resx">
-      <DependentUpon>GrapherActionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\ParamSliderActionControl.resx">
-      <DependentUpon>ParamSliderActionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\ScalerControl.resx">
-      <DependentUpon>ScalerControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\AllSAMControl.resx">
-      <DependentUpon>AllSAMControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\FlagControl.resx">
       <DependentUpon>FlagControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\InputControl.resx">
-      <DependentUpon>InputControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputCriteria.resx">
       <DependentUpon>InputCriteria.cs</DependentUpon>
@@ -304,9 +244,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InstructionEditor.resx">
       <DependentUpon>InstructionEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Inputs\SAMControl.resx">
-      <DependentUpon>SAMControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Schedules\ScheduleControl.resx">
       <DependentUpon>ScheduleControl.cs</DependentUpon>

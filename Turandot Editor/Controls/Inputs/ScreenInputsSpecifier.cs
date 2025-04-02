@@ -14,11 +14,11 @@ using Turandot.Screen;
 
 namespace Turandot_Editor.Controls
 {
-    public partial class CuesSpecifier : KUserControl
+    public partial class ScreenInputsSpecifier : KUserControl
     {
-        private List<CueLayout> _value;
+        private List<InputLayout> _value;
 
-        public List<CueLayout> Value
+        public List<InputLayout> Value
         {
             get { return _value; }
             set
@@ -33,30 +33,30 @@ namespace Turandot_Editor.Controls
         private void OnNameChange(string oldName, string newName) { NameChange?.Invoke(oldName, newName); }
 
 
-        public CuesSpecifier()
+        public ScreenInputsSpecifier()
         {
             InitializeComponent();
 
-            KLib.Controls.Utilities.SetCueBanner(cueDropDown.Handle, "Add...");
+            KLib.Controls.Utilities.SetCueBanner(inputDropDown.Handle, "Add...");
         }
 
         private void ShowValue()
         {
             if (_value == null) return;
 
-            cueListBox.Items.Clear();
-            cueListBox.Items.AddRange(_value.Select(x => x.Name).ToArray());
+            inputListBox.Items.Clear();
+            inputListBox.Items.AddRange(_value.Select(x => x.Name).ToArray());
             if (_value.Count > 0)
             {
-                cueListBox.SelectedIndex = 0;
+                inputListBox.SelectedIndex = 0;
             }
         }
 
-        private void cueListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void inputListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_ignoreEvents) return;
 
-            propertyGrid.SelectedObject = _value[cueListBox.SelectedIndex];
+            propertyGrid.SelectedObject = _value[inputListBox.SelectedIndex];
         }
 
         private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -64,17 +64,17 @@ namespace Turandot_Editor.Controls
             if (e.ChangedItem.Label == "Name")
             {
                 _ignoreEvents = true;
-                int index = cueListBox.SelectedIndex;
-                cueListBox.Items[index] = e.ChangedItem.Value.ToString();
-                cueListBox.SelectedIndex = index;
+                int index = inputListBox.SelectedIndex;
+                inputListBox.Items[index] = e.ChangedItem.Value.ToString();
+                inputListBox.SelectedIndex = index;
                 OnNameChange(e.OldValue.ToString(), e.ChangedItem.Value.ToString());
             }
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            if (cueListBox.SelectedIndex < 0) return;
-            var toRemove = _value.Find(x => x.Name == cueListBox.SelectedItem.ToString());
+            if (inputListBox.SelectedIndex < 0) return;
+            var toRemove = _value.Find(x => x.Name == inputListBox.SelectedItem.ToString());
             if (toRemove != null)
             {
                 _value.Remove(toRemove);
@@ -83,9 +83,11 @@ namespace Turandot_Editor.Controls
             OnValueChanged();
         }
 
-        private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        private void inputDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string baseName = "Message";
+            if (inputDropDown.SelectedIndex < 0) return;
+
+            string baseName = "Button";
             string name = baseName;
             int num = 1;
             while (true)
@@ -101,12 +103,12 @@ namespace Turandot_Editor.Controls
                 }
             }
 
-            //var newCue = new Turandot.Screen.MessageLayout() { Name = name };
-            var newCue = new Turandot.Screen.MessageLayout();
-            _value.Add(newCue);
+            var newInput = new Turandot.Screen.ButtonLayout() { Name = name };
+            _value.Add(newInput);
 
-            cueListBox.Items.Add(newCue.Name);
-            cueListBox.SelectedItem = _value.Count - 1;
+            inputListBox.Items.Add(newInput.Name);
+            inputListBox.SelectedItem = _value.Count - 1;
+            inputDropDown.SelectedIndex = -1;
             OnValueChanged();
         }
     }

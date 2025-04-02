@@ -76,6 +76,7 @@ namespace Turandot_Editor
             trialLogOptionEnum.Fill<TrialLogOption>();
 
             cuesSpecifier.NameChange = cuesSpecifier_NameChanged;
+            inputsSpecifier.NameChange = inputsSpecifier_NameChanged;
 
             tabControl.TabPages.Remove(StatePage);
             tabControl.TabPages.Remove(AudioPage);
@@ -326,11 +327,11 @@ namespace Turandot_Editor
                 linktoBrowser.DefaultFolder = Path.GetDirectoryName(_filePath);
             linktoBrowser.Value = p.linkTo;
 
-            //p.screen.Cues = new List<CueLayout>() { new MessageLayout() { Name = "Message" } };
             cuesSpecifier.Value = p.screen.Cues;
+            inputsSpecifier.Value = p.screen.Inputs;
 
-            allCuesControl.SetAvailableCues(p.screen.Cues);
-            //inputControl.SetAvailableInputs(p.screen.inputs.elements, p.buttons.Select(o => o.name).ToList());
+            stateCuesControl.SetAvailableCues(p.screen.Cues);
+            stateInputsControl.SetAvailableInputs(p.screen.Inputs);
 
             ShowInstructions(p.instructions);
 
@@ -627,8 +628,8 @@ namespace Turandot_Editor
             CreateAFCButton.Enabled = !state.nI_mAFC; // && state.sigMan != null && state.sigMan.channels.Count > 0;
             ipcTextBox.Text = state.ipcCommand;
 
-            allCuesControl.Value = state.cues;
-            inputControl.Value = state.inputs;
+            stateCuesControl.Value = state.cues;
+            stateInputsControl.Value = state.inputs;
 
             if (state.sigMan != null)
             {
@@ -1117,7 +1118,7 @@ namespace Turandot_Editor
             }
         }
 
-        private void allCuesControl_CueAddRemove(object sender, Controls.AllCuesControl.CueAddRemoveArgs e)
+        private void allCuesControl_CueAddRemove(object sender, Controls.StateCuesControl.CueAddRemoveArgs e)
         {
             Turandot.Layout.AddBadges(_selectedState, graphViewer);
         }
@@ -1496,16 +1497,16 @@ namespace Turandot_Editor
             }
         }
 
-        private void inputControl_InputAddRemove(object sender, Controls.InputControl.InputAddRemoveArgs e)
-        {
-            Turandot.Layout.AddBadges(_selectedState, graphViewer);
-            UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
+        //private void inputControl_InputAddRemove(object sender, Controls.InputControl.InputAddRemoveArgs e)
+        //{
+        //    Turandot.Layout.AddBadges(_selectedState, graphViewer);
+        //    UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
 
-            if (!ValidateInputEvents())
-            {
-                System.Windows.Forms.MessageBox.Show("One or more Events have become invalid. Go to the Events tab to correct it.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //    if (!ValidateInputEvents())
+        //    {
+        //        System.Windows.Forms.MessageBox.Show("One or more Events have become invalid. Go to the Events tab to correct it.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private bool ValidateInputEvents()
         {
@@ -1808,7 +1809,7 @@ namespace Turandot_Editor
             {
                 CurateCues(fe, _params.screen.Cues);             
             }
-            allCuesControl.SetAvailableCues(_params.screen.Cues);
+            stateCuesControl.SetAvailableCues(_params.screen.Cues);
             SetDirty();
         }
 
@@ -1836,9 +1837,46 @@ namespace Turandot_Editor
                     c.Target = newName;
                 }
             }
-            allCuesControl.SetAvailableCues(_params.screen.Cues);
+            stateCuesControl.SetAvailableCues(_params.screen.Cues);
             SetDirty();
         }
 
+        private void inputsSpecifier_ValueChanged(object sender, EventArgs e)
+        {
+            foreach (var fe in _params.flowChart)
+            {
+                CurateInputs(fe, _params.screen.Inputs);
+            }
+            stateInputsControl.SetAvailableInputs(_params.screen.Inputs);
+            SetDirty();
+        }
+
+        private void CurateInputs(FlowElement flowElement, List<InputLayout> screenInputs)
+        {
+            var toDelete = new List<Turandot.Inputs.Input>();
+            foreach (var i in flowElement.inputs)
+            {
+                if (screenInputs.Find(x => x.Name.Equals(i.Target)) == null)
+                {
+                    toDelete.Add(i);
+                }
+            }
+
+            foreach (var i in toDelete) flowElement.inputs.Remove(i);
+        }
+
+        private void inputsSpecifier_NameChanged(string oldName, string newName)
+        {
+            foreach (var fe in _params.flowChart)
+            {
+                var i = fe.inputs.Find(x => x.Target == oldName);
+                if (i != null)
+                {
+                    i.Target = newName;
+                }
+            }
+            stateInputsControl.SetAvailableInputs(_params.screen.Inputs);
+            SetDirty();
+        }
     }
 }

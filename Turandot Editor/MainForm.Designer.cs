@@ -53,7 +53,8 @@
             this.MetricName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MetricValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ScreenPage = new System.Windows.Forms.TabPage();
-            this.cuesSpecifier = new Turandot_Editor.Controls.CuesSpecifier();
+            this.inputsSpecifier = new Turandot_Editor.Controls.ScreenInputsSpecifier();
+            this.cuesSpecifier = new Turandot_Editor.Controls.ScreenCuesSpecifier();
             this.InstructionsPage = new System.Windows.Forms.TabPage();
             this.instructionEditor = new Turandot_Editor.Controls.InstructionEditor();
             this.EventPage = new System.Windows.Forms.TabPage();
@@ -120,9 +121,9 @@
             this.channelListBox = new KLib.Controls.KUserListBox();
             this.channelView = new KLib.Unity.Controls.Signals.ChannelView();
             this.CuePage = new System.Windows.Forms.TabPage();
-            this.allCuesControl = new Turandot_Editor.Controls.AllCuesControl();
+            this.stateCuesControl = new Turandot_Editor.Controls.StateCuesControl();
             this.InputPage = new System.Windows.Forms.TabPage();
-            this.inputControl = new Turandot_Editor.Controls.InputControl();
+            this.stateInputsControl = new Turandot_Editor.Controls.StateInputsControl();
             this.infoPanel = new System.Windows.Forms.Panel();
             this.bypassIPCCheckBox = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -139,7 +140,6 @@
             this.pathLabel = new System.Windows.Forms.Label();
             this.graphViewer = new Turandot.GraphViewer();
             this.ledTimer = new System.Windows.Forms.Timer(this.components);
-            this.inputLayout1 = new Turandot_Editor.Controls.InputLayout();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -439,7 +439,7 @@
             // ScreenPage
             // 
             this.ScreenPage.BackColor = System.Drawing.SystemColors.Control;
-            this.ScreenPage.Controls.Add(this.inputLayout1);
+            this.ScreenPage.Controls.Add(this.inputsSpecifier);
             this.ScreenPage.Controls.Add(this.cuesSpecifier);
             this.ScreenPage.Location = new System.Drawing.Point(4, 22);
             this.ScreenPage.Name = "ScreenPage";
@@ -447,6 +447,16 @@
             this.ScreenPage.Size = new System.Drawing.Size(611, 702);
             this.ScreenPage.TabIndex = 2;
             this.ScreenPage.Text = "Screen";
+            // 
+            // inputsSpecifier
+            // 
+            this.inputsSpecifier.Location = new System.Drawing.Point(18, 339);
+            this.inputsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputsSpecifier.Name = "inputsSpecifier";
+            this.inputsSpecifier.Size = new System.Drawing.Size(351, 318);
+            this.inputsSpecifier.TabIndex = 1;
+            this.inputsSpecifier.Value = null;
+            this.inputsSpecifier.ValueChanged += new System.EventHandler(this.inputsSpecifier_ValueChanged);
             // 
             // cuesSpecifier
             // 
@@ -1235,7 +1245,7 @@
             // CuePage
             // 
             this.CuePage.BackColor = System.Drawing.SystemColors.Control;
-            this.CuePage.Controls.Add(this.allCuesControl);
+            this.CuePage.Controls.Add(this.stateCuesControl);
             this.CuePage.Location = new System.Drawing.Point(4, 22);
             this.CuePage.Name = "CuePage";
             this.CuePage.Padding = new System.Windows.Forms.Padding(3);
@@ -1243,21 +1253,21 @@
             this.CuePage.TabIndex = 1;
             this.CuePage.Text = "Cues";
             // 
-            // allCuesControl
+            // stateCuesControl
             // 
-            this.allCuesControl.Location = new System.Drawing.Point(7, 7);
-            this.allCuesControl.Margin = new System.Windows.Forms.Padding(4);
-            this.allCuesControl.Name = "allCuesControl";
-            this.allCuesControl.Size = new System.Drawing.Size(442, 491);
-            this.allCuesControl.TabIndex = 0;
-            this.allCuesControl.Value = null;
-            this.allCuesControl.CueAddRemove += new System.EventHandler<Turandot_Editor.Controls.AllCuesControl.CueAddRemoveArgs>(this.allCuesControl_CueAddRemove);
-            this.allCuesControl.ValueChanged += new System.EventHandler(this.allCuesControl_ValueChanged);
+            this.stateCuesControl.Location = new System.Drawing.Point(7, 7);
+            this.stateCuesControl.Margin = new System.Windows.Forms.Padding(4);
+            this.stateCuesControl.Name = "stateCuesControl";
+            this.stateCuesControl.Size = new System.Drawing.Size(442, 491);
+            this.stateCuesControl.TabIndex = 0;
+            this.stateCuesControl.Value = null;
+            this.stateCuesControl.CueAddRemove += new System.EventHandler<Turandot_Editor.Controls.StateCuesControl.CueAddRemoveArgs>(this.allCuesControl_CueAddRemove);
+            this.stateCuesControl.ValueChanged += new System.EventHandler(this.allCuesControl_ValueChanged);
             // 
             // InputPage
             // 
             this.InputPage.BackColor = System.Drawing.SystemColors.Control;
-            this.InputPage.Controls.Add(this.inputControl);
+            this.InputPage.Controls.Add(this.stateInputsControl);
             this.InputPage.Location = new System.Drawing.Point(4, 22);
             this.InputPage.Name = "InputPage";
             this.InputPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1265,18 +1275,13 @@
             this.InputPage.TabIndex = 8;
             this.InputPage.Text = "Inputs";
             // 
-            // inputControl
+            // stateInputsControl1
             // 
-            this.inputControl.AutoSize = true;
-            this.inputControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.inputControl.Location = new System.Drawing.Point(30, 26);
-            this.inputControl.Margin = new System.Windows.Forms.Padding(4);
-            this.inputControl.Name = "inputControl";
-            this.inputControl.Size = new System.Drawing.Size(158, 168);
-            this.inputControl.TabIndex = 0;
-            this.inputControl.Value = null;
-            this.inputControl.InputAddRemove += new System.EventHandler<Turandot_Editor.Controls.InputControl.InputAddRemoveArgs>(this.inputControl_InputAddRemove);
-            this.inputControl.ValueChanged += new System.EventHandler(this.inputControl_ValueChanged);
+            this.stateInputsControl.Location = new System.Drawing.Point(6, 6);
+            this.stateInputsControl.Name = "stateInputsControl1";
+            this.stateInputsControl.Size = new System.Drawing.Size(392, 360);
+            this.stateInputsControl.TabIndex = 0;
+            this.stateInputsControl.Value = null;
             // 
             // infoPanel
             // 
@@ -1463,15 +1468,6 @@
             // 
             this.ledTimer.Interval = 2500;
             // 
-            // inputLayout1
-            // 
-            this.inputLayout1.Location = new System.Drawing.Point(18, 339);
-            this.inputLayout1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.inputLayout1.Name = "inputLayout1";
-            this.inputLayout1.Size = new System.Drawing.Size(351, 318);
-            this.inputLayout1.TabIndex = 1;
-            this.inputLayout1.Value = null;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1525,7 +1521,6 @@
             this.errorPage.PerformLayout();
             this.CuePage.ResumeLayout(false);
             this.InputPage.ResumeLayout(false);
-            this.InputPage.PerformLayout();
             this.infoPanel.ResumeLayout(false);
             this.infoPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -1597,12 +1592,11 @@
         private System.Windows.Forms.TabPage InputPage;
         private System.Windows.Forms.TabPage InstructionsPage;
         private Controls.InstructionEditor instructionEditor;
-        private Controls.InputControl inputControl;
         private System.Windows.Forms.Label label16;
         private Controls.FlagControl flagControl;
         private KLib.Controls.FileBrowser linktoBrowser;
         private System.Windows.Forms.Label label19;
-        private Controls.AllCuesControl allCuesControl;
+        private Controls.StateCuesControl stateCuesControl;
         private System.Windows.Forms.Button CreateAFCButton;
         private System.Windows.Forms.CheckBox mAFCCheckBox;
         private System.Windows.Forms.TextBox breakInstructBox;
@@ -1636,12 +1630,13 @@
         private System.Windows.Forms.ComboBox actionFamilyComboBox;
         private System.Windows.Forms.CheckBox bypassIPCCheckBox;
         private System.Windows.Forms.TabPage ScreenPage;
-        private Controls.CuesSpecifier cuesSpecifier;
+        private Controls.ScreenCuesSpecifier cuesSpecifier;
         private System.Windows.Forms.TabControl graphTabControl;
         private System.Windows.Forms.TabPage graphPage;
         private System.Windows.Forms.TabPage errorPage;
         private System.Windows.Forms.Label label21;
-        private Controls.InputLayout inputLayout1;
+        private Controls.ScreenInputsSpecifier inputsSpecifier;
+        private Controls.StateInputsControl stateInputsControl;
     }
 }
 

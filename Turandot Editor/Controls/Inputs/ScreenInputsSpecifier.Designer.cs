@@ -1,6 +1,6 @@
 ﻿namespace Turandot_Editor.Controls
 {
-    partial class InputLayout
+    partial class ScreenInputsSpecifier
     {
         /// <summary> 
         /// Required designer variable.
@@ -53,7 +53,7 @@
             this.inputListBox.Name = "inputListBox";
             this.inputListBox.Size = new System.Drawing.Size(180, 180);
             this.inputListBox.TabIndex = 2;
-            this.inputListBox.SelectedIndexChanged += new System.EventHandler(this.cueListBox_SelectedIndexChanged);
+            this.inputListBox.SelectedIndexChanged += new System.EventHandler(this.inputListBox_SelectedIndexChanged);
             // 
             // propertyGrid
             // 
@@ -86,7 +86,7 @@
             this.inputDropDown.Name = "inputDropDown";
             this.inputDropDown.Size = new System.Drawing.Size(180, 24);
             this.inputDropDown.TabIndex = 7;
-            this.inputDropDown.SelectedIndexChanged += new System.EventHandler(this.cueDropDown_SelectedIndexChanged);
+            this.inputDropDown.SelectedIndexChanged += new System.EventHandler(this.inputDropDown_SelectedIndexChanged);
             // 
             // InputLayout
             // 
