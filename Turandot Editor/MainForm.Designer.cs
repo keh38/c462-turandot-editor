@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NewParamsButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -122,7 +122,6 @@
             this.InputPage = new System.Windows.Forms.TabPage();
             this.stateInputsControl = new Turandot_Editor.Controls.StateInputsControl();
             this.infoPanel = new System.Windows.Forms.Panel();
-            this.bypassIPCCheckBox = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.trialLogOptionEnum = new KLib.Controls.EnumDropDown();
             this.expertCheckBox = new System.Windows.Forms.CheckBox();
@@ -388,38 +387,38 @@
             this.metricGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.metricGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metricGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.metricGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.metricGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MetricName,
             this.MetricValue});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle11;
             this.metricGridView.EnableHeadersVisualStyles = false;
             this.metricGridView.Location = new System.Drawing.Point(44, 439);
             this.metricGridView.Margin = new System.Windows.Forms.Padding(4);
             this.metricGridView.Name = "metricGridView";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.metricGridView.RowHeadersVisible = false;
             this.metricGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.metricGridView.Size = new System.Drawing.Size(296, 185);
@@ -1314,7 +1313,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.infoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.infoPanel.Controls.Add(this.bypassIPCCheckBox);
             this.infoPanel.Controls.Add(this.label7);
             this.infoPanel.Controls.Add(this.trialLogOptionEnum);
             this.infoPanel.Controls.Add(this.expertCheckBox);
@@ -1333,18 +1331,6 @@
             this.infoPanel.Size = new System.Drawing.Size(699, 115);
             this.infoPanel.TabIndex = 2;
             this.infoPanel.SizeChanged += new System.EventHandler(this.infoPanel_SizeChanged);
-            // 
-            // bypassIPCCheckBox
-            // 
-            this.bypassIPCCheckBox.AutoSize = true;
-            this.bypassIPCCheckBox.Location = new System.Drawing.Point(645, 76);
-            this.bypassIPCCheckBox.Margin = new System.Windows.Forms.Padding(4);
-            this.bypassIPCCheckBox.Name = "bypassIPCCheckBox";
-            this.bypassIPCCheckBox.Size = new System.Drawing.Size(101, 21);
-            this.bypassIPCCheckBox.TabIndex = 16;
-            this.bypassIPCCheckBox.Text = "Bypass IPC";
-            this.bypassIPCCheckBox.UseVisualStyleBackColor = true;
-            this.bypassIPCCheckBox.CheckedChanged += new System.EventHandler(this.bypassIPCCheckBox_CheckedChanged);
             // 
             // label7
             // 
@@ -1371,7 +1357,7 @@
             // expertCheckBox
             // 
             this.expertCheckBox.AutoSize = true;
-            this.expertCheckBox.Location = new System.Drawing.Point(525, 76);
+            this.expertCheckBox.Location = new System.Drawing.Point(584, 77);
             this.expertCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.expertCheckBox.Name = "expertCheckBox";
             this.expertCheckBox.Size = new System.Drawing.Size(109, 21);
@@ -1431,7 +1417,6 @@
             // 
             // linktoBrowser
             // 
-            this.linktoBrowser.AutoSize = true;
             this.linktoBrowser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.linktoBrowser.DefaultFolder = null;
             this.linktoBrowser.FileMustExist = false;
@@ -1661,7 +1646,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MetricValue;
         private System.Windows.Forms.Button showStateButton;
         private System.Windows.Forms.ComboBox actionFamilyComboBox;
-        private System.Windows.Forms.CheckBox bypassIPCCheckBox;
         private System.Windows.Forms.TabPage ScreenPage;
         private Controls.ScreenCuesSpecifier cuesSpecifier;
         private System.Windows.Forms.TabControl graphTabControl;

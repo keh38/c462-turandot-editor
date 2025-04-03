@@ -317,7 +317,6 @@ namespace Turandot
             p.wavFolder = wavFolder;
             p.trialLogOption = trialLogOption;
             p.allowExpertOptions = allowExpertOptions;
-            p.bypassIPC = bypassIPC;
 
             return p;
         }
@@ -337,7 +336,6 @@ namespace Turandot
             wavFolder = p.wavFolder;
             trialLogOption = p.trialLogOption;
             allowExpertOptions = p.allowExpertOptions;
-            bypassIPC = p.bypassIPC;
         }
 
         public void CreateAFC(FlowElement state, int numIntervals, float ISI_ms)

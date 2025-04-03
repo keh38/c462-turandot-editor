@@ -92,11 +92,17 @@ namespace Turandot_Editor.Controls
             if (cueListBox.Items.Contains(cueDropDown.SelectedItem.ToString())) return;
 
             var c = _available[cueDropDown.SelectedIndex];
-            if (c is MessageLayout)
+            cueListBox.Items.Add(c.Name);
+
+            if (c is FixationPointLayout)
             {
-                cueListBox.Items.Add(c.Name);
+                _value.Add((c as FixationPointLayout).GetDefaultCue());
+            }
+            else if (c is MessageLayout)
+            {
                 _value.Add((c as MessageLayout).GetDefaultCue());
             }
+           
             _value[_value.Count - 1].Target = c.Name;
             cueListBox.SelectedItem = _value.Count - 1;
             OnValueChanged();

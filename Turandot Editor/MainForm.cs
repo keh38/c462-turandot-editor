@@ -318,7 +318,6 @@ namespace Turandot_Editor
             trialLogOptionEnum.SetEnumValue(p.trialLogOption);
 
             expertCheckBox.Checked = p.allowExpertOptions;
-            bypassIPCCheckBox.Checked = p.bypassIPC;
             channelView.AllowExpertOptions = p.allowExpertOptions;
             termFlagLabel.Visible = _params.allowExpertOptions;
             termFlagExprBox.Visible = _params.allowExpertOptions;
@@ -1608,15 +1607,6 @@ namespace Turandot_Editor
 
                 if (!_params.allowExpertOptions) _params.ClearExpertOptions();
 
-                SetDirty();
-            }
-        }
-
-        private void bypassIPCCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                _params.bypassIPC = bypassIPCCheckBox.Checked;
                 SetDirty();
             }
         }

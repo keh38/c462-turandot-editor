@@ -38,38 +38,38 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(8, 18);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Location = new System.Drawing.Point(11, 22);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(31, 13);
+            this.label21.Size = new System.Drawing.Size(40, 17);
             this.label21.TabIndex = 3;
             this.label21.Text = "Cues";
             // 
             // cueListBox
             // 
             this.cueListBox.FormattingEnabled = true;
-            this.cueListBox.Location = new System.Drawing.Point(10, 34);
-            this.cueListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cueListBox.ItemHeight = 16;
+            this.cueListBox.Location = new System.Drawing.Point(13, 42);
+            this.cueListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cueListBox.Name = "cueListBox";
-            this.cueListBox.Size = new System.Drawing.Size(136, 147);
+            this.cueListBox.Size = new System.Drawing.Size(180, 180);
             this.cueListBox.TabIndex = 2;
             this.cueListBox.SelectedIndexChanged += new System.EventHandler(this.cueListBox_SelectedIndexChanged);
             // 
             // propertyGrid
             // 
-            this.propertyGrid.Location = new System.Drawing.Point(160, 9);
-            this.propertyGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.propertyGrid.Location = new System.Drawing.Point(213, 11);
+            this.propertyGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(183, 296);
+            this.propertyGrid.Size = new System.Drawing.Size(244, 364);
             this.propertyGrid.TabIndex = 4;
             this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(10, 185);
-            this.removeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.removeButton.Location = new System.Drawing.Point(13, 228);
+            this.removeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(136, 24);
+            this.removeButton.Size = new System.Drawing.Size(181, 30);
             this.removeButton.TabIndex = 6;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -80,26 +80,27 @@
             this.cueDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cueDropDown.FormattingEnabled = true;
             this.cueDropDown.Items.AddRange(new object[] {
+            "Fixation point",
             "Message"});
-            this.cueDropDown.Location = new System.Drawing.Point(10, 213);
-            this.cueDropDown.Margin = new System.Windows.Forms.Padding(2);
+            this.cueDropDown.Location = new System.Drawing.Point(13, 262);
+            this.cueDropDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cueDropDown.Name = "cueDropDown";
-            this.cueDropDown.Size = new System.Drawing.Size(136, 21);
+            this.cueDropDown.Size = new System.Drawing.Size(180, 24);
             this.cueDropDown.TabIndex = 7;
             this.cueDropDown.SelectedIndexChanged += new System.EventHandler(this.cueDropDown_SelectedIndexChanged);
             // 
-            // CuesSpecifier
+            // ScreenCuesSpecifier
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cueDropDown);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.cueListBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "CuesSpecifier";
-            this.Size = new System.Drawing.Size(351, 318);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "ScreenCuesSpecifier";
+            this.Size = new System.Drawing.Size(468, 391);
             this.ResumeLayout(false);
             this.PerformLayout();
 

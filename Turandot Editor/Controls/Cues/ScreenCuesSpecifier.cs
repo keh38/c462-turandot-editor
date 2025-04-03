@@ -56,7 +56,7 @@ namespace Turandot_Editor.Controls
         {
             if (_ignoreEvents) return;
 
-            propertyGrid.SelectedObject = _value[cueListBox.SelectedIndex];
+            propertyGrid.SelectedObject = _value.Find(x => x.Name.Equals(cueListBox.SelectedItem.ToString()));
         }
 
         private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -85,7 +85,7 @@ namespace Turandot_Editor.Controls
 
         private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string baseName = "Message";
+            string baseName = cueDropDown.SelectedItem.ToString();
             string name = baseName;
             int num = 1;
             while (true)
@@ -101,11 +101,17 @@ namespace Turandot_Editor.Controls
                 }
             }
 
-            //var newCue = new Turandot.Screen.MessageLayout() { Name = name };
-            var newCue = new Turandot.Screen.MessageLayout();
-            _value.Add(newCue);
+            switch (baseName)
+            {
+                case "Fixation point":
+                    _value.Add(new FixationPointLayout() { Name = name });
+                    break;
+                case "Message":
+                    _value.Add(new MessageLayout() { Name = name });
+                    break;
+            }
 
-            cueListBox.Items.Add(newCue.Name);
+            cueListBox.Items.Add(name);
             cueListBox.SelectedItem = _value.Count - 1;
             OnValueChanged();
         }
