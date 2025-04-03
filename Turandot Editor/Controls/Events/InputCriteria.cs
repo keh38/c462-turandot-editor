@@ -24,11 +24,23 @@ namespace Turandot_Editor
 
         private int _numActiveRows;
 
+        private List<InputCriterion> _value;
+        public List<InputCriterion> Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                ShowValue();
+            }
+        }
+
         public InputCriteria()
         {
             InitializeComponent();
+
             _criterionControls = new List<InputCriterionControl>();
-            _criterionControls.Add(inputCriterion);
+            AddRow();
             _numActiveRows = 0;
 
             _digitalInputs = new List<string>();
@@ -36,45 +48,36 @@ namespace Turandot_Editor
             _scalarNames = new List<string>();
         }
 
-        public string[] DigitalInputs
+        public void SetDigitalInputs(List<string> digitalInputs)
         {
-            set
-            {
-                _digitalInputs.Clear();
-                _digitalInputs.AddRange(value);
+            _digitalInputs.Clear();
+            _digitalInputs.AddRange(digitalInputs);
 
-                foreach (InputCriterionControl c in _criterionControls)
-                {
-                    c.DigitalInputs = value;
-                }
+            foreach (InputCriterionControl c in _criterionControls)
+            {
+                c.SetDigitalInputs(digitalInputs);
             }
         }
 
-        public string[] FlagNames
+        public void SetFlagNames(List<string> flagNames)
         {
-            set
-            {
-                _flagNames.Clear();
-                _flagNames.AddRange(value);
+            _flagNames.Clear();
+            _flagNames.AddRange(flagNames);
 
-                foreach (InputCriterionControl c in _criterionControls)
-                {
-                    c.FlagNames = value;
-                }
+            foreach (InputCriterionControl c in _criterionControls)
+            {
+                c.SetFlagNames(flagNames);
             }
         }
 
-        public string[] ScalarNames
+        public void SetScalarNames(List<string> scalarNames)
         {
-            set
-            {
-                _scalarNames.Clear();
-                _scalarNames.AddRange(value);
+            _scalarNames.Clear();
+            _scalarNames.AddRange(scalarNames);
 
-                foreach (InputCriterionControl c in _criterionControls)
-                {
-                    c.ScalarNames = value;
-                }
+            foreach (InputCriterionControl c in _criterionControls)
+            {
+                c.SetScalarNames(scalarNames);
             }
         }
 
@@ -89,20 +92,13 @@ namespace Turandot_Editor
         {
             if (_numActiveRows == 0) _numActiveRows++;
         }
-
-
-        public List<InputCriterion> Value
-        {
-            set { SetValue(value); }
-            get { return GetValue(); }
-        } 
-
-        private void SetValue(List<InputCriterion> criteria)
+        
+        private void ShowValue()
         {
             _ignoreEvents = true;
 
             Clear();
-            foreach (InputCriterion crit in criteria)
+            foreach (var crit in _value)
             {
                 ActivateNextRow().Value = crit;
             }
@@ -110,19 +106,21 @@ namespace Turandot_Editor
             _ignoreEvents = false;
         }
 
-        private List<InputCriterion> GetValue()
+        private void UpdateValue()
         {
-            List<InputCriterion> newValue = new List<InputCriterion>();
+            _value.Clear();
 
             for (int k=0; k<_numActiveRows; k++)
             {
                 if (_criterionControls[k].IsValid)
-                    newValue.Add(_criterionControls[k].Value);
+                {
+                    _value.Add(_criterionControls[k].Value);
+                }
                 else
+                {
                     break;
+                }
             }
-
-            return newValue;
         }
 
         public void AddCriterion(InputCriterion crit)
@@ -153,21 +151,19 @@ namespace Turandot_Editor
             int newRowNum = _criterionControls.Count;
 
             InputCriterionControl c = new InputCriterionControl();
-            c.Location = new Point(inputCriterion.Location.X, inputCriterion.Location.Y + newRowNum * (inputCriterion.Height+5));
-            c.DigitalInputs = _digitalInputs.ToArray();
-            c.FlagNames = _flagNames.ToArray();
+            c.SetDigitalInputs(_digitalInputs);
+            c.SetFlagNames(_flagNames);
             c.ValueChanged += inputCriterion_ValueChanged;
             c.OperatorChanged += inputCriterion_OperatorChanged;
             c.RowBecameValid += inputCriterion_RowBecameValid;
             c.Clear();
 
             _criterionControls.Add(c);
-            this.Controls.Add(c);
+            flowLayoutPanel.Controls.Add(c);
 
             return c;
         }
-
-
+        
         void HideUnused()
         {
             for (int k=Math.Max(1, _numActiveRows); k<_criterionControls.Count; k++)
@@ -178,6 +174,7 @@ namespace Turandot_Editor
 
         private void inputCriterion_ValueChanged(object sender, EventArgs e)
         {
+            UpdateValue();
             OnValueChanged();
         }
 
@@ -204,15 +201,17 @@ namespace Turandot_Editor
                         for (int k = index + 1; k < _numActiveRows; k++)
                         {
                             InputCriterionControl c = _criterionControls[_criterionControls.Count - 1];
-                            this.Controls.Remove(c);
+                            flowLayoutPanel.Controls.Remove(c);
                             _criterionControls.Remove(c);
                         }
 
                         _numActiveRows = index + 1;
                     }
                 }
+                UpdateValue();
                 OnValueChanged();
             }
         }
+
     }
 }

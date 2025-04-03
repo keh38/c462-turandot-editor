@@ -107,6 +107,8 @@ namespace Turandot_Editor.Controls
             if (cueListBox.SelectedIndex < 0) return;
             var toDelete = _value.Find(x => x.Target.Equals(cueListBox.SelectedItem.ToString()));
             if (toDelete != null) _value.Remove(toDelete);
+
+            ShowCues();
             OnValueChanged();
         }
    }

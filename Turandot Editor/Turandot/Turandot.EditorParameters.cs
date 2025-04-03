@@ -365,14 +365,14 @@ namespace Turandot
             if (inputEvents.Find(o => o.name == "AFC Correct") == null)
             {
                 InputEvent ie = new InputEvent("AFC Correct");
-                ie.criteria.Add(new InputCriterion("AFC Correct"));
+                ie.criteria.Add(new InputCriterion() { control = "AFC Correct" });
                 inputEvents.Add(ie);
             }
 
             if (inputEvents.Find(o => o.name == "AFC Incorrect") == null)
             {
                 InputEvent ie = new InputEvent("AFC Incorrect");
-                ie.criteria.Add(new InputCriterion("AFC Incorrect"));
+                ie.criteria.Add(new InputCriterion() { control = "AFC Incorrect" });
                 inputEvents.Add(ie);
             }
 
@@ -661,13 +661,6 @@ namespace Turandot
         public List<string> GetInputEventNames()
         {
             return inputEvents.Select(i => i.name).ToList();
-        }
-
-        public InputEvent AddEvent(string name, int index)
-        {
-            InputEvent inputEvent = new InputEvent(name);
-            inputEvents.Insert(index, inputEvent);
-            return inputEvent;
         }
 
         public string RenameEvent(string name, int index)

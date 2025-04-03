@@ -49,49 +49,45 @@ namespace Turandot_Editor
             comparisonEnum.AddItem(Comparison.GE, ">=");
         }
 
-        public string[] DigitalInputs
-        {   
-            set
+        public void SetDigitalInputs(List<string> digitalInputs)
+        {
+            _inputs.Clear();
+            if (digitalInputs != null)
             {
-                _inputs.Clear();
-                _inputs.AddRange(value);
-
-                controlList.Items.Clear();
-                controlList.Items.AddRange(value);
-                if (_flags.Count > 0) controlList.Items.AddRange(_flags.ToArray());
-                if (_scalars.Count > 0) controlList.Items.AddRange(_scalars.ToArray());
-                SetValue(_data);
+                _inputs.AddRange(digitalInputs);
             }
+            UpdateControlList();
+            ShowValue();
         }
 
-        public string[] FlagNames
+        public void SetFlagNames(List<string> flagNames)
         {
-            set
+            _flags.Clear();
+            if (flagNames != null)
             {
-                _flags.Clear();
-                _flags.AddRange(value);
-
-                controlList.Items.Clear();
-                if (_inputs.Count > 0) controlList.Items.AddRange(_inputs.ToArray());
-                controlList.Items.AddRange(value);
-                if (_scalars.Count > 0) controlList.Items.AddRange(_scalars.ToArray());
-                SetValue(_data);
+                _flags.AddRange(flagNames);
             }
+            UpdateControlList();
+            ShowValue();
         }
 
-        public string[] ScalarNames
+        public void SetScalarNames(List<string> scalarNames)
         {
-            set
+            _scalars.Clear();
+            if (scalarNames != null)
             {
-                _scalars.Clear();
-                _scalars.AddRange(value);
-
-                controlList.Items.Clear();
-                if (_inputs.Count > 0) controlList.Items.AddRange(_inputs.ToArray());
-                if (_flags.Count > 0) controlList.Items.AddRange(_flags.ToArray());
-                controlList.Items.AddRange(value);
-                SetValue(_data);
+                _scalars.AddRange(scalarNames);
             }
+            UpdateControlList();
+            ShowValue();
+        }
+
+        private void UpdateControlList()
+        {
+            controlList.Items.Clear();
+            if (_inputs.Count > 0) controlList.Items.AddRange(_inputs.ToArray());
+            if (_flags.Count > 0) controlList.Items.AddRange(_flags.ToArray());
+            if (_scalars.Count > 0) controlList.Items.AddRange(_scalars.ToArray());
         }
 
         public InputCriterion Value
@@ -100,13 +96,21 @@ namespace Turandot_Editor
             set
             {
                 _data = value;
-                SetValue(value);
+                ShowValue();
             }
         }
 
         public void Clear()
         {
-            _data = new InputCriterion("", InputState.Rising, 10, InputOperator.None, Comparison.EQ);
+            _data = new InputCriterion()
+            {
+                control = "",
+                op = InputOperator.None,
+                state = InputState.Rising,
+                time_ms = 10,
+                comparison = Comparison.EQ
+            };
+
             _isValid = false;
             opDropDown.Enabled = false;
 
@@ -132,11 +136,11 @@ namespace Turandot_Editor
             get { return _isValid; }
         }
 
-        public void SetValue(InputCriterion crit)
+        public void ShowValue()
         {
-            if (crit == null) return;
+            if (_data == null) return;
 
-            int index = controlList.Items.IndexOf(crit.control);
+            int index = controlList.Items.IndexOf(_data.control);
             if (index < 0) return;
 
             _ignoreEvents = true;
@@ -144,15 +148,15 @@ namespace Turandot_Editor
             controlList.SelectedIndex = Math.Max(0, index);
             _isValid = controlList.SelectedIndex >= 0;
 
-            stateDropDown.SetEnumValue(crit.state);
-            comparisonEnum.SetEnumValue(crit.comparison);
-            durationNumeric.Value = crit.time_ms;
+            stateDropDown.SetEnumValue(_data.state);
+            comparisonEnum.SetEnumValue(_data.comparison);
+            durationNumeric.Value = _data.time_ms;
 
             if (controlList.SelectedIndex < _inputs.Count)
             {
                 stateDropDown.Visible = true;
                 comparisonEnum.Visible = false;
-                durationNumeric.Visible = (crit.state == InputState.High || crit.state == InputState.Low);
+                durationNumeric.Visible = (_data.state == InputState.High || _data.state == InputState.Low);
                 forLabel.Visible = durationNumeric.Visible;
                 durationNumeric.Units = "ms";
             }
@@ -165,7 +169,7 @@ namespace Turandot_Editor
                 durationNumeric.Units = "";
             }
 
-            opDropDown.SetEnumValue(crit.op);
+            opDropDown.SetEnumValue(_data.op);
             opDropDown.Enabled = _isValid;
 
             _ignoreEvents = false;

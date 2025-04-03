@@ -28,37 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.inputCriterion = new Turandot_Editor.InputCriterionControl();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // inputCriterion
+            // flowLayoutPanel
             // 
-            this.inputCriterion.AutoSize = true;
-            this.inputCriterion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.inputCriterion.Location = new System.Drawing.Point(3, 3);
-            this.inputCriterion.Name = "inputCriterion";
-            this.inputCriterion.Size = new System.Drawing.Size(404, 24);
-            this.inputCriterion.TabIndex = 0;
-            this.inputCriterion.ValueChanged += new System.EventHandler(this.inputCriterion_ValueChanged);
-            this.inputCriterion.RowBecameValid += new System.EventHandler(this.inputCriterion_RowBecameValid);
-            this.inputCriterion.OperatorChanged += new System.EventHandler<InputCriterionControl.OperatorChangedArgs>(this.inputCriterion_OperatorChanged);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(532, 351);
+            this.flowLayoutPanel.TabIndex = 0;
             // 
             // InputCriteria
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Controls.Add(this.inputCriterion);
+            this.Controls.Add(this.flowLayoutPanel);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InputCriteria";
-            this.Size = new System.Drawing.Size(410, 30);
+            this.Size = new System.Drawing.Size(538, 357);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private InputCriterionControl inputCriterion;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
     }
 }

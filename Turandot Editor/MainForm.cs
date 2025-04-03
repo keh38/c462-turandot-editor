@@ -337,7 +337,9 @@ namespace Turandot_Editor
 
             _ignoreEvents = false;
 
-            //ShowEventParameters(p.buttons, p.GetActiveInputControls(), p.flags, p.GetActiveScalarControls(), p.inputEvents);
+            eventsSpecifier.UpdateInputSources(p.screen.Inputs.Select(x => x.Name).ToList(), null);
+            eventsSpecifier.SetData(p.inputEvents, p.flags);
+
             ShowScheduleParameters(p.schedule, p.adapt);
 
             FillActionFamilyComboBox();
@@ -361,55 +363,6 @@ namespace Turandot_Editor
         void ShowInstructions(Turandot.Instructions instructions)
         {
             instructionEditor.Value = instructions;
-        }
-
-        void UpdateInputSources(List<string> inputControls, List<string> scalarControls)
-        {
-            _ignoreEvents = true;
-
-            inputCriteria.DigitalInputs = inputControls.ToArray();
-            inputCriteria.ScalarNames = scalarControls.ToArray(); 
-
-            _ignoreEvents = false;
-        }
-
-        //void ShowEventParameters(List<ButtonSpec> buttons, List<string> inputControls, List<Flag> flags, List<string> scalarControls, List<InputEvent> events)
-        //{
-        //    UpdateInputSources(inputControls, scalarControls);
-        //    ShowFlags(flags);
-
-        //    _ignoreEvents = true;
-
-        //    eventListBox.SetItems(events.Select(e => e.name).ToList());
-        //    eventListBox.SelectedIndex = events.Count > 0 ? 0 : -1;
-        //    _ignoreEvents = false;
-
-        //    ShowEventCriteria(events.Count > 0 ? events[0] : null);
-        //}
-
-        private void ShowEventCriteria(InputEvent inputEvent)
-        {
-            _ignoreEvents = true;
-
-            inputCriteria.Enabled = inputEvent != null;
-            if (inputEvent == null)
-            {
-                inputCriteria.Tag = null;
-                inputCriteria.Clear();
-            }
-            else
-            {
-                inputCriteria.Tag = inputEvent;
-                inputCriteria.Value = inputEvent.criteria;
-            }
-
-            _ignoreEvents = false;
-        }
-
-        private void ShowFlags(List<Flag> flags)
-        {
-            flagControl.Value = flags;
-            inputCriteria.FlagNames = _params.flags.Select(f => f.name).ToArray();
         }
 
         private void ShowScheduleParameters(Schedule sched, Adaptation adapt)
@@ -1060,56 +1013,6 @@ namespace Turandot_Editor
             }
         }
 
-        private void eventListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)
-        {
-            InputEvent inputEvent = _params.AddEvent(e.name, e.index);
-            ShowEventCriteria(inputEvent);
-            SetDirty();
-        }
-
-        private void eventListBox_ItemRenamed(object sender, KUserListBox.ChangedItem e)
-        {
-            string oldName = _params.RenameEvent(e.name, e.index);
-            graphViewer.RenameEvent(oldName, e.name);
-            SetDirty();
-        }
-
-        private void eventListBox_ItemsDeleted(object sender, KUserListBox.ChangedItems e)
-        {
-            _params.DeleteEvents(e.names);
-            graphViewer.DeleteEvents(e.names);
-            SetDirty();
-        }
-
-        private void eventListBox_ItemMoved(object sender, KUserListBox.ChangedItem e)
-        {
-            _params.MoveEvent(e.name, e.index);
-            SetDirty();
-        }
-
-        private void eventListBox_ItemsMoved(object sender, KUserListBox.ChangedItems e)
-        {
-            _params.MoveEvents(e.names);
-            SetDirty();
-        }
-
-        private void eventListBox_SelectionChanged(object sender, KUserListBox.ChangedItem e)
-        {
-            if (!_ignoreEvents)
-            {
-                ShowEventCriteria(e.index >= 0 ? _params.inputEvents[e.index] : null);
-            }
-        }
-
-        private void inputCriteria_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                (inputCriteria.Tag as InputEvent).criteria = inputCriteria.Value;
-                SetDirty();
-            }
-        }
-
         private void allCuesControl_ValueChanged(object sender, EventArgs e)
         {
             if (!_ignoreEvents)
@@ -1497,16 +1400,16 @@ namespace Turandot_Editor
             }
         }
 
-        //private void inputControl_InputAddRemove(object sender, Controls.InputControl.InputAddRemoveArgs e)
-        //{
-        //    Turandot.Layout.AddBadges(_selectedState, graphViewer);
-        //    UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
+        private void inputControl_InputAddRemove(object sender, Controls.StateInputsControl.InputAddRemoveArgs e)
+        {
+            Turandot.Layout.AddBadges(_selectedState, graphViewer);
+            eventsSpecifier.UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
 
-        //    if (!ValidateInputEvents())
-        //    {
-        //        System.Windows.Forms.MessageBox.Show("One or more Events have become invalid. Go to the Events tab to correct it.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
+            if (!ValidateInputEvents())
+            {
+                System.Windows.Forms.MessageBox.Show("One or more Events have become invalid. Go to the Events tab to correct it.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private bool ValidateInputEvents()
         {
@@ -1531,15 +1434,6 @@ namespace Turandot_Editor
             }
 
             return isOK;
-        }
-
-        private void flagControl_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                SetDirty();
-                inputCriteria.FlagNames = _params.flags.Select(f => f.name).ToArray();
-            }
         }
 
         private void linktoBrowser_ValueChanged(object sender, EventArgs e)
@@ -1876,6 +1770,11 @@ namespace Turandot_Editor
                 }
             }
             stateInputsControl.SetAvailableInputs(_params.screen.Inputs);
+            SetDirty();
+        }
+
+        private void eventsSpecifier_ValueChanged(object sender, EventArgs e)
+        {
             SetDirty();
         }
     }

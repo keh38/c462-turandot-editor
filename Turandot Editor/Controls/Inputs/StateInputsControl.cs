@@ -74,16 +74,13 @@ namespace Turandot_Editor.Controls
         }
 
         #region Events
-        public event EventHandler<CueAddRemoveArgs> CueAddRemove;
-        protected virtual void OnCueAddRemove(CueAddRemoveArgs args)
-        {
-            if (this.CueAddRemove != null) CueAddRemove(this, args);
-        }
-        public class CueAddRemoveArgs : EventArgs
+        public event EventHandler<InputAddRemoveArgs> InputAddRemove;
+        protected virtual void OnInputAddRemove(InputAddRemoveArgs args) { InputAddRemove?.Invoke(this, args); }
+        public class InputAddRemoveArgs : EventArgs
         {
             public string type;
             public bool added;
-            public CueAddRemoveArgs(string type, bool added) { this.type = type; this.added = added; }
+            public InputAddRemoveArgs(string type, bool added) { this.type = type; this.added = added; }
         }
         #endregion
 
@@ -107,6 +104,8 @@ namespace Turandot_Editor.Controls
             if (inputListBox.SelectedIndex < 0) return;
             var toDelete = _value.Find(x => x.Target.Equals(inputListBox.SelectedItem.ToString()));
             if (toDelete != null) _value.Remove(toDelete);
+
+            ShowInputs();
             OnValueChanged();
         }
    }

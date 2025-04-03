@@ -111,6 +111,12 @@
     <Compile Include="Controls\Cues\ScreenCuesSpecifier.Designer.cs">
       <DependentUpon>ScreenCuesSpecifier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Events\EventsSpecifier.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Events\EventsSpecifier.Designer.cs">
+      <DependentUpon>EventsSpecifier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Inputs\ScreenInputsSpecifier.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -141,22 +147,22 @@
     <Compile Include="Controls\ExpressionEditor.Designer.cs">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FlagControl.cs">
+    <Compile Include="Controls\Events\FlagControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\FlagControl.Designer.cs">
+    <Compile Include="Controls\Events\FlagControl.Designer.cs">
       <DependentUpon>FlagControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\InputCriteria.cs">
+    <Compile Include="Controls\Events\InputCriteria.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\InputCriteria.Designer.cs">
+    <Compile Include="Controls\Events\InputCriteria.Designer.cs">
       <DependentUpon>InputCriteria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\InputCriterionControl.cs">
+    <Compile Include="Controls\Events\InputCriterionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\InputCriterionControl.Designer.cs">
+    <Compile Include="Controls\Events\InputCriterionControl.Designer.cs">
       <DependentUpon>InputCriterionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\InstructionEditor.cs">
@@ -218,6 +224,9 @@
     <EmbeddedResource Include="Controls\Cues\ScreenCuesSpecifier.resx">
       <DependentUpon>ScreenCuesSpecifier.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Events\EventsSpecifier.resx">
+      <DependentUpon>EventsSpecifier.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Inputs\ScreenInputsSpecifier.resx">
       <DependentUpon>ScreenInputsSpecifier.cs</DependentUpon>
     </EmbeddedResource>
@@ -233,13 +242,13 @@
     <EmbeddedResource Include="Controls\ExpressionEditor.resx">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FlagControl.resx">
+    <EmbeddedResource Include="Controls\Events\FlagControl.resx">
       <DependentUpon>FlagControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\InputCriteria.resx">
+    <EmbeddedResource Include="Controls\Events\InputCriteria.resx">
       <DependentUpon>InputCriteria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\InputCriterionControl.resx">
+    <EmbeddedResource Include="Controls\Events\InputCriterionControl.resx">
       <DependentUpon>InputCriterionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InstructionEditor.resx">
