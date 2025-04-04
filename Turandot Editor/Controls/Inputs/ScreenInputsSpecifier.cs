@@ -87,7 +87,7 @@ namespace Turandot_Editor.Controls
         {
             if (inputDropDown.SelectedIndex < 0) return;
 
-            string baseName = "Button";
+            string baseName = inputDropDown.SelectedItem.ToString();
             string name = baseName;
             int num = 1;
             while (true)
@@ -103,10 +103,17 @@ namespace Turandot_Editor.Controls
                 }
             }
 
-            var newInput = new Turandot.Screen.ButtonLayout() { Name = name };
-            _value.Add(newInput);
+            switch (baseName)
+            {
+                case "Button":
+                    _value.Add(new ButtonLayout() { Name = name });
+                    break;
+                case "Checklist":
+                    _value.Add(new ChecklistLayout() { Name = name });
+                    break;
+            }
 
-            inputListBox.Items.Add(newInput.Name);
+            inputListBox.Items.Add(name);
             inputListBox.SelectedItem = _value.Count - 1;
             inputDropDown.SelectedIndex = -1;
             OnValueChanged();

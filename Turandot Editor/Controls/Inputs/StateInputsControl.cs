@@ -86,16 +86,24 @@ namespace Turandot_Editor.Controls
 
         private void inputDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (inputDropDown.SelectedIndex < 0) return;
             if (inputListBox.Items.Contains(inputDropDown.SelectedItem.ToString())) return;
 
             var i = _available[inputDropDown.SelectedIndex];
+            inputListBox.Items.Add(i.Name);
             if (i is ButtonLayout)
             {
-                inputListBox.Items.Add(i.Name);
                 _value.Add(new Turandot.Inputs.Button());
             }
+            else if (i is ChecklistLayout)
+            {
+               _value.Add(new Turandot.Inputs.Input("Checklist"));
+            }
+
             _value[_value.Count - 1].Target = i.Name;
+
             inputListBox.SelectedItem = _value.Count - 1;
+            inputDropDown.SelectedIndex = -1;
             OnValueChanged();
         }
 

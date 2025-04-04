@@ -80,7 +80,8 @@
             this.inputDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.inputDropDown.FormattingEnabled = true;
             this.inputDropDown.Items.AddRange(new object[] {
-            "Button"});
+            "Button",
+            "Checklist"});
             this.inputDropDown.Location = new System.Drawing.Point(13, 262);
             this.inputDropDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputDropDown.Name = "inputDropDown";
@@ -88,7 +89,7 @@
             this.inputDropDown.TabIndex = 7;
             this.inputDropDown.SelectedIndexChanged += new System.EventHandler(this.inputDropDown_SelectedIndexChanged);
             // 
-            // InputLayout
+            // ScreenInputsSpecifier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,7 +99,7 @@
             this.Controls.Add(this.label21);
             this.Controls.Add(this.inputListBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "InputLayout";
+            this.Name = "ScreenInputsSpecifier";
             this.Size = new System.Drawing.Size(468, 391);
             this.ResumeLayout(false);
             this.PerformLayout();
