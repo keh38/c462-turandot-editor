@@ -278,7 +278,7 @@ namespace Turandot_Editor
             SaveFileDialog dlg = new SaveFileDialog();
 
             // Set filter options and filter index.
-            dlg.Filter = "XML Files (.xml)|*.xml|All Files (*.*)|*.*";
+            dlg.Filter = "XML Files (.xml)|Turandot.*.xml|All Files (*.*)|*.*";
             dlg.FilterIndex = 1;
             dlg.OverwritePrompt = true;
 
@@ -299,6 +299,13 @@ namespace Turandot_Editor
 
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                var folder = Path.GetDirectoryName(dlg.FileName);
+                var fn = Path.GetFileName(dlg.FileName);
+                if (!(fn.StartsWith("Turandot.")))
+                {
+                    dlg.FileName = Path.Combine(folder, $"Turandot.{fn}");
+                }
+
                 SaveParameterFile(dlg.FileName);
                 _settings.lastFolder = Path.GetDirectoryName(dlg.FileName);
                 _settings.lastFile = dlg.FileName;

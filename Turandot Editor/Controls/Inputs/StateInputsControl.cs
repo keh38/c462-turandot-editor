@@ -104,6 +104,8 @@ namespace Turandot_Editor.Controls
 
             inputListBox.SelectedItem = _value.Count - 1;
             inputDropDown.SelectedIndex = -1;
+
+            ShowInputs();
             OnValueChanged();
         }
 

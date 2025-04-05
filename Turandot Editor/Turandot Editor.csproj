@@ -332,7 +332,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if "$(ConfigurationName)" == "Release" ("C:\Program Files (x86)\Inno Setup 6\Compil32.exe" /cc "D:\Development\C462\c462-turandot-editor\Installer\Turandot Editor.iss")</PostBuildEvent>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Release" ("C:\Program Files (x86)\Inno Setup 6\Compil32.exe" /cc "$(SolutionDir)\Installer\Turandot Editor.iss")</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

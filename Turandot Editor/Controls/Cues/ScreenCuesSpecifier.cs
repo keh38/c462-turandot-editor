@@ -50,6 +50,10 @@ namespace Turandot_Editor.Controls
             {
                 cueListBox.SelectedIndex = 0;
             }
+            else
+            {
+                propertyGrid.SelectedObject = null;
+            }
         }
 
         private void cueListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,6 +117,7 @@ namespace Turandot_Editor.Controls
 
             cueListBox.Items.Add(name);
             cueListBox.SelectedItem = _value.Count - 1;
+            ShowValue();
             OnValueChanged();
         }
     }

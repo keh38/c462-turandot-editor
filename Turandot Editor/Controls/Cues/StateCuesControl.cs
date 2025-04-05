@@ -105,6 +105,7 @@ namespace Turandot_Editor.Controls
            
             _value[_value.Count - 1].Target = c.Name;
             cueListBox.SelectedItem = _value.Count - 1;
+            ShowCues();
             OnValueChanged();
         }
 

@@ -50,6 +50,10 @@ namespace Turandot_Editor.Controls
             {
                 inputListBox.SelectedIndex = 0;
             }
+            else
+            {
+                propertyGrid.SelectedObject = null;
+            }
         }
 
         private void inputListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -116,6 +120,8 @@ namespace Turandot_Editor.Controls
             inputListBox.Items.Add(name);
             inputListBox.SelectedItem = _value.Count - 1;
             inputDropDown.SelectedIndex = -1;
+
+            ShowValue();
             OnValueChanged();
         }
     }
