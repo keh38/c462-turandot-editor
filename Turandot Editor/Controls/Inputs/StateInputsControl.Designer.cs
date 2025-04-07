@@ -50,7 +50,7 @@
             this.propertyGrid.Location = new System.Drawing.Point(176, 18);
             this.propertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(194, 310);
+            this.propertyGrid.Size = new System.Drawing.Size(298, 310);
             this.propertyGrid.TabIndex = 1;
             // 
             // label1
@@ -97,7 +97,7 @@
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.inputListBox);
             this.Name = "StateInputsControl";
-            this.Size = new System.Drawing.Size(392, 360);
+            this.Size = new System.Drawing.Size(496, 360);
             this.ResumeLayout(false);
             this.PerformLayout();
 

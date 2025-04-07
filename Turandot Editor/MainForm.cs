@@ -330,7 +330,9 @@ namespace Turandot_Editor
             termFlagExprBox.Visible = _params.allowExpertOptions;
 
             if (!string.IsNullOrEmpty(_filePath))
+            {
                 linktoBrowser.DefaultFolder = Path.GetDirectoryName(_filePath);
+            }
             linktoBrowser.Value = p.linkTo;
 
             cuesSpecifier.Value = p.screen.Cues;
@@ -478,11 +480,13 @@ namespace Turandot_Editor
 
                 FlowElement state = _params.FindState(name);
                 SelectState(state);
-                if (string.IsNullOrEmpty(state.timeOuts[0].linkTo) || state.timeOuts[0].termType==TermType.Any)
+                if (string.IsNullOrEmpty(state.timeOuts[0].linkTo) || state.timeOuts[0].termType == TermType.Any)
                     SelectTimeout(state.timeOuts[0]);
             }
             else
+            {
                 SelectNothing();
+            }
         }
 
         private void OnNodesDeleted(List<string> names)
@@ -588,6 +592,7 @@ namespace Turandot_Editor
             ipcTextBox.Text = state.ipcCommand;
 
             stateCuesControl.Value = state.cues;
+            stateInputsControl.SetDataForContext(state.sigMan.GetValidSweepables());
             stateInputsControl.Value = state.inputs;
 
             if (state.sigMan != null)

@@ -15,6 +15,7 @@ using Turandot.Inputs;
 using Turandot.Screen;
 
 using KLib.ExtensionMethods;
+using KLib.Signals;
 
 namespace Turandot_Editor.Controls
 {
@@ -22,6 +23,7 @@ namespace Turandot_Editor.Controls
     {
         private List<Input> _value = null;
         private List<InputLayout> _available;
+        private List<ChannelProperties> _validProperties;
 
         public StateInputsControl()
         {
@@ -34,7 +36,21 @@ namespace Turandot_Editor.Controls
             set
             {
                 _value = value;
+                ApplyContextData();
                 ShowInputs();
+            }
+        }
+
+        private void ApplyContextData()
+        {
+            if (_value == null) return;
+
+            foreach (var i in _value)
+            {
+                if (i is ParamSliderAction)
+                {
+                    (i as ParamSliderAction).SetDataForContext(_validProperties);
+                }
             }
         }
 
@@ -48,6 +64,11 @@ namespace Turandot_Editor.Controls
             KLib.Controls.Utilities.SetCueBanner(inputDropDown.Handle, "Add input");
 
             ShowInputs();
+        }
+
+        public void SetDataForContext(List<ChannelProperties> channelProperties)
+        {
+            _validProperties = channelProperties;
         }
 
         private void ShowInputs()
@@ -98,6 +119,12 @@ namespace Turandot_Editor.Controls
             else if (i is ChecklistLayout)
             {
                _value.Add(new Turandot.Inputs.Input("Checklist"));
+            }
+            else if (i is ParamSliderLayout)
+            {
+                var psa = new Turandot.Inputs.ParamSliderAction();
+                psa.SetDataForContext(_validProperties);
+                _value.Add(psa);
             }
 
             _value[_value.Count - 1].Target = i.Name;
