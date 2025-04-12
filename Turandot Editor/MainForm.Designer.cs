@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NewParamsButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -269,7 +269,7 @@
             this.MetricsPage.Controls.Add(this.metricGridView);
             this.MetricsPage.Location = new System.Drawing.Point(4, 22);
             this.MetricsPage.Name = "MetricsPage";
-            this.MetricsPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.MetricsPage.Padding = new System.Windows.Forms.Padding(3);
             this.MetricsPage.Size = new System.Drawing.Size(611, 702);
             this.MetricsPage.TabIndex = 7;
             this.MetricsPage.Text = "General";
@@ -290,7 +290,7 @@
             this.transducerTextBox.FontColor = System.Drawing.SystemColors.WindowText;
             this.transducerTextBox.IsIPAddress = false;
             this.transducerTextBox.Location = new System.Drawing.Point(33, 145);
-            this.transducerTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.transducerTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.transducerTextBox.Name = "transducerTextBox";
             this.transducerTextBox.Size = new System.Drawing.Size(124, 20);
             this.transducerTextBox.TabIndex = 7;
@@ -316,7 +316,7 @@
             this.calfolderBrowser.FoldersOnly = true;
             this.calfolderBrowser.HideFolder = false;
             this.calfolderBrowser.Location = new System.Drawing.Point(33, 35);
-            this.calfolderBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.calfolderBrowser.Margin = new System.Windows.Forms.Padding(4);
             this.calfolderBrowser.Name = "calfolderBrowser";
             this.calfolderBrowser.ReadOnly = false;
             this.calfolderBrowser.ShowSaveButton = false;
@@ -345,7 +345,7 @@
             this.wavfolderBrowser.FoldersOnly = true;
             this.wavfolderBrowser.HideFolder = false;
             this.wavfolderBrowser.Location = new System.Drawing.Point(33, 88);
-            this.wavfolderBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wavfolderBrowser.Margin = new System.Windows.Forms.Padding(4);
             this.wavfolderBrowser.Name = "wavfolderBrowser";
             this.wavfolderBrowser.ReadOnly = false;
             this.wavfolderBrowser.ShowSaveButton = false;
@@ -379,37 +379,37 @@
             this.metricGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.metricGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metricGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.metricGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.metricGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MetricName,
             this.MetricValue});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle11;
             this.metricGridView.EnableHeadersVisualStyles = false;
             this.metricGridView.Location = new System.Drawing.Point(33, 357);
             this.metricGridView.Name = "metricGridView";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.metricGridView.RowHeadersVisible = false;
             this.metricGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.metricGridView.Size = new System.Drawing.Size(222, 150);
@@ -439,15 +439,15 @@
             this.ScreenPage.Controls.Add(this.cuesSpecifier);
             this.ScreenPage.Location = new System.Drawing.Point(4, 22);
             this.ScreenPage.Name = "ScreenPage";
-            this.ScreenPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.ScreenPage.Size = new System.Drawing.Size(611, 707);
+            this.ScreenPage.Padding = new System.Windows.Forms.Padding(3);
+            this.ScreenPage.Size = new System.Drawing.Size(611, 702);
             this.ScreenPage.TabIndex = 2;
             this.ScreenPage.Text = "Screen";
             // 
             // inputsSpecifier
             // 
             this.inputsSpecifier.Location = new System.Drawing.Point(18, 339);
-            this.inputsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputsSpecifier.Margin = new System.Windows.Forms.Padding(2);
             this.inputsSpecifier.Name = "inputsSpecifier";
             this.inputsSpecifier.Size = new System.Drawing.Size(351, 318);
             this.inputsSpecifier.TabIndex = 1;
@@ -470,15 +470,15 @@
             this.InstructionsPage.Controls.Add(this.instructionEditor);
             this.InstructionsPage.Location = new System.Drawing.Point(4, 22);
             this.InstructionsPage.Name = "InstructionsPage";
-            this.InstructionsPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.InstructionsPage.Size = new System.Drawing.Size(611, 707);
+            this.InstructionsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.InstructionsPage.Size = new System.Drawing.Size(611, 702);
             this.InstructionsPage.TabIndex = 9;
             this.InstructionsPage.Text = "Instructions";
             // 
             // instructionEditor
             // 
             this.instructionEditor.Location = new System.Drawing.Point(34, 27);
-            this.instructionEditor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.instructionEditor.Margin = new System.Windows.Forms.Padding(4);
             this.instructionEditor.Name = "instructionEditor";
             this.instructionEditor.Size = new System.Drawing.Size(424, 315);
             this.instructionEditor.TabIndex = 10;
@@ -491,7 +491,7 @@
             this.EventPage.Controls.Add(this.eventsSpecifier);
             this.EventPage.Location = new System.Drawing.Point(4, 22);
             this.EventPage.Name = "EventPage";
-            this.EventPage.Size = new System.Drawing.Size(611, 707);
+            this.EventPage.Size = new System.Drawing.Size(611, 702);
             this.EventPage.TabIndex = 3;
             this.EventPage.Text = "Events";
             // 
@@ -500,10 +500,14 @@
             this.eventsSpecifier.AutoSize = true;
             this.eventsSpecifier.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.eventsSpecifier.Location = new System.Drawing.Point(11, 12);
-            this.eventsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.eventsSpecifier.Margin = new System.Windows.Forms.Padding(2);
             this.eventsSpecifier.Name = "eventsSpecifier";
             this.eventsSpecifier.Size = new System.Drawing.Size(421, 461);
             this.eventsSpecifier.TabIndex = 0;
+            this.eventsSpecifier.ItemRenamed += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemRenamed);
+            this.eventsSpecifier.ItemMoved += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemMoved);
+            this.eventsSpecifier.ItemsDeleted += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItems>(this.eventListBox_ItemsDeleted);
+            this.eventsSpecifier.ItemsMoved += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItems>(this.eventListBox_ItemsMoved);
             this.eventsSpecifier.ValueChanged += new System.EventHandler(this.eventsSpecifier_ValueChanged);
             // 
             // SchedulePage
@@ -516,7 +520,7 @@
             this.SchedulePage.Controls.Add(this.schedModeDropDown);
             this.SchedulePage.Location = new System.Drawing.Point(4, 22);
             this.SchedulePage.Name = "SchedulePage";
-            this.SchedulePage.Size = new System.Drawing.Size(611, 707);
+            this.SchedulePage.Size = new System.Drawing.Size(611, 702);
             this.SchedulePage.TabIndex = 4;
             this.SchedulePage.Text = "Schedule";
             // 
@@ -538,7 +542,7 @@
             this.breakPanel.Controls.Add(this.afterNumeric);
             this.breakPanel.Location = new System.Drawing.Point(235, 9);
             this.breakPanel.Name = "breakPanel";
-            this.breakPanel.Size = new System.Drawing.Size(371, 26);
+            this.breakPanel.Size = new System.Drawing.Size(371, 27);
             this.breakPanel.TabIndex = 1;
             // 
             // label10
@@ -579,15 +583,15 @@
             this.afterNumeric.IntValue = 0;
             this.afterNumeric.IsInteger = true;
             this.afterNumeric.Location = new System.Drawing.Point(30, 3);
-            this.afterNumeric.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.afterNumeric.Margin = new System.Windows.Forms.Padding(4);
             this.afterNumeric.MaxCoerce = false;
-            this.afterNumeric.MaximumSize = new System.Drawing.Size(15000, 16);
+            this.afterNumeric.MaximumSize = new System.Drawing.Size(20000, 20);
             this.afterNumeric.MaxValue = 100D;
             this.afterNumeric.MinCoerce = false;
-            this.afterNumeric.MinimumSize = new System.Drawing.Size(8, 16);
+            this.afterNumeric.MinimumSize = new System.Drawing.Size(10, 20);
             this.afterNumeric.MinValue = 1D;
             this.afterNumeric.Name = "afterNumeric";
-            this.afterNumeric.Size = new System.Drawing.Size(40, 16);
+            this.afterNumeric.Size = new System.Drawing.Size(40, 20);
             this.afterNumeric.TabIndex = 4;
             this.afterNumeric.TextFormat = "K4";
             this.afterNumeric.ToolTip = "";
@@ -626,7 +630,7 @@
             this.schedPage.Controls.Add(this.scheduleControl);
             this.schedPage.Location = new System.Drawing.Point(4, 5);
             this.schedPage.Name = "schedPage";
-            this.schedPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.schedPage.Padding = new System.Windows.Forms.Padding(3);
             this.schedPage.Size = new System.Drawing.Size(619, 638);
             this.schedPage.TabIndex = 0;
             this.schedPage.Text = "tabPage1";
@@ -634,7 +638,7 @@
             // scheduleControl
             // 
             this.scheduleControl.Location = new System.Drawing.Point(3, 6);
-            this.scheduleControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.scheduleControl.Margin = new System.Windows.Forms.Padding(4);
             this.scheduleControl.Name = "scheduleControl";
             this.scheduleControl.Size = new System.Drawing.Size(610, 570);
             this.scheduleControl.TabIndex = 0;
@@ -647,7 +651,7 @@
             this.adaptPage.Controls.Add(this.adaptControl);
             this.adaptPage.Location = new System.Drawing.Point(4, 5);
             this.adaptPage.Name = "adaptPage";
-            this.adaptPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.adaptPage.Padding = new System.Windows.Forms.Padding(3);
             this.adaptPage.Size = new System.Drawing.Size(619, 638);
             this.adaptPage.TabIndex = 1;
             this.adaptPage.Text = "tabPage2";
@@ -655,7 +659,7 @@
             // adaptControl
             // 
             this.adaptControl.Location = new System.Drawing.Point(6, 6);
-            this.adaptControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.adaptControl.Margin = new System.Windows.Forms.Padding(4);
             this.adaptControl.Name = "adaptControl";
             this.adaptControl.Size = new System.Drawing.Size(593, 622);
             this.adaptControl.TabIndex = 0;
@@ -690,7 +694,7 @@
             this.StatePage.Controls.Add(this.stateNameTextBox);
             this.StatePage.Location = new System.Drawing.Point(4, 22);
             this.StatePage.Name = "StatePage";
-            this.StatePage.Size = new System.Drawing.Size(611, 707);
+            this.StatePage.Size = new System.Drawing.Size(611, 702);
             this.StatePage.TabIndex = 6;
             this.StatePage.Text = "State";
             // 
@@ -730,7 +734,7 @@
             this.ipcTextBox.FontColor = System.Drawing.SystemColors.WindowText;
             this.ipcTextBox.IsIPAddress = false;
             this.ipcTextBox.Location = new System.Drawing.Point(151, 124);
-            this.ipcTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ipcTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ipcTextBox.Name = "ipcTextBox";
             this.ipcTextBox.Size = new System.Drawing.Size(118, 20);
             this.ipcTextBox.TabIndex = 66;
@@ -861,7 +865,7 @@
             this.timeoutPage.Controls.Add(this.timeoutExprBox);
             this.timeoutPage.Location = new System.Drawing.Point(4, 5);
             this.timeoutPage.Name = "timeoutPage";
-            this.timeoutPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.timeoutPage.Padding = new System.Windows.Forms.Padding(3);
             this.timeoutPage.Size = new System.Drawing.Size(318, 299);
             this.timeoutPage.TabIndex = 0;
             this.timeoutPage.Text = "tabPage1";
@@ -928,7 +932,7 @@
             this.termPage.Controls.Add(this.termLatencyNumeric);
             this.termPage.Location = new System.Drawing.Point(4, 5);
             this.termPage.Name = "termPage";
-            this.termPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.termPage.Padding = new System.Windows.Forms.Padding(3);
             this.termPage.Size = new System.Drawing.Size(318, 299);
             this.termPage.TabIndex = 1;
             this.termPage.Text = "tabPage2";
@@ -1036,15 +1040,15 @@
             this.termLatencyNumeric.IntValue = 0;
             this.termLatencyNumeric.IsInteger = false;
             this.termLatencyNumeric.Location = new System.Drawing.Point(6, 75);
-            this.termLatencyNumeric.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.termLatencyNumeric.Margin = new System.Windows.Forms.Padding(4);
             this.termLatencyNumeric.MaxCoerce = false;
-            this.termLatencyNumeric.MaximumSize = new System.Drawing.Size(15000, 16);
+            this.termLatencyNumeric.MaximumSize = new System.Drawing.Size(20000, 20);
             this.termLatencyNumeric.MaxValue = 1000000D;
             this.termLatencyNumeric.MinCoerce = false;
-            this.termLatencyNumeric.MinimumSize = new System.Drawing.Size(8, 16);
+            this.termLatencyNumeric.MinimumSize = new System.Drawing.Size(10, 20);
             this.termLatencyNumeric.MinValue = 0D;
             this.termLatencyNumeric.Name = "termLatencyNumeric";
-            this.termLatencyNumeric.Size = new System.Drawing.Size(107, 16);
+            this.termLatencyNumeric.Size = new System.Drawing.Size(107, 20);
             this.termLatencyNumeric.TabIndex = 2;
             this.termLatencyNumeric.TextFormat = "K4";
             this.termLatencyNumeric.ToolTip = "";
@@ -1088,8 +1092,8 @@
             this.AudioPage.Controls.Add(this.channelView);
             this.AudioPage.Location = new System.Drawing.Point(4, 22);
             this.AudioPage.Name = "AudioPage";
-            this.AudioPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.AudioPage.Size = new System.Drawing.Size(611, 707);
+            this.AudioPage.Padding = new System.Windows.Forms.Padding(3);
+            this.AudioPage.Size = new System.Drawing.Size(611, 702);
             this.AudioPage.TabIndex = 0;
             this.AudioPage.Text = "Audio";
             // 
@@ -1111,7 +1115,7 @@
             this.graphPage.Controls.Add(this.signalGraph);
             this.graphPage.Location = new System.Drawing.Point(4, 5);
             this.graphPage.Name = "graphPage";
-            this.graphPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.graphPage.Padding = new System.Windows.Forms.Padding(3);
             this.graphPage.Size = new System.Drawing.Size(508, 175);
             this.graphPage.TabIndex = 0;
             this.graphPage.Text = "tabPage1";
@@ -1122,7 +1126,7 @@
             this.signalGraph.BackColor = System.Drawing.SystemColors.Control;
             this.signalGraph.Dock = System.Windows.Forms.DockStyle.Fill;
             this.signalGraph.Location = new System.Drawing.Point(3, 3);
-            this.signalGraph.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.signalGraph.Margin = new System.Windows.Forms.Padding(4);
             this.signalGraph.Name = "signalGraph";
             this.signalGraph.ScrollGrace = 0D;
             this.signalGraph.ScrollMaxX = 0D;
@@ -1141,7 +1145,7 @@
             this.errorPage.Controls.Add(this.audioErrorTextBox);
             this.errorPage.Location = new System.Drawing.Point(4, 5);
             this.errorPage.Name = "errorPage";
-            this.errorPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.errorPage.Padding = new System.Windows.Forms.Padding(3);
             this.errorPage.Size = new System.Drawing.Size(508, 175);
             this.errorPage.TabIndex = 1;
             this.errorPage.Text = "tabPage2";
@@ -1172,7 +1176,7 @@
             // 
             this.channelListBox.DefaultName = "Signal";
             this.channelListBox.Location = new System.Drawing.Point(15, 11);
-            this.channelListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.channelListBox.Margin = new System.Windows.Forms.Padding(4);
             this.channelListBox.Name = "channelListBox";
             this.channelListBox.SelectedIndex = -1;
             this.channelListBox.Size = new System.Drawing.Size(219, 89);
@@ -1191,7 +1195,7 @@
             this.channelView.AutoScroll = true;
             this.channelView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.channelView.Location = new System.Drawing.Point(273, 11);
-            this.channelView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.channelView.Margin = new System.Windows.Forms.Padding(4);
             this.channelView.Name = "channelView";
             this.channelView.Size = new System.Drawing.Size(258, 443);
             this.channelView.TabIndex = 0;
@@ -1206,15 +1210,15 @@
             this.CuePage.Controls.Add(this.stateCuesControl);
             this.CuePage.Location = new System.Drawing.Point(4, 22);
             this.CuePage.Name = "CuePage";
-            this.CuePage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.CuePage.Size = new System.Drawing.Size(611, 707);
+            this.CuePage.Padding = new System.Windows.Forms.Padding(3);
+            this.CuePage.Size = new System.Drawing.Size(611, 702);
             this.CuePage.TabIndex = 1;
             this.CuePage.Text = "Cues";
             // 
             // stateCuesControl
             // 
             this.stateCuesControl.Location = new System.Drawing.Point(7, 7);
-            this.stateCuesControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stateCuesControl.Margin = new System.Windows.Forms.Padding(4);
             this.stateCuesControl.Name = "stateCuesControl";
             this.stateCuesControl.Size = new System.Drawing.Size(442, 491);
             this.stateCuesControl.TabIndex = 0;
@@ -1228,7 +1232,7 @@
             this.InputPage.Controls.Add(this.stateInputsControl);
             this.InputPage.Location = new System.Drawing.Point(4, 22);
             this.InputPage.Name = "InputPage";
-            this.InputPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.InputPage.Padding = new System.Windows.Forms.Padding(3);
             this.InputPage.Size = new System.Drawing.Size(611, 702);
             this.InputPage.TabIndex = 8;
             this.InputPage.Text = "Inputs";
@@ -1236,7 +1240,7 @@
             // stateInputsControl
             // 
             this.stateInputsControl.Location = new System.Drawing.Point(6, 6);
-            this.stateInputsControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stateInputsControl.Margin = new System.Windows.Forms.Padding(4);
             this.stateInputsControl.Name = "stateInputsControl";
             this.stateInputsControl.Size = new System.Drawing.Size(554, 360);
             this.stateInputsControl.TabIndex = 0;
@@ -1305,7 +1309,7 @@
             this.wavFolderTextBox.FontColor = System.Drawing.SystemColors.WindowText;
             this.wavFolderTextBox.IsIPAddress = false;
             this.wavFolderTextBox.Location = new System.Drawing.Point(245, 33);
-            this.wavFolderTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wavFolderTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.wavFolderTextBox.Name = "wavFolderTextBox";
             this.wavFolderTextBox.Size = new System.Drawing.Size(100, 20);
             this.wavFolderTextBox.TabIndex = 11;
@@ -1319,7 +1323,7 @@
             this.tagTextBox.FontColor = System.Drawing.SystemColors.WindowText;
             this.tagTextBox.IsIPAddress = false;
             this.tagTextBox.Location = new System.Drawing.Point(49, 33);
-            this.tagTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tagTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.tagTextBox.Name = "tagTextBox";
             this.tagTextBox.Size = new System.Drawing.Size(100, 20);
             this.tagTextBox.TabIndex = 10;
@@ -1339,7 +1343,7 @@
             // 
             this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versionLabel.Location = new System.Drawing.Point(498, 76);
-            this.versionLabel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.versionLabel.Margin = new System.Windows.Forms.Padding(3);
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(100, 19);
             this.versionLabel.TabIndex = 7;
@@ -1356,7 +1360,7 @@
             this.linktoBrowser.FoldersOnly = false;
             this.linktoBrowser.HideFolder = true;
             this.linktoBrowser.Location = new System.Drawing.Point(49, 61);
-            this.linktoBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.linktoBrowser.Margin = new System.Windows.Forms.Padding(4);
             this.linktoBrowser.Name = "linktoBrowser";
             this.linktoBrowser.ReadOnly = false;
             this.linktoBrowser.ShowSaveButton = true;
@@ -1407,7 +1411,7 @@
             this.graphViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphViewer.Graph = null;
             this.graphViewer.Location = new System.Drawing.Point(4, 4);
-            this.graphViewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.graphViewer.Margin = new System.Windows.Forms.Padding(4);
             this.graphViewer.Name = "graphViewer";
             this.graphViewer.Size = new System.Drawing.Size(522, 626);
             this.graphViewer.TabIndex = 3;

@@ -32,7 +32,6 @@ namespace Turandot_Editor.Controls
         public NameChangeDelegate NameChange;
         private void OnNameChange(string oldName, string newName) { NameChange?.Invoke(oldName, newName); }
 
-
         public ScreenInputsSpecifier()
         {
             InitializeComponent();

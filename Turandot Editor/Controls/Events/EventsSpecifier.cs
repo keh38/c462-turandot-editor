@@ -89,44 +89,36 @@ namespace Turandot_Editor.Controls.Events
 
         private void eventListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)
         {
-            InputEvent inputEvent = new InputEvent(e.name);
-            _events.Insert(e.index, inputEvent);
-            ShowEventCriteria(inputEvent);
+            ItemAdded(this, e);
         }
 
-        //private void eventListBox_ItemRenamed(object sender, KUserListBox.ChangedItem e)
-        //{
-        //    string oldName = _params.RenameEvent(e.name, e.index);
-        //    graphViewer.RenameEvent(oldName, e.name);
-        //    SetDirty();
-        //}
+        private void eventListBox_ItemRenamed(object sender, KUserListBox.ChangedItem e)
+        {
+            ItemRenamed(this, e);
+        }
 
-        //private void eventListBox_ItemsDeleted(object sender, KUserListBox.ChangedItems e)
-        //{
-        //    _params.DeleteEvents(e.names);
-        //    graphViewer.DeleteEvents(e.names);
-        //    SetDirty();
-        //}
+        private void eventListBox_ItemsDeleted(object sender, KUserListBox.ChangedItems e)
+        {
+            ItemsDeleted(this, e);
+        }
 
-        //private void eventListBox_ItemMoved(object sender, KUserListBox.ChangedItem e)
-        //{
-        //    _params.MoveEvent(e.name, e.index);
-        //    SetDirty();
-        //}
+        private void eventListBox_ItemMoved(object sender, KUserListBox.ChangedItem e)
+        {
+            ItemMoved(this, e);
+        }
 
-        //private void eventListBox_ItemsMoved(object sender, KUserListBox.ChangedItems e)
-        //{
-        //    _params.MoveEvents(e.names);
-        //    SetDirty();
-        //}
+        private void eventListBox_ItemsMoved(object sender, KUserListBox.ChangedItems e)
+        {
+            ItemsMoved(this, e);
+        }
 
-        //private void eventListBox_SelectionChanged(object sender, KUserListBox.ChangedItem e)
-        //{
-        //    if (!_ignoreEvents)
-        //    {
-        //        ShowEventCriteria(e.index >= 0 ? _params.inputEvents[e.index] : null);
-        //    }
-        //}
+        private void eventListBox_SelectionChanged(object sender, KUserListBox.ChangedItem e)
+        {
+            if (!_ignoreEvents)
+            {
+                ShowEventCriteria(e.index >= 0 ? _events[e.index] : null);
+            }
+        }
 
         private void flagControl_ValueChanged(object sender, EventArgs e)
         {
@@ -145,6 +137,37 @@ namespace Turandot_Editor.Controls.Events
                 OnValueChanged();
             }
         }
+        #region Events
+        public event EventHandler<KUserListBox.ChangedItem> ItemAdded;
+        private void OnItemAdded(KUserListBox.ChangedItem itemChanged)
+        {
+            ItemAdded?.Invoke(this, itemChanged);
+        }
 
+        public event EventHandler<KUserListBox.ChangedItem> ItemRenamed;
+        private void OnItemRenamed(KUserListBox.ChangedItem itemChanged)
+        {
+            ItemRenamed?.Invoke(this, itemChanged);
+        }
+
+        public event EventHandler<KUserListBox.ChangedItem> ItemMoved;
+        private void OnItemMoved(KUserListBox.ChangedItem itemChanged)
+        {
+            ItemMoved?.Invoke(this, itemChanged);
+        }
+
+        public event EventHandler<KUserListBox.ChangedItems> ItemsDeleted;
+        private void OnItemsDeleted(KUserListBox.ChangedItems items)
+        {
+            ItemsDeleted?.Invoke(this, items);
+        }
+
+        public event EventHandler<KUserListBox.ChangedItems> ItemsMoved;
+        private void OnItemsMoved(KUserListBox.ChangedItems items)
+        {
+            ItemsMoved?.Invoke(this, items);
+        }
+
+        #endregion
     }
 }

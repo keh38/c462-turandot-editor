@@ -592,7 +592,7 @@ namespace Turandot_Editor
             ipcTextBox.Text = state.ipcCommand;
 
             stateCuesControl.Value = state.cues;
-            stateInputsControl.SetDataForContext(state.sigMan.GetValidSweepables());
+            stateInputsControl.SetDataForContext(state.sigMan?.GetValidSweepables());
             stateInputsControl.Value = state.inputs;
 
             if (state.sigMan != null)
@@ -985,6 +985,33 @@ namespace Turandot_Editor
                 SetDirty();
             }
         }
+
+        private void eventListBox_ItemRenamed(object sender, KUserListBox.ChangedItem e)
+        {
+            string oldName = _params.RenameEvent(e.name, e.index);
+            graphViewer.RenameEvent(oldName, e.name);
+            SetDirty();
+        }
+
+        private void eventListBox_ItemsDeleted(object sender, KUserListBox.ChangedItems e)
+        {
+            _params.DeleteEvents(e.names);
+            graphViewer.DeleteEvents(e.names);
+            SetDirty();
+        }
+
+        private void eventListBox_ItemMoved(object sender, KUserListBox.ChangedItem e)
+        {
+            _params.MoveEvent(e.name, e.index);
+            SetDirty();
+        }
+
+        private void eventListBox_ItemsMoved(object sender, KUserListBox.ChangedItems e)
+        {
+            _params.MoveEvents(e.names);
+            SetDirty();
+        }
+
 
         private bool PassesDirtyCheck()
         {
