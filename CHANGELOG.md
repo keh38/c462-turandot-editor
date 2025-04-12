@@ -1,5 +1,13 @@
 ## Changelog
 
+### 2.2 (unreleased)
+#### Fixed
+- bugs in event specifier
+#### Added
+- slider functionality
+
+---
+
 ### 2.1 (2025-04-07)
 #### Fixed
 - install location/registry setting
