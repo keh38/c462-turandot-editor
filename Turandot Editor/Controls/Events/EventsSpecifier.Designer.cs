@@ -38,11 +38,12 @@
             // 
             this.eventListBox.DefaultName = "Event";
             this.eventListBox.Location = new System.Drawing.Point(4, 4);
-            this.eventListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.eventListBox.Margin = new System.Windows.Forms.Padding(4);
             this.eventListBox.Name = "eventListBox";
             this.eventListBox.SelectedIndex = -1;
             this.eventListBox.Size = new System.Drawing.Size(169, 168);
             this.eventListBox.TabIndex = 5;
+            this.eventListBox.SelectionChanged += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_SelectionChanged);
             this.eventListBox.ItemAdded += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemAdded);
             this.eventListBox.ItemRenamed += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemRenamed);
             this.eventListBox.ItemMoved += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemMoved);
@@ -54,7 +55,7 @@
             this.inputCriteria.AutoSize = true;
             this.inputCriteria.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.inputCriteria.Location = new System.Drawing.Point(14, 168);
-            this.inputCriteria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputCriteria.Margin = new System.Windows.Forms.Padding(4);
             this.inputCriteria.Name = "inputCriteria";
             this.inputCriteria.Size = new System.Drawing.Size(403, 289);
             this.inputCriteria.TabIndex = 9;
@@ -64,7 +65,7 @@
             // flagControl
             // 
             this.flagControl.Location = new System.Drawing.Point(191, 25);
-            this.flagControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flagControl.Margin = new System.Windows.Forms.Padding(4);
             this.flagControl.Name = "flagControl";
             this.flagControl.Size = new System.Drawing.Size(223, 136);
             this.flagControl.TabIndex = 8;
@@ -79,7 +80,7 @@
             this.Controls.Add(this.inputCriteria);
             this.Controls.Add(this.flagControl);
             this.Controls.Add(this.eventListBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "EventsSpecifier";
             this.Size = new System.Drawing.Size(421, 461);
             this.ResumeLayout(false);

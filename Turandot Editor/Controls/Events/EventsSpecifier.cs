@@ -89,7 +89,9 @@ namespace Turandot_Editor.Controls.Events
 
         private void eventListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)
         {
-            ItemAdded(this, e);
+            var inputEvent = new InputEvent(e.name);
+            _events.Insert(e.index, inputEvent);
+            ItemAdded?.Invoke(this, e);
         }
 
         private void eventListBox_ItemRenamed(object sender, KUserListBox.ChangedItem e)

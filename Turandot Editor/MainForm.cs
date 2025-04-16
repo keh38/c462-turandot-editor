@@ -986,6 +986,11 @@ namespace Turandot_Editor
             }
         }
 
+        private void eventListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)
+        {
+            SetDirty();
+        }
+
         private void eventListBox_ItemRenamed(object sender, KUserListBox.ChangedItem e)
         {
             string oldName = _params.RenameEvent(e.name, e.index);
