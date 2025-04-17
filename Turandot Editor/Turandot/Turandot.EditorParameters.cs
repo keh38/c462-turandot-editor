@@ -314,6 +314,7 @@ namespace Turandot
             p.adapt = adapt;
             p.tag = tag;
             p.linkTo = linkTo;
+            p.matlabFunction = matlabFunction;
             p.wavFolder = wavFolder;
             p.trialLogOption = trialLogOption;
             p.allowExpertOptions = allowExpertOptions;
@@ -333,6 +334,7 @@ namespace Turandot
             adapt = p.adapt;
             tag = p.tag;
             linkTo = p.linkTo;
+            matlabFunction = p.matlabFunction;
             wavFolder = p.wavFolder;
             trialLogOption = p.trialLogOption;
             allowExpertOptions = p.allowExpertOptions;
