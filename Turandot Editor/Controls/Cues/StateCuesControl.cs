@@ -40,7 +40,9 @@ namespace Turandot_Editor.Controls
 
         public void SetAvailableCues(List<CueLayout> available)
         {
-            _available = available;
+            // don't want to sort original list
+            _available = new List<CueLayout>();
+            _available.AddRange(available);
             _available.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             cueDropDown.Items.Clear();
@@ -105,6 +107,8 @@ namespace Turandot_Editor.Controls
            
             _value[_value.Count - 1].Target = c.Name;
             cueListBox.SelectedItem = _value.Count - 1;
+            cueListBox.SelectedIndex = -1;
+
             ShowCues();
             OnValueChanged();
         }

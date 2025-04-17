@@ -287,7 +287,7 @@ namespace Turandot
         {
             foreach (var fe in flowChart)
             {
-                var inp = fe.inputs.Find(o => o.Name.ToLower().Equals(inputName.ToLower()));
+                var inp = fe.inputs.Find(o => o.Target.ToLower().Equals(inputName.ToLower()));
                 if (inp != null) fe.inputs.Remove(inp);
             }
         }
