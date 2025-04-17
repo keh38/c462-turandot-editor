@@ -56,7 +56,10 @@ namespace Turandot_Editor.Controls
 
         public void SetAvailableInputs(List<InputLayout> available)
         {
-            _available = available;
+            // don't want the sort to change the original list
+            _available = new List<InputLayout>();
+            _available.AddRange(available);
+
             _available.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             inputDropDown.Items.Clear();

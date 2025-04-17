@@ -71,6 +71,7 @@ namespace Turandot_Editor.Controls
                 inputListBox.Items[index] = e.ChangedItem.Value.ToString();
                 inputListBox.SelectedIndex = index;
                 OnNameChange(e.OldValue.ToString(), e.ChangedItem.Value.ToString());
+                _ignoreEvents = false;
             }
         }
 
@@ -120,11 +121,12 @@ namespace Turandot_Editor.Controls
             }
 
             inputListBox.Items.Add(name);
-            inputListBox.SelectedItem = _value.Count - 1;
+            inputListBox.SelectedIndex = _value.Count - 1;
             inputDropDown.SelectedIndex = -1;
 
-            ShowValue();
+            //ShowValue();
             OnValueChanged();
         }
+
     }
 }

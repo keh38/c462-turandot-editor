@@ -49,7 +49,7 @@
             // 
             this.inputListBox.FormattingEnabled = true;
             this.inputListBox.Location = new System.Drawing.Point(10, 34);
-            this.inputListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputListBox.Margin = new System.Windows.Forms.Padding(2);
             this.inputListBox.Name = "inputListBox";
             this.inputListBox.Size = new System.Drawing.Size(136, 147);
             this.inputListBox.TabIndex = 2;
@@ -58,7 +58,7 @@
             // propertyGrid
             // 
             this.propertyGrid.Location = new System.Drawing.Point(160, 9);
-            this.propertyGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.propertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.Size = new System.Drawing.Size(183, 296);
             this.propertyGrid.TabIndex = 4;
@@ -67,7 +67,7 @@
             // removeButton
             // 
             this.removeButton.Location = new System.Drawing.Point(10, 185);
-            this.removeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.removeButton.Margin = new System.Windows.Forms.Padding(2);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(136, 24);
             this.removeButton.TabIndex = 6;
@@ -84,7 +84,7 @@
             "Checklist",
             "Param Slider"});
             this.inputDropDown.Location = new System.Drawing.Point(10, 213);
-            this.inputDropDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputDropDown.Margin = new System.Windows.Forms.Padding(2);
             this.inputDropDown.Name = "inputDropDown";
             this.inputDropDown.Size = new System.Drawing.Size(136, 21);
             this.inputDropDown.TabIndex = 7;
@@ -99,7 +99,7 @@
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.inputListBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ScreenInputsSpecifier";
             this.Size = new System.Drawing.Size(351, 318);
             this.ResumeLayout(false);

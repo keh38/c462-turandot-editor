@@ -335,6 +335,9 @@ namespace Turandot_Editor
             }
             linktoBrowser.Value = p.linkTo;
 
+            matlabFileBrowser.DefaultFolder = FileLocations.MATLABFolder;
+            matlabFileBrowser.Value = p.matlabFunction;
+
             cuesSpecifier.Value = p.screen.Cues;
             inputsSpecifier.Value = p.screen.Inputs;
 
@@ -1484,6 +1487,15 @@ namespace Turandot_Editor
             if (!_ignoreEvents)
             {
                 _params.linkTo = Path.GetFileName(linktoBrowser.Value);
+                SetDirty();
+            }
+        }
+
+        private void matlabFileBrowser_ValueChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreEvents)
+            {
+                _params.matlabFunction = Path.GetFileName(matlabFileBrowser.Value);
                 SetDirty();
             }
         }

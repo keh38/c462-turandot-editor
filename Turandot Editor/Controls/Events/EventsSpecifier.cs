@@ -84,7 +84,7 @@ namespace Turandot_Editor.Controls.Events
         private void ShowFlags(List<Flag> flags)
         {
             flagControl.Value = flags;
-            //inputCriteria.FlagNames = _params.flags.Select(f => f.name).ToArray();
+            inputCriteria.SetFlagNames(flags.Select(f => f.name).ToList());
         }
 
         private void eventListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)

@@ -180,7 +180,7 @@ namespace Turandot
             {
                 foreach (var input in fe.inputs)
                 {
-                    if (!input.name.Equals("Random process") && active.Find(a => a == input.Name) == null) active.Add(input.Name);
+                    if (!input.name.Equals("Random process") && active.Find(a => a == input.Target) == null) active.Add(input.Target);
                 }
             }
 

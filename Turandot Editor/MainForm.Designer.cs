@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NewParamsButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -122,6 +122,8 @@
             this.InputPage = new System.Windows.Forms.TabPage();
             this.stateInputsControl = new Turandot_Editor.Controls.StateInputsControl();
             this.infoPanel = new System.Windows.Forms.Panel();
+            this.matlabFileBrowser = new KLib.Controls.FileBrowser();
+            this.label16 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.trialLogOptionEnum = new KLib.Controls.EnumDropDown();
             this.expertCheckBox = new System.Windows.Forms.CheckBox();
@@ -230,7 +232,7 @@
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(1155, 734);
             this.tableLayoutPanel.TabIndex = 2;
             // 
@@ -379,37 +381,37 @@
             this.metricGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.metricGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metricGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metricGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.metricGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MetricName,
             this.MetricValue});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle5;
             this.metricGridView.EnableHeadersVisualStyles = false;
             this.metricGridView.Location = new System.Drawing.Point(33, 357);
             this.metricGridView.Name = "metricGridView";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metricGridView.RowHeadersVisible = false;
             this.metricGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.metricGridView.Size = new System.Drawing.Size(222, 150);
@@ -1254,6 +1256,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.infoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.infoPanel.Controls.Add(this.matlabFileBrowser);
+            this.infoPanel.Controls.Add(this.label16);
             this.infoPanel.Controls.Add(this.label7);
             this.infoPanel.Controls.Add(this.trialLogOptionEnum);
             this.infoPanel.Controls.Add(this.expertCheckBox);
@@ -1266,16 +1270,45 @@
             this.infoPanel.Controls.Add(this.label2);
             this.infoPanel.Controls.Add(this.label1);
             this.infoPanel.Controls.Add(this.pathLabel);
-            this.infoPanel.Location = new System.Drawing.Point(3, 637);
+            this.infoPanel.Location = new System.Drawing.Point(3, 611);
             this.infoPanel.Name = "infoPanel";
-            this.infoPanel.Size = new System.Drawing.Size(524, 94);
+            this.infoPanel.Size = new System.Drawing.Size(524, 120);
             this.infoPanel.TabIndex = 2;
             this.infoPanel.SizeChanged += new System.EventHandler(this.infoPanel_SizeChanged);
+            // 
+            // matlabFileBrowser
+            // 
+            this.matlabFileBrowser.AutoSize = true;
+            this.matlabFileBrowser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.matlabFileBrowser.DefaultFolder = null;
+            this.matlabFileBrowser.FileMustExist = false;
+            this.matlabFileBrowser.Filter = "MATLAB files (*.m) | *.m";
+            this.matlabFileBrowser.FoldersOnly = false;
+            this.matlabFileBrowser.HideFolder = true;
+            this.matlabFileBrowser.Location = new System.Drawing.Point(237, 59);
+            this.matlabFileBrowser.Margin = new System.Windows.Forms.Padding(4);
+            this.matlabFileBrowser.Name = "matlabFileBrowser";
+            this.matlabFileBrowser.ReadOnly = false;
+            this.matlabFileBrowser.ShowSaveButton = false;
+            this.matlabFileBrowser.Size = new System.Drawing.Size(178, 21);
+            this.matlabFileBrowser.TabIndex = 17;
+            this.matlabFileBrowser.UseEllipsis = false;
+            this.matlabFileBrowser.Value = "";
+            this.matlabFileBrowser.ValueChanged += new System.EventHandler(this.matlabFileBrowser_ValueChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(184, 63);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(50, 13);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "MATLAB";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(414, 36);
+            this.label7.Location = new System.Drawing.Point(15, 90);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 15;
@@ -1285,9 +1318,9 @@
             // 
             this.trialLogOptionEnum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.trialLogOptionEnum.FormattingEnabled = true;
-            this.trialLogOptionEnum.Location = new System.Drawing.Point(469, 32);
+            this.trialLogOptionEnum.Location = new System.Drawing.Point(70, 86);
             this.trialLogOptionEnum.Name = "trialLogOptionEnum";
-            this.trialLogOptionEnum.Size = new System.Drawing.Size(86, 21);
+            this.trialLogOptionEnum.Size = new System.Drawing.Size(99, 21);
             this.trialLogOptionEnum.Sort = false;
             this.trialLogOptionEnum.TabIndex = 14;
             this.trialLogOptionEnum.ValueChanged += new System.EventHandler(this.trialLogOptionEnum_ValueChanged);
@@ -1295,7 +1328,7 @@
             // expertCheckBox
             // 
             this.expertCheckBox.AutoSize = true;
-            this.expertCheckBox.Location = new System.Drawing.Point(438, 63);
+            this.expertCheckBox.Location = new System.Drawing.Point(237, 88);
             this.expertCheckBox.Name = "expertCheckBox";
             this.expertCheckBox.Size = new System.Drawing.Size(85, 17);
             this.expertCheckBox.TabIndex = 13;
@@ -1309,7 +1342,7 @@
             this.wavFolderTextBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.wavFolderTextBox.FontColor = System.Drawing.SystemColors.WindowText;
             this.wavFolderTextBox.IsIPAddress = false;
-            this.wavFolderTextBox.Location = new System.Drawing.Point(245, 33);
+            this.wavFolderTextBox.Location = new System.Drawing.Point(70, 59);
             this.wavFolderTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.wavFolderTextBox.Name = "wavFolderTextBox";
             this.wavFolderTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1323,7 +1356,7 @@
             this.tagTextBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tagTextBox.FontColor = System.Drawing.SystemColors.WindowText;
             this.tagTextBox.IsIPAddress = false;
-            this.tagTextBox.Location = new System.Drawing.Point(49, 33);
+            this.tagTextBox.Location = new System.Drawing.Point(69, 33);
             this.tagTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.tagTextBox.Name = "tagTextBox";
             this.tagTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1334,7 +1367,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(181, 36);
+            this.label8.Location = new System.Drawing.Point(6, 63);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 13);
             this.label8.TabIndex = 9;
@@ -1360,12 +1393,12 @@
             this.linktoBrowser.Filter = "XML files | *.xml";
             this.linktoBrowser.FoldersOnly = false;
             this.linktoBrowser.HideFolder = true;
-            this.linktoBrowser.Location = new System.Drawing.Point(49, 61);
+            this.linktoBrowser.Location = new System.Drawing.Point(237, 33);
             this.linktoBrowser.Margin = new System.Windows.Forms.Padding(4);
             this.linktoBrowser.Name = "linktoBrowser";
             this.linktoBrowser.ReadOnly = false;
-            this.linktoBrowser.ShowSaveButton = true;
-            this.linktoBrowser.Size = new System.Drawing.Size(338, 21);
+            this.linktoBrowser.ShowSaveButton = false;
+            this.linktoBrowser.Size = new System.Drawing.Size(178, 21);
             this.linktoBrowser.TabIndex = 6;
             this.linktoBrowser.UseEllipsis = false;
             this.linktoBrowser.Value = "";
@@ -1374,7 +1407,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(4, 63);
+            this.label19.Location = new System.Drawing.Point(196, 36);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(39, 13);
             this.label19.TabIndex = 5;
@@ -1383,7 +1416,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 36);
+            this.label2.Location = new System.Drawing.Point(40, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 4;
@@ -1414,7 +1447,7 @@
             this.graphViewer.Location = new System.Drawing.Point(4, 4);
             this.graphViewer.Margin = new System.Windows.Forms.Padding(4);
             this.graphViewer.Name = "graphViewer";
-            this.graphViewer.Size = new System.Drawing.Size(522, 626);
+            this.graphViewer.Size = new System.Drawing.Size(522, 600);
             this.graphViewer.TabIndex = 3;
             // 
             // ledTimer
@@ -1587,6 +1620,8 @@
         private Controls.ScreenInputsSpecifier inputsSpecifier;
         private Controls.StateInputsControl stateInputsControl;
         private Controls.Events.EventsSpecifier eventsSpecifier;
+        private KLib.Controls.FileBrowser matlabFileBrowser;
+        private System.Windows.Forms.Label label16;
     }
 }
 
