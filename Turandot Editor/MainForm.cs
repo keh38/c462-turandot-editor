@@ -1449,7 +1449,6 @@ namespace Turandot_Editor
         private void inputControl_InputAddRemove(object sender, Controls.StateInputsControl.InputAddRemoveArgs e)
         {
             Turandot.Layout.AddBadges(_selectedState, graphViewer);
-            eventsSpecifier.UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
 
             if (!ValidateInputEvents())
             {
@@ -1788,6 +1787,7 @@ namespace Turandot_Editor
                 CurateInputs(fe, _params.screen.Inputs);
             }
             stateInputsControl.SetAvailableInputs(_params.screen.Inputs);
+            eventsSpecifier.UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
             SetDirty();
         }
 

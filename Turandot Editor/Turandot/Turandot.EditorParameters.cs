@@ -175,14 +175,7 @@ namespace Turandot
 
         public List<string> GetActiveInputControls()
         {
-            List<string> active = new List<string>();
-            foreach (FlowElement fe in flowChart)
-            {
-                foreach (var input in fe.inputs)
-                {
-                    if (!input.name.Equals("Random process") && active.Find(a => a == input.Target) == null) active.Add(input.Target);
-                }
-            }
+            List<string> active = new List<string>(screen.Inputs.Select(x => x.Name).ToList());
 
             //foreach (ButtonSpec b in buttons)
             //{
