@@ -1,6 +1,6 @@
 ## Changelog
 
-### unreleased
+### 2.2.1 (2025-04-24)
 #### Fixed
 - more cleanup of events specifier
 
