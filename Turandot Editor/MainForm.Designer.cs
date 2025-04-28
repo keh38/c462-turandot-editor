@@ -720,7 +720,6 @@
             this.showStateButton.TabIndex = 68;
             this.showStateButton.Text = "Show";
             this.showStateButton.UseVisualStyleBackColor = true;
-            this.showStateButton.Click += new System.EventHandler(this.showStateButton_Click);
             // 
             // label17
             // 

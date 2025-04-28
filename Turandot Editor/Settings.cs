@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using KLib;
+
 namespace Turandot_Editor
 {
     public class Settings
@@ -12,7 +14,7 @@ namespace Turandot_Editor
         public string lastFolder = "";
         public Rectangle lastPosition = new Rectangle();
         public bool normalize = false;
-        public List<MainForm.MetricTableEntry> metricTable = new List<MainForm.MetricTableEntry>();
+        public SerializeableDictionary<string> metrics = new SerializeableDictionary<string>();
         public string wavFolder = "";
         public string calFolder = "";
         public string lastFile = "";

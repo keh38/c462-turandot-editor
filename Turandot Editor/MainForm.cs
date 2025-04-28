@@ -41,7 +41,6 @@ namespace Turandot_Editor
         bool _setupIsDirty = false;
         string _filePath = "";
         FlowElement _selectedState = null;
-        bool _remoteStart = false;
         bool _ignoreEvents = false;
         Settings _settings = new Settings();
 
@@ -1290,49 +1289,48 @@ namespace Turandot_Editor
             //timeLabel.Text = "Estimated time: " + min + " minutes";
         }
 
+        private void ShowMetrics()
+        {
+            _settings.metrics.Sort();
+            metricGridView.Rows.Clear();
+            foreach (var entry in _settings.metrics.entries)
+            {
+                metricGridView.Rows.Add(entry.key, entry.value);
+            }
+        }
+
         private void metricGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (!_ignoreEvents && metricGridView.CurrentCell != null)
-            {
-                int rowIndex = metricGridView.CurrentCell.RowIndex;
-                var cells = metricGridView.Rows[rowIndex].Cells;
+            if (_ignoreEvents || metricGridView.CurrentCell == null) return;
 
-                if (metricGridView.CurrentCell.ColumnIndex == 0)
+            int rowIndex = metricGridView.CurrentCell.RowIndex;
+            var cells = metricGridView.Rows[rowIndex].Cells;
+            string metricName = cells["MetricName"].Value as string;
+
+            if (metricGridView.CurrentCell.ColumnIndex == 0)
+            {
+                if (rowIndex == _settings.metrics.entries.Count)
                 {
-                    string metricName = cells["MetricName"].Value as string;
-                    if (rowIndex== _settings.metricTable.Count)
-                    {
-                        _settings.metricTable.Add(new MetricTableEntry(metricName, float.NaN));
-                    }
-                    else
-                    {
-                        _settings.metricTable[rowIndex].name = metricName;
-                    }
-                    MetricTableToMetricDictionary();
-                    SaveDefaults();
+                    _settings.metrics[metricName] = "";
                 }
-                else if (metricGridView.CurrentCell.ColumnIndex == 1)
+                else
                 {
-                    _settings.metricTable[rowIndex].value = (float) Convert.ToDouble(cells["MetricValue"].Value as string);
-                    MetricTableToMetricDictionary();
-                    SaveDefaults();
+                    _settings.metrics.RenameKey(rowIndex, metricName);
                 }
             }
+            else if (metricGridView.CurrentCell.ColumnIndex == 1)
+            {
+                _settings.metrics[metricName] = cells["MetricValue"].Value.ToString();
+            }
+            SaveDefaults();
         }
 
         private void metricGridView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            _settings.metricTable.RemoveAt(e.Row.Index);
-            MetricTableToMetricDictionary();
+            var metricName = e.Row.Cells["MetricName"].Value.ToString();
+            _settings.metrics.RemoveKey(metricName);
+
             SaveDefaults();
-        }
-
-        private void MetricTableToMetricDictionary()
-        {
-            Expressions.Metrics.Clear();
-            foreach (MetricTableEntry te in _settings.metricTable)
-                Expressions.Metrics.Add(te.name, new MetricData(DateTime.Now, te.value));
-
         }
 
         private void SaveDefaults()
@@ -1360,12 +1358,8 @@ namespace Turandot_Editor
 
                 transducerTextBox.Text = _settings.transducer;
 
-                metricGridView.Rows.Clear();
-                foreach (MetricTableEntry t in _settings.metricTable)
-                {
-                    metricGridView.Rows.Add(t.name, t.value);
-                }
-                MetricTableToMetricDictionary();
+                Expressions.Metrics = _settings.metrics;
+                ShowMetrics();
                 ApplyAudiogramDataToExpressions();
             }
         }
@@ -1374,18 +1368,6 @@ namespace Turandot_Editor
         {
             Expressions.Audiogram = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "agram.xml");
             Expressions.LDL = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "ldlgram.xml");
-        }
-
-        public class MetricTableEntry
-        {
-            public string name = "";
-            public float value = float.NaN;
-            public MetricTableEntry() { }
-            public MetricTableEntry(string name, float value)
-            {
-                this.name = name;
-                this.value = value;
-            }
         }
 
         private void adaptControl_ValueChanged(object sender, EventArgs e)
@@ -1679,19 +1661,6 @@ namespace Turandot_Editor
         }
 
 
-        private void GetMetrics()
-        {
-            //var response = KTcpClient.SendMessageReceiveString(_ipEndPoint, "GetMetrics");
-            //var metrics = KFile.JSONDeserializeFromString<Dictionary<string, MetricData>>(response);
-            //Expressions.Metrics = metrics;
-
-            //metricGridView.Rows.Clear();
-            //foreach (var key in metrics.Keys)
-            //{
-            //    metricGridView.Rows.Add(key, metrics[key].val);
-            //}
-        }
-
         private void showStateButton_Click(object sender, EventArgs e)
         {
             //try
@@ -1725,6 +1694,9 @@ namespace Turandot_Editor
                 case "OpenFile":
                     RpcOpenFile(parts[1]);
                     break;
+                case "SetMetrics":
+                    Invoke(new Action(() => { RpcSetMetrics(parts[1]); }));
+                    break;
             }
         }
 
@@ -1741,6 +1713,13 @@ namespace Turandot_Editor
                     SelectNothing();
                 }));
             }
+        }
+
+        private void RpcSetMetrics(string data)
+        {
+            _settings.metrics = KFile.FromXMLString<SerializeableDictionary<string>>(data);
+            Expressions.Metrics = _settings.metrics;
+            ShowMetrics();
         }
 
         private void cuesSpecifier_ValueChanged(object sender, EventArgs e)
@@ -1827,8 +1806,11 @@ namespace Turandot_Editor
 
         private void customScreenColorCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _params.screen.ApplyCustomScreenColor = customScreenColorCheckBox.Checked;
-            SetDirty();
+            if (!_ignoreEvents)
+            {
+                _params.screen.ApplyCustomScreenColor = customScreenColorCheckBox.Checked;
+                SetDirty();
+            }
         }
     }
 }
