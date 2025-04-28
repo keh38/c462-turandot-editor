@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NewParamsButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -122,6 +122,7 @@
             this.InputPage = new System.Windows.Forms.TabPage();
             this.stateInputsControl = new Turandot_Editor.Controls.StateInputsControl();
             this.infoPanel = new System.Windows.Forms.Panel();
+            this.customScreenColorCheckBox = new KLib.Controls.KCheckBox();
             this.matlabFileBrowser = new KLib.Controls.FileBrowser();
             this.label16 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -381,37 +382,37 @@
             this.metricGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.metricGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metricGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.metricGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.metricGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MetricName,
             this.MetricValue});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.metricGridView.EnableHeadersVisualStyles = false;
             this.metricGridView.Location = new System.Drawing.Point(33, 357);
             this.metricGridView.Name = "metricGridView";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.metricGridView.RowHeadersVisible = false;
             this.metricGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.metricGridView.Size = new System.Drawing.Size(222, 150);
@@ -502,7 +503,7 @@
             this.eventsSpecifier.AutoSize = true;
             this.eventsSpecifier.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.eventsSpecifier.Location = new System.Drawing.Point(11, 12);
-            this.eventsSpecifier.Margin = new System.Windows.Forms.Padding(2);
+            this.eventsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.eventsSpecifier.Name = "eventsSpecifier";
             this.eventsSpecifier.Size = new System.Drawing.Size(421, 461);
             this.eventsSpecifier.TabIndex = 0;
@@ -1256,6 +1257,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.infoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.infoPanel.Controls.Add(this.customScreenColorCheckBox);
             this.infoPanel.Controls.Add(this.matlabFileBrowser);
             this.infoPanel.Controls.Add(this.label16);
             this.infoPanel.Controls.Add(this.label7);
@@ -1275,6 +1277,17 @@
             this.infoPanel.Size = new System.Drawing.Size(524, 120);
             this.infoPanel.TabIndex = 2;
             this.infoPanel.SizeChanged += new System.EventHandler(this.infoPanel_SizeChanged);
+            // 
+            // customScreenColorCheckBox
+            // 
+            this.customScreenColorCheckBox.AutoSize = true;
+            this.customScreenColorCheckBox.Location = new System.Drawing.Point(423, 32);
+            this.customScreenColorCheckBox.Name = "customScreenColorCheckBox";
+            this.customScreenColorCheckBox.Size = new System.Drawing.Size(150, 17);
+            this.customScreenColorCheckBox.TabIndex = 2;
+            this.customScreenColorCheckBox.Text = "Apply custom screen color";
+            this.customScreenColorCheckBox.UseVisualStyleBackColor = true;
+            this.customScreenColorCheckBox.CheckedChanged += new System.EventHandler(this.customScreenColorCheckBox_CheckedChanged);
             // 
             // matlabFileBrowser
             // 
@@ -1622,6 +1635,7 @@
         private Controls.Events.EventsSpecifier eventsSpecifier;
         private KLib.Controls.FileBrowser matlabFileBrowser;
         private System.Windows.Forms.Label label16;
+        private KLib.Controls.KCheckBox customScreenColorCheckBox;
     }
 }
 

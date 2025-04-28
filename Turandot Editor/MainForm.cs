@@ -338,6 +338,7 @@ namespace Turandot_Editor
             matlabFileBrowser.DefaultFolder = FileLocations.MATLABFolder;
             matlabFileBrowser.Value = p.matlabFunction;
 
+            customScreenColorCheckBox.Checked = p.screen.ApplyCustomScreenColor;
             cuesSpecifier.Value = p.screen.Cues;
             inputsSpecifier.Value = p.screen.Inputs;
 
@@ -1821,6 +1822,12 @@ namespace Turandot_Editor
 
         private void eventsSpecifier_ValueChanged(object sender, EventArgs e)
         {
+            SetDirty();
+        }
+
+        private void customScreenColorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            _params.screen.ApplyCustomScreenColor = customScreenColorCheckBox.Checked;
             SetDirty();
         }
     }
