@@ -176,36 +176,43 @@ namespace Turandot_Editor
 
         private void TestExpression(DataGridViewCell cell)
         {
-            string xvector = "";
-            string yvector = "";
-            for (int k=0; k<_varList.Count;k++)
+            try
             {
-                //if (k != cell.RowIndex && _varList[k].dim == VarDimension.X && string.IsNullOrEmpty(xvector))
-                if (string.IsNullOrEmpty(xvector) && _varList[k].dim == VarDimension.X)
+                string xvector = "";
+                string yvector = "";
+                for (int k = 0; k < _varList.Count; k++)
                 {
-                    float[] xvec = Expressions.Evaluate(_varList[k].expression);
-                    xvector = Expressions.ToVectorString(xvec);
+                    //if (k != cell.RowIndex && _varList[k].dim == VarDimension.X && string.IsNullOrEmpty(xvector))
+                    if (string.IsNullOrEmpty(xvector) && _varList[k].dim == VarDimension.X)
+                    {
+                        float[] xvec = Expressions.Evaluate(_varList[k].expression);
+                        xvector = Expressions.ToVectorString(xvec);
+                    }
+
+                    if (k != cell.RowIndex && _varList[k].dim == VarDimension.Y && string.IsNullOrEmpty(yvector))
+                    {
+                        string yexpr = _varList[k].expression;
+                        if (yexpr.Contains("X") && !string.IsNullOrEmpty(xvector)) yexpr = yexpr.Replace("X", xvector);
+
+                        float[] yvec = Expressions.Evaluate(yexpr);
+                        yvector = Expressions.ToVectorString(yvec);
+                    }
                 }
 
-                if (k != cell.RowIndex && _varList[k].dim == VarDimension.Y && string.IsNullOrEmpty(yvector))
+                string expr = cell.Value as string;
+                if (expr.Contains("X") && !string.IsNullOrEmpty(xvector)) expr = expr.Replace("X", xvector);
+                if (expr.Contains("Y") && !string.IsNullOrEmpty(yvector)) expr = expr.Replace("Y", yvector);
+
+                if (!Expressions.TryEvaluate(expr, _propVals))
                 {
-                    string yexpr = _varList[k].expression;
-                    if (yexpr.Contains("X") && !string.IsNullOrEmpty(xvector)) yexpr = yexpr.Replace("X", xvector);
-
-                    float[] yvec = Expressions.Evaluate(yexpr);
-                    yvector = Expressions.ToVectorString(yvec);
+                    cell.ErrorText = Expressions.LastError;
                 }
+                else cell.ErrorText = "";
             }
-
-            string expr = cell.Value as string;
-            if (expr.Contains("X") && !string.IsNullOrEmpty(xvector)) expr = expr.Replace("X", xvector);
-            if (expr.Contains("Y") && !string.IsNullOrEmpty(yvector)) expr = expr.Replace("Y", yvector);
-
-            if (!Expressions.TryEvaluate(expr, _propVals))
+            catch (Exception ex)
             {
-                cell.ErrorText = Expressions.LastError;
+                cell.ErrorText = ex.Message;
             }
-            else cell.ErrorText = "";
         }
 
         private void UpdateStateSelection(int rowIndex, string stateName)

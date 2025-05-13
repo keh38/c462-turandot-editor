@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.3 (unreleased)
+### v2.3 (2025-05-13)
 #### Added
 - option to apply custom screen color
 - receives metrics by TCP connection

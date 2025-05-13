@@ -273,12 +273,26 @@ namespace Turandot_Editor.Controls
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            StringBuilder errors = new StringBuilder();
+
             foreach (Family f in _schedule.families.FindAll(o => o.oneEach))
             {
-                f.Apply();
-                f.number = f.NumTotal;
+                try
+                {
+                    f.Apply();
+                    f.number = f.NumTotal;
+                }
+                catch (Exception ex)
+                {
+                    errors.AppendLine($"{f.name}: {ex.Message}");
+                }
             }
             ShowSchedule(_schedule);
+
+            if (errors.Length > 0)
+            {
+                MsgBox.Show(errors.ToString(), "Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void groupOrderEnum_ValueChanged(object sender, EventArgs e)
