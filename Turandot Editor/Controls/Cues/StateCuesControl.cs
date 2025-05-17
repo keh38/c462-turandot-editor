@@ -13,6 +13,7 @@ using KLib.Controls;
 
 using Turandot.Cues;
 using Turandot.Screen;
+using ImageLayout = Turandot.Screen.ImageLayout;
 
 using KLib.ExtensionMethods;
 
@@ -37,7 +38,6 @@ namespace Turandot_Editor.Controls
                 ShowCues();
             }
         }
-
         public void SetAvailableCues(List<CueLayout> available)
         {
             // don't want to sort original list
@@ -98,7 +98,10 @@ namespace Turandot_Editor.Controls
 
             if (c is FixationPointLayout)
             {
-                _value.Add((c as FixationPointLayout).GetDefaultCue());
+            }
+            else if (c is ImageLayout)
+            {
+                _value.Add((c as ImageLayout).GetDefaultCue());
             }
             else if (c is MessageLayout)
             {

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using KLib.Controls;
 
 using Turandot.Screen;
+using ImageLayout = Turandot.Screen.ImageLayout;
 
 namespace Turandot_Editor.Controls
 {
@@ -109,6 +110,9 @@ namespace Turandot_Editor.Controls
             {
                 case "Fixation point":
                     _value.Add(new FixationPointLayout() { Name = name });
+                    break;
+                case "Image":
+                    _value.Add(new ImageLayout() { Name = name });
                     break;
                 case "Message":
                     _value.Add(new MessageLayout() { Name = name });

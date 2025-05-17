@@ -40,7 +40,7 @@
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(11, 22);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(40, 17);
+            this.label21.Size = new System.Drawing.Size(38, 16);
             this.label21.TabIndex = 3;
             this.label21.Text = "Cues";
             // 
@@ -81,7 +81,9 @@
             this.cueDropDown.FormattingEnabled = true;
             this.cueDropDown.Items.AddRange(new object[] {
             "Fixation point",
-            "Message"});
+            "Image",
+            "Message",
+            "Video"});
             this.cueDropDown.Location = new System.Drawing.Point(13, 262);
             this.cueDropDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cueDropDown.Name = "cueDropDown";
