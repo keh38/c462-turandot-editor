@@ -107,7 +107,11 @@ namespace Turandot_Editor.Controls
             {
                 _value.Add((c as MessageLayout).GetDefaultCue());
             }
-           
+            else if (c is VideoLayout)
+            {
+                _value.Add((c as VideoLayout).GetDefaultCue());
+            }
+
             _value[_value.Count - 1].Target = c.Name;
             cueListBox.SelectedItem = _value.Count - 1;
             cueListBox.SelectedIndex = -1;

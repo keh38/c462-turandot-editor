@@ -117,6 +117,9 @@ namespace Turandot_Editor.Controls
                 case "Message":
                     _value.Add(new MessageLayout() { Name = name });
                     break;
+                case "Video":
+                    _value.Add(new VideoLayout() { Name = name });
+                    break;
             }
 
             cueListBox.Items.Add(name);

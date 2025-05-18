@@ -1,5 +1,12 @@
 ## Changelog
 
+### v2.4 (unreleased)
+#### Added
+- restored Image cue
+- added Video cue
+
+---
+
 ### v2.3 (2025-05-13)
 #### Added
 - option to apply custom screen color
