@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.4 (unreleased)
+### v2.4 (2025-05-30)
 #### Added
 - restored Image cue
 - added Video cue
