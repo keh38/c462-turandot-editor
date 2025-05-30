@@ -4,6 +4,8 @@
 #### Added
 - restored Image cue
 - added Video cue
+#### Fixed
+- read .wav files from project folder if not otherwise specified
 
 ---
 

@@ -306,6 +306,9 @@ namespace Turandot_Editor
                 }
 
                 SaveParameterFile(dlg.FileName);
+
+                channelView.WavFolder = GetWavFolder();
+
                 _settings.lastFolder = Path.GetDirectoryName(dlg.FileName);
                 _settings.lastFile = dlg.FileName;
                 SaveDefaults();
@@ -319,7 +322,8 @@ namespace Turandot_Editor
             pathLabel.Text = Tools.CompactPath(_filePath, pathLabel.Width, pathLabel.Font, TextFormatFlags.PathEllipsis);
             tagTextBox.Text = p.tag ?? "";
             wavFolderTextBox.Text = p.wavFolder;
-            channelView.WavFolder = Path.Combine(_settings.wavFolder, p.wavFolder);
+
+            channelView.WavFolder = GetWavFolder();
 
             trialLogOptionEnum.SetEnumValue(p.trialLogOption);
 
@@ -354,6 +358,19 @@ namespace Turandot_Editor
             ShowScheduleParameters(p.schedule, p.adapt);
 
             FillActionFamilyComboBox();
+        }
+
+        private string GetWavFolder()
+        {
+            if (!string.IsNullOrEmpty(_filePath) && string.IsNullOrEmpty(_params.wavFolder))
+            {
+                var folder = Path.GetDirectoryName(_filePath).Replace("Config Files", "Wav Files");
+                if (Directory.Exists(folder))
+                {
+                    return folder;
+                }
+            }
+            return Path.Combine(_settings.wavFolder, _params.wavFolder);
         }
 
         void FillActionFamilyComboBox()
@@ -1354,7 +1371,7 @@ namespace Turandot_Editor
                 calfolderBrowser.Value = _settings.calFolder;
 
                 wavfolderBrowser.Value = _settings.wavFolder;
-                channelView.WavFolder = _settings.wavFolder;
+                channelView.WavFolder = GetWavFolder();
 
                 transducerTextBox.Text = _settings.transducer;
 
@@ -1389,7 +1406,7 @@ namespace Turandot_Editor
         private void wavfolderBrowser_ValueChanged(object sender, EventArgs e)
         {
             _settings.wavFolder = wavfolderBrowser.Value;
-            channelView.WavFolder = Path.Combine(_settings.wavFolder, _params.wavFolder);
+            channelView.WavFolder = GetWavFolder();
             SaveDefaults();
         }
 
@@ -1619,7 +1636,7 @@ namespace Turandot_Editor
             if (!_ignoreEvents)
             {
                 _params.wavFolder = wavFolderTextBox.Text;
-                channelView.WavFolder = Path.Combine(_settings.wavFolder, _params.wavFolder);
+                channelView.WavFolder = GetWavFolder();
                 SetDirty();
             }
         }
