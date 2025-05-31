@@ -115,6 +115,9 @@ namespace Turandot_Editor.Controls
                 case "Checklist":
                     _value.Add(new ChecklistLayout() { Name = name });
                     break;
+                case "Manikins":
+                    _value.Add(new ManikinLayout() { Name = name });
+                    break;
                 case "Param Slider":
                     _value.Add(new ParamSliderLayout() { Name = name });
                     break;

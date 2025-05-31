@@ -123,6 +123,10 @@ namespace Turandot_Editor.Controls
             {
                _value.Add(new Turandot.Inputs.Input("Checklist"));
             }
+            else if (i is ManikinLayout)
+            {
+                _value.Add(new Turandot.Inputs.Input("Manikins"));
+            }
             else if (i is ParamSliderLayout)
             {
                 var psa = new Turandot.Inputs.ParamSliderAction();

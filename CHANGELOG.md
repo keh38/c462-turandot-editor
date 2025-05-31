@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.5 (unreleased)
+#### Added
+- restored manikins
+
+---
+
 ### v2.4 (2025-05-30)
 #### Added
 - restored Image cue
