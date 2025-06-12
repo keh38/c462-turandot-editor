@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.5 (unreleased)
+### v2.5 (2025-06-12)
 #### Added
 - restored manikins
 

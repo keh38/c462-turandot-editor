@@ -80,11 +80,11 @@ namespace Turandot
                     if (input != null)
                     {
                         int nsam = 0;
-                        SAM sam = input as SAM;
-                        nsam += sam.valence.visible ? 1 : 0;
-                        nsam += sam.arousal.visible ? 1 : 0;
-                        nsam += sam.dominance.visible ? 1 : 0;
-                        nsam += sam.loudness.visible ? 1 : 0;
+                        //SAM sam = input as SAM;
+                        //nsam += sam.valence.visible ? 1 : 0;
+                        //nsam += sam.arousal.visible ? 1 : 0;
+                        //nsam += sam.dominance.visible ? 1 : 0;
+                        //nsam += sam.loudness.visible ? 1 : 0;
 
                         trialDuration += nsam * responseLatency;
                     }
