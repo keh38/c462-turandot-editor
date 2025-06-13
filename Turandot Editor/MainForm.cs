@@ -597,6 +597,7 @@ namespace Turandot_Editor
             stateNameTextBox.Text = state.name;
             startCheckBox.Checked = state.name == _params.firstState;
             startCheckBox.Enabled = !startCheckBox.Checked;
+            hideCursorCheckBox.Checked = state.hideCursor;
 
             bool endActionVisible = _params.allowExpertOptions && state.term.Count == 0 && state.timeOuts.Count == 1 && string.IsNullOrEmpty(state.timeOuts[0].linkTo);
 
@@ -1826,6 +1827,15 @@ namespace Turandot_Editor
             if (!_ignoreEvents)
             {
                 _params.screen.ApplyCustomScreenColor = customScreenColorCheckBox.Checked;
+                SetDirty();
+            }
+        }
+
+        private void hideCursorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreEvents && _selectedState != null)
+            {
+                _selectedState.hideCursor = hideCursorCheckBox.Checked;
                 SetDirty();
             }
         }

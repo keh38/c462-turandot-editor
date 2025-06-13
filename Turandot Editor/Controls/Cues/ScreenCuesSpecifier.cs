@@ -90,6 +90,8 @@ namespace Turandot_Editor.Controls
 
         private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cueDropDown.SelectedIndex < 0) return;
+
             string baseName = cueDropDown.SelectedItem.ToString();
             string name = baseName;
             int num = 1;
@@ -124,6 +126,7 @@ namespace Turandot_Editor.Controls
 
             cueListBox.Items.Add(name);
             cueListBox.SelectedItem = _value.Count - 1;
+            cueDropDown.SelectedIndex = -1;
             ShowValue();
             OnValueChanged();
         }

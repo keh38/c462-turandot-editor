@@ -91,6 +91,7 @@ namespace Turandot_Editor.Controls
 
         private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cueDropDown.SelectedIndex < 0) return;
             if (cueListBox.Items.Contains(cueDropDown.SelectedItem.ToString())) return;
 
             var c = _available[cueDropDown.SelectedIndex];
@@ -98,6 +99,7 @@ namespace Turandot_Editor.Controls
 
             if (c is FixationPointLayout)
             {
+                _value.Add((c as FixationPointLayout).GetDefaultCue());
             }
             else if (c is ImageLayout)
             {
@@ -115,6 +117,7 @@ namespace Turandot_Editor.Controls
             _value[_value.Count - 1].Target = c.Name;
             cueListBox.SelectedItem = _value.Count - 1;
             cueListBox.SelectedIndex = -1;
+            cueDropDown.SelectedIndex = -1;
 
             ShowCues();
             OnValueChanged();

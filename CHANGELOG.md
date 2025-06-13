@@ -1,5 +1,13 @@
 ## Changelog
 
+### v2.6 (2025-06-13)
+#### Added
+- hide cursor option for states
+#### Fixed
+- various bugs related to configuring cues and inputs
+
+---
+
 ### v2.5.1 (2025-06-13)
 #### Changed
 - made message text property view multiline

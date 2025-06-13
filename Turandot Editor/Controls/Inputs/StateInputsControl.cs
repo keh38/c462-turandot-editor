@@ -47,7 +47,7 @@ namespace Turandot_Editor.Controls
 
             foreach (var i in _value)
             {
-                if (i is ParamSliderAction)
+                if (i is ParamSliderAction && _validProperties != null)
                 {
                     (i as ParamSliderAction).SetDataForContext(_validProperties);
                 }
@@ -130,7 +130,10 @@ namespace Turandot_Editor.Controls
             else if (i is ParamSliderLayout)
             {
                 var psa = new Turandot.Inputs.ParamSliderAction();
-                psa.SetDataForContext(_validProperties);
+                if (_validProperties != null)
+                {
+                    psa.SetDataForContext(_validProperties);
+                }
                 _value.Add(psa);
             }
 
