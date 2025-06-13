@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.5.1 (2025-06-13)
+#### Changed
+- made message text property view multiline
+
+---
+
 ### v2.5 (2025-06-12)
 #### Added
 - restored manikins
