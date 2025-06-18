@@ -1,5 +1,11 @@
 ## Changelog
 
+### V2.7 (unreleased)
+#### Changed
+- generalized manikin functionality
+
+---
+
 ### v2.6 (2025-06-13)
 #### Added
 - hide cursor option for states
