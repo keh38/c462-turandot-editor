@@ -1,8 +1,10 @@
 ## Changelog
 
-### V2.7 (unreleased)
+### V2.7 (2025-06-19)
 #### Changed
 - generalized manikin functionality
+#### Fixed
+- transducer properly applied when retrieving .wav file references
 
 ---
 

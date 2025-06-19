@@ -1375,6 +1375,8 @@ namespace Turandot_Editor
                 channelView.WavFolder = GetWavFolder();
 
                 transducerTextBox.Text = _settings.transducer;
+                _adapterMap.AudioTransducer = _settings.transducer;
+                channelView.AdapterMap = _adapterMap;
 
                 Expressions.Metrics = _settings.metrics;
                 ShowMetrics();
@@ -1676,6 +1678,8 @@ namespace Turandot_Editor
         {
             _settings.transducer = transducerTextBox.Text;
             SaveDefaults();
+            _adapterMap.AudioTransducer = _settings.transducer;
+            channelView.AdapterMap = _adapterMap;
         }
 
 

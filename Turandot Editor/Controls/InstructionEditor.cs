@@ -34,7 +34,11 @@ namespace Turandot_Editor.Controls
     
         private void ShowValue()
         {
-            if (_value == null || string.IsNullOrEmpty(_value.Text)) return;
+            if (_value == null || string.IsNullOrEmpty(_value.Text))
+            {
+                textBox.Text = "";
+                return;
+            }
 
             string text = _value.Text.Replace("\n", Environment.NewLine);
             textBox.Text = text;
