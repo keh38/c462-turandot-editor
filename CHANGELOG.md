@@ -1,5 +1,17 @@
 ## Changelog
 
+### v2.8 (2025-06-26)
+#### Changed
+- Manikins:
+  - exposed options: text size, start position
+  - made fill transparent
+- Restored key code option to Turandot buttons
+- Checklist:
+  - made "auto advance" optional
+  - made option to allow multiple selections
+
+---
+
 ### V2.7 (2025-06-19)
 #### Changed
 - generalized manikin functionality
