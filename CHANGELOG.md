@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.9 (unreleased)
+#### Added
+- exposed button and checklist font size
+
+---
+
 ### v2.8 (2025-06-26)
 #### Changed
 - Manikins:

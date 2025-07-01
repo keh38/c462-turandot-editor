@@ -458,7 +458,7 @@
             this.ScreenPage.Margin = new System.Windows.Forms.Padding(4);
             this.ScreenPage.Name = "ScreenPage";
             this.ScreenPage.Padding = new System.Windows.Forms.Padding(4);
-            this.ScreenPage.Size = new System.Drawing.Size(817, 873);
+            this.ScreenPage.Size = new System.Drawing.Size(817, 869);
             this.ScreenPage.TabIndex = 2;
             this.ScreenPage.Text = "Screen";
             // 
@@ -490,7 +490,7 @@
             this.InstructionsPage.Margin = new System.Windows.Forms.Padding(4);
             this.InstructionsPage.Name = "InstructionsPage";
             this.InstructionsPage.Padding = new System.Windows.Forms.Padding(4);
-            this.InstructionsPage.Size = new System.Drawing.Size(817, 873);
+            this.InstructionsPage.Size = new System.Drawing.Size(817, 869);
             this.InstructionsPage.TabIndex = 9;
             this.InstructionsPage.Text = "Instructions";
             // 
@@ -511,7 +511,7 @@
             this.EventPage.Location = new System.Drawing.Point(4, 25);
             this.EventPage.Margin = new System.Windows.Forms.Padding(4);
             this.EventPage.Name = "EventPage";
-            this.EventPage.Size = new System.Drawing.Size(817, 873);
+            this.EventPage.Size = new System.Drawing.Size(817, 869);
             this.EventPage.TabIndex = 3;
             this.EventPage.Text = "Events";
             // 
@@ -542,7 +542,7 @@
             this.SchedulePage.Location = new System.Drawing.Point(4, 25);
             this.SchedulePage.Margin = new System.Windows.Forms.Padding(4);
             this.SchedulePage.Name = "SchedulePage";
-            this.SchedulePage.Size = new System.Drawing.Size(817, 873);
+            this.SchedulePage.Size = new System.Drawing.Size(817, 869);
             this.SchedulePage.TabIndex = 4;
             this.SchedulePage.Text = "Schedule";
             // 
@@ -728,7 +728,7 @@
             this.StatePage.Location = new System.Drawing.Point(4, 25);
             this.StatePage.Margin = new System.Windows.Forms.Padding(4);
             this.StatePage.Name = "StatePage";
-            this.StatePage.Size = new System.Drawing.Size(817, 873);
+            this.StatePage.Size = new System.Drawing.Size(817, 869);
             this.StatePage.TabIndex = 6;
             this.StatePage.Text = "State";
             // 
@@ -1174,7 +1174,7 @@
             this.AudioPage.Margin = new System.Windows.Forms.Padding(4);
             this.AudioPage.Name = "AudioPage";
             this.AudioPage.Padding = new System.Windows.Forms.Padding(4);
-            this.AudioPage.Size = new System.Drawing.Size(817, 873);
+            this.AudioPage.Size = new System.Drawing.Size(817, 869);
             this.AudioPage.TabIndex = 0;
             this.AudioPage.Text = "Audio";
             // 
@@ -1298,7 +1298,7 @@
             this.CuePage.Margin = new System.Windows.Forms.Padding(4);
             this.CuePage.Name = "CuePage";
             this.CuePage.Padding = new System.Windows.Forms.Padding(4);
-            this.CuePage.Size = new System.Drawing.Size(817, 873);
+            this.CuePage.Size = new System.Drawing.Size(817, 869);
             this.CuePage.TabIndex = 1;
             this.CuePage.Text = "Cues";
             // 
@@ -1321,7 +1321,7 @@
             this.InputPage.Margin = new System.Windows.Forms.Padding(4);
             this.InputPage.Name = "InputPage";
             this.InputPage.Padding = new System.Windows.Forms.Padding(4);
-            this.InputPage.Size = new System.Drawing.Size(817, 873);
+            this.InputPage.Size = new System.Drawing.Size(817, 869);
             this.InputPage.TabIndex = 8;
             this.InputPage.Text = "Inputs";
             // 
