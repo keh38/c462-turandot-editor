@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.9 (unreleased)
+### v2.9 (2025-07-02)
 #### Added
 - exposed button and checklist font size
 
