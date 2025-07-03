@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.10 (unreleased)
+#### Changed
+- made slider start position manikin-specific
+
+---
+
 ### v2.9 (2025-07-02)
 #### Added
 - exposed button and checklist font size
