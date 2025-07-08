@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.10 (unreleased)
+### v2.10 (2025-07-08)
 #### Changed
 - made slider start position manikin-specific
 
