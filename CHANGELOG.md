@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.11 (unreleased)
+#### Added
+- Checklist: "allow none" option
+
+---
+
 ### v2.10 (2025-07-08)
 #### Changed
 - made slider start position manikin-specific
