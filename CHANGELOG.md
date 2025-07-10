@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.11 (unreleased)
+### v2.11 (2025-07-10)
 #### Added
 - Checklist: "allow none" option
 
