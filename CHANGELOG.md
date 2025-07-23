@@ -1,5 +1,9 @@
 ## Changelog
 
+### v2.12 (2025-07-23)
+#### Added
+- option to set parameter-specific screen color
+
 ### v2.11 (2025-07-10)
 #### Added
 - Checklist: "allow none" option

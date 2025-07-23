@@ -345,6 +345,9 @@ namespace Turandot_Editor
             cuesSpecifier.Value = p.screen.Cues;
             inputsSpecifier.Value = p.screen.Inputs;
 
+            overrideColorCheckBox.Checked = p.screen.ApplyParamSpecificScreenColor;
+            screenColorBox.ValueAsUInt = (uint)p.screen.Color;
+
             stateCuesControl.SetAvailableCues(p.screen.Cues);
             stateInputsControl.SetAvailableInputs(p.screen.Inputs);
 
@@ -1840,6 +1843,24 @@ namespace Turandot_Editor
             if (!_ignoreEvents && _selectedState != null)
             {
                 _selectedState.hideCursor = hideCursorCheckBox.Checked;
+                SetDirty();
+            }
+        }
+
+        private void overrideColorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreEvents)
+            {
+                _params.screen.ApplyParamSpecificScreenColor = overrideColorCheckBox.Checked;
+                SetDirty();
+            }
+        }
+
+        private void screenColorBox_ValueChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreEvents)
+            {
+                _params.screen.Color = (int) screenColorBox.ValueAsUInt;
                 SetDirty();
             }
         }
