@@ -34,14 +34,28 @@ namespace Turandot_Editor.Controls
     
         private void ShowValue()
         {
-            if (_value == null || string.IsNullOrEmpty(_value.Text))
+            if (_value == null)
             {
                 textBox.Text = "";
                 return;
             }
 
-            string text = _value.Text.Replace("\n", Environment.NewLine);
-            textBox.Text = text;
+            _ignoreEvents = true;
+            
+            instructionFontSizeNumeric.IntValue = _value.FontSize;
+
+
+            if (_value.Text == null)
+            {
+                textBox.Text = "";
+            }
+            else
+            {
+                string text = _value.Text.Replace("\n", Environment.NewLine);
+                textBox.Text = text;
+            }
+
+            _ignoreEvents = false;
         }
 
         private void textBox_Leave(object sender, EventArgs e)
@@ -53,6 +67,15 @@ namespace Turandot_Editor.Controls
         {
             _value.Text = textBox.Text;
             OnValueChanged();
+        }
+
+        private void instructionFontSizeNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreEvents)
+            {
+                _value.FontSize = instructionFontSizeNumeric.IntValue;
+                OnValueChanged();
+            }
         }
     }
 

@@ -1,8 +1,16 @@
 ## Changelog
 
+### v2.13 (unreleased)
+#### Added
+- font size control to instructions editor
+
+---
+
 ### v2.12 (2025-07-23)
 #### Added
 - option to set parameter-specific screen color
+
+---
 
 ### v2.11 (2025-07-10)
 #### Added

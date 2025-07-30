@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NewParamsButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -57,8 +57,7 @@
             this.screenColorBox = new KLib.Controls.KColorBox();
             this.inputsSpecifier = new Turandot_Editor.Controls.ScreenInputsSpecifier();
             this.cuesSpecifier = new Turandot_Editor.Controls.ScreenCuesSpecifier();
-            this.InstructionsPage = new System.Windows.Forms.TabPage();
-            this.instructionEditor = new Turandot_Editor.Controls.InstructionEditor();
+            this.Instructions = new System.Windows.Forms.TabPage();
             this.EventPage = new System.Windows.Forms.TabPage();
             this.eventsSpecifier = new Turandot_Editor.Controls.Events.EventsSpecifier();
             this.SchedulePage = new System.Windows.Forms.TabPage();
@@ -142,13 +141,14 @@
             this.pathLabel = new System.Windows.Forms.Label();
             this.graphViewer = new Turandot.GraphViewer();
             this.ledTimer = new System.Windows.Forms.Timer(this.components);
+            this.instructionEditor = new Turandot_Editor.Controls.InstructionEditor();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.MetricsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metricGridView)).BeginInit();
             this.ScreenPage.SuspendLayout();
-            this.InstructionsPage.SuspendLayout();
+            this.Instructions.SuspendLayout();
             this.EventPage.SuspendLayout();
             this.SchedulePage.SuspendLayout();
             this.breakPanel.SuspendLayout();
@@ -247,7 +247,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.MetricsPage);
             this.tabControl.Controls.Add(this.ScreenPage);
-            this.tabControl.Controls.Add(this.InstructionsPage);
+            this.tabControl.Controls.Add(this.Instructions);
             this.tabControl.Controls.Add(this.EventPage);
             this.tabControl.Controls.Add(this.SchedulePage);
             this.tabControl.Controls.Add(this.StatePage);
@@ -385,38 +385,38 @@
             this.metricGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.metricGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metricGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metricGridView.ColumnHeadersHeight = 29;
             this.metricGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.metricGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MetricName,
             this.MetricValue});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle5;
             this.metricGridView.EnableHeadersVisualStyles = false;
             this.metricGridView.Location = new System.Drawing.Point(33, 357);
             this.metricGridView.Name = "metricGridView";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metricGridView.RowHeadersVisible = false;
             this.metricGridView.RowHeadersWidth = 51;
             this.metricGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -497,26 +497,16 @@
             this.cuesSpecifier.Value = null;
             this.cuesSpecifier.ValueChanged += new System.EventHandler(this.cuesSpecifier_ValueChanged);
             // 
-            // InstructionsPage
+            // Instructions
             // 
-            this.InstructionsPage.BackColor = System.Drawing.SystemColors.Control;
-            this.InstructionsPage.Controls.Add(this.instructionEditor);
-            this.InstructionsPage.Location = new System.Drawing.Point(4, 22);
-            this.InstructionsPage.Name = "InstructionsPage";
-            this.InstructionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.InstructionsPage.Size = new System.Drawing.Size(611, 702);
-            this.InstructionsPage.TabIndex = 9;
-            this.InstructionsPage.Text = "Instructions";
-            // 
-            // instructionEditor
-            // 
-            this.instructionEditor.Location = new System.Drawing.Point(34, 27);
-            this.instructionEditor.Margin = new System.Windows.Forms.Padding(4);
-            this.instructionEditor.Name = "instructionEditor";
-            this.instructionEditor.Size = new System.Drawing.Size(424, 315);
-            this.instructionEditor.TabIndex = 10;
-            this.instructionEditor.Value = null;
-            this.instructionEditor.ValueChanged += new System.EventHandler(this.instructionEditor_ValueChanged);
+            this.Instructions.BackColor = System.Drawing.SystemColors.Control;
+            this.Instructions.Controls.Add(this.instructionEditor);
+            this.Instructions.Location = new System.Drawing.Point(4, 22);
+            this.Instructions.Name = "Instructions";
+            this.Instructions.Padding = new System.Windows.Forms.Padding(3);
+            this.Instructions.Size = new System.Drawing.Size(611, 702);
+            this.Instructions.TabIndex = 9;
+            this.Instructions.Text = "Instructions";
             // 
             // EventPage
             // 
@@ -1513,6 +1503,15 @@
             // 
             this.ledTimer.Interval = 2500;
             // 
+            // instructionEditor
+            // 
+            this.instructionEditor.Location = new System.Drawing.Point(6, 6);
+            this.instructionEditor.Name = "instructionEditor";
+            this.instructionEditor.Size = new System.Drawing.Size(318, 344);
+            this.instructionEditor.TabIndex = 0;
+            this.instructionEditor.Value = null;
+            this.instructionEditor.ValueChanged += new System.EventHandler(this.instructionEditor_ValueChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1541,7 +1540,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.metricGridView)).EndInit();
             this.ScreenPage.ResumeLayout(false);
             this.ScreenPage.PerformLayout();
-            this.InstructionsPage.ResumeLayout(false);
+            this.Instructions.ResumeLayout(false);
             this.EventPage.ResumeLayout(false);
             this.EventPage.PerformLayout();
             this.SchedulePage.ResumeLayout(false);
@@ -1635,8 +1634,7 @@
         private System.Windows.Forms.Label label18;
         private KLib.Controls.FileBrowser calfolderBrowser;
         private System.Windows.Forms.TabPage InputPage;
-        private System.Windows.Forms.TabPage InstructionsPage;
-        private Controls.InstructionEditor instructionEditor;
+        private System.Windows.Forms.TabPage Instructions;
         private KLib.Controls.FileBrowser linktoBrowser;
         private System.Windows.Forms.Label label19;
         private Controls.StateCuesControl stateCuesControl;
@@ -1686,6 +1684,7 @@
         private System.Windows.Forms.CheckBox hideCursorCheckBox;
         private KLib.Controls.KCheckBox overrideColorCheckBox;
         private KLib.Controls.KColorBox screenColorBox;
+        private Controls.InstructionEditor instructionEditor;
     }
 }
 
