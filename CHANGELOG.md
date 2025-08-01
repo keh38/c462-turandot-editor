@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.13 (unreleased)
+### v2.13 (2025-08-01)
 #### Added
 - font size control to instructions editor
 
