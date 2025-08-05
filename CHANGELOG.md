@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.14.3 (2025-08-05)
+#### Fixed
+- yet one more diagnostic breaking stimulus plot
+
+---
+
 ### v2.14.2 (2025-08-05)
 #### Fixed
 - not sure last one took
