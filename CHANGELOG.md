@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.14.1 (2025-08-05)
+#### Fixed
+- broken display of .wav files
+
+---
+
 ### v2.14 (2025-08-04)
 #### Added
 - Manikin button appearance
