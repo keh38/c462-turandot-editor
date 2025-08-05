@@ -1226,7 +1226,7 @@ namespace Turandot_Editor
 
                 float T = Expressions.Evaluate(to.expr).Min();
                 if (T <= 0) T = 0.001f * sigman.GetMaxInterval(1000);
-                T = Math.Min(T, 25);
+                T = Math.Min(T, 5);
 
                 npts = (int)(_Fs * T);
 

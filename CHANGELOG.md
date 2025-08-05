@@ -1,5 +1,12 @@
 ## Changelog
 
+### v2.14 (2025-08-04)
+#### Added
+- Manikin button appearance
+- Checklist prompt spacing
+
+---
+
 ### v2.13 (2025-08-01)
 #### Added
 - font size control to instructions editor
