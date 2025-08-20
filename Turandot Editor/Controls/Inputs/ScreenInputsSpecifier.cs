@@ -24,7 +24,7 @@ namespace Turandot_Editor.Controls
             set
             {
                 _value = value;
-                ShowValue();
+                inputListBox.Collection = _value;
             }
         }
 
@@ -36,62 +36,25 @@ namespace Turandot_Editor.Controls
         {
             InitializeComponent();
 
-            KLib.Controls.Utilities.SetCueBanner(inputDropDown.Handle, "Add...");
+            inputListBox.AttachPropertyGrid(propertyGrid);
+            inputListBox.GetDisplayText += GetDisplayText;
+            inputListBox.CreateNewItem += CreateNewInputLayout;
         }
 
-        private void ShowValue()
+        private string GetDisplayText(object item)
         {
-            if (_value == null) return;
-
-            inputListBox.Items.Clear();
-            inputListBox.Items.AddRange(_value.Select(x => x.Name).ToArray());
-            if (_value.Count > 0)
+            if (item != null && item is InputLayout)
             {
-                inputListBox.SelectedIndex = 0;
+                return (item as InputLayout).Name;
             }
-            else
-            {
-                propertyGrid.SelectedObject = null;
-            }
+            return "";
         }
 
-        private void inputListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private object CreateNewInputLayout(object item)
         {
-            if (_ignoreEvents) return;
+            if (!(item is string)) return null;
 
-            propertyGrid.SelectedObject = _value[inputListBox.SelectedIndex];
-        }
-
-        private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
-        {
-            if (e.ChangedItem.Label == "Name")
-            {
-                _ignoreEvents = true;
-                int index = inputListBox.SelectedIndex;
-                inputListBox.Items[index] = e.ChangedItem.Value.ToString();
-                inputListBox.SelectedIndex = index;
-                OnNameChange(e.OldValue.ToString(), e.ChangedItem.Value.ToString());
-                _ignoreEvents = false;
-            }
-        }
-
-        private void removeButton_Click(object sender, EventArgs e)
-        {
-            if (inputListBox.SelectedIndex < 0) return;
-            var toRemove = _value.Find(x => x.Name == inputListBox.SelectedItem.ToString());
-            if (toRemove != null)
-            {
-                _value.Remove(toRemove);
-            }
-            ShowValue();
-            OnValueChanged();
-        }
-
-        private void inputDropDown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (inputDropDown.SelectedIndex < 0) return;
-
-            string baseName = inputDropDown.SelectedItem.ToString();
+            string baseName = item as string;
             string name = baseName;
             int num = 1;
             while (true)
@@ -110,26 +73,33 @@ namespace Turandot_Editor.Controls
             switch (baseName)
             {
                 case "Button":
-                    _value.Add(new ButtonLayout() { Name = name });
-                    break;
+                    return new ButtonLayout() { Name = name };
                 case "Checklist":
-                    _value.Add(new ChecklistLayout() { Name = name });
-                    break;
+                    return new ChecklistLayout() { Name = name };
                 case "Manikins":
-                    _value.Add(new ManikinLayout() { Name = name });
-                    break;
+                    return new ManikinLayout() { Name = name };
                 case "Param Slider":
-                    _value.Add(new ParamSliderLayout() { Name = name });
-                    break;
+                    return new ParamSliderLayout() { Name = name };
+                case "Scaler":
+                    return new ScalerLayout() { Name = name };
             }
 
-            inputListBox.Items.Add(name);
-            inputListBox.SelectedIndex = _value.Count - 1;
-            inputDropDown.SelectedIndex = -1;
+            return null;
+        }
 
-            //ShowValue();
+        private void inputListBox_ItemAdded(object sender, CollectionListBox.ChangedItem e)
+        {
             OnValueChanged();
         }
 
+        private void inputListBox_ItemRemoved(object sender, CollectionListBox.ChangedItem e)
+        {
+            OnValueChanged();
+        }
+
+        private void inputListBox_ItemRenamed(object sender, CollectionListBox.RenamedItem e)
+        {
+            OnNameChange(e.oldName, e.newName);
+        }
     }
 }

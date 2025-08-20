@@ -38,6 +38,7 @@ namespace Turandot_Editor.Controls
                 ShowCues();
             }
         }
+
         public void SetAvailableCues(List<CueLayout> available)
         {
             // don't want to sort original list
@@ -79,7 +80,7 @@ namespace Turandot_Editor.Controls
         public event EventHandler<CueAddRemoveArgs> CueAddRemove;
         protected virtual void OnCueAddRemove(CueAddRemoveArgs args)
         {
-            if (this.CueAddRemove != null) CueAddRemove(this, args);
+            CueAddRemove?.Invoke(this, args);
         }
         public class CueAddRemoveArgs : EventArgs
         {
@@ -121,6 +122,7 @@ namespace Turandot_Editor.Controls
 
             ShowCues();
             OnValueChanged();
+            OnCueAddRemove(new CueAddRemoveArgs(c.Name, true));
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -131,6 +133,7 @@ namespace Turandot_Editor.Controls
 
             ShowCues();
             OnValueChanged();
+            OnCueAddRemove(new CueAddRemoveArgs(toDelete.Target, false));
         }
    }
 }

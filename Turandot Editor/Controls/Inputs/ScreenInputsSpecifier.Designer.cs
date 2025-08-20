@@ -28,78 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label21 = new System.Windows.Forms.Label();
-            this.inputListBox = new System.Windows.Forms.ListBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScreenInputsSpecifier));
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
-            this.removeButton = new System.Windows.Forms.Button();
-            this.inputDropDown = new System.Windows.Forms.ComboBox();
+            this.inputListBox = new KLib.Controls.CollectionListBox();
             this.SuspendLayout();
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(11, 22);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(42, 16);
-            this.label21.TabIndex = 3;
-            this.label21.Text = "Inputs";
-            // 
-            // inputListBox
-            // 
-            this.inputListBox.FormattingEnabled = true;
-            this.inputListBox.ItemHeight = 16;
-            this.inputListBox.Location = new System.Drawing.Point(13, 42);
-            this.inputListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.inputListBox.Name = "inputListBox";
-            this.inputListBox.Size = new System.Drawing.Size(180, 180);
-            this.inputListBox.TabIndex = 2;
-            this.inputListBox.SelectedIndexChanged += new System.EventHandler(this.inputListBox_SelectedIndexChanged);
             // 
             // propertyGrid
             // 
-            this.propertyGrid.Location = new System.Drawing.Point(213, 11);
+            this.propertyGrid.Location = new System.Drawing.Point(209, 25);
             this.propertyGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.Size = new System.Drawing.Size(244, 364);
             this.propertyGrid.TabIndex = 4;
-            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
+            this.propertyGrid.ToolbarVisible = false;
             // 
-            // removeButton
+            // inputListBox
             // 
-            this.removeButton.Location = new System.Drawing.Point(13, 228);
-            this.removeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(181, 30);
-            this.removeButton.TabIndex = 6;
-            this.removeButton.Text = "Remove";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
-            // 
-            // inputDropDown
-            // 
-            this.inputDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.inputDropDown.FormattingEnabled = true;
-            this.inputDropDown.Items.AddRange(new object[] {
-            "Button",
-            "Checklist",
-            "Manikins",
-            "Param Slider"});
-            this.inputDropDown.Location = new System.Drawing.Point(13, 262);
-            this.inputDropDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.inputDropDown.Name = "inputDropDown";
-            this.inputDropDown.Size = new System.Drawing.Size(180, 24);
-            this.inputDropDown.TabIndex = 7;
-            this.inputDropDown.SelectedIndexChanged += new System.EventHandler(this.inputDropDown_SelectedIndexChanged);
+            this.inputListBox.AddDropDownItems = ((System.ComponentModel.BindingList<string>)(resources.GetObject("inputListBox.AddDropDownItems")));
+            this.inputListBox.AutoSize = true;
+            this.inputListBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.inputListBox.Collection = null;
+            this.inputListBox.CreateNewItem = null;
+            this.inputListBox.GetDisplayText = null;
+            this.inputListBox.ListTitle = "Inputs";
+            this.inputListBox.Location = new System.Drawing.Point(3, 3);
+            this.inputListBox.MinimumSize = new System.Drawing.Size(200, 225);
+            this.inputListBox.Name = "inputListBox";
+            this.inputListBox.ShowAddDropDown = true;
+            this.inputListBox.Size = new System.Drawing.Size(200, 272);
+            this.inputListBox.TabIndex = 5;
+            this.inputListBox.ItemRenamed += new System.EventHandler<KLib.Controls.CollectionListBox.RenamedItem>(this.inputListBox_ItemRenamed);
+            this.inputListBox.ItemAdded += new System.EventHandler<KLib.Controls.CollectionListBox.ChangedItem>(this.inputListBox_ItemAdded);
+            this.inputListBox.ItemRemoved += new System.EventHandler<KLib.Controls.CollectionListBox.ChangedItem>(this.inputListBox_ItemRemoved);
             // 
             // ScreenInputsSpecifier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.inputDropDown);
-            this.Controls.Add(this.removeButton);
-            this.Controls.Add(this.propertyGrid);
-            this.Controls.Add(this.label21);
             this.Controls.Add(this.inputListBox);
+            this.Controls.Add(this.propertyGrid);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ScreenInputsSpecifier";
             this.Size = new System.Drawing.Size(468, 391);
@@ -110,10 +77,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ListBox inputListBox;
         private System.Windows.Forms.PropertyGrid propertyGrid;
-        private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.ComboBox inputDropDown;
+        private KLib.Controls.CollectionListBox inputListBox;
     }
 }

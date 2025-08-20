@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.15 (unreleased)
+#### Added
+- restored scaler (e.g.: for VAS)
+
+---
+
 ### v2.14.3 (2025-08-05)
 #### Fixed
 - yet one more diagnostic breaking stimulus plot

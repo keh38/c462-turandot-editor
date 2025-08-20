@@ -25,7 +25,7 @@ namespace Turandot_Editor.Controls
             set
             {
                 _value = value;
-                ShowValue();
+                cueListBox.Collection = _value;
             }
         }
 
@@ -40,27 +40,6 @@ namespace Turandot_Editor.Controls
             cueListBox.AttachPropertyGrid(propertyGrid);
             cueListBox.GetDisplayText += GetDisplayText;
             cueListBox.CreateNewItem += CreateNewCueLayout;
-
-//            KLib.Controls.Utilities.SetCueBanner(cueDropDown.Handle, "Add...");
-        }
-
-        private void ShowValue()
-        {
-            cueListBox.Collection = _value;
-            //if (_value == null) return;
-
-            //cueListBox.co
-
-            //cueListBox2.Items.Clear();
-            //cueListBox2.Items.AddRange(_value.Select(x => x.Name).ToArray());
-            //if (_value.Count > 0)
-            //{
-            //    cueListBox2.SelectedIndex = 0;
-            //}
-            //else
-            //{
-            //    propertyGrid.SelectedObject = null;
-            //}
         }
 
         private string GetDisplayText(object item)
@@ -106,79 +85,19 @@ namespace Turandot_Editor.Controls
             return null;
         }
 
-
-        private void cueListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void cueListBox_ItemAdded(object sender, CollectionListBox.ChangedItem e)
         {
-            //if (_ignoreEvents) return;
-
-            //propertyGrid.SelectedObject = _value.Find(x => x.Name.Equals(cueListBox2.SelectedItem.ToString()));
+            OnValueChanged();
         }
 
-        private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        private void cueListBox_ItemRemoved(object sender, CollectionListBox.ChangedItem e)
         {
-            //if (e.ChangedItem.Label == "Name")
-            //{
-            //    _ignoreEvents = true;
-            //    int index = cueListBox2.SelectedIndex;
-            //    cueListBox2.Items[index] = e.ChangedItem.Value.ToString();
-            //    cueListBox2.SelectedIndex = index;
-            //    OnNameChange(e.OldValue.ToString(), e.ChangedItem.Value.ToString());
-            //}
+            OnValueChanged();
         }
 
-        private void removeButton_Click(object sender, EventArgs e)
+        private void cueListBox_ItemRenamed(object sender, CollectionListBox.RenamedItem e)
         {
-            //if (cueListBox2.SelectedIndex < 0) return;
-            //var toRemove = _value.Find(x => x.Name == cueListBox2.SelectedItem.ToString());
-            //if (toRemove != null)
-            //{
-            //    _value.Remove(toRemove);
-            //}
-            //ShowValue();
-            //OnValueChanged();
-        }
-
-        private void cueDropDown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (cueDropDown.SelectedIndex < 0) return;
-
-            //string baseName = cueDropDown.SelectedItem.ToString();
-            //string name = baseName;
-            //int num = 1;
-            //while (true)
-            //{
-            //    if (_value.Find(x => x.Name.Equals(name)) == null)
-            //    {
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        num++;
-            //        name = $"{baseName}_{num}";
-            //    }
-            //}
-
-            //switch (baseName)
-            //{
-            //    case "Fixation point":
-            //        _value.Add(new FixationPointLayout() { Name = name });
-            //        break;
-            //    case "Image":
-            //        _value.Add(new ImageLayout() { Name = name });
-            //        break;
-            //    case "Message":
-            //        _value.Add(new MessageLayout() { Name = name });
-            //        break;
-            //    case "Video":
-            //        _value.Add(new VideoLayout() { Name = name });
-            //        break;
-            //}
-
-            //cueListBox2.Items.Add(name);
-            //cueListBox2.SelectedItem = _value.Count - 1;
-            //cueDropDown.SelectedIndex = -1;
-            //ShowValue();
-            //OnValueChanged();
+            OnNameChange(e.oldName, e.newName);
         }
     }
 }

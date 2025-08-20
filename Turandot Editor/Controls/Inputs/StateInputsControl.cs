@@ -136,6 +136,10 @@ namespace Turandot_Editor.Controls
                 }
                 _value.Add(psa);
             }
+            else if (i is ScalerLayout)
+            {
+                _value.Add(new Turandot.Inputs.ScalerAction());
+            }
 
             _value[_value.Count - 1].Target = i.Name;
 
@@ -144,6 +148,7 @@ namespace Turandot_Editor.Controls
 
             ShowInputs();
             OnValueChanged();
+            OnInputAddRemove(new InputAddRemoveArgs(i.Name, true));
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -154,6 +159,7 @@ namespace Turandot_Editor.Controls
 
             ShowInputs();
             OnValueChanged();
+            OnInputAddRemove(new InputAddRemoveArgs(toDelete.Target, false));
         }
    }
 }

@@ -35,13 +35,12 @@
             // 
             // propertyGrid
             // 
-            this.propertyGrid.Location = new System.Drawing.Point(229, 27);
+            this.propertyGrid.Location = new System.Drawing.Point(209, 27);
             this.propertyGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.Size = new System.Drawing.Size(244, 364);
             this.propertyGrid.TabIndex = 4;
             this.propertyGrid.ToolbarVisible = false;
-            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // cueListBox
             // 
@@ -57,8 +56,11 @@
             this.cueListBox.MinimumSize = new System.Drawing.Size(200, 225);
             this.cueListBox.Name = "cueListBox";
             this.cueListBox.ShowAddDropDown = true;
-            this.cueListBox.Size = new System.Drawing.Size(220, 272);
+            this.cueListBox.Size = new System.Drawing.Size(200, 272);
             this.cueListBox.TabIndex = 8;
+            this.cueListBox.ItemRenamed += new System.EventHandler<KLib.Controls.CollectionListBox.RenamedItem>(this.cueListBox_ItemRenamed);
+            this.cueListBox.ItemAdded += new System.EventHandler<KLib.Controls.CollectionListBox.ChangedItem>(this.cueListBox_ItemAdded);
+            this.cueListBox.ItemRemoved += new System.EventHandler<KLib.Controls.CollectionListBox.ChangedItem>(this.cueListBox_ItemRemoved);
             // 
             // ScreenCuesSpecifier
             // 
@@ -68,7 +70,7 @@
             this.Controls.Add(this.propertyGrid);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ScreenCuesSpecifier";
-            this.Size = new System.Drawing.Size(485, 393);
+            this.Size = new System.Drawing.Size(458, 393);
             this.ResumeLayout(false);
             this.PerformLayout();
 
