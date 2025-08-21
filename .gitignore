@@ -5,3 +5,12 @@
 /.vs
 /Turandot Editor/.vs
 /Installer/Output
+/packages/Microsoft.CSharp.4.7.0
+/packages/System.Buffers.4.5.1
+/packages/System.CodeDom.9.0.5
+/packages/System.Collections.Immutable.8.0.0
+/packages/System.Data.DataSetExtensions.4.5.0
+/packages/System.Management.9.0.5
+/packages/System.Memory.4.5.5
+/packages/System.Numerics.Vectors.4.5.0
+/packages/System.Runtime.CompilerServices.Unsafe.6.0.0

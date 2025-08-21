@@ -3,6 +3,7 @@
 ### v2.15 (unreleased)
 #### Added
 - restored scaler (e.g.: for VAS)
+- more completely restore parameter slider
 
 ---
 
