@@ -24,15 +24,20 @@ namespace Turandot_Editor
 
         private int _numActiveRows;
 
-        private List<InputCriterion> _value;
-        public List<InputCriterion> Value
+        private List<InputCriterion> _value = new List<InputCriterion>();
+        //public List<InputCriterion> Value
+        //{
+        //    get { return _value; }
+        //    //set
+        //    //{
+        //    //    _value = value;
+        //    //    ShowValue();
+        //    //}
+        //}
+        public void SetValue(List<InputCriterion> value)
         {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                ShowValue();
-            }
+            _value = value;
+            ShowValue();
         }
 
         public InputCriteria()

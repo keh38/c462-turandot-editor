@@ -75,7 +75,8 @@ namespace Turandot_Editor.Controls.Events
             else
             {
                 inputCriteria.Tag = inputEvent;
-                inputCriteria.Value = inputEvent.criteria;
+                //inputCriteria.Value = inputEvent.criteria;
+                inputCriteria.SetValue(inputEvent.criteria);
             }
 
             _ignoreEvents = false;

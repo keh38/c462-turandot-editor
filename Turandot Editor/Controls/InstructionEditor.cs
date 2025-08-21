@@ -42,8 +42,7 @@ namespace Turandot_Editor.Controls
 
             _ignoreEvents = true;
             
-            instructionFontSizeNumeric.IntValue = _value.FontSize;
-
+            propertyGrid.SelectedObject = _value;
 
             if (_value.Text == null)
             {
@@ -69,14 +68,6 @@ namespace Turandot_Editor.Controls
             OnValueChanged();
         }
 
-        private void instructionFontSizeNumeric_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                _value.FontSize = instructionFontSizeNumeric.IntValue;
-                OnValueChanged();
-            }
-        }
     }
 
 }

@@ -1821,6 +1821,7 @@ namespace Turandot_Editor
                 }
             }
             stateInputsControl.SetAvailableInputs(_params.screen.Inputs);
+            eventsSpecifier.UpdateInputSources(_params.GetActiveInputControls(), _params.GetActiveScalarControls());
             SetDirty();
         }
 

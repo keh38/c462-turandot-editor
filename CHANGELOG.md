@@ -4,6 +4,7 @@
 #### Added
 - restored scaler (e.g.: for VAS)
 - more completely restore parameter slider
+- added more formatting properties to instructions
 
 ---
 

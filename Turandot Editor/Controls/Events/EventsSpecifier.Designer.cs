@@ -59,7 +59,6 @@
             this.inputCriteria.Name = "inputCriteria";
             this.inputCriteria.Size = new System.Drawing.Size(538, 357);
             this.inputCriteria.TabIndex = 9;
-            this.inputCriteria.Value = ((System.Collections.Generic.List<Turandot.InputCriterion>)(resources.GetObject("inputCriteria.Value")));
             this.inputCriteria.ValueChanged += new System.EventHandler(this.inputCriteria_ValueChanged);
             // 
             // flagControl
