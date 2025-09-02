@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.15 (unreleased)
+### v2.15 (2025-09-02)
 #### Added
 - restored scaler (e.g.: for VAS)
 - more completely restore parameter slider
