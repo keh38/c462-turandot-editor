@@ -306,7 +306,6 @@ namespace Turandot
             p.schedule = schedule;
             p.adapt = adapt;
             p.tag = tag;
-            p.linkTo = linkTo;
             p.matlabFunction = matlabFunction;
             p.wavFolder = wavFolder;
             p.trialLogOption = trialLogOption;
@@ -326,7 +325,6 @@ namespace Turandot
             schedule = p.schedule;
             adapt = p.adapt;
             tag = p.tag;
-            linkTo = p.linkTo;
             matlabFunction = p.matlabFunction;
             wavFolder = p.wavFolder;
             trialLogOption = p.trialLogOption;

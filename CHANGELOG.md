@@ -1,5 +1,12 @@
 ## Changelog
 
+### v2.16 (unreleased)
+#### Removed
+- link to option (better handled through protocol)
+- advanced channel options (intramural variables)
+
+---
+
 ### v2.15 (2025-09-02)
 #### Added
 - restored scaler (e.g.: for VAS)

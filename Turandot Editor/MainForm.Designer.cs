@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NewParamsButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -53,6 +53,7 @@
             this.MetricName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MetricValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ScreenPage = new System.Windows.Forms.TabPage();
+            this.customScreenColorCheckBox = new KLib.Controls.KCheckBox();
             this.overrideColorCheckBox = new KLib.Controls.KCheckBox();
             this.screenColorBox = new KLib.Controls.KColorBox();
             this.inputsSpecifier = new Turandot_Editor.Controls.ScreenInputsSpecifier();
@@ -125,7 +126,6 @@
             this.InputPage = new System.Windows.Forms.TabPage();
             this.stateInputsControl = new Turandot_Editor.Controls.StateInputsControl();
             this.infoPanel = new System.Windows.Forms.Panel();
-            this.customScreenColorCheckBox = new KLib.Controls.KCheckBox();
             this.matlabFileBrowser = new KLib.Controls.FileBrowser();
             this.label16 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -135,8 +135,6 @@
             this.tagTextBox = new KLib.Controls.KTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
-            this.linktoBrowser = new KLib.Controls.FileBrowser();
-            this.label19 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pathLabel = new System.Windows.Forms.Label();
@@ -385,38 +383,38 @@
             this.metricGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.metricGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metricGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.metricGridView.ColumnHeadersHeight = 29;
             this.metricGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.metricGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MetricName,
             this.MetricValue});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.metricGridView.EnableHeadersVisualStyles = false;
             this.metricGridView.Location = new System.Drawing.Point(33, 357);
             this.metricGridView.Name = "metricGridView";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.metricGridView.RowHeadersVisible = false;
             this.metricGridView.RowHeadersWidth = 51;
             this.metricGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -457,12 +455,23 @@
             this.ScreenPage.TabIndex = 2;
             this.ScreenPage.Text = "Screen";
             // 
+            // customScreenColorCheckBox
+            // 
+            this.customScreenColorCheckBox.AutoSize = true;
+            this.customScreenColorCheckBox.Location = new System.Drawing.Point(393, 47);
+            this.customScreenColorCheckBox.Name = "customScreenColorCheckBox";
+            this.customScreenColorCheckBox.Size = new System.Drawing.Size(150, 17);
+            this.customScreenColorCheckBox.TabIndex = 2;
+            this.customScreenColorCheckBox.Text = "Apply custom screen color";
+            this.customScreenColorCheckBox.UseVisualStyleBackColor = true;
+            this.customScreenColorCheckBox.CheckedChanged += new System.EventHandler(this.customScreenColorCheckBox_CheckedChanged);
+            // 
             // overrideColorCheckBox
             // 
             this.overrideColorCheckBox.AutoSize = true;
             this.overrideColorCheckBox.Location = new System.Drawing.Point(393, 78);
             this.overrideColorCheckBox.Name = "overrideColorCheckBox";
-            this.overrideColorCheckBox.Size = new System.Drawing.Size(185, 25);
+            this.overrideColorCheckBox.Size = new System.Drawing.Size(127, 17);
             this.overrideColorCheckBox.TabIndex = 3;
             this.overrideColorCheckBox.Text = "Override screen color";
             this.overrideColorCheckBox.UseVisualStyleBackColor = true;
@@ -1243,7 +1252,6 @@
             // channelView
             // 
             this.channelView.AdapterMap = null;
-            this.channelView.AllowExpertOptions = false;
             this.channelView.AutoScroll = true;
             this.channelView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.channelView.Location = new System.Drawing.Point(273, 11);
@@ -1314,8 +1322,6 @@
             this.infoPanel.Controls.Add(this.tagTextBox);
             this.infoPanel.Controls.Add(this.label8);
             this.infoPanel.Controls.Add(this.versionLabel);
-            this.infoPanel.Controls.Add(this.linktoBrowser);
-            this.infoPanel.Controls.Add(this.label19);
             this.infoPanel.Controls.Add(this.label2);
             this.infoPanel.Controls.Add(this.label1);
             this.infoPanel.Controls.Add(this.pathLabel);
@@ -1324,17 +1330,6 @@
             this.infoPanel.Size = new System.Drawing.Size(524, 120);
             this.infoPanel.TabIndex = 2;
             this.infoPanel.SizeChanged += new System.EventHandler(this.infoPanel_SizeChanged);
-            // 
-            // customScreenColorCheckBox
-            // 
-            this.customScreenColorCheckBox.AutoSize = true;
-            this.customScreenColorCheckBox.Location = new System.Drawing.Point(393, 47);
-            this.customScreenColorCheckBox.Name = "customScreenColorCheckBox";
-            this.customScreenColorCheckBox.Size = new System.Drawing.Size(208, 25);
-            this.customScreenColorCheckBox.TabIndex = 2;
-            this.customScreenColorCheckBox.Text = "Apply custom screen color";
-            this.customScreenColorCheckBox.UseVisualStyleBackColor = true;
-            this.customScreenColorCheckBox.CheckedChanged += new System.EventHandler(this.customScreenColorCheckBox_CheckedChanged);
             // 
             // matlabFileBrowser
             // 
@@ -1443,35 +1438,6 @@
             this.versionLabel.TabIndex = 7;
             this.versionLabel.Text = "version";
             this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // linktoBrowser
-            // 
-            this.linktoBrowser.AutoSize = true;
-            this.linktoBrowser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.linktoBrowser.DefaultFolder = null;
-            this.linktoBrowser.FileMustExist = false;
-            this.linktoBrowser.Filter = "XML files | *.xml";
-            this.linktoBrowser.FoldersOnly = false;
-            this.linktoBrowser.HideFolder = true;
-            this.linktoBrowser.Location = new System.Drawing.Point(280, 33);
-            this.linktoBrowser.Margin = new System.Windows.Forms.Padding(4);
-            this.linktoBrowser.Name = "linktoBrowser";
-            this.linktoBrowser.ReadOnly = false;
-            this.linktoBrowser.ShowSaveButton = false;
-            this.linktoBrowser.Size = new System.Drawing.Size(178, 21);
-            this.linktoBrowser.TabIndex = 6;
-            this.linktoBrowser.UseEllipsis = false;
-            this.linktoBrowser.Value = "";
-            this.linktoBrowser.ValueChanged += new System.EventHandler(this.linktoBrowser_ValueChanged);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(239, 36);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(39, 13);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "Link to";
             // 
             // label2
             // 
@@ -1637,8 +1603,6 @@
         private KLib.Controls.FileBrowser calfolderBrowser;
         private System.Windows.Forms.TabPage InputPage;
         private System.Windows.Forms.TabPage Instructions;
-        private KLib.Controls.FileBrowser linktoBrowser;
-        private System.Windows.Forms.Label label19;
         private Controls.StateCuesControl stateCuesControl;
         private System.Windows.Forms.Button CreateAFCButton;
         private System.Windows.Forms.CheckBox mAFCCheckBox;

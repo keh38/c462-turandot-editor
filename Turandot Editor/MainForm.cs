@@ -328,15 +328,8 @@ namespace Turandot_Editor
             trialLogOptionEnum.SetEnumValue(p.trialLogOption);
 
             expertCheckBox.Checked = p.allowExpertOptions;
-            channelView.AllowExpertOptions = p.allowExpertOptions;
             termFlagLabel.Visible = _params.allowExpertOptions;
             termFlagExprBox.Visible = _params.allowExpertOptions;
-
-            if (!string.IsNullOrEmpty(_filePath))
-            {
-                linktoBrowser.DefaultFolder = Path.GetDirectoryName(_filePath);
-            }
-            linktoBrowser.Value = p.linkTo;
 
             matlabFileBrowser.DefaultFolder = FileLocations.MATLABFolder;
             matlabFileBrowser.Value = p.matlabFunction;
@@ -1487,15 +1480,6 @@ namespace Turandot_Editor
             return isOK;
         }
 
-        private void linktoBrowser_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                _params.linkTo = Path.GetFileName(linktoBrowser.Value);
-                SetDirty();
-            }
-        }
-
         private void matlabFileBrowser_ValueChanged(object sender, EventArgs e)
         {
             if (!_ignoreEvents)
@@ -1662,7 +1646,6 @@ namespace Turandot_Editor
             {
                 _params.allowExpertOptions = expertCheckBox.Checked;
 
-                channelView.AllowExpertOptions = _params.allowExpertOptions;
                 termFlagLabel.Visible = _params.allowExpertOptions;
                 termFlagExprBox.Visible = _params.allowExpertOptions;
 
