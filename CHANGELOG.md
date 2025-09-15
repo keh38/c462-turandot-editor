@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.16 (unreleased)
+### v2.16 (2025-09-15)
 #### Removed
 - link to option (better handled through protocol)
 - advanced channel options (intramural variables)

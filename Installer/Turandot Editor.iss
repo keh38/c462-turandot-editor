@@ -27,8 +27,8 @@ Name: "{commonappdata}\EPL";
 
 [Files]
 Source: "..\Turandot Editor\Images\Turandot.ico"; DestDir: "{app}"; Flags: replacesameversion;
-Source: "..\Turandot Editor\bin\Release\*.*"; DestDir: "{app}"; Flags: replacesameversion;
-Source: "..\Turandot Editor\bin\Release\Images\*.*"; DestDir: "{app}\Images"; Flags: replacesameversion;
+Source: "..\Turandot Editor\bin\x64\Release\*.*"; DestDir: "{app}"; Flags: replacesameversion;
+Source: "..\Turandot Editor\bin\x64\Release\Images\*.*"; DestDir: "{app}\Images"; Flags: replacesameversion;
 Source: "..\CHANGELOG.md"; DestDir: "{app}"; Flags: replacesameversion;
 
 [Icons]
