@@ -2,7 +2,7 @@
 
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING .ISS SCRIPT FILES!
 #define SemanticVersion() \
-   GetVersionComponents("..\Turandot Editor\bin\Release\Turandot Editor.exe", Local[0], Local[1], Local[2], Local[3]), \
+   GetVersionComponents("..\Turandot Editor\bin\x64\Release\Turandot Editor.exe", Local[0], Local[1], Local[2], Local[3]), \
    Str(Local[0]) + "." + Str(Local[1]) + ((Local[2]>0) ? "." + Str(Local[2]) : "")
     
 

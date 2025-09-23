@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.16.1 (2025-09-16)
+#### Added
+- exposed Digitimer pulse width as sequence variable
+
+---
+
 ### v2.16 (2025-09-15)
 #### Removed
 - link to option (better handled through protocol)
