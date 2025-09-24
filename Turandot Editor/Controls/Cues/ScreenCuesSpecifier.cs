@@ -79,6 +79,8 @@ namespace Turandot_Editor.Controls
                     return new ImageLayout() { Name = name };
                 case "Message":
                     return new MessageLayout() { Name = name };
+                case "Text box":
+                    return new TextBoxLayout() { Name = name };
                 case "Video":
                     return new VideoLayout() { Name = name };
             }

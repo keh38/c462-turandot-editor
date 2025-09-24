@@ -110,6 +110,10 @@ namespace Turandot_Editor.Controls
             {
                 _value.Add((c as MessageLayout).GetDefaultCue());
             }
+            else if (c is TextBoxLayout)
+            {
+                _value.Add((c as TextBoxLayout).GetDefaultCue());
+            }
             else if (c is VideoLayout)
             {
                 _value.Add((c as VideoLayout).GetDefaultCue());
