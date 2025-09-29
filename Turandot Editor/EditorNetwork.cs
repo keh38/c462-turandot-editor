@@ -28,6 +28,8 @@ namespace Turandot_Editor
         private int _serverPort = 4951;
         private bool _lastPingSucceeded = false;
 
+        private IPEndPoint _turandotEndPoint = null;
+
         private CancellationTokenSource _serverCancellationToken;
 
         public bool IsConnected { get { return _ipEndPoint != null && _lastPingSucceeded; } }
@@ -39,6 +41,10 @@ namespace Turandot_Editor
             if (_ipEndPoint != null)
             {
                 _serverCancellationToken.Cancel();
+            }
+            if (_turandotEndPoint != null)
+            {
+                KTcpClient.SendMessage(_turandotEndPoint, "Disconnect");
             }
         }
 
@@ -56,6 +62,29 @@ namespace Turandot_Editor
             {
                 MulticastReceiver("TURANDOT.EDITOR", _ipEndPoint, _serverCancellationToken.Token);
             }, _serverCancellationToken.Token);
+        }
+
+        public void SendMessageToTablet(string message, string data=null)
+        {
+            if (_turandotEndPoint == null)
+            {
+                DiscoverTurandot();
+            }
+            if (data != null)
+            {
+                KTcpClient.SendMessage(_turandotEndPoint, $"{message}:{data}");
+            }
+            else
+            {
+                KTcpClient.SendMessage(_turandotEndPoint, $"{message}");
+            }
+        }
+
+        private void DiscoverTurandot()
+        {
+            _turandotEndPoint = Discovery.Discover("HEARING.TEST.SUITE");
+            var result = KTcpClient.SendMessage(_turandotEndPoint, $"Connect:{_ipEndPoint.Address}/{_ipEndPoint.Port}");
+            KTcpClient.SendMessage(_turandotEndPoint, "ChangeScene:Turandot");
         }
 
         private void Listener(IPEndPoint endpoint, CancellationToken ct)

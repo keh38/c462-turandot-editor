@@ -41,6 +41,7 @@
             this.textBox.Margin = new System.Windows.Forms.Padding(0);
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
+            this.textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox.Size = new System.Drawing.Size(308, 252);
             this.textBox.TabIndex = 0;
             this.textBox.Leave += new System.EventHandler(this.textBox_Leave);

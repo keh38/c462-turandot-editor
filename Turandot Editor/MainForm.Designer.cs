@@ -140,6 +140,7 @@
             this.pathLabel = new System.Windows.Forms.Label();
             this.graphViewer = new Turandot.GraphViewer();
             this.ledTimer = new System.Windows.Forms.Timer(this.components);
+            this.showInstructionsButton = new System.Windows.Forms.Button();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -511,6 +512,7 @@
             // Instructions
             // 
             this.Instructions.BackColor = System.Drawing.SystemColors.Control;
+            this.Instructions.Controls.Add(this.showInstructionsButton);
             this.Instructions.Controls.Add(this.instructionEditor);
             this.Instructions.Location = new System.Drawing.Point(4, 22);
             this.Instructions.Name = "Instructions";
@@ -775,7 +777,7 @@
             this.showStateButton.TabIndex = 68;
             this.showStateButton.Text = "Show";
             this.showStateButton.UseVisualStyleBackColor = true;
-            this.showStateButton.Visible = false;
+            this.showStateButton.Click += new System.EventHandler(this.showStateButton_Click);
             // 
             // label17
             // 
@@ -1480,6 +1482,16 @@
             // 
             this.ledTimer.Interval = 2500;
             // 
+            // showInstructionsButton
+            // 
+            this.showInstructionsButton.Location = new System.Drawing.Point(331, 192);
+            this.showInstructionsButton.Name = "showInstructionsButton";
+            this.showInstructionsButton.Size = new System.Drawing.Size(75, 23);
+            this.showInstructionsButton.TabIndex = 69;
+            this.showInstructionsButton.Text = "Show";
+            this.showInstructionsButton.UseVisualStyleBackColor = true;
+            this.showInstructionsButton.Click += new System.EventHandler(this.showInstructionsButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1651,6 +1663,7 @@
         private KLib.Controls.KCheckBox overrideColorCheckBox;
         private KLib.Controls.KColorBox screenColorBox;
         private Controls.InstructionEditor instructionEditor;
+        private System.Windows.Forms.Button showInstructionsButton;
     }
 }
 

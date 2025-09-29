@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.17 (unreleased)
+#### Added
+- ability to connect to Turandot instance and show state and instructions
+
+---
+
 ### v2.16.1 (2025-09-16)
 #### Added
 - exposed Digitimer pulse width as sequence variable

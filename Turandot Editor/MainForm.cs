@@ -151,7 +151,6 @@ namespace Turandot_Editor
             SaveDefaults();
         }
 
-
         bool LoadParameterFile(string path)
         {
             bool ok = true;
@@ -1671,15 +1670,15 @@ namespace Turandot_Editor
 
         private void showStateButton_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    KTcpClient.SendMessage(_ipEndPoint, "Set", KFile.ToXMLString(_params.ToBase()));
-            //    KTcpClient.SendMessage(_ipEndPoint, "Show", _selectedState.name);
-            //}
-            //catch (Exception ex)
-            //{
-            //    System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            try
+            {
+                _network.SendMessageToTablet("SetParams", KFile.ToXMLString(_params.ToBase()));
+                _network.SendMessageToTablet("ShowState", _selectedState.name);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void actionFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1846,6 +1845,19 @@ namespace Turandot_Editor
             {
                 _params.screen.Color = (int) screenColorBox.ValueAsUInt;
                 SetDirty();
+            }
+        }
+
+        private void showInstructionsButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _network.SendMessageToTablet("SetParams", KFile.ToXMLString(_params.ToBase()));
+                _network.SendMessageToTablet("ShowInstructions");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
