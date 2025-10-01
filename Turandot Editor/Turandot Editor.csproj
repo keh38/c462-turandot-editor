@@ -197,12 +197,6 @@
     <Compile Include="Controls\Schedules\ScheduleControl.Designer.cs">
       <DependentUpon>ScheduleControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateAFCDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CreateAFCDialog.Designer.cs">
-      <DependentUpon>CreateAFCDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="FileLocations.cs" />
     <Compile Include="FSMGraph\FSMGraph.Badge.cs" />
     <Compile Include="FSMGraph\FSMGraph.Edge.cs" />
@@ -277,9 +271,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Schedules\ScheduleControl.resx">
       <DependentUpon>ScheduleControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CreateAFCDialog.resx">
-      <DependentUpon>CreateAFCDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FSMGraph\FSMGraphViewer.resx">
       <DependentUpon>FSMGraphViewer.cs</DependentUpon>

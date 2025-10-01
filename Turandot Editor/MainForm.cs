@@ -603,9 +603,6 @@ namespace Turandot_Editor
 
             actionCheckBox.Enabled = !startCheckBox.Checked;
             decisionCheckBox.Checked = state.name == _params.schedule.decisionState;
-            mAFCCheckBox.Checked = state.nI_mAFC;
-            CreateAFCButton.Enabled = !state.nI_mAFC; // && state.sigMan != null && state.sigMan.channels.Count > 0;
-            ipcTextBox.Text = state.ipcCommand;
 
             stateCuesControl.Value = state.cues;
             stateInputsControl.SetDataForContext(state.sigMan?.GetValidSweepables());
@@ -1484,46 +1481,6 @@ namespace Turandot_Editor
             if (!_ignoreEvents)
             {
                 _params.matlabFunction = Path.GetFileName(matlabFileBrowser.Value);
-                SetDirty();
-            }
-        }
-
-        private void CreateAFCButton_Click(object sender, EventArgs e)
-        {
-            CreateAFCDialog dlg = new CreateAFCDialog();
-            dlg.NumIntervals = 2;
-            float isi = 1;
-            float.TryParse(_selectedState.timeOuts[0].expr, out isi);
-
-            dlg.ISI = isi * 1000;
-            dlg.Left = CreateAFCButton.Left + Left + tabControl.Left;
-            dlg.Top = CreateAFCButton.Top + Top + tabControl.Top;
-
-            if (dlg.ShowDialog() == DlgResult.OK)
-            {
-                _params.CreateAFC(_selectedState, dlg.NumIntervals, dlg.ISI);
-                ShowParameters(_params);
-                SelectState(_selectedState);
-                SelectTimeout(_selectedState.timeOuts[0]);
-
-                SetDirty();
-            }
-        }
-
-        private void mAFCCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                _selectedState.nI_mAFC = mAFCCheckBox.Checked;
-                CreateAFCButton.Enabled = mAFCCheckBox.Checked && _selectedState.sigMan != null && _selectedState.sigMan.channels.Count > 0;
-            }
-        }
-
-        private void ipcTextBox_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                _selectedState.ipcCommand = ipcTextBox.Text;
                 SetDirty();
             }
         }

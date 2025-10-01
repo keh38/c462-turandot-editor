@@ -56,12 +56,9 @@
             this.customScreenColorCheckBox = new KLib.Controls.KCheckBox();
             this.overrideColorCheckBox = new KLib.Controls.KCheckBox();
             this.screenColorBox = new KLib.Controls.KColorBox();
-            this.inputsSpecifier = new Turandot_Editor.Controls.ScreenInputsSpecifier();
-            this.cuesSpecifier = new Turandot_Editor.Controls.ScreenCuesSpecifier();
             this.Instructions = new System.Windows.Forms.TabPage();
-            this.instructionEditor = new Turandot_Editor.Controls.InstructionEditor();
+            this.showInstructionsButton = new System.Windows.Forms.Button();
             this.EventPage = new System.Windows.Forms.TabPage();
-            this.eventsSpecifier = new Turandot_Editor.Controls.Events.EventsSpecifier();
             this.SchedulePage = new System.Windows.Forms.TabPage();
             this.timeLabel = new System.Windows.Forms.Label();
             this.breakPanel = new System.Windows.Forms.Panel();
@@ -72,23 +69,17 @@
             this.breakCheckBox = new System.Windows.Forms.CheckBox();
             this.schedTabs = new System.Windows.Forms.TabControl();
             this.schedPage = new System.Windows.Forms.TabPage();
-            this.scheduleControl = new Turandot_Editor.Controls.ScheduleControl();
             this.adaptPage = new System.Windows.Forms.TabPage();
-            this.adaptControl = new Turandot_Editor.Controls.AdaptationControl();
             this.schedModeDropDown = new KLib.Controls.EnumDropDown();
             this.StatePage = new System.Windows.Forms.TabPage();
             this.hideCursorCheckBox = new System.Windows.Forms.CheckBox();
             this.actionFamilyComboBox = new System.Windows.Forms.ComboBox();
             this.showStateButton = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.ipcTextBox = new KLib.Controls.KTextBox();
             this.statePanel = new System.Windows.Forms.Panel();
             this.endActionLabel = new System.Windows.Forms.Label();
             this.startCheckBox = new System.Windows.Forms.CheckBox();
             this.decisionCheckBox = new System.Windows.Forms.CheckBox();
             this.endActionDropDown = new KLib.Controls.EnumDropDown();
-            this.CreateAFCButton = new System.Windows.Forms.Button();
-            this.mAFCCheckBox = new System.Windows.Forms.CheckBox();
             this.actionCheckBox = new System.Windows.Forms.CheckBox();
             this.Separator = new System.Windows.Forms.Label();
             this.TransitionTabs = new System.Windows.Forms.TabControl();
@@ -122,9 +113,7 @@
             this.channelListBox = new KLib.Controls.KUserListBox();
             this.channelView = new KLib.Unity.Controls.Signals.ChannelView();
             this.CuePage = new System.Windows.Forms.TabPage();
-            this.stateCuesControl = new Turandot_Editor.Controls.StateCuesControl();
             this.InputPage = new System.Windows.Forms.TabPage();
-            this.stateInputsControl = new Turandot_Editor.Controls.StateInputsControl();
             this.infoPanel = new System.Windows.Forms.Panel();
             this.matlabFileBrowser = new KLib.Controls.FileBrowser();
             this.label16 = new System.Windows.Forms.Label();
@@ -138,9 +127,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pathLabel = new System.Windows.Forms.Label();
-            this.graphViewer = new Turandot.GraphViewer();
             this.ledTimer = new System.Windows.Forms.Timer(this.components);
-            this.showInstructionsButton = new System.Windows.Forms.Button();
+            this.inputsSpecifier = new Turandot_Editor.Controls.ScreenInputsSpecifier();
+            this.cuesSpecifier = new Turandot_Editor.Controls.ScreenCuesSpecifier();
+            this.instructionEditor = new Turandot_Editor.Controls.InstructionEditor();
+            this.eventsSpecifier = new Turandot_Editor.Controls.Events.EventsSpecifier();
+            this.scheduleControl = new Turandot_Editor.Controls.ScheduleControl();
+            this.adaptControl = new Turandot_Editor.Controls.AdaptationControl();
+            this.stateCuesControl = new Turandot_Editor.Controls.StateCuesControl();
+            this.stateInputsControl = new Turandot_Editor.Controls.StateInputsControl();
+            this.graphViewer = new Turandot.GraphViewer();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -461,7 +457,7 @@
             this.customScreenColorCheckBox.AutoSize = true;
             this.customScreenColorCheckBox.Location = new System.Drawing.Point(393, 47);
             this.customScreenColorCheckBox.Name = "customScreenColorCheckBox";
-            this.customScreenColorCheckBox.Size = new System.Drawing.Size(150, 17);
+            this.customScreenColorCheckBox.Size = new System.Drawing.Size(208, 25);
             this.customScreenColorCheckBox.TabIndex = 2;
             this.customScreenColorCheckBox.Text = "Apply custom screen color";
             this.customScreenColorCheckBox.UseVisualStyleBackColor = true;
@@ -472,7 +468,7 @@
             this.overrideColorCheckBox.AutoSize = true;
             this.overrideColorCheckBox.Location = new System.Drawing.Point(393, 78);
             this.overrideColorCheckBox.Name = "overrideColorCheckBox";
-            this.overrideColorCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.overrideColorCheckBox.Size = new System.Drawing.Size(185, 25);
             this.overrideColorCheckBox.TabIndex = 3;
             this.overrideColorCheckBox.Text = "Override screen color";
             this.overrideColorCheckBox.UseVisualStyleBackColor = true;
@@ -489,26 +485,6 @@
             this.screenColorBox.ValueAsUInt = ((uint)(4294967295u));
             this.screenColorBox.ValueChanged += new System.EventHandler(this.screenColorBox_ValueChanged);
             // 
-            // inputsSpecifier
-            // 
-            this.inputsSpecifier.Location = new System.Drawing.Point(18, 339);
-            this.inputsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.inputsSpecifier.Name = "inputsSpecifier";
-            this.inputsSpecifier.Size = new System.Drawing.Size(351, 318);
-            this.inputsSpecifier.TabIndex = 1;
-            this.inputsSpecifier.Value = null;
-            this.inputsSpecifier.ValueChanged += new System.EventHandler(this.inputsSpecifier_ValueChanged);
-            // 
-            // cuesSpecifier
-            // 
-            this.cuesSpecifier.Location = new System.Drawing.Point(18, 19);
-            this.cuesSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cuesSpecifier.Name = "cuesSpecifier";
-            this.cuesSpecifier.Size = new System.Drawing.Size(370, 323);
-            this.cuesSpecifier.TabIndex = 0;
-            this.cuesSpecifier.Value = null;
-            this.cuesSpecifier.ValueChanged += new System.EventHandler(this.cuesSpecifier_ValueChanged);
-            // 
             // Instructions
             // 
             this.Instructions.BackColor = System.Drawing.SystemColors.Control;
@@ -521,15 +497,15 @@
             this.Instructions.TabIndex = 9;
             this.Instructions.Text = "Instructions";
             // 
-            // instructionEditor
+            // showInstructionsButton
             // 
-            this.instructionEditor.Location = new System.Drawing.Point(6, 6);
-            this.instructionEditor.Margin = new System.Windows.Forms.Padding(4);
-            this.instructionEditor.Name = "instructionEditor";
-            this.instructionEditor.Size = new System.Drawing.Size(318, 446);
-            this.instructionEditor.TabIndex = 0;
-            this.instructionEditor.Value = null;
-            this.instructionEditor.ValueChanged += new System.EventHandler(this.instructionEditor_ValueChanged);
+            this.showInstructionsButton.Location = new System.Drawing.Point(331, 192);
+            this.showInstructionsButton.Name = "showInstructionsButton";
+            this.showInstructionsButton.Size = new System.Drawing.Size(75, 23);
+            this.showInstructionsButton.TabIndex = 69;
+            this.showInstructionsButton.Text = "Show";
+            this.showInstructionsButton.UseVisualStyleBackColor = true;
+            this.showInstructionsButton.Click += new System.EventHandler(this.showInstructionsButton_Click);
             // 
             // EventPage
             // 
@@ -540,22 +516,6 @@
             this.EventPage.Size = new System.Drawing.Size(611, 702);
             this.EventPage.TabIndex = 3;
             this.EventPage.Text = "Events";
-            // 
-            // eventsSpecifier
-            // 
-            this.eventsSpecifier.AutoSize = true;
-            this.eventsSpecifier.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.eventsSpecifier.Location = new System.Drawing.Point(11, 12);
-            this.eventsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.eventsSpecifier.Name = "eventsSpecifier";
-            this.eventsSpecifier.Size = new System.Drawing.Size(421, 461);
-            this.eventsSpecifier.TabIndex = 0;
-            this.eventsSpecifier.ItemAdded += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemAdded);
-            this.eventsSpecifier.ItemRenamed += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemRenamed);
-            this.eventsSpecifier.ItemMoved += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemMoved);
-            this.eventsSpecifier.ItemsDeleted += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItems>(this.eventListBox_ItemsDeleted);
-            this.eventsSpecifier.ItemsMoved += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItems>(this.eventListBox_ItemsMoved);
-            this.eventsSpecifier.ValueChanged += new System.EventHandler(this.eventsSpecifier_ValueChanged);
             // 
             // SchedulePage
             // 
@@ -682,16 +642,6 @@
             this.schedPage.TabIndex = 0;
             this.schedPage.Text = "tabPage1";
             // 
-            // scheduleControl
-            // 
-            this.scheduleControl.Location = new System.Drawing.Point(3, 6);
-            this.scheduleControl.Margin = new System.Windows.Forms.Padding(4);
-            this.scheduleControl.Name = "scheduleControl";
-            this.scheduleControl.Size = new System.Drawing.Size(610, 570);
-            this.scheduleControl.TabIndex = 0;
-            this.scheduleControl.Value = null;
-            this.scheduleControl.ValueChanged += new System.EventHandler(this.scheduleControl_ValueChanged);
-            // 
             // adaptPage
             // 
             this.adaptPage.BackColor = System.Drawing.SystemColors.Control;
@@ -702,16 +652,6 @@
             this.adaptPage.Size = new System.Drawing.Size(619, 638);
             this.adaptPage.TabIndex = 1;
             this.adaptPage.Text = "tabPage2";
-            // 
-            // adaptControl
-            // 
-            this.adaptControl.Location = new System.Drawing.Point(6, 6);
-            this.adaptControl.Margin = new System.Windows.Forms.Padding(4);
-            this.adaptControl.Name = "adaptControl";
-            this.adaptControl.Size = new System.Drawing.Size(593, 622);
-            this.adaptControl.TabIndex = 0;
-            this.adaptControl.Value = null;
-            this.adaptControl.ValueChanged += new System.EventHandler(this.adaptControl_ValueChanged);
             // 
             // schedModeDropDown
             // 
@@ -731,8 +671,6 @@
             this.StatePage.Controls.Add(this.hideCursorCheckBox);
             this.StatePage.Controls.Add(this.actionFamilyComboBox);
             this.StatePage.Controls.Add(this.showStateButton);
-            this.StatePage.Controls.Add(this.label17);
-            this.StatePage.Controls.Add(this.ipcTextBox);
             this.StatePage.Controls.Add(this.statePanel);
             this.StatePage.Controls.Add(this.actionCheckBox);
             this.StatePage.Controls.Add(this.Separator);
@@ -750,7 +688,7 @@
             // 
             this.hideCursorCheckBox.AutoSize = true;
             this.hideCursorCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.hideCursorCheckBox.Location = new System.Drawing.Point(84, 126);
+            this.hideCursorCheckBox.Location = new System.Drawing.Point(85, 109);
             this.hideCursorCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.hideCursorCheckBox.Name = "hideCursorCheckBox";
             this.hideCursorCheckBox.Size = new System.Drawing.Size(80, 17);
@@ -771,38 +709,13 @@
             // 
             // showStateButton
             // 
-            this.showStateButton.Location = new System.Drawing.Point(327, 121);
+            this.showStateButton.Location = new System.Drawing.Point(327, 103);
             this.showStateButton.Name = "showStateButton";
             this.showStateButton.Size = new System.Drawing.Size(75, 23);
             this.showStateButton.TabIndex = 68;
             this.showStateButton.Text = "Show";
             this.showStateButton.UseVisualStyleBackColor = true;
             this.showStateButton.Click += new System.EventHandler(this.showStateButton_Click);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(76, 127);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(73, 13);
-            this.label17.TabIndex = 67;
-            this.label17.Text = "IPC command";
-            this.label17.Visible = false;
-            // 
-            // ipcTextBox
-            // 
-            this.ipcTextBox.AutoSize = true;
-            this.ipcTextBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ipcTextBox.FontColor = System.Drawing.SystemColors.WindowText;
-            this.ipcTextBox.IsIPAddress = false;
-            this.ipcTextBox.Location = new System.Drawing.Point(151, 124);
-            this.ipcTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.ipcTextBox.Name = "ipcTextBox";
-            this.ipcTextBox.Size = new System.Drawing.Size(118, 20);
-            this.ipcTextBox.TabIndex = 66;
-            this.ipcTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ipcTextBox.Visible = false;
-            this.ipcTextBox.ValueChanged += new System.EventHandler(this.ipcTextBox_ValueChanged);
             // 
             // statePanel
             // 
@@ -812,11 +725,9 @@
             this.statePanel.Controls.Add(this.startCheckBox);
             this.statePanel.Controls.Add(this.decisionCheckBox);
             this.statePanel.Controls.Add(this.endActionDropDown);
-            this.statePanel.Controls.Add(this.CreateAFCButton);
-            this.statePanel.Controls.Add(this.mAFCCheckBox);
             this.statePanel.Location = new System.Drawing.Point(76, 48);
             this.statePanel.Name = "statePanel";
-            this.statePanel.Size = new System.Drawing.Size(193, 70);
+            this.statePanel.Size = new System.Drawing.Size(193, 46);
             this.statePanel.TabIndex = 15;
             // 
             // endActionLabel
@@ -862,28 +773,6 @@
             this.endActionDropDown.Sort = false;
             this.endActionDropDown.TabIndex = 68;
             this.endActionDropDown.ValueChanged += new System.EventHandler(this.endActionDropDown_ValueChanged);
-            // 
-            // CreateAFCButton
-            // 
-            this.CreateAFCButton.Location = new System.Drawing.Point(95, 44);
-            this.CreateAFCButton.Name = "CreateAFCButton";
-            this.CreateAFCButton.Size = new System.Drawing.Size(60, 23);
-            this.CreateAFCButton.TabIndex = 13;
-            this.CreateAFCButton.Text = "Create";
-            this.CreateAFCButton.UseVisualStyleBackColor = true;
-            this.CreateAFCButton.Click += new System.EventHandler(this.CreateAFCButton_Click);
-            // 
-            // mAFCCheckBox
-            // 
-            this.mAFCCheckBox.AutoSize = true;
-            this.mAFCCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.mAFCCheckBox.Location = new System.Drawing.Point(32, 50);
-            this.mAFCCheckBox.Name = "mAFCCheckBox";
-            this.mAFCCheckBox.Size = new System.Drawing.Size(54, 17);
-            this.mAFCCheckBox.TabIndex = 12;
-            this.mAFCCheckBox.Text = "mAFC";
-            this.mAFCCheckBox.UseVisualStyleBackColor = true;
-            this.mAFCCheckBox.CheckedChanged += new System.EventHandler(this.mAFCCheckBox_CheckedChanged);
             // 
             // actionCheckBox
             // 
@@ -1277,17 +1166,6 @@
             this.CuePage.TabIndex = 1;
             this.CuePage.Text = "Cues";
             // 
-            // stateCuesControl
-            // 
-            this.stateCuesControl.Location = new System.Drawing.Point(7, 7);
-            this.stateCuesControl.Margin = new System.Windows.Forms.Padding(4);
-            this.stateCuesControl.Name = "stateCuesControl";
-            this.stateCuesControl.Size = new System.Drawing.Size(442, 491);
-            this.stateCuesControl.TabIndex = 0;
-            this.stateCuesControl.Value = null;
-            this.stateCuesControl.CueAddRemove += new System.EventHandler<Turandot_Editor.Controls.StateCuesControl.CueAddRemoveArgs>(this.allCuesControl_CueAddRemove);
-            this.stateCuesControl.ValueChanged += new System.EventHandler(this.allCuesControl_ValueChanged);
-            // 
             // InputPage
             // 
             this.InputPage.BackColor = System.Drawing.SystemColors.Control;
@@ -1298,16 +1176,6 @@
             this.InputPage.Size = new System.Drawing.Size(611, 702);
             this.InputPage.TabIndex = 8;
             this.InputPage.Text = "Inputs";
-            // 
-            // stateInputsControl
-            // 
-            this.stateInputsControl.Location = new System.Drawing.Point(6, 6);
-            this.stateInputsControl.Margin = new System.Windows.Forms.Padding(4);
-            this.stateInputsControl.Name = "stateInputsControl";
-            this.stateInputsControl.Size = new System.Drawing.Size(554, 360);
-            this.stateInputsControl.TabIndex = 0;
-            this.stateInputsControl.Value = null;
-            this.stateInputsControl.InputAddRemove += new System.EventHandler<Turandot_Editor.Controls.StateInputsControl.InputAddRemoveArgs>(this.inputControl_InputAddRemove);
             // 
             // infoPanel
             // 
@@ -1466,6 +1334,97 @@
             this.pathLabel.Size = new System.Drawing.Size(430, 23);
             this.pathLabel.TabIndex = 1;
             // 
+            // ledTimer
+            // 
+            this.ledTimer.Interval = 2500;
+            // 
+            // inputsSpecifier
+            // 
+            this.inputsSpecifier.Location = new System.Drawing.Point(18, 339);
+            this.inputsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputsSpecifier.Name = "inputsSpecifier";
+            this.inputsSpecifier.Size = new System.Drawing.Size(351, 318);
+            this.inputsSpecifier.TabIndex = 1;
+            this.inputsSpecifier.Value = null;
+            this.inputsSpecifier.ValueChanged += new System.EventHandler(this.inputsSpecifier_ValueChanged);
+            // 
+            // cuesSpecifier
+            // 
+            this.cuesSpecifier.Location = new System.Drawing.Point(18, 19);
+            this.cuesSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cuesSpecifier.Name = "cuesSpecifier";
+            this.cuesSpecifier.Size = new System.Drawing.Size(370, 323);
+            this.cuesSpecifier.TabIndex = 0;
+            this.cuesSpecifier.Value = null;
+            this.cuesSpecifier.ValueChanged += new System.EventHandler(this.cuesSpecifier_ValueChanged);
+            // 
+            // instructionEditor
+            // 
+            this.instructionEditor.Location = new System.Drawing.Point(6, 6);
+            this.instructionEditor.Margin = new System.Windows.Forms.Padding(4);
+            this.instructionEditor.Name = "instructionEditor";
+            this.instructionEditor.Size = new System.Drawing.Size(318, 446);
+            this.instructionEditor.TabIndex = 0;
+            this.instructionEditor.Value = null;
+            this.instructionEditor.ValueChanged += new System.EventHandler(this.instructionEditor_ValueChanged);
+            // 
+            // eventsSpecifier
+            // 
+            this.eventsSpecifier.AutoSize = true;
+            this.eventsSpecifier.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.eventsSpecifier.Location = new System.Drawing.Point(11, 12);
+            this.eventsSpecifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.eventsSpecifier.Name = "eventsSpecifier";
+            this.eventsSpecifier.Size = new System.Drawing.Size(421, 461);
+            this.eventsSpecifier.TabIndex = 0;
+            this.eventsSpecifier.ItemAdded += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemAdded);
+            this.eventsSpecifier.ItemRenamed += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemRenamed);
+            this.eventsSpecifier.ItemMoved += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItem>(this.eventListBox_ItemMoved);
+            this.eventsSpecifier.ItemsDeleted += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItems>(this.eventListBox_ItemsDeleted);
+            this.eventsSpecifier.ItemsMoved += new System.EventHandler<KLib.Controls.KUserListBox.ChangedItems>(this.eventListBox_ItemsMoved);
+            this.eventsSpecifier.ValueChanged += new System.EventHandler(this.eventsSpecifier_ValueChanged);
+            // 
+            // scheduleControl
+            // 
+            this.scheduleControl.Location = new System.Drawing.Point(3, 6);
+            this.scheduleControl.Margin = new System.Windows.Forms.Padding(4);
+            this.scheduleControl.Name = "scheduleControl";
+            this.scheduleControl.Size = new System.Drawing.Size(610, 570);
+            this.scheduleControl.TabIndex = 0;
+            this.scheduleControl.Value = null;
+            this.scheduleControl.ValueChanged += new System.EventHandler(this.scheduleControl_ValueChanged);
+            // 
+            // adaptControl
+            // 
+            this.adaptControl.Location = new System.Drawing.Point(6, 6);
+            this.adaptControl.Margin = new System.Windows.Forms.Padding(4);
+            this.adaptControl.Name = "adaptControl";
+            this.adaptControl.Size = new System.Drawing.Size(593, 622);
+            this.adaptControl.TabIndex = 0;
+            this.adaptControl.Value = null;
+            this.adaptControl.ValueChanged += new System.EventHandler(this.adaptControl_ValueChanged);
+            // 
+            // stateCuesControl
+            // 
+            this.stateCuesControl.Location = new System.Drawing.Point(7, 7);
+            this.stateCuesControl.Margin = new System.Windows.Forms.Padding(4);
+            this.stateCuesControl.Name = "stateCuesControl";
+            this.stateCuesControl.Size = new System.Drawing.Size(442, 491);
+            this.stateCuesControl.TabIndex = 0;
+            this.stateCuesControl.Value = null;
+            this.stateCuesControl.CueAddRemove += new System.EventHandler<Turandot_Editor.Controls.StateCuesControl.CueAddRemoveArgs>(this.allCuesControl_CueAddRemove);
+            this.stateCuesControl.ValueChanged += new System.EventHandler(this.allCuesControl_ValueChanged);
+            // 
+            // stateInputsControl
+            // 
+            this.stateInputsControl.Location = new System.Drawing.Point(6, 6);
+            this.stateInputsControl.Margin = new System.Windows.Forms.Padding(4);
+            this.stateInputsControl.Name = "stateInputsControl";
+            this.stateInputsControl.Size = new System.Drawing.Size(554, 360);
+            this.stateInputsControl.TabIndex = 0;
+            this.stateInputsControl.Value = null;
+            this.stateInputsControl.InputAddRemove += new System.EventHandler<Turandot_Editor.Controls.StateInputsControl.InputAddRemoveArgs>(this.inputControl_InputAddRemove);
+            // 
             // graphViewer
             // 
             this.graphViewer.BackColor = System.Drawing.Color.Moccasin;
@@ -1477,20 +1436,6 @@
             this.graphViewer.Name = "graphViewer";
             this.graphViewer.Size = new System.Drawing.Size(522, 600);
             this.graphViewer.TabIndex = 3;
-            // 
-            // ledTimer
-            // 
-            this.ledTimer.Interval = 2500;
-            // 
-            // showInstructionsButton
-            // 
-            this.showInstructionsButton.Location = new System.Drawing.Point(331, 192);
-            this.showInstructionsButton.Name = "showInstructionsButton";
-            this.showInstructionsButton.Size = new System.Drawing.Size(75, 23);
-            this.showInstructionsButton.TabIndex = 69;
-            this.showInstructionsButton.Text = "Show";
-            this.showInstructionsButton.UseVisualStyleBackColor = true;
-            this.showInstructionsButton.Click += new System.EventHandler(this.showInstructionsButton_Click);
             // 
             // MainForm
             // 
@@ -1616,8 +1561,6 @@
         private System.Windows.Forms.TabPage InputPage;
         private System.Windows.Forms.TabPage Instructions;
         private Controls.StateCuesControl stateCuesControl;
-        private System.Windows.Forms.Button CreateAFCButton;
-        private System.Windows.Forms.CheckBox mAFCCheckBox;
         private System.Windows.Forms.TextBox breakInstructBox;
         private System.Windows.Forms.CheckBox breakCheckBox;
         private System.Windows.Forms.Panel breakPanel;
@@ -1636,8 +1579,6 @@
         private System.Windows.Forms.CheckBox expertCheckBox;
         private System.Windows.Forms.Label label7;
         private KLib.Controls.EnumDropDown trialLogOptionEnum;
-        private System.Windows.Forms.Label label17;
-        private KLib.Controls.KTextBox ipcTextBox;
         private System.Windows.Forms.Label label20;
         private KLib.Controls.KTextBox transducerTextBox;
         private System.Windows.Forms.Label endActionLabel;
