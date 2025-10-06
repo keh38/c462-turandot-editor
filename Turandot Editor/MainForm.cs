@@ -1219,6 +1219,8 @@ namespace Turandot_Editor
 
                 npts = (int)(_Fs * T);
 
+                KLib.Signals.Calibration.CalibrationFactory.AudiogramFolder = FileLocations.SubjectMetaDataFolder;
+
                 sigman.AdapterMap = _adapterMap;
                 sigman.Initialize(_Fs, npts);
                 channelView.UpdateMaxLevel();
@@ -1372,14 +1374,16 @@ namespace Turandot_Editor
 
                 Expressions.Metrics = _settings.metrics;
                 ShowMetrics();
-                ApplyAudiogramDataToExpressions();
+//                ApplyAudiogramDataToExpressions();
             }
         }
 
-        private void ApplyAudiogramDataToExpressions()
+        private void ApplyAudiogramDataToExpressions(string folder)
         {
-            Expressions.Audiogram = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "agram.xml");
-            Expressions.LDL = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "ldlgram.xml");
+            //Expressions.Audiogram = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "agram.xml");
+            //Expressions.LDL = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "ldlgram.xml");
+            Expressions.Audiogram = Audiograms.AudiogramData.Load(Path.Combine(folder, "agram.xml"));
+            Expressions.LDL = Audiograms.AudiogramData.Load(Path.Combine(folder, "ldlgram.xml"));
         }
 
         private void adaptControl_ValueChanged(object sender, EventArgs e)
@@ -1395,7 +1399,7 @@ namespace Turandot_Editor
         {
             _settings.calFolder = calfolderBrowser.Value;
             SaveDefaults();
-            ApplyAudiogramDataToExpressions();
+            //ApplyAudiogramDataToExpressions();
         }
 
         private void wavfolderBrowser_ValueChanged(object sender, EventArgs e)
@@ -1660,6 +1664,11 @@ namespace Turandot_Editor
                     break;
                 case "SetMetrics":
                     Invoke(new Action(() => { RpcSetMetrics(parts[1]); }));
+                    break;
+                case "SetSubjectFolder":
+                    Debug.WriteLine($"set subject folder to {parts[1]}");
+                    FileLocations.SubjectDataFolder = parts[1];
+                    ApplyAudiogramDataToExpressions(Path.Combine(FileLocations.SubjectDataFolder, "meta"));
                     break;
             }
         }

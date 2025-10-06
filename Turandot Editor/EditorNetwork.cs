@@ -124,7 +124,6 @@ namespace Turandot_Editor
             RemoteMessageHandler?.Invoke(input);
         }
 
-
         private void MulticastReceiver(string name, IPEndPoint endpoint, CancellationToken ct)
         {
             var ipLocal = new IPEndPoint(endpoint.Address, 10000);
