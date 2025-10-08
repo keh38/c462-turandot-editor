@@ -1666,7 +1666,6 @@ namespace Turandot_Editor
                     Invoke(new Action(() => { RpcSetMetrics(parts[1]); }));
                     break;
                 case "SetSubjectFolder":
-                    Debug.WriteLine($"set subject folder to {parts[1]}");
                     FileLocations.SubjectDataFolder = parts[1];
                     ApplyAudiogramDataToExpressions(Path.Combine(FileLocations.SubjectDataFolder, "meta"));
                     break;
