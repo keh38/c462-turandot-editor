@@ -3,6 +3,8 @@
 ### v2.17 (unreleased)
 #### Added
 - ability to connect to Turandot instance and show state and instructions
+- text box cue
+- restored button flashing
 
 ---
 
