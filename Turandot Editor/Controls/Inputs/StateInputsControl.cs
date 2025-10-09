@@ -16,6 +16,7 @@ using Turandot.Screen;
 
 using KLib.ExtensionMethods;
 using KLib.Signals;
+using System.Diagnostics;
 
 namespace Turandot_Editor.Controls
 {
@@ -161,5 +162,11 @@ namespace Turandot_Editor.Controls
             OnValueChanged();
             OnInputAddRemove(new InputAddRemoveArgs(toDelete.Target, false));
         }
-   }
+
+        private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            propertyGrid.Refresh();
+            OnValueChanged();
+        }
+    }
 }

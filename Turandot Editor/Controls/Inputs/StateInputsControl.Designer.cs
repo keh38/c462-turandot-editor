@@ -38,28 +38,29 @@
             // inputListBox
             // 
             this.inputListBox.FormattingEnabled = true;
-            this.inputListBox.Location = new System.Drawing.Point(14, 41);
-            this.inputListBox.Margin = new System.Windows.Forms.Padding(2);
+            this.inputListBox.ItemHeight = 16;
+            this.inputListBox.Location = new System.Drawing.Point(19, 50);
+            this.inputListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputListBox.Name = "inputListBox";
-            this.inputListBox.Size = new System.Drawing.Size(143, 134);
+            this.inputListBox.Size = new System.Drawing.Size(189, 164);
             this.inputListBox.TabIndex = 0;
             this.inputListBox.SelectedIndexChanged += new System.EventHandler(this.inputListBox_SelectedIndexChanged);
             // 
             // propertyGrid
             // 
-            this.propertyGrid.Location = new System.Drawing.Point(176, 18);
-            this.propertyGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.propertyGrid.Location = new System.Drawing.Point(235, 22);
+            this.propertyGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(298, 310);
+            this.propertyGrid.Size = new System.Drawing.Size(397, 382);
             this.propertyGrid.TabIndex = 1;
+            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 25);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(16, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.Size = new System.Drawing.Size(42, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "Inputs";
             // 
@@ -69,19 +70,19 @@
             this.inputDropDown.FormattingEnabled = true;
             this.inputDropDown.Items.AddRange(new object[] {
             "Message"});
-            this.inputDropDown.Location = new System.Drawing.Point(14, 210);
-            this.inputDropDown.Margin = new System.Windows.Forms.Padding(2);
+            this.inputDropDown.Location = new System.Drawing.Point(19, 258);
+            this.inputDropDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputDropDown.Name = "inputDropDown";
-            this.inputDropDown.Size = new System.Drawing.Size(143, 21);
+            this.inputDropDown.Size = new System.Drawing.Size(189, 24);
             this.inputDropDown.TabIndex = 3;
             this.inputDropDown.SelectedIndexChanged += new System.EventHandler(this.inputDropDown_SelectedIndexChanged);
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(14, 180);
-            this.removeButton.Margin = new System.Windows.Forms.Padding(2);
+            this.removeButton.Location = new System.Drawing.Point(19, 222);
+            this.removeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(142, 26);
+            this.removeButton.Size = new System.Drawing.Size(189, 32);
             this.removeButton.TabIndex = 4;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -89,15 +90,16 @@
             // 
             // StateInputsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.inputDropDown);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.inputListBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "StateInputsControl";
-            this.Size = new System.Drawing.Size(496, 360);
+            this.Size = new System.Drawing.Size(661, 443);
             this.ResumeLayout(false);
             this.PerformLayout();
 

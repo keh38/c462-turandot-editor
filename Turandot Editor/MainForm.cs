@@ -1219,7 +1219,8 @@ namespace Turandot_Editor
 
                 npts = (int)(_Fs * T);
 
-                KLib.Signals.Calibration.CalibrationFactory.AudiogramFolder = FileLocations.SubjectMetaDataFolder;
+                //KLib.Signals.Calibration.CalibrationFactory.AudiogramFolder = FileLocations.SubjectMetaDataFolder;
+                KLib.Signals.Calibration.CalibrationFactory.AudiogramFolder = _settings.audiogramFolder;
 
                 sigman.AdapterMap = _adapterMap;
                 sigman.Initialize(_Fs, npts);
@@ -1364,6 +1365,7 @@ namespace Turandot_Editor
                 _settings = KFile.XmlDeserialize<Settings>(fn);
 
                 calfolderBrowser.Value = _settings.calFolder;
+                audiogramFolderBrowser.Value = _settings.audiogramFolder;
 
                 wavfolderBrowser.Value = _settings.wavFolder;
                 channelView.WavFolder = GetWavFolder();
@@ -1374,7 +1376,9 @@ namespace Turandot_Editor
 
                 Expressions.Metrics = _settings.metrics;
                 ShowMetrics();
-//                ApplyAudiogramDataToExpressions();
+                if (Directory.Exists(_settings.audiogramFolder)) {
+                    ApplyAudiogramDataToExpressions(_settings.audiogramFolder);
+                }
             }
         }
 
@@ -1406,6 +1410,12 @@ namespace Turandot_Editor
         {
             _settings.wavFolder = wavfolderBrowser.Value;
             channelView.WavFolder = GetWavFolder();
+            SaveDefaults();
+        }
+
+        private void audiogramFolderBrowser_ValueChanged(object sender, EventArgs e)
+        {
+            _settings.audiogramFolder = audiogramFolderBrowser.Value;
             SaveDefaults();
         }
 
@@ -1823,6 +1833,14 @@ namespace Turandot_Editor
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void stateInputsControl_ValueChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreEvents)
+            {
+                SetDirty();
             }
         }
     }
