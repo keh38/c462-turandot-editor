@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.17 (unreleased)
+### v2.17 (2025-10-14)
 #### Added
 - ability to connect to Turandot instance and show state and instructions
 - text box cue
