@@ -176,7 +176,7 @@
             this.SaveFileAsButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1540, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1540, 31);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -186,7 +186,7 @@
             this.NewParamsButton.Image = ((System.Drawing.Image)(resources.GetObject("NewParamsButton.Image")));
             this.NewParamsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.NewParamsButton.Name = "NewParamsButton";
-            this.NewParamsButton.Size = new System.Drawing.Size(29, 24);
+            this.NewParamsButton.Size = new System.Drawing.Size(29, 28);
             this.NewParamsButton.Text = "New";
             this.NewParamsButton.Click += new System.EventHandler(this.NewParamsButton_Click);
             // 
@@ -196,7 +196,7 @@
             this.OpenFileButton.Image = ((System.Drawing.Image)(resources.GetObject("OpenFileButton.Image")));
             this.OpenFileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OpenFileButton.Name = "OpenFileButton";
-            this.OpenFileButton.Size = new System.Drawing.Size(29, 24);
+            this.OpenFileButton.Size = new System.Drawing.Size(29, 28);
             this.OpenFileButton.Text = "Open parameter file";
             this.OpenFileButton.Click += new System.EventHandler(this.OpenFileButton_Click);
             // 
@@ -206,7 +206,7 @@
             this.SaveFileButton.Image = ((System.Drawing.Image)(resources.GetObject("SaveFileButton.Image")));
             this.SaveFileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SaveFileButton.Name = "SaveFileButton";
-            this.SaveFileButton.Size = new System.Drawing.Size(29, 24);
+            this.SaveFileButton.Size = new System.Drawing.Size(29, 28);
             this.SaveFileButton.Text = "Save parameter file";
             this.SaveFileButton.Click += new System.EventHandler(this.SaveFileButton_Click);
             // 
@@ -216,7 +216,7 @@
             this.SaveFileAsButton.Image = ((System.Drawing.Image)(resources.GetObject("SaveFileAsButton.Image")));
             this.SaveFileAsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SaveFileAsButton.Name = "SaveFileAsButton";
-            this.SaveFileAsButton.Size = new System.Drawing.Size(29, 24);
+            this.SaveFileAsButton.Size = new System.Drawing.Size(29, 28);
             this.SaveFileAsButton.Text = "Save parameter file as...";
             this.SaveFileAsButton.Click += new System.EventHandler(this.SaveFileAsButton_Click);
             // 
@@ -229,13 +229,13 @@
             this.tableLayoutPanel.Controls.Add(this.infoPanel, 0, 1);
             this.tableLayoutPanel.Controls.Add(this.graphViewer, 0, 0);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 27);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 31);
             this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 155F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1540, 910);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(1540, 906);
             this.tableLayoutPanel.TabIndex = 2;
             // 
             // tabControl
@@ -257,7 +257,7 @@
             this.tabControl.Name = "tabControl";
             this.tableLayoutPanel.SetRowSpan(this.tabControl, 2);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(825, 902);
+            this.tabControl.Size = new System.Drawing.Size(825, 898);
             this.tabControl.TabIndex = 1;
             // 
             // MetricsPage
@@ -278,7 +278,7 @@
             this.MetricsPage.Margin = new System.Windows.Forms.Padding(4);
             this.MetricsPage.Name = "MetricsPage";
             this.MetricsPage.Padding = new System.Windows.Forms.Padding(4);
-            this.MetricsPage.Size = new System.Drawing.Size(817, 873);
+            this.MetricsPage.Size = new System.Drawing.Size(817, 869);
             this.MetricsPage.TabIndex = 7;
             this.MetricsPage.Text = "General";
             // 
@@ -492,7 +492,7 @@
             this.ScreenPage.Margin = new System.Windows.Forms.Padding(4);
             this.ScreenPage.Name = "ScreenPage";
             this.ScreenPage.Padding = new System.Windows.Forms.Padding(4);
-            this.ScreenPage.Size = new System.Drawing.Size(817, 869);
+            this.ScreenPage.Size = new System.Drawing.Size(817, 873);
             this.ScreenPage.TabIndex = 2;
             this.ScreenPage.Text = "Screen";
             // 
@@ -560,7 +560,7 @@
             this.Instructions.Margin = new System.Windows.Forms.Padding(4);
             this.Instructions.Name = "Instructions";
             this.Instructions.Padding = new System.Windows.Forms.Padding(4);
-            this.Instructions.Size = new System.Drawing.Size(817, 869);
+            this.Instructions.Size = new System.Drawing.Size(817, 873);
             this.Instructions.TabIndex = 9;
             this.Instructions.Text = "Instructions";
             // 
@@ -592,7 +592,7 @@
             this.EventPage.Location = new System.Drawing.Point(4, 25);
             this.EventPage.Margin = new System.Windows.Forms.Padding(4);
             this.EventPage.Name = "EventPage";
-            this.EventPage.Size = new System.Drawing.Size(817, 869);
+            this.EventPage.Size = new System.Drawing.Size(817, 873);
             this.EventPage.TabIndex = 3;
             this.EventPage.Text = "Events";
             // 
@@ -623,7 +623,7 @@
             this.SchedulePage.Location = new System.Drawing.Point(4, 25);
             this.SchedulePage.Margin = new System.Windows.Forms.Padding(4);
             this.SchedulePage.Name = "SchedulePage";
-            this.SchedulePage.Size = new System.Drawing.Size(817, 869);
+            this.SchedulePage.Size = new System.Drawing.Size(817, 873);
             this.SchedulePage.TabIndex = 4;
             this.SchedulePage.Text = "Schedule";
             // 
@@ -807,7 +807,7 @@
             this.StatePage.Location = new System.Drawing.Point(4, 25);
             this.StatePage.Margin = new System.Windows.Forms.Padding(4);
             this.StatePage.Name = "StatePage";
-            this.StatePage.Size = new System.Drawing.Size(817, 869);
+            this.StatePage.Size = new System.Drawing.Size(817, 873);
             this.StatePage.TabIndex = 6;
             this.StatePage.Text = "State";
             // 
@@ -1202,7 +1202,7 @@
             this.AudioPage.Margin = new System.Windows.Forms.Padding(4);
             this.AudioPage.Name = "AudioPage";
             this.AudioPage.Padding = new System.Windows.Forms.Padding(4);
-            this.AudioPage.Size = new System.Drawing.Size(817, 869);
+            this.AudioPage.Size = new System.Drawing.Size(817, 873);
             this.AudioPage.TabIndex = 0;
             this.AudioPage.Text = "Audio";
             // 
@@ -1325,7 +1325,7 @@
             this.CuePage.Margin = new System.Windows.Forms.Padding(4);
             this.CuePage.Name = "CuePage";
             this.CuePage.Padding = new System.Windows.Forms.Padding(4);
-            this.CuePage.Size = new System.Drawing.Size(817, 869);
+            this.CuePage.Size = new System.Drawing.Size(817, 873);
             this.CuePage.TabIndex = 1;
             this.CuePage.Text = "Cues";
             // 
@@ -1381,7 +1381,7 @@
             this.infoPanel.Controls.Add(this.label2);
             this.infoPanel.Controls.Add(this.label1);
             this.infoPanel.Controls.Add(this.pathLabel);
-            this.infoPanel.Location = new System.Drawing.Point(4, 759);
+            this.infoPanel.Location = new System.Drawing.Point(4, 755);
             this.infoPanel.Margin = new System.Windows.Forms.Padding(4);
             this.infoPanel.Name = "infoPanel";
             this.infoPanel.Size = new System.Drawing.Size(699, 147);
@@ -1538,7 +1538,7 @@
             this.graphViewer.Location = new System.Drawing.Point(5, 5);
             this.graphViewer.Margin = new System.Windows.Forms.Padding(5);
             this.graphViewer.Name = "graphViewer";
-            this.graphViewer.Size = new System.Drawing.Size(697, 745);
+            this.graphViewer.Size = new System.Drawing.Size(697, 741);
             this.graphViewer.TabIndex = 3;
             // 
             // ledTimer

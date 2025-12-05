@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.18 (unreleased)
+#### Added
+- Turandot progress bar
+
+---
+
 ### v2.17 (2025-10-14)
 #### Added
 - ability to connect to Turandot instance and show state and instructions

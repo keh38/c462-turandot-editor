@@ -110,6 +110,10 @@ namespace Turandot_Editor.Controls
             {
                 _value.Add((c as MessageLayout).GetDefaultCue());
             }
+            else if (c is ProgressBarLayout)
+            {
+                _value.Add((c as ProgressBarLayout).GetDefaultCue());
+            }
             else if (c is TextBoxLayout)
             {
                 _value.Add((c as TextBoxLayout).GetDefaultCue());
