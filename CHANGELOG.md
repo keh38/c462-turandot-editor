@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.18 (unreleased)
+### v2.18 (2025-12-15)
 #### Added
 - Turandot progress bar
 
