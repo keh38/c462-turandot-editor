@@ -351,8 +351,6 @@ namespace Turandot_Editor
             eventsSpecifier.SetData(p.inputEvents, p.flags);
 
             ShowScheduleParameters(p.schedule, p.adapt);
-
-            FillActionFamilyComboBox();
         }
 
         private string GetWavFolder()
@@ -366,21 +364,6 @@ namespace Turandot_Editor
                 }
             }
             return Path.Combine(_settings.wavFolder, _params.wavFolder);
-        }
-
-        void FillActionFamilyComboBox()
-        {
-            actionFamilyComboBox.Items.Clear();
-            actionFamilyComboBox.Items.Add("");
-            var names = _params.schedule.families.Select(x => x.name).ToList();
-            names.Sort();
-            actionFamilyComboBox.Items.AddRange(names.ToArray());
-
-            foreach (var fe in _params.flowChart)
-            {
-                if (fe.isAction && !names.Contains(fe.actionFamily)) fe.actionFamily = "";
-            }
-
         }
 
         void ShowInstructions(Turandot.Instructions instructions)
@@ -574,19 +557,18 @@ namespace Turandot_Editor
             _ignoreEvents = true;
 
             actionCheckBox.Checked = state.isAction;
-            actionFamilyComboBox.Visible = state.isAction;
+//            actionFamilyComboBox.Visible = state.isAction;
             TransitionTabs.Visible = !state.isAction;
             transitionLabel.Visible = !state.isAction;
             statePanel.Visible = !state.isAction;
 
             if (state.isAction)
             {
-                System.Diagnostics.Debug.WriteLine(state.name + ": " + state.actionFamily);
-                actionFamilyComboBox.SelectedIndex = 1 + _params.schedule.families.Select(x => x.name).ToList().FindIndex(x => x.Equals(state.actionFamily));
+//                actionFamilyComboBox.SelectedIndex = 1 + _params.schedule.families.Select(x => x.name).ToList().FindIndex(x => x.Equals(state.actionFamily));
             }
             else
             {
-                state.actionFamily = null;
+//                state.actionFamily = null;
             }
 
             stateNameTextBox.Text = state.name;
@@ -1649,15 +1631,6 @@ namespace Turandot_Editor
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void actionFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents && _selectedState != null)
-            {
-                System.Diagnostics.Debug.WriteLine("action family: " + _selectedState.name);
-                _selectedState.actionFamily = actionFamilyComboBox.SelectedItem as string;
             }
         }
 

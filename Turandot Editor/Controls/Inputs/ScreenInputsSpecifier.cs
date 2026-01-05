@@ -73,7 +73,8 @@ namespace Turandot_Editor.Controls
             switch (baseName)
             {
                 case "Button":
-                    return new ButtonLayout() { Name = name };
+                    return CreateNewButtonLayout(name);
+//                    return new ButtonLayout() { Name = name };
                 case "Checklist":
                     return new ChecklistLayout() { Name = name };
                 case "Manikins":
@@ -85,6 +86,27 @@ namespace Turandot_Editor.Controls
             }
 
             return null;
+        }
+
+        private ButtonLayout CreateNewButtonLayout(string name)
+        {
+            var layout = _value.FindLast(x => x is ButtonLayout);
+            if (layout == null)
+            {
+                return new ButtonLayout() { Name = name };
+            }
+
+            var lastButton = layout as ButtonLayout;
+
+            return new ButtonLayout()
+            {
+                Name = name,
+                Label = lastButton.Name,
+                Width = lastButton.Width,
+                Height = lastButton.Height,
+                Style = lastButton.Style,
+                FontSize = lastButton.FontSize
+            };
         }
 
         private void inputListBox_ItemAdded(object sender, CollectionListBox.ChangedItem e)
