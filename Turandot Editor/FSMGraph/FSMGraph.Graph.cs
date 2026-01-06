@@ -107,7 +107,7 @@ namespace FSMGraph
         public Node NodeUnderMouse(Point mousePoint)
         {
             Node nodeUnder = null;
-            foreach (Node n in Nodes)
+            foreach (Node n in Nodes.Reverse<Node>())   
             {
                 if (n.BoundingBox.Contains(mousePoint))
                 {

@@ -271,6 +271,8 @@ namespace Turandot
                 copy.cues.Add(cc);
             }
             foreach (var i in fe.inputs) copy.inputs.Add(i);
+            copy.isAction = fe.isAction;
+            copy.action = new TurandotAction(fe.action);
 
             flowChart.Add(copy);
         }

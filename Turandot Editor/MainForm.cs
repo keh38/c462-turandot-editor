@@ -557,18 +557,17 @@ namespace Turandot_Editor
             _ignoreEvents = true;
 
             actionCheckBox.Checked = state.isAction;
-//            actionFamilyComboBox.Visible = state.isAction;
+            actionPropertyGrid.Visible = state.isAction;
             TransitionTabs.Visible = !state.isAction;
             transitionLabel.Visible = !state.isAction;
             statePanel.Visible = !state.isAction;
 
             if (state.isAction)
             {
-//                actionFamilyComboBox.SelectedIndex = 1 + _params.schedule.families.Select(x => x.name).ToList().FindIndex(x => x.Equals(state.actionFamily));
+                actionPropertyGrid.SelectedObject = state.action;
             }
             else
             {
-//                state.actionFamily = null;
             }
 
             stateNameTextBox.Text = state.name;
@@ -741,6 +740,7 @@ namespace Turandot_Editor
 
                 _selectedState.isAction = actionCheckBox.Checked;
                 _selectedState.endAction = EndAction.None;
+                _selectedState.action = new TurandotAction();
                 Turandot.Layout.AddBadges(_selectedState, graphViewer);
                 TransitionTabs.Visible = !_selectedState.isAction;
                 transitionLabel.Visible = !_selectedState.isAction;
