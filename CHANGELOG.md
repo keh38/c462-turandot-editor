@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.20 (2026-01-13)
+#### Changed
+- Checklist: added button properties
+
+---
+
 ### v2.19 (2026-01-08)
 #### Added
 - support for updated Turandot "actions"
