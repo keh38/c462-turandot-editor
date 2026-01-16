@@ -60,10 +60,10 @@
       <Aliases>global, KLibUnity</Aliases>
     </Reference>
     <Reference Include="KLib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\KLib.1.1.0\lib\net48\KLib.dll</HintPath>
+      <HintPath>..\packages\KLib.1.2.0\lib\net48\KLib.dll</HintPath>
     </Reference>
     <Reference Include="KLib.Controls, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\KLib.Controls.1.2.0\lib\net48\KLib.Controls.dll</HintPath>
+      <HintPath>..\packages\KLib.Controls.1.3.0\lib\net48\KLib.Controls.dll</HintPath>
     </Reference>
     <Reference Include="KLib.Net">
       <HintPath>..\..\..\KLib\Framework\KLib.Net.dll</HintPath>
