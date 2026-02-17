@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.21 (unreleased)
+#### added
+- linspace to expressions
+
+---
+
 ### v2.20 (2026-01-13)
 #### Changed
 - Checklist: added button properties
