@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.21 (unreleased)
+### v2.20.1 (2026-02-20)
 #### added
 - linspace to expressions
 
