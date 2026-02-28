@@ -119,6 +119,7 @@ namespace Turandot_Editor
             versionLabel.Text = $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
 
             channelView.AdapterMap = _adapterMap;
+            channelView.SetAllowableAudioLevelUnits(LevelUnits.dB_attenuation, LevelUnits.dB_SPL, LevelUnits.dB_Vrms, LevelUnits.dB_SL, LevelUnits.PercentDR);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
