@@ -2,7 +2,8 @@
 
 ### v2.21 (unreleased)
 #### Changed
-- Turandot scaler: added options for min/max value, whole numbers and showing tick marks
+- Scaler: added options for min/max value, whole numbers and showing tick marks
+- Expressions: accepts numeric value for laterality in THR, LDL, and DR expressions to accommodate use in sequence
 
 ---
 

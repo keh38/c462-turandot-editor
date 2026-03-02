@@ -497,13 +497,13 @@ namespace Turandot_Editor
             {
                 if (_varList[k].dim == VarDimension.X && string.IsNullOrEmpty(xvector))
                 {
-                    //var xvec = Expressions.Evaluate(_varList[k].expression);
-                    //xvector = Expressions.ToVectorString(xvec);
+                    var xvec = Expressions.Evaluate(_varList[k].expression);
+                    xvector = Expressions.ToVectorString(xvec);
                 }
                 if (_varList[k].dim == VarDimension.Y && string.IsNullOrEmpty(yvector))
                 {
-                    //var yvec = Expressions.Evaluate(_varList[k].expression);
-                    //yvector = Expressions.ToVectorString(yvec);
+                    var yvec = Expressions.Evaluate(_varList[k].expression);
+                    yvector = Expressions.ToVectorString(yvec);
                 }
             }
 
