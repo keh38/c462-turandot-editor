@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.21 (unreleased)
+### v2.21 (2026-03-03)
 #### Changed
 - Scaler: added options for min/max value, whole numbers and showing tick marks
 - Expressions: accepts numeric value for laterality in THR, LDL, and DR expressions to accommodate use in sequence
