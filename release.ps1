@@ -4,24 +4,27 @@
 
 $ErrorActionPreference = "Stop"
 
-# ── Configuration ────────────────────────────────────────────────────────────
+# Ensure system PATH is loaded (fixes tools like gh that are visible in cmd but not PowerShell)
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+
+# --- Configuration -----------------------------------------------------------
 $Version        = "2.21"
 $RepoRoot       = "D:\Development\C462\c462-turandot-editor"
 $AssemblyInfo   = "$RepoRoot\Turandot Editor\Properties\AssemblyInfo.cs"
 $Changelog      = "$RepoRoot\CHANGELOG.md"
-$SolutionFile   = "$RepoRoot\c462-turandot-editor.sln"   # adjust if needed
-$InstallerPath  = "$RepoRoot\Installer\Output\Turandot_Editor_2-21.exe"  # TODO: confirm filename
+$SolutionFile   = "$RepoRoot\c462-turandot-editor.sln"
+$InstallerPath  = "$RepoRoot\Installer\Output\Turandot_Editor_2-21.exe"
 $ReleaseDate    = (Get-Date -Format "yyyy-MM-dd")
 $CommitMessage  = "Built $Version"
 $TagName        = $Version
 $ReleaseTitle   = "v$Version"
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 function Step($msg) {
     Write-Host "`n==> $msg" -ForegroundColor Cyan
 }
 
-# ── Step 1: Update AssemblyInfo.cs ───────────────────────────────────────────
+# --- Step 1: Update AssemblyInfo.cs ------------------------------------------
 Step "Updating AssemblyInfo.cs to version $Version"
 
 $ai = Get-Content $AssemblyInfo -Raw
@@ -30,19 +33,19 @@ $ai = $ai -replace 'AssemblyFileVersion\("[^"]*"\)', "AssemblyFileVersion(`"$Ver
 Set-Content $AssemblyInfo $ai -NoNewline
 Write-Host "Done."
 
-# ── Step 2: Update CHANGELOG.md (replace '(unreleased)' with today's date) ──
-Step "Updating CHANGELOG.md — replacing '(unreleased)' with ($ReleaseDate)"
+# --- Step 2: Update CHANGELOG.md (replace '(unreleased)' with today's date) -
+Step "Updating CHANGELOG.md - replacing '(unreleased)' with today's date"
 
 $cl = Get-Content $Changelog -Raw
 if ($cl -notmatch "\(unreleased\)") {
-    Write-Warning "No '(unreleased)' marker found in CHANGELOG.md — skipping date update."
+    Write-Warning "No '(unreleased)' marker found in CHANGELOG.md - skipping date update."
 } else {
     $cl = $cl -replace "\(unreleased\)", "($ReleaseDate)"
     Set-Content $Changelog $cl -NoNewline
     Write-Host "Done."
 }
 
-# ── Step 3: Extract release notes from CHANGELOG ─────────────────────────────
+# --- Step 3: Extract release notes from CHANGELOG ----------------------------
 Step "Extracting release notes for v$Version from CHANGELOG.md"
 
 $cl = Get-Content $Changelog -Raw
@@ -54,16 +57,16 @@ if (-not $match.Success) {
     Write-Error "Could not find changelog entry for v$Version. Aborting."
     exit 1
 }
-$ReleaseNotes = $match.Value.Trim()
+$ReleaseNotes = ($match.Value.Trim() -split "\r?\n", 2)[1].Trim()
 Write-Host "Release notes:`n$ReleaseNotes"
 
-# ── Step 4: Build the solution ───────────────────────────────────────────────
+# --- Step 4: Build the solution ----------------------------------------------
 Step "Building solution in Release mode"
 
-$msbuild = & "${env:ProgramFiles}\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
+& "${env:ProgramFiles}\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
     $SolutionFile `
     /p:Configuration=Release `
-    /p:Platform="Any CPU" `
+    /p:Platform=x64 `
     /v:minimal
 
 if ($LASTEXITCODE -ne 0) {
@@ -72,7 +75,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 Write-Host "Build succeeded."
 
-# ── Step 5: Verify installer exists ─────────────────────────────────────────
+# --- Step 5: Verify installer exists -----------------------------------------
 Step "Checking for installer at: $InstallerPath"
 
 if (-not (Test-Path $InstallerPath)) {
@@ -81,7 +84,7 @@ if (-not (Test-Path $InstallerPath)) {
 }
 Write-Host "Installer found."
 
-# ── Step 6: Git commit and push ──────────────────────────────────────────────
+# --- Step 6: Git commit and push ---------------------------------------------
 Step "Committing and pushing changes"
 
 Push-Location $RepoRoot
@@ -91,7 +94,7 @@ git push
 Pop-Location
 Write-Host "Pushed to GitHub."
 
-# ── Step 7: Create GitHub release ───────────────────────────────────────────
+# --- Step 7: Create GitHub release -------------------------------------------
 Step "Creating GitHub release v$Version"
 
 Push-Location $RepoRoot
@@ -100,4 +103,4 @@ gh release create $TagName $InstallerPath `
     --notes $ReleaseNotes
 Pop-Location
 
-Write-Host "`n✅ Release $Version complete!" -ForegroundColor Green
+Write-Host "`n[OK] Release $Version complete!" -ForegroundColor Green
