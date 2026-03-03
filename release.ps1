@@ -58,6 +58,7 @@ if (-not $match.Success) {
     exit 1
 }
 $ReleaseNotes = ($match.Value.Trim() -split "\r?\n", 2)[1].Trim()
+$ReleaseNotes = ($ReleaseNotes -split "\r?\n" | Where-Object { $_ -notmatch "^---$" }) -join "`n"
 Write-Host "Release notes:`n$ReleaseNotes"
 
 # --- Step 4: Build the solution ----------------------------------------------
@@ -67,7 +68,7 @@ Step "Building solution in Release mode"
     $SolutionFile `
     /p:Configuration=Release `
     /p:Platform=x64 `
-    /v:minimal
+    /v:quiet
 
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Build failed. Aborting."
