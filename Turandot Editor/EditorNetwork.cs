@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -16,23 +17,27 @@ using System.Windows.Forms;
 
 using KLib;
 using KLib.Net;
+using Newtonsoft.Json;
 
 namespace Turandot_Editor
 {
+
+    [JsonObject]
+    public class HtsEndpointPayload
+    {
+        public string Address { get; set; }
+        public int Port { get; set; }
+    }
+
     public class EditorNetwork
     {
-        public delegate void RemoteMessageHandlerDelegate (string message);
+        public delegate void RemoteMessageHandlerDelegate(TcpMessage message);
         public RemoteMessageHandlerDelegate RemoteMessageHandler { set; get; } = null;
 
         private IPEndPoint _ipEndPoint;
-        private int _serverPort = 4951;
-        private bool _lastPingSucceeded = false;
-
-        private IPEndPoint _turandotEndPoint = null;
+        private IPEndPoint _htsEndPoint = null;
 
         private CancellationTokenSource _serverCancellationToken;
-
-        public bool IsConnected { get { return _ipEndPoint != null && _lastPingSucceeded; } }
 
         public EditorNetwork() { }
 
@@ -42,49 +47,41 @@ namespace Turandot_Editor
             {
                 _serverCancellationToken.Cancel();
             }
-            if (_turandotEndPoint != null)
-            {
-                KTcpClient.SendMessage(_turandotEndPoint, "Disconnect");
-            }
         }
 
         public void StartListener()
         {
-            _ipEndPoint = Discovery.FindNextAvailableEndPoint();
+            _ipEndPoint = new IPEndPoint(IPAddress.Loopback, 40002);
 
             _serverCancellationToken = new CancellationTokenSource();
             Task.Run(() =>
             {
                 Listener(_ipEndPoint, _serverCancellationToken.Token);
             }, _serverCancellationToken.Token);
-
-            Task.Run(() =>
-            {
-                MulticastReceiver("TURANDOT.EDITOR", _ipEndPoint, _serverCancellationToken.Token);
-            }, _serverCancellationToken.Token);
         }
 
-        public void SendMessageToTablet(string message, string data=null)
+        public void SendMessageToHTS(string message, object payloadObject=null)
         {
-            if (_turandotEndPoint == null)
+            if (_htsEndPoint == null) return;
+
+            var response = KTcpClient.SendRequest(_htsEndPoint, TcpMessage.Request("GetCurrentSceneName"));
+            if (!response.IsOk) return;
+
+            string currentSceneName = response.GetPayload<string>();
+            if (currentSceneName != "Turandot")
             {
-                DiscoverTurandot();
+                response = KTcpClient.SendRequest(_htsEndPoint, TcpMessage.Request("ChangeScene", (object)"Turandot"));
+                if (!response.IsOk) return;
             }
-            if (data != null)
+
+            if (payloadObject != null)
             {
-                KTcpClient.SendMessage(_turandotEndPoint, $"{message}:{data}");
+                KTcpClient.SendRequest(_htsEndPoint, new TcpMessage() { Command = message, Payload = KFile.JSONSerializeToString(payloadObject) });
             }
             else
             {
-                KTcpClient.SendMessage(_turandotEndPoint, $"{message}");
+                KTcpClient.SendRequest(_htsEndPoint, new TcpMessage() { Command = message, Payload = "{}" });
             }
-        }
-
-        private void DiscoverTurandot()
-        {
-            _turandotEndPoint = Discovery.Discover("HEARING.TEST.SUITE");
-            var result = KTcpClient.SendMessage(_turandotEndPoint, $"Connect:{_ipEndPoint.Address}/{_ipEndPoint.Port}");
-            KTcpClient.SendMessage(_turandotEndPoint, "ChangeScene:Turandot");
         }
 
         private void Listener(IPEndPoint endpoint, CancellationToken ct)
@@ -92,7 +89,7 @@ namespace Turandot_Editor
             var server = new KTcpListener();
              server.StartListener(endpoint);
 
-            Debug.WriteLine($"TCP server started on {server.ListeningOn}");
+            Debug.WriteLine($"TCP server started on {endpoint}");
 
             while (!ct.IsCancellationRequested)
             {
@@ -116,51 +113,28 @@ namespace Turandot_Editor
         private void ProcessTCPMessage(KTcpListener server)
         {
             server.AcceptTcpClient();
+            var request = server.ReadRequest();
+            server.WriteResponse(TcpMessage.Ok());
 
-            string input = server.ReadString();
-            server.SendAcknowledgement();
+            Debug.WriteLine($"Received message: {request.Command}");
+
+            switch (request.Command)
+            {
+                case "Ping":
+                    break;
+                case "SetHtsEndpoint":
+                    var ep = request.GetPayload<HtsEndpointPayload>();
+                    _htsEndPoint = !string.IsNullOrEmpty(ep.Address)
+                        ? new IPEndPoint(IPAddress.Parse(ep.Address), ep.Port)
+                        : null;
+                    break;
+                default:
+                    RemoteMessageHandler?.Invoke(request);
+                    break;
+            }
+
             server.CloseTcpClient();
 
-            RemoteMessageHandler?.Invoke(input);
-        }
-
-        private void MulticastReceiver(string name, IPEndPoint endpoint, CancellationToken ct)
-        {
-            var ipLocal = new IPEndPoint(endpoint.Address, 10000);
-            Debug.WriteLine(ipLocal);
-
-            var address = IPAddress.Parse("234.5.6.7");
-            var ipEndPoint = new IPEndPoint(address, 10000);
-
-            var udp = new UdpClient();
-            udp.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-            udp.Client.Bind(ipLocal);
-            udp.Client.ReceiveTimeout = 1000;
-
-            udp.JoinMulticastGroup(address, endpoint.Address);
-            Debug.WriteLine(endpoint.Address);
-
-            var anyIP = new IPEndPoint(IPAddress.Any, 0);
-
-            while (!ct.IsCancellationRequested)
-            {
-                try
-                {
-                    // receive bytes
-                    var bytes = udp.Receive(ref anyIP);
-                    var response = Encoding.Default.GetString(bytes);
-
-                    if (response.Equals(name))
-                    {
-                        bytes = Encoding.UTF8.GetBytes(endpoint.Port.ToString());
-                        udp.Send(bytes, bytes.Length, anyIP);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Debug.WriteLine(ex.Message);
-                }
-            }
         }
 
     }

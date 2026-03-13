@@ -1626,8 +1626,8 @@ namespace Turandot_Editor
         {
             try
             {
-                _network.SendMessageToTablet("SetParams", KFile.ToXMLString(_params.ToBase()));
-                _network.SendMessageToTablet("ShowState", _selectedState.name);
+                _network.SendMessageToHTS("SetParams", _params.ToBase());
+                _network.SendMessageToHTS("ShowState", _selectedState.name);
             }
             catch (Exception ex)
             {
@@ -1635,24 +1635,22 @@ namespace Turandot_Editor
             }
         }
 
-        private void HandleRemoteMessage(string fullMessage)
+        private void HandleRemoteMessage(TcpMessage message)
         {
-            var parts = fullMessage.Split(new char[] { ':' }, 2);
-            string message = parts[0];
-            string data = (parts.Length > 1) ? parts[1] : null;
-
-            switch (message)
+            switch (message.Command)
             {
                 case "OpenFile":
-                    RpcOpenFile(parts[1]);
+                    var filePath = message.GetPayload<string>();
+                    Debug.WriteLine($"filepath = {filePath}");
+                    RpcOpenFile(filePath);
                     break;
-                case "SetMetrics":
-                    Invoke(new Action(() => { RpcSetMetrics(parts[1]); }));
-                    break;
-                case "SetSubjectFolder":
-                    FileLocations.SubjectDataFolder = parts[1];
-                    ApplyAudiogramDataToExpressions(Path.Combine(FileLocations.SubjectDataFolder, "meta"));
-                    break;
+                //case "SetMetrics":
+                //    Invoke(new Action(() => { RpcSetMetrics(parts[1]); }));
+                //    break;
+                //case "SetSubjectFolder":
+                //    FileLocations.SubjectDataFolder = parts[1];
+                //    ApplyAudiogramDataToExpressions(Path.Combine(FileLocations.SubjectDataFolder, "meta"));
+                //    break;
             }
         }
 
@@ -1682,7 +1680,7 @@ namespace Turandot_Editor
         {
             foreach (var fe in _params.flowChart)
             {
-                CurateCues(fe, _params.screen.Cues);             
+                CurateCues(fe, _params.screen.Cues);
             }
             stateCuesControl.SetAvailableCues(_params.screen.Cues);
             SetDirty();
@@ -1801,8 +1799,8 @@ namespace Turandot_Editor
         {
             try
             {
-                _network.SendMessageToTablet("SetParams", KFile.ToXMLString(_params.ToBase()));
-                _network.SendMessageToTablet("ShowInstructions");
+                _network.SendMessageToHTS("SetParams", _params.ToBase());
+                _network.SendMessageToHTS("ShowInstructions");
             }
             catch (Exception ex)
             {
