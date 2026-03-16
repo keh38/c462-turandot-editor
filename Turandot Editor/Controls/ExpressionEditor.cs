@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using KLib;
 using KLib.Controls;
 
-using Expressions = KLibUnity.KLib.Expressions;
+using Expressions = KLibUnity.KLib.Expressions.Expressions;
 
 namespace Turandot_Editor.Controls
 {

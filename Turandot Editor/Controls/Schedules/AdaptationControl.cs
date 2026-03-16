@@ -1,5 +1,5 @@
 ﻿extern alias KLibUnity;
-using Expressions = KLibUnity.KLib.Expressions;
+using Expressions = KLibUnity.KLib.Expressions.Expressions;
 
 using System;
 using System.Collections.Generic;

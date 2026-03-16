@@ -30,7 +30,7 @@ using Turandot.Schedules;
 using Turandot.Screen;
 
 
-using Expressions = KLibUnity::KLib.Expressions;
+using Expressions = KLibUnity::KLib.Expressions.Expressions;
 
 namespace Turandot_Editor
 {
