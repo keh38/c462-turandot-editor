@@ -8,12 +8,12 @@ $ErrorActionPreference = "Stop"
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 # --- Configuration -----------------------------------------------------------
-$Version        = "2.21"
+$Version        = "2.22"
 $RepoRoot       = "D:\Development\C462\c462-turandot-editor"
 $AssemblyInfo   = "$RepoRoot\Turandot Editor\Properties\AssemblyInfo.cs"
 $Changelog      = "$RepoRoot\CHANGELOG.md"
 $SolutionFile   = "$RepoRoot\c462-turandot-editor.sln"
-$InstallerPath  = "$RepoRoot\Installer\Output\Turandot_Editor_2-21.exe"
+$InstallerPath  = "$RepoRoot\Installer\Output\Turandot_Editor_2-22.exe"
 $ReleaseDate    = (Get-Date -Format "yyyy-MM-dd")
 $CommitMessage  = "Built $Version"
 $TagName        = $Version
