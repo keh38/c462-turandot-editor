@@ -1,4 +1,10 @@
 ## Changelog
+### v2.22 (2026-03-17)
+#### Changed
+- updated expression parser
+- updated discovery/message handling
+
+---
 
 ### v2.21 (2026-03-03)
 #### Changed
