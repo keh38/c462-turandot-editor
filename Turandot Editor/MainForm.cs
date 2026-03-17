@@ -56,12 +56,35 @@ namespace Turandot_Editor
 
             RestoreDefaults();
 
-            if (_settings.lastPosition.X > 0)
+            if (!_settings.lastPosition.IsEmpty)
             {
-                StartPosition = FormStartPosition.Manual;
-                Location = new Point(_settings.lastPosition.X, _settings.lastPosition.Y);
-                Width = _settings.lastPosition.Width;
-                Height = _settings.lastPosition.Height;
+                // Validate that the saved position is still visible on screen
+                Rectangle savedBounds = _settings.lastPosition;
+                bool isVisible = false;
+
+                foreach (Screen screen in Screen.AllScreens)
+                {
+                    if (screen.WorkingArea.IntersectsWith(savedBounds))
+                    {
+                        isVisible = true;
+                        break;
+                    }
+                }
+
+                if (isVisible)
+                {
+                    StartPosition = FormStartPosition.Manual;
+                    Location = new Point(savedBounds.X, savedBounds.Y);
+                    Width = savedBounds.Width;
+                    Height = savedBounds.Height;
+                }
+                else
+                {
+                    // Position is off-screen, use default positioning
+                    StartPosition = FormStartPosition.CenterScreen;
+                    // Optionally clear the invalid position
+                    _settings.lastPosition = Rectangle.Empty;
+                }
             }
 
             var args = Environment.GetCommandLineArgs();
