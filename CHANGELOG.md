@@ -1,4 +1,11 @@
 ## Changelog
+
+### v2.22.1 (unreleased)
+#### Fixed
+- error with Update button on Schedule tab
+
+---
+
 ### v2.22 (2026-03-17)
 #### Changed
 - updated expression parser
