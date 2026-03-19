@@ -1,6 +1,6 @@
 ## Changelog
 
-### v2.22.1 (unreleased)
+### v2.22.1 (2026-03-19)
 #### Fixed
 - error with Update button on Schedule tab
 
