@@ -39,7 +39,7 @@ namespace Turandot
         {
             graphViewer.ClearBadges(state.name);
 
-            if (state.sigMan != null && state.sigMan.channels.Count > 0) graphViewer.AddBadge(state.name, Badge.BadgeIcon.Sound);
+            if (state.sigMan != null && state.sigMan.Channels.Count > 0) graphViewer.AddBadge(state.name, Badge.BadgeIcon.Sound);
             foreach (Cues.Cue cue in state.cues)
             {
                 switch (cue.Name)

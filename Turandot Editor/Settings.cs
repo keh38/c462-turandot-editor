@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using KLib;
+using C462.Shared;
 
 namespace Turandot_Editor
 {

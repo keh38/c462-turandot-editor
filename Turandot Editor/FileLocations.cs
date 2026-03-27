@@ -5,6 +5,7 @@ namespace Turandot_Editor
 {
     public static class FileLocations
     {
+        public static readonly string SharedFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EPL", "C462.Shared");
         public static readonly string RootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EPL", "HTS");
         public static string MATLABFolder { get { return Path.Combine(RootFolder, "MATLAB"); } }
         public static string SubjectDataFolder { get; set; } = "";

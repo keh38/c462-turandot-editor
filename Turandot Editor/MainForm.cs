@@ -1,6 +1,4 @@
-﻿extern alias KLibUnity;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +16,7 @@ using DlgResult = System.Windows.Forms.DialogResult;
 
 using FSMGraph;
 
-using KLib;
+using KLib.IO;
 using KLib.Controls;
 using KLib.KGraphics;
 using KLib.Net;
@@ -29,8 +27,9 @@ using Turandot.Cues;
 using Turandot.Schedules;
 using Turandot.Screen;
 
-
-using Expressions = KLibUnity::KLib.Expressions.Expressions;
+using C462.Shared;
+using KLib.Drawing.Graphics;
+using KLib.Expressions;
 
 namespace Turandot_Editor
 {
@@ -44,8 +43,6 @@ namespace Turandot_Editor
         bool _ignoreEvents = false;
         Settings _settings = new Settings();
 
-        AdapterMap _adapterMap = AdapterMap.Default7point1Map("HD280");
-
         bool _controlKeyDown = false;
 
         readonly float _Fs = 44100f;
@@ -54,6 +51,7 @@ namespace Turandot_Editor
         {
             InitializeComponent();
 
+            SessionContext.Initialize(AdapterMap.Default7point1Map("HD280"));
             RestoreDefaults();
 
             if (!_settings.lastPosition.IsEmpty)
@@ -128,21 +126,22 @@ namespace Turandot_Editor
             schedModeDropDown.AddItem(Mode.Adapt, "Adaptive");
             schedModeDropDown.AddItem(Mode.Optimize, "Optimization");
 
-            KLib.KGraphics.ZedGraphUtils.InitZedGraph(signalGraph, "Time (s)", "");
-            signalGraph.MasterPane.Fill.Type = ZedGraph.FillType.None;
-            signalGraph.MasterPane.Border.IsVisible = false;
-            signalGraph.GraphPane.Fill.Type = ZedGraph.FillType.None;
-            signalGraph.GraphPane.Border.IsVisible = false;
-            signalGraph.GraphPane.Chart.Fill.Type = ZedGraph.FillType.None;
-            signalGraph.GraphPane.YAxis.IsVisible = false;
-            signalGraph.Refresh();
+            //KLib.KGraphics.ZedGraphUtils.InitZedGraph(signalGraph, "Time (s)", "");
+            //signalGraph.MasterPane.Fill.Type = ZedGraph.FillType.None;
+            //signalGraph.MasterPane.Border.IsVisible = false;
+            //signalGraph.GraphPane.Fill.Type = ZedGraph.FillType.None;
+            //signalGraph.GraphPane.Border.IsVisible = false;
+            //signalGraph.GraphPane.Chart.Fill.Type = ZedGraph.FillType.None;
+            //signalGraph.GraphPane.YAxis.IsVisible = false;
+            //signalGraph.Refresh();
 
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             Version currentVersion = assembly.GetName().Version;
             versionLabel.Text = $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
 
-            channelView.AdapterMap = _adapterMap;
-            channelView.SetAllowableAudioLevelUnits(LevelUnits.dB_attenuation, LevelUnits.dB_SPL, LevelUnits.dB_Vrms, LevelUnits.dB_SL, LevelUnits.PercentDR);
+
+            // FIX ME
+            //channelView.SetAllowableAudioLevelUnits(LevelUnits.dB_attenuation, LevelUnits.dB_SPL, LevelUnits.dB_Vrms, LevelUnits.dB_SL, LevelUnits.PercentDR);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -215,7 +214,7 @@ namespace Turandot_Editor
             bool ok = true;
             try
             {
-                KFile.XmlSerialize(_params.ToBase(), path);
+                Files.XmlSerialize(_params.ToBase(), path);
                 graphViewer.Write(path.Replace(".xml", ".fsm"));
 
                 _setupIsDirty = false;
@@ -225,7 +224,7 @@ namespace Turandot_Editor
             catch (Exception ex)
             {
                 ok = false;
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
 
             return ok;
@@ -330,7 +329,7 @@ namespace Turandot_Editor
 
                 SaveParameterFile(dlg.FileName);
 
-                channelView.WavFolder = GetWavFolder();
+                // FIX ME: channelView.WavFolder = GetWavFolder();
 
                 _settings.lastFolder = Path.GetDirectoryName(dlg.FileName);
                 _settings.lastFile = dlg.FileName;
@@ -346,7 +345,7 @@ namespace Turandot_Editor
             tagTextBox.Text = p.tag ?? "";
             wavFolderTextBox.Text = p.wavFolder;
 
-            channelView.WavFolder = GetWavFolder();
+            // FIX ME: channelView.WavFolder = GetWavFolder();
 
             trialLogOptionEnum.SetEnumValue(p.trialLogOption);
 
@@ -615,15 +614,15 @@ namespace Turandot_Editor
 
             if (state.sigMan != null)
             {
-                channelListBox.SetItems(state.sigMan.channels.Select(c => c.Name).ToList());
+                channelListBox.SetItems(state.sigMan.Channels.Select(c => c.Name).ToList());
                 channelListBox.SelectedIndex = 0;
-                ShowSignalChannel(state.sigMan.channels[0]);
-                signalGraph.Visible = true;
+                ShowSignalChannel(state.sigMan.Channels[0]);
+                // FIX ME: signalGraph.Visible = true;
                 PlotSignals(state.sigMan, state.timeOuts[0]);
             }
             else
             {
-                signalGraph.Visible = false;
+                // FIX ME: signalGraph.Visible = false;
                 audioErrorTextBox.Text = "";
                 channelListBox.Clear();
                 ShowSignalChannel(null);
@@ -648,7 +647,9 @@ namespace Turandot_Editor
 
         void ShowSignalChannel(Channel chan)
         {
-            channelView.Value = chan;
+            channelPropertyGrid.SelectedObject = chan;
+            // FIX ME
+            //channelView.Value = chan;
         }
 
         void SelectTimeout(Timeout t)
@@ -1090,16 +1091,17 @@ namespace Turandot_Editor
 
         private void channelListBox_ItemAdded(object sender, KUserListBox.ChangedItem e)
         {
-            Channel ch = new Channel(e.name, new KLib.Signals.Waveforms.Waveform());
-            ch.Modality = KLib.Signals.Enumerations.Modality.Audio;
+            Channel ch = new Channel(e.name, new KLib.Signals.Waveform());
+            ch.Modality = Modality.Audio;
             ch.Laterality = Laterality.Diotic;
-            channelView.Value = ch;
+            // FIX ME
+            //channelView.Value = ch;
 
             if (_selectedState.sigMan == null)
             {
                 _selectedState.sigMan = new SignalManager();
             }
-            _selectedState.sigMan.channels.Insert(e.index, ch);
+            _selectedState.sigMan.Channels.Insert(e.index, ch);
             Turandot.Layout.AddBadges(_selectedState, graphViewer);
             scheduleControl.UpdateAvailableStates();
             adaptControl.UpdateAvailableStates();
@@ -1110,14 +1112,15 @@ namespace Turandot_Editor
         private void channelView_WaveformBecameValid(object sender, EventArgs e)
         {
             //if (_selectedState.sigMan == null) _selectedState.sigMan = new SignalManager();
-            //_selectedState.sigMan.channels.Insert(channelListBox.SelectedIndex, channelView.Data);
+            //_selectedState.sigMan.Channels.Insert(channelListBox.SelectedIndex, channelView.Data);
         }
 
         private void channelView_ValueChanged(object sender, EventArgs e)
         {
             if (!_ignoreEvents)
             {
-                _params.ApplyChannelChangeToSchedule(_selectedState.name, channelView.Value);
+                // FIX ME
+                //_params.ApplyChannelChangeToSchedule(_selectedState.name, channelView.Value);
                 scheduleControl.UpdateAvailableStates();
                 adaptControl.UpdateAvailableStates();
                 PlotSignals(_selectedState.sigMan, _selectedState.timeOuts[0]);
@@ -1132,8 +1135,8 @@ namespace Turandot_Editor
             Channel ch = _selectedState.sigMan.GetChannel(e.name);
             if (ch != null)
             {
-                _selectedState.sigMan.channels.Remove(ch);
-                _selectedState.sigMan.channels.Insert(e.index, ch);
+                _selectedState.sigMan.Channels.Remove(ch);
+                _selectedState.sigMan.Channels.Insert(e.index, ch);
             }
             SetDirty();
         }
@@ -1142,13 +1145,14 @@ namespace Turandot_Editor
         {
             if (_ignoreEvents || _selectedState == null || _selectedState.sigMan == null) return;
 
-            Channel ch = _selectedState.sigMan.channels[e.index];
+            Channel ch = _selectedState.sigMan.Channels[e.index];
 
             if (ch != null)
             {
                 string oldname = ch.Name;
                 ch.Name = e.name;
-                channelView.Value = ch;
+
+                // FIX ME                channelView.Value = ch;
                 _params.ApplySignalNameChangeToSchedule(_selectedState.name, oldname, e.name);
                 scheduleControl.UpdateAvailableStates();
                 adaptControl.UpdateAvailableStates();
@@ -1163,10 +1167,10 @@ namespace Turandot_Editor
             foreach (string name in e.names)
             {
                 Channel ch = _selectedState.sigMan.GetChannel(name);
-                if (ch != null) _selectedState.sigMan.channels.Remove(ch);
+                if (ch != null) _selectedState.sigMan.Channels.Remove(ch);
             }
 
-            if (_selectedState.sigMan.channels.Count == 0)
+            if (_selectedState.sigMan.Channels.Count == 0)
             {
                 _selectedState.sigMan = null;
                 Turandot.Layout.AddBadges(_selectedState, graphViewer);
@@ -1185,7 +1189,7 @@ namespace Turandot_Editor
                 if (ch != null) tmp.Add(ch);
             }
 
-            _selectedState.sigMan.channels = tmp;
+            _selectedState.sigMan.Channels = tmp;
             SetDirty();
         }
 
@@ -1200,7 +1204,7 @@ namespace Turandot_Editor
                     ch = new Channel(e.name);
                     //ch.Destination = KLib.Signals.Enumerations.Laterality.Diotic;
                 }
-                channelView.Value = ch;
+                // FIX ME channelView.Value = ch;
             }
         }
 
@@ -1216,7 +1220,7 @@ namespace Turandot_Editor
             double[] time;
             try
             {
-                signalGraph.GraphPane.CurveList.Clear();
+                // FIX ME: signalGraph.GraphPane.CurveList.Clear();
 
 
                 float T = Expressions.Evaluate(to.expr).Min();
@@ -1225,26 +1229,22 @@ namespace Turandot_Editor
 
                 npts = (int)(_Fs * T);
 
-                //KLib.Signals.Calibration.CalibrationFactory.AudiogramFolder = FileLocations.SubjectMetaDataFolder;
-                KLib.Signals.Calibration.CalibrationFactory.AudiogramFolder = _settings.audiogramFolder;
-
-                sigman.AdapterMap = _adapterMap;
-                sigman.Initialize(_Fs, npts);
-                channelView.UpdateMaxLevel();
+                sigman.Initialize(_Fs, npts, SessionContext.Signal);
+                // FIX ME: channelView.UpdateMaxLevel();
 
                 time = new double[npts];
             }
             catch (Exception ex)
             {
                 audioErrorTextBox.Text = ex.Message;
-                signalGraph.Refresh();
+                // FIX ME: signalGraph.Refresh();
                 graphTabControl.SelectedTab = errorPage;
 
                 return;
             }
 
             int irow = 0;
-            foreach (Channel ch in sigman.channels)
+            foreach (Channel ch in sigman.Channels)
             {
                 try
                 {
@@ -1260,7 +1260,7 @@ namespace Turandot_Editor
                         y[k] = ch.Data[k]*scaleFactor + 2 * irow;
                     }
 
-                    signalGraph.GraphPane.AddCurve("", time, y, Color.Blue, ZedGraph.SymbolType.None);
+                    //signalGraph.GraphPane.AddCurve("", time, y, Color.Blue, ZedGraph.SymbolType.None);
                 }
                 catch (Exception ex)
                 {
@@ -1270,13 +1270,13 @@ namespace Turandot_Editor
                 --irow;
             }
 
-            signalGraph.GraphPane.XAxis.Scale.Min = time.Min();
-            signalGraph.GraphPane.XAxis.Scale.Max = time.Max();
-            signalGraph.GraphPane.YAxis.Scale.Min = -sigman.channels.Count * 2 + 0.75;
-            signalGraph.GraphPane.YAxis.Scale.Max = 1.25;
-            signalGraph.GraphPane.YAxis.IsVisible = false;
-            signalGraph.Visible = true;
-            signalGraph.Refresh();
+            //signalGraph.GraphPane.XAxis.Scale.Min = time.Min();
+            //signalGraph.GraphPane.XAxis.Scale.Max = time.Max();
+            //signalGraph.GraphPane.YAxis.Scale.Min = -sigman.Channels.Count * 2 + 0.75;
+            //signalGraph.GraphPane.YAxis.Scale.Max = 1.25;
+            //signalGraph.GraphPane.YAxis.IsVisible = false;
+            //signalGraph.Visible = true;
+            //signalGraph.Refresh();
             graphTabControl.SelectedTab = string.IsNullOrEmpty(audioErrorTextBox.Text) ? graphPage : errorPage;
         }
 
@@ -1354,7 +1354,7 @@ namespace Turandot_Editor
 
         private void SaveDefaults()
         {
-            KFile.XmlSerialize(_settings, GetDefaultsFileName());
+            Files.XmlSerialize(_settings, GetDefaultsFileName());
         }
 
         private string GetDefaultsFileName()
@@ -1368,17 +1368,16 @@ namespace Turandot_Editor
 
             if (File.Exists(fn))
             {
-                _settings = KFile.XmlDeserialize<Settings>(fn);
+                _settings = Files.XmlDeserialize<Settings>(fn);
 
                 calfolderBrowser.Value = _settings.calFolder;
                 audiogramFolderBrowser.Value = _settings.audiogramFolder;
 
                 wavfolderBrowser.Value = _settings.wavFolder;
-                channelView.WavFolder = GetWavFolder();
+                // FIX ME: channelView.WavFolder = GetWavFolder();
 
                 transducerTextBox.Text = _settings.transducer;
-                _adapterMap.AudioTransducer = _settings.transducer;
-                channelView.AdapterMap = _adapterMap;
+                SessionContext.SetTransducer(_settings.transducer);
 
                 Expressions.Metrics = _settings.metrics;
                 ShowMetrics();
@@ -1415,7 +1414,7 @@ namespace Turandot_Editor
         private void wavfolderBrowser_ValueChanged(object sender, EventArgs e)
         {
             _settings.wavFolder = wavfolderBrowser.Value;
-            channelView.WavFolder = GetWavFolder();
+            // FIX ME: channelView.WavFolder = GetWavFolder();
             SaveDefaults();
         }
 
@@ -1602,7 +1601,7 @@ namespace Turandot_Editor
             if (!_ignoreEvents)
             {
                 _params.wavFolder = wavFolderTextBox.Text;
-                channelView.WavFolder = GetWavFolder();
+                // FIX ME: channelView.WavFolder = GetWavFolder();
                 SetDirty();
             }
         }
@@ -1640,8 +1639,7 @@ namespace Turandot_Editor
         {
             _settings.transducer = transducerTextBox.Text;
             SaveDefaults();
-            _adapterMap.AudioTransducer = _settings.transducer;
-            channelView.AdapterMap = _adapterMap;
+            SessionContext.SetTransducer(_settings.transducer);
         }
 
 
@@ -1694,7 +1692,7 @@ namespace Turandot_Editor
 
         private void RpcSetMetrics(string data)
         {
-            _settings.metrics = KFile.FromXMLString<SerializeableDictionary<string>>(data);
+            _settings.metrics = Files.FromXMLString<SerializeableDictionary<string>>(data);
             Expressions.Metrics = _settings.metrics;
             ShowMetrics();
         }

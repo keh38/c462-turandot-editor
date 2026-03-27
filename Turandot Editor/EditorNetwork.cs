@@ -15,7 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using KLib;
+using KLib.IO;
 using KLib.Net;
 using Newtonsoft.Json;
 
@@ -76,7 +76,7 @@ namespace Turandot_Editor
 
             if (payloadObject != null)
             {
-                KTcpClient.SendRequest(_htsEndPoint, new TcpMessage() { Command = message, Payload = KFile.JSONSerializeToString(payloadObject) });
+                KTcpClient.SendRequest(_htsEndPoint, new TcpMessage() { Command = message, Payload = JsonConvert.SerializeObject(payloadObject) });
             }
             else
             {

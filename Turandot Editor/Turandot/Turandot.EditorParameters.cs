@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml;
 
-using KLib;
+using KLib.IO;
 using KLib.Signals;
 
 using Turandot.Inputs;
@@ -22,7 +22,7 @@ namespace Turandot
             switch (GetFileVersion(path))
             {
                 default:
-                    Parameters p = KFile.XmlDeserialize<Parameters>(path);
+                    Parameters p = Files.XmlDeserialize<Parameters>(path);
                     FromBase(p);
                     break;
             }
@@ -53,7 +53,7 @@ namespace Turandot
             }
             else
             {
-                result = fe.sigMan == null || fe.sigMan.channels.Count == 0;
+                result = fe.sigMan == null || fe.sigMan.Channels.Count == 0;
                 result &= fe.inputs.Count == 0;
                 result &= fe.term.Count == 0;
                 result &= fe.timeOuts.Count == 1 && string.IsNullOrEmpty(fe.timeOuts[0].linkTo);
@@ -85,7 +85,7 @@ namespace Turandot
                 {
                     if (fe.sigMan != null)
                     {
-                        names.AddRange(fe.sigMan.channels.Select(c => c.Name));
+                        names.AddRange(fe.sigMan.Channels.Select(c => c.Name));
                     }
                     if (fe.cues != null && fe.cues.Count > 0 && fe.cues.Find(x => x.IsSequenceable) != null)
                     {
@@ -203,7 +203,7 @@ namespace Turandot
             {
                 if (f.sigMan != null)
                 {
-                    foreach (Channel ch in f.sigMan.channels) ch.ContraSide = null;
+                    foreach (Channel ch in f.sigMan.Channels) ch.ContraSide = null;
                 }
             }
 
@@ -261,13 +261,13 @@ namespace Turandot
 
             copy.timeOuts[0].expr = fe.timeOuts[0].expr;
 
-            string xml = KFile.ToXMLString(fe.sigMan);
-            copy.sigMan = KFile.FromXMLString<SignalManager>(xml);
+            string xml = Files.ToXMLString(fe.sigMan);
+            copy.sigMan = Files.FromXMLString<SignalManager>(xml);
 
             foreach (var c in fe.cues)
             {
-                xml = KFile.ToXMLString(c);
-                Cues.Cue cc = KFile.FromXMLString<Cues.Cue>(xml);
+                xml = Files.ToXMLString(c);
+                Cues.Cue cc = Files.FromXMLString<Cues.Cue>(xml);
                 copy.cues.Add(cc);
             }
             foreach (var i in fe.inputs) copy.inputs.Add(i);

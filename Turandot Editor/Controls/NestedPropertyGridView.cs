@@ -1,6 +1,4 @@
-﻿extern alias KLibUnity;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -17,7 +15,7 @@ using KLib.Controls;
 using Turandot;
 using Turandot.Schedules;
 
-using Expressions = KLibUnity.KLib.Expressions.Expressions;
+using KLib.Expressions;
 
 namespace Turandot_Editor
 {

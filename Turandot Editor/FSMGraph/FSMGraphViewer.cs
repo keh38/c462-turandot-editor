@@ -15,6 +15,8 @@ using System.Xml.Serialization;
 
 using FSMGraph;
 
+using Math = System.Math;
+
 namespace KLib.Controls
 {
     public partial class FSMGraphViewer : UserControl
@@ -533,10 +535,10 @@ namespace KLib.Controls
         {
             if (_dragMode != DragMode.Select) return false;
 
-            _selectionRectangle.X = Math.Min(_dragStartPoint.X, mousePoint.X);
-            _selectionRectangle.Y = Math.Min(_dragStartPoint.Y, mousePoint.Y);
-            _selectionRectangle.Width = Math.Abs(mousePoint.X - _dragStartPoint.X);
-            _selectionRectangle.Height = Math.Abs(mousePoint.Y - _dragStartPoint.Y);
+            _selectionRectangle.X = System.Math.Min(_dragStartPoint.X, mousePoint.X);
+            _selectionRectangle.Y = System.Math.Min(_dragStartPoint.Y, mousePoint.Y);
+            _selectionRectangle.Width = System.Math.Abs(mousePoint.X - _dragStartPoint.X);
+            _selectionRectangle.Height = System.Math.Abs(mousePoint.Y - _dragStartPoint.Y);
 
             Refresh();
             return true;
@@ -544,7 +546,7 @@ namespace KLib.Controls
 
         private double DistanceMovedSquared(Point start, Point stop)
         {
-            return (Math.Pow((stop.X - start.X), 2) + Math.Pow((stop.Y - start.Y), 2));
+            return (System.Math.Pow((stop.X - start.X), 2) + System.Math.Pow((stop.Y - start.Y), 2));
         }
 
         private void StartNodeDrag(Node n)
@@ -579,7 +581,7 @@ namespace KLib.Controls
             Rectangle bounds = GetContentBounds();
 
             float newScale = (float)this.Width / (float)bounds.Width;
-            ChangeScale(Math.Min(newScale, 1.0f));
+            ChangeScale(System.Math.Min(newScale, 1.0f));
 
             _dx = (this.Width - bounds.Width) / 2 - bounds.Left;
             _dy = (this.Height - bounds.Height) / 2 - bounds.Top;
@@ -611,14 +613,14 @@ namespace KLib.Controls
 
         private float CoerceScale(float value)
         {
-            value = Math.Min(value, _maxScale);
-            value = Math.Max(value, _minScale);
+            value = System.Math.Min(value, _maxScale);
+            value = System.Math.Max(value, _minScale);
             return value;
         }
 
         private void ShowCurrentScaleInTextBox()
         {
-            _scaleTextBox.Text = Math.Round(_currentScale * 100).ToString("F0") + "%";
+            _scaleTextBox.Text = System.Math.Round(_currentScale * 100).ToString("F0") + "%";
         }
 
         private Rectangle GetContentBounds()
@@ -630,10 +632,10 @@ namespace KLib.Controls
 
             foreach (Node n in _graph.Nodes)
             {
-                xmin = Math.Min(xmin, n.BoundingBox.Left);
-                xmax = Math.Max(xmax, n.BoundingBox.Right);
-                ymin = Math.Min(ymin, n.BoundingBox.Top);
-                ymax = Math.Max(ymax, n.BoundingBox.Bottom);
+                xmin = System.Math.Min(xmin, n.BoundingBox.Left);
+                xmax = System.Math.Max(xmax, n.BoundingBox.Right);
+                ymin = System.Math.Min(ymin, n.BoundingBox.Top);
+                ymax = System.Math.Max(ymax, n.BoundingBox.Bottom);
             }
 
             return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
