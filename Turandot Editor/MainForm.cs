@@ -30,6 +30,8 @@ using Turandot.Screen;
 using C462.Shared;
 using KLib.Drawing.Graphics;
 using KLib.Expressions;
+using Newtonsoft.Json;
+using ScottPlot;
 
 namespace Turandot_Editor
 {
@@ -126,19 +128,34 @@ namespace Turandot_Editor
             schedModeDropDown.AddItem(Mode.Adapt, "Adaptive");
             schedModeDropDown.AddItem(Mode.Optimize, "Optimization");
 
-            //KLib.KGraphics.ZedGraphUtils.InitZedGraph(signalGraph, "Time (s)", "");
-            //signalGraph.MasterPane.Fill.Type = ZedGraph.FillType.None;
-            //signalGraph.MasterPane.Border.IsVisible = false;
-            //signalGraph.GraphPane.Fill.Type = ZedGraph.FillType.None;
-            //signalGraph.GraphPane.Border.IsVisible = false;
-            //signalGraph.GraphPane.Chart.Fill.Type = ZedGraph.FillType.None;
-            //signalGraph.GraphPane.YAxis.IsVisible = false;
-            //signalGraph.Refresh();
+            // Hide axis label and tick
+            signalGraph.Plot.Axes.Left.TickLabelStyle.IsVisible = false;
+            signalGraph.Plot.Axes.Left.MajorTickStyle.Length = 0;
+            signalGraph.Plot.Axes.Left.MinorTickStyle.Length = 0;
+            signalGraph.Plot.XLabel("Time (s)");
+
+            // Hide axis edge line
+            signalGraph.Plot.Axes.Left.FrameLineStyle.Width = 0;
+            signalGraph.Plot.Axes.Right.FrameLineStyle.Width = 0;
+            signalGraph.Plot.Axes.Top.FrameLineStyle.Width = 0;
+            signalGraph.Plot.Axes.Bottom.MinorTickStyle.Length = 0;
+
+            signalGraph.Plot.Axes.Bottom.Label.Bold = false;
+            signalGraph.Plot.Axes.Bottom.Label.FontSize = 12;
+            signalGraph.Plot.Axes.Bottom.TickLabelStyle.FontSize = 12;
+
+            signalGraph.Plot.DataBackground.Color = ScottPlot.Colors.Transparent;
+            var padding = new PixelPadding(
+                left: 0,
+                right: 0,
+                bottom: 50, // keep some bottom padding for x-axis labels
+                top: 0);
+            signalGraph.Plot.Layout.Fixed(padding);
+            signalGraph.Refresh();
 
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            Version currentVersion = assembly.GetName().Version;
+            System.Version currentVersion = assembly.GetName().Version;
             versionLabel.Text = $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
-
 
             // FIX ME
             //channelView.SetAllowableAudioLevelUnits(LevelUnits.dB_attenuation, LevelUnits.dB_SPL, LevelUnits.dB_Vrms, LevelUnits.dB_SL, LevelUnits.PercentDR);
@@ -196,7 +213,7 @@ namespace Turandot_Editor
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
                 ok = false;
             }
 
@@ -389,7 +406,7 @@ namespace Turandot_Editor
             return Path.Combine(_settings.wavFolder, _params.wavFolder);
         }
 
-        void ShowInstructions(Turandot.Instructions instructions)
+        void ShowInstructions(Instructions instructions)
         {
             instructionEditor.Value = instructions;
         }
@@ -410,8 +427,6 @@ namespace Turandot_Editor
             afterNumeric.IntValue = sched.offerBreakAfter;
             breakInstructBox.Text = sched.breakInstructions;
             _ignoreEvents = false;
-
-            UpdateTime();
         }
 
         private void SelectScheduleTab(Mode mode)
@@ -562,7 +577,6 @@ namespace Turandot_Editor
                 else if (usedAny && usedCSminus) available.Exclude(TermType.CSplus);
             }
 
-
             foreach (string src in sources)
             {
                 Termination term = fe.term.Find(t => t.source == src);
@@ -589,9 +603,6 @@ namespace Turandot_Editor
             {
                 actionPropertyGrid.SelectedObject = state.action;
             }
-            else
-            {
-            }
 
             stateNameTextBox.Text = state.name;
             startCheckBox.Checked = state.name == _params.firstState;
@@ -615,14 +626,19 @@ namespace Turandot_Editor
             if (state.sigMan != null)
             {
                 channelListBox.SetItems(state.sigMan.Channels.Select(c => c.Name).ToList());
-                channelListBox.SelectedIndex = 0;
-                ShowSignalChannel(state.sigMan.Channels[0]);
-                // FIX ME: signalGraph.Visible = true;
-                PlotSignals(state.sigMan, state.timeOuts[0]);
+
+                if (state.sigMan.Channels.Count > 0)
+                {
+                    state.sigMan.Initialize(_Fs, 10000, SessionContext.Signal);
+                    channelListBox.SelectedIndex = 0;
+                    ShowSignalChannel(state.sigMan.Channels[0]);
+                    signalGraph.Visible = true;
+                    PlotSignals(state.sigMan, state.timeOuts[0]);
+                }
             }
             else
             {
-                // FIX ME: signalGraph.Visible = false;
+                signalGraph.Visible = false;
                 audioErrorTextBox.Text = "";
                 channelListBox.Clear();
                 ShowSignalChannel(null);
@@ -647,9 +663,34 @@ namespace Turandot_Editor
 
         void ShowSignalChannel(Channel chan)
         {
-            channelPropertyGrid.SelectedObject = chan;
-            // FIX ME
-            //channelView.Value = chan;
+            var editorChan = Files.FromXMLString<KLib.Signals.Editor.Channel>(Files.ToXMLString(chan));
+
+            channelPropertyGrid.SelectedObject = editorChan;
+            channelPropertyGrid.ExpandAllGridItems();
+        }
+
+        private void channelPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            if (e.ChangedItem.Label == "Gate" || e.ChangedItem.Label == "Bursted")
+            {
+                channelPropertyGrid.Refresh();
+            }
+
+            var editorChan = channelPropertyGrid.SelectedObject as KLib.Signals.Editor.Channel;
+            if (editorChan == null) return;
+
+            var chan = Files.FromXMLString<Channel>(Files.ToXMLString(editorChan));
+            if (chan == null) return;
+
+            int index = channelListBox.SelectedIndex;
+            if (index < 0 || index > _selectedState.sigMan.Channels.Count) return;
+
+            _selectedState.sigMan.Channels[channelListBox.SelectedIndex] = chan;
+
+            scheduleControl.UpdateAvailableStates();
+            adaptControl.UpdateAvailableStates();
+            PlotSignals(_selectedState.sigMan, _selectedState.timeOuts[0]);
+            SetDirty();
         }
 
         void SelectTimeout(Timeout t)
@@ -1066,12 +1107,12 @@ namespace Turandot_Editor
         {
             if (Expressions.TryEvaluate(expr))
             {
-                exprEvalResultTextBox.ForeColor = Color.Black;
+                exprEvalResultTextBox.ForeColor = System.Drawing.Color.Black;
                 exprEvalResultTextBox.Text = "Expression OK.";
             }
             else
             {
-                exprEvalResultTextBox.ForeColor = Color.Red;
+                exprEvalResultTextBox.ForeColor = System.Drawing.Color.Red;
                 exprEvalResultTextBox.Text = "Expression error:" + Environment.NewLine + Environment.NewLine + Expressions.LastError;
             }
         }
@@ -1094,8 +1135,8 @@ namespace Turandot_Editor
             Channel ch = new Channel(e.name, new KLib.Signals.Waveform());
             ch.Modality = Modality.Audio;
             ch.Laterality = Laterality.Diotic;
-            // FIX ME
-            //channelView.Value = ch;
+
+            ShowSignalChannel(ch);
 
             if (_selectedState.sigMan == null)
             {
@@ -1113,19 +1154,6 @@ namespace Turandot_Editor
         {
             //if (_selectedState.sigMan == null) _selectedState.sigMan = new SignalManager();
             //_selectedState.sigMan.Channels.Insert(channelListBox.SelectedIndex, channelView.Data);
-        }
-
-        private void channelView_ValueChanged(object sender, EventArgs e)
-        {
-            if (!_ignoreEvents)
-            {
-                // FIX ME
-                //_params.ApplyChannelChangeToSchedule(_selectedState.name, channelView.Value);
-                scheduleControl.UpdateAvailableStates();
-                adaptControl.UpdateAvailableStates();
-                PlotSignals(_selectedState.sigMan, _selectedState.timeOuts[0]);
-                SetDirty();
-            }
         }
 
         private void channelListBox_ItemMoved(object sender, KUserListBox.ChangedItem e)
@@ -1152,7 +1180,8 @@ namespace Turandot_Editor
                 string oldname = ch.Name;
                 ch.Name = e.name;
 
-                // FIX ME                channelView.Value = ch;
+                ShowSignalChannel(ch);
+
                 _params.ApplySignalNameChangeToSchedule(_selectedState.name, oldname, e.name);
                 scheduleControl.UpdateAvailableStates();
                 adaptControl.UpdateAvailableStates();
@@ -1202,15 +1231,13 @@ namespace Turandot_Editor
                 if (ch == null)
                 {
                     ch = new Channel(e.name);
-                    //ch.Destination = KLib.Signals.Enumerations.Laterality.Diotic;
                 }
-                // FIX ME channelView.Value = ch;
+                ShowSignalChannel(ch);
             }
         }
 
         private void PlotSignals(SignalManager sigman, Timeout to)
         {
-            //sigman.CalibrationFolder = _settings.calFolder;
             sigman.WavFolder = Path.Combine(_settings.wavFolder, _params.wavFolder);
 
             audioErrorTextBox.Text = "";
@@ -1220,8 +1247,7 @@ namespace Turandot_Editor
             double[] time;
             try
             {
-                // FIX ME: signalGraph.GraphPane.CurveList.Clear();
-
+                signalGraph.Plot.Clear();
 
                 float T = Expressions.Evaluate(to.expr).Min();
                 if (T <= 0) T = 0.001f * sigman.GetMaxInterval(1000);
@@ -1237,7 +1263,7 @@ namespace Turandot_Editor
             catch (Exception ex)
             {
                 audioErrorTextBox.Text = ex.Message;
-                // FIX ME: signalGraph.Refresh();
+                signalGraph.Refresh();
                 graphTabControl.SelectedTab = errorPage;
 
                 return;
@@ -1259,8 +1285,7 @@ namespace Turandot_Editor
                         time[k] = k / _Fs;
                         y[k] = ch.Data[k]*scaleFactor + 2 * irow;
                     }
-
-                    //signalGraph.GraphPane.AddCurve("", time, y, Color.Blue, ZedGraph.SymbolType.None);
+                    signalGraph.Plot.Add.SignalXY(time, y);
                 }
                 catch (Exception ex)
                 {
@@ -1270,13 +1295,10 @@ namespace Turandot_Editor
                 --irow;
             }
 
-            //signalGraph.GraphPane.XAxis.Scale.Min = time.Min();
-            //signalGraph.GraphPane.XAxis.Scale.Max = time.Max();
-            //signalGraph.GraphPane.YAxis.Scale.Min = -sigman.Channels.Count * 2 + 0.75;
-            //signalGraph.GraphPane.YAxis.Scale.Max = 1.25;
-            //signalGraph.GraphPane.YAxis.IsVisible = false;
-            //signalGraph.Visible = true;
-            //signalGraph.Refresh();
+            signalGraph.Visible = true;
+            signalGraph.Plot.Axes.AutoScale();
+            signalGraph.Refresh();
+
             graphTabControl.SelectedTab = string.IsNullOrEmpty(audioErrorTextBox.Text) ? graphPage : errorPage;
         }
 
@@ -1296,16 +1318,7 @@ namespace Turandot_Editor
             if (!_ignoreEvents)
             {
                 SetDirty();
-                UpdateTime();
             }
-        }
-
-        private void UpdateTime()
-        {
-            //float seconds = _params.EstimateTime();
-            //int min = (int) Math.Ceiling((double) seconds / 60);
-
-            //timeLabel.Text = "Estimated time: " + min + " minutes";
         }
 
         private void ShowMetrics()
@@ -1400,7 +1413,6 @@ namespace Turandot_Editor
             if (!_ignoreEvents)
             {
                 SetDirty();
-                UpdateTime();
             }
         }
 
@@ -1825,7 +1837,7 @@ namespace Turandot_Editor
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1836,5 +1848,6 @@ namespace Turandot_Editor
                 SetDirty();
             }
         }
+
     }
 }

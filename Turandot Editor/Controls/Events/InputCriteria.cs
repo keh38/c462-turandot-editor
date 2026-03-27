@@ -37,7 +37,7 @@ namespace Turandot_Editor
         public void SetValue(List<InputCriterion> value)
         {
             _value = value;
-            //ShowValue();
+            ShowValue();
         }
 
         public InputCriteria()
