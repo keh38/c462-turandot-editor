@@ -663,29 +663,16 @@ namespace Turandot_Editor
 
         void ShowSignalChannel(Channel chan)
         {
-            var editorChan = Files.FromXMLString<KLib.Signals.Editor.Channel>(Files.ToXMLString(chan));
-
-            channelPropertyGrid.SelectedObject = editorChan;
+            channelPropertyGrid.SelectedObject = chan;
             channelPropertyGrid.ExpandAllGridItems();
         }
 
         private void channelPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            if (e.ChangedItem.Label == "Gate" || e.ChangedItem.Label == "Bursted")
+            if (e.ChangedItem.Label == "Gate" || e.ChangedItem.Label == "Bursted" || e.ChangedItem.Label == "BurstRate" || e.ChangedItem.Label == "Modulation")
             {
                 channelPropertyGrid.Refresh();
             }
-
-            var editorChan = channelPropertyGrid.SelectedObject as KLib.Signals.Editor.Channel;
-            if (editorChan == null) return;
-
-            var chan = Files.FromXMLString<Channel>(Files.ToXMLString(editorChan));
-            if (chan == null) return;
-
-            int index = channelListBox.SelectedIndex;
-            if (index < 0 || index > _selectedState.sigMan.Channels.Count) return;
-
-            _selectedState.sigMan.Channels[channelListBox.SelectedIndex] = chan;
 
             scheduleControl.UpdateAvailableStates();
             adaptControl.UpdateAvailableStates();

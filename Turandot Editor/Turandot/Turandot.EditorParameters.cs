@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Xml;
 
@@ -21,6 +23,10 @@ namespace Turandot
         {
             switch (GetFileVersion(path))
             {
+                case 5:
+                    ReadVersion5(path);
+                    break;
+
                 default:
                     Parameters p = Files.XmlDeserialize<Parameters>(path);
                     FromBase(p);
@@ -41,6 +47,23 @@ namespace Turandot
 
             int version = int.Parse(node.InnerText);
             return version;
+        }
+
+        private void ReadVersion5(string filePath)
+        {
+            var xml = File.ReadAllText(filePath);
+
+            xml = xml
+                .Replace("channels", "Channels")
+                .Replace("waveform", "Waveform")
+                .Replace("gate", "Gate")
+                .Replace("level", "Level")
+                .Replace("modulation", "Modulation")
+                .Replace("Duration_ms", "Width_ms");
+
+            Parameters p = Files.FromXMLString<Parameters>(xml);
+            FromBase(p);
+            Debug.WriteLine("Updated from file version 5 through string replacement");
         }
 
         public bool CanBeMadeAction(FlowElement fe)
