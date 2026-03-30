@@ -58,6 +58,17 @@ namespace Turandot_Editor
             Signal.LDL = ldl;
         }
 
+        public static void SetWavFolder(string wavFolder)
+        {
+            if (Signal == null)
+            {
+                Debug.WriteLine("SessionContext not initialized. Call Initialize() before setting wav folder.");
+                return;
+            }
+            Signal.WavFolder = wavFolder;
+        }
+
+
         //public static void Clear()
         //{
         //    Signal = null;

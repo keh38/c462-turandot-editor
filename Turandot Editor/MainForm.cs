@@ -628,7 +628,6 @@ namespace Turandot_Editor
 
                 if (state.sigMan.Channels.Count > 0)
                 {
-                    state.sigMan.Initialize(_Fs, 10000, SessionContext.Signal);
                     channelListBox.SelectedIndex = 0;
                     ShowSignalChannel(state.sigMan.Channels[0]);
                     signalGraph.Visible = true;
@@ -1233,7 +1232,7 @@ namespace Turandot_Editor
 
         private void PlotSignals(SignalManager sigman, Timeout to)
         {
-            sigman.WavFolder = Path.Combine(_settings.wavFolder, _params.wavFolder);
+            SessionContext.SetWavFolder(Path.Combine(_settings.wavFolder, _params.wavFolder));
 
             audioErrorTextBox.Text = "";
 
