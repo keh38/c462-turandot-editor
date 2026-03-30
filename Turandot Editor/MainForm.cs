@@ -157,8 +157,7 @@ namespace Turandot_Editor
             System.Version currentVersion = assembly.GetName().Version;
             versionLabel.Text = $"v{currentVersion.Major}.{currentVersion.Minor}.{currentVersion.Build}";
 
-            // FIX ME
-            //channelView.SetAllowableAudioLevelUnits(LevelUnits.dB_attenuation, LevelUnits.dB_SPL, LevelUnits.dB_Vrms, LevelUnits.dB_SL, LevelUnits.PercentDR);
+            KLib.Signals.Editor.LevelUnitsConverter.Allowable = new LevelUnits[] { LevelUnits.dB_attenuation, LevelUnits.dB_SPL, LevelUnits.dB_Vrms, LevelUnits.dB_SL, LevelUnits.PercentDR };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -667,10 +666,17 @@ namespace Turandot_Editor
             channelPropertyGrid.ExpandAllGridItems();
         }
 
+        private static readonly HashSet<string> _expandTriggers = new HashSet<string>
+        {
+            "Gate", "Bursted", "BurstRate", "Modulation", "Filter", "BandMode"
+        };
+
+
         private void channelPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            if (e.ChangedItem.Label == "Gate" || e.ChangedItem.Label == "Bursted" || e.ChangedItem.Label == "BurstRate" || e.ChangedItem.Label == "Modulation")
+            if (_expandTriggers.Contains(e.ChangedItem.Label))
             {
+                channelPropertyGrid.ExpandAllGridItems();
                 channelPropertyGrid.Refresh();
             }
 
@@ -1133,6 +1139,8 @@ namespace Turandot_Editor
             Turandot.Layout.AddBadges(_selectedState, graphViewer);
             scheduleControl.UpdateAvailableStates();
             adaptControl.UpdateAvailableStates();
+
+            ShowSignalChannel(ch);
 
             SetDirty();
         }
