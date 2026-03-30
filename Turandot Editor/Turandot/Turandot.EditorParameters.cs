@@ -59,7 +59,10 @@ namespace Turandot
                 .Replace("gate", "Gate")
                 .Replace("level", "Level")
                 .Replace("modulation", "Modulation")
-                .Replace("Duration_ms", "Width_ms");
+                .Replace("Duration_ms", "Width_ms")
+                .Replace("fileName", "Filename")
+                .Replace("oneShot", "OneShot")
+                .Replace("canComputeReference", "CanComputeReference");
 
             Parameters p = Files.FromXMLString<Parameters>(xml);
             FromBase(p);

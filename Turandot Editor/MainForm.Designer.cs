@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NewParamsButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -41,14 +41,10 @@
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.MetricsPage = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
-            this.audiogramFolderBrowser = new KLib.Controls.FileBrowser();
+            this.transducerComboBox = new System.Windows.Forms.ComboBox();
+            this.projectComboBox = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.transducerTextBox = new KLib.Controls.KTextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.calfolderBrowser = new KLib.Controls.FileBrowser();
-            this.label15 = new System.Windows.Forms.Label();
-            this.wavfolderBrowser = new KLib.Controls.FileBrowser();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.metricGridView = new System.Windows.Forms.DataGridView();
@@ -261,14 +257,10 @@
             // MetricsPage
             // 
             this.MetricsPage.BackColor = System.Drawing.SystemColors.Control;
-            this.MetricsPage.Controls.Add(this.label17);
-            this.MetricsPage.Controls.Add(this.audiogramFolderBrowser);
+            this.MetricsPage.Controls.Add(this.transducerComboBox);
+            this.MetricsPage.Controls.Add(this.projectComboBox);
             this.MetricsPage.Controls.Add(this.label20);
-            this.MetricsPage.Controls.Add(this.transducerTextBox);
             this.MetricsPage.Controls.Add(this.label18);
-            this.MetricsPage.Controls.Add(this.calfolderBrowser);
-            this.MetricsPage.Controls.Add(this.label15);
-            this.MetricsPage.Controls.Add(this.wavfolderBrowser);
             this.MetricsPage.Controls.Add(this.label12);
             this.MetricsPage.Controls.Add(this.label14);
             this.MetricsPage.Controls.Add(this.metricGridView);
@@ -279,115 +271,43 @@
             this.MetricsPage.TabIndex = 7;
             this.MetricsPage.Text = "General";
             // 
-            // label17
+            // transducerComboBox
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(30, 127);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(122, 13);
-            this.label17.TabIndex = 10;
-            this.label17.Text = "Default audiogram folder";
+            this.transducerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.transducerComboBox.FormattingEnabled = true;
+            this.transducerComboBox.Location = new System.Drawing.Point(35, 96);
+            this.transducerComboBox.Name = "transducerComboBox";
+            this.transducerComboBox.Size = new System.Drawing.Size(121, 21);
+            this.transducerComboBox.TabIndex = 10;
+            this.transducerComboBox.SelectedIndexChanged += new System.EventHandler(this.transducerComboBox_SelectedIndexChanged);
             // 
-            // audiogramFolderBrowser
+            // projectComboBox
             // 
-            this.audiogramFolderBrowser.AutoSize = true;
-            this.audiogramFolderBrowser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.audiogramFolderBrowser.DefaultFolder = null;
-            this.audiogramFolderBrowser.FileMustExist = false;
-            this.audiogramFolderBrowser.Filter = null;
-            this.audiogramFolderBrowser.FoldersOnly = true;
-            this.audiogramFolderBrowser.HideFolder = false;
-            this.audiogramFolderBrowser.Location = new System.Drawing.Point(33, 142);
-            this.audiogramFolderBrowser.Margin = new System.Windows.Forms.Padding(4);
-            this.audiogramFolderBrowser.Name = "audiogramFolderBrowser";
-            this.audiogramFolderBrowser.ReadOnly = false;
-            this.audiogramFolderBrowser.ShowSaveButton = false;
-            this.audiogramFolderBrowser.Size = new System.Drawing.Size(305, 21);
-            this.audiogramFolderBrowser.TabIndex = 9;
-            this.audiogramFolderBrowser.UseEllipsis = true;
-            this.audiogramFolderBrowser.Value = "";
-            this.audiogramFolderBrowser.ValueChanged += new System.EventHandler(this.audiogramFolderBrowser_ValueChanged);
+            this.projectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.projectComboBox.FormattingEnabled = true;
+            this.projectComboBox.Location = new System.Drawing.Point(35, 35);
+            this.projectComboBox.Name = "projectComboBox";
+            this.projectComboBox.Size = new System.Drawing.Size(121, 21);
+            this.projectComboBox.TabIndex = 9;
+            this.projectComboBox.SelectedIndexChanged += new System.EventHandler(this.projectComboBox_SelectedIndexChanged);
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(29, 180);
+            this.label20.Location = new System.Drawing.Point(32, 80);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(61, 13);
             this.label20.TabIndex = 8;
             this.label20.Text = "Transducer";
-            // 
-            // transducerTextBox
-            // 
-            this.transducerTextBox.AutoSize = true;
-            this.transducerTextBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.transducerTextBox.FontColor = System.Drawing.SystemColors.WindowText;
-            this.transducerTextBox.IsIPAddress = false;
-            this.transducerTextBox.Location = new System.Drawing.Point(32, 195);
-            this.transducerTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.transducerTextBox.Name = "transducerTextBox";
-            this.transducerTextBox.Size = new System.Drawing.Size(124, 20);
-            this.transducerTextBox.TabIndex = 7;
-            this.transducerTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.transducerTextBox.ValueChanged += new System.EventHandler(this.transducerTextBox_ValueChanged);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(30, 19);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(121, 13);
+            this.label18.Size = new System.Drawing.Size(40, 13);
             this.label18.TabIndex = 6;
-            this.label18.Text = "Default calibration folder";
-            // 
-            // calfolderBrowser
-            // 
-            this.calfolderBrowser.AutoSize = true;
-            this.calfolderBrowser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.calfolderBrowser.DefaultFolder = null;
-            this.calfolderBrowser.FileMustExist = false;
-            this.calfolderBrowser.Filter = null;
-            this.calfolderBrowser.FoldersOnly = true;
-            this.calfolderBrowser.HideFolder = false;
-            this.calfolderBrowser.Location = new System.Drawing.Point(33, 35);
-            this.calfolderBrowser.Margin = new System.Windows.Forms.Padding(4);
-            this.calfolderBrowser.Name = "calfolderBrowser";
-            this.calfolderBrowser.ReadOnly = false;
-            this.calfolderBrowser.ShowSaveButton = false;
-            this.calfolderBrowser.Size = new System.Drawing.Size(305, 21);
-            this.calfolderBrowser.TabIndex = 5;
-            this.calfolderBrowser.UseEllipsis = true;
-            this.calfolderBrowser.Value = "";
-            this.calfolderBrowser.ValueChanged += new System.EventHandler(this.calfolderBrowser_ValueChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(30, 72);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(96, 13);
-            this.label15.TabIndex = 4;
-            this.label15.Text = "Default .wav folder";
-            // 
-            // wavfolderBrowser
-            // 
-            this.wavfolderBrowser.AutoSize = true;
-            this.wavfolderBrowser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.wavfolderBrowser.DefaultFolder = null;
-            this.wavfolderBrowser.FileMustExist = false;
-            this.wavfolderBrowser.Filter = null;
-            this.wavfolderBrowser.FoldersOnly = true;
-            this.wavfolderBrowser.HideFolder = false;
-            this.wavfolderBrowser.Location = new System.Drawing.Point(33, 88);
-            this.wavfolderBrowser.Margin = new System.Windows.Forms.Padding(4);
-            this.wavfolderBrowser.Name = "wavfolderBrowser";
-            this.wavfolderBrowser.ReadOnly = false;
-            this.wavfolderBrowser.ShowSaveButton = false;
-            this.wavfolderBrowser.Size = new System.Drawing.Size(305, 21);
-            this.wavfolderBrowser.TabIndex = 3;
-            this.wavfolderBrowser.UseEllipsis = true;
-            this.wavfolderBrowser.Value = "";
-            this.wavfolderBrowser.ValueChanged += new System.EventHandler(this.wavfolderBrowser_ValueChanged);
+            this.label18.Text = "Project";
             // 
             // label12
             // 
@@ -413,38 +333,38 @@
             this.metricGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.metricGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metricGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metricGridView.ColumnHeadersHeight = 29;
             this.metricGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.metricGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MetricName,
             this.MetricValue});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metricGridView.DefaultCellStyle = dataGridViewCellStyle5;
             this.metricGridView.EnableHeadersVisualStyles = false;
             this.metricGridView.Location = new System.Drawing.Point(33, 357);
             this.metricGridView.Name = "metricGridView";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metricGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metricGridView.RowHeadersVisible = false;
             this.metricGridView.RowHeadersWidth = 51;
             this.metricGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1574,10 +1494,7 @@
         private System.Windows.Forms.Label label14;
         private Controls.AdaptationControl adaptControl;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label15;
-        private KLib.Controls.FileBrowser wavfolderBrowser;
         private System.Windows.Forms.Label label18;
-        private KLib.Controls.FileBrowser calfolderBrowser;
         private System.Windows.Forms.TabPage InputPage;
         private System.Windows.Forms.TabPage Instructions;
         private Controls.StateCuesControl stateCuesControl;
@@ -1600,7 +1517,6 @@
         private System.Windows.Forms.Label label7;
         private KLib.Controls.EnumDropDown trialLogOptionEnum;
         private System.Windows.Forms.Label label20;
-        private KLib.Controls.KTextBox transducerTextBox;
         private System.Windows.Forms.Label endActionLabel;
         private KLib.Controls.EnumDropDown endActionDropDown;
         private System.Windows.Forms.Timer ledTimer;
@@ -1624,11 +1540,11 @@
         private KLib.Controls.KColorBox screenColorBox;
         private Controls.InstructionEditor instructionEditor;
         private System.Windows.Forms.Button showInstructionsButton;
-        private System.Windows.Forms.Label label17;
-        private KLib.Controls.FileBrowser audiogramFolderBrowser;
         private System.Windows.Forms.PropertyGrid actionPropertyGrid;
         private System.Windows.Forms.PropertyGrid channelPropertyGrid;
         private ScottPlot.WinForms.FormsPlot signalGraph;
+        private System.Windows.Forms.ComboBox transducerComboBox;
+        private System.Windows.Forms.ComboBox projectComboBox;
     }
 }
 

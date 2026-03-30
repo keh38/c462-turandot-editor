@@ -1,13 +1,12 @@
-﻿using System;
+﻿using C462.Shared;
+using System;
 using System.IO;
 
 namespace Turandot_Editor
 {
     public static class FileLocations
     {
-        public static readonly string SharedFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EPL", "C462.Shared");
-        public static readonly string RootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EPL", "HTS");
-        public static string MATLABFolder { get { return Path.Combine(RootFolder, "MATLAB"); } }
+        public static string MATLABFolder { get { return Path.Combine(SharedFileLocations.HtsResourcesFolder, "MATLAB"); } }
         public static string SubjectDataFolder { get; set; } = "";
         public static string SubjectMetaDataFolder { get { return Path.Combine(SubjectDataFolder, "meta"); } }
     }

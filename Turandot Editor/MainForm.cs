@@ -49,11 +49,17 @@ namespace Turandot_Editor
 
         readonly float _Fs = 44100f;
 
+        private List<string> _projectNames;
+        private List<string> _transducerNames;
+
         public MainForm()
         {
             InitializeComponent();
 
             SessionContext.Initialize(AdapterMap.Default7point1Map("HD280"));
+            EnumerateProjectNames();
+            EnumerateTransducerNames();
+
             RestoreDefaults();
 
             if (!_settings.lastPosition.IsEmpty)
@@ -188,6 +194,28 @@ namespace Turandot_Editor
             _settings.lastPosition.Width = Width;
             _settings.lastPosition.Height = Height;
             SaveDefaults();
+        }
+
+        private void EnumerateProjectNames()
+        {
+            _projectNames = SharedFileLocations.EnumerateHtsProjects();
+            projectComboBox.Items.Clear();
+            foreach (var p in _projectNames) projectComboBox.Items.Add(p);
+        }
+
+        private void EnumerateTransducerNames()
+        {
+            _transducerNames = SharedFileLocations.EnumerateTransducers();
+            transducerComboBox.Items.Clear();
+            foreach (var t in _transducerNames) transducerComboBox.Items.Add(t);
+        }
+
+        private void projectComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _settings.project = projectComboBox.SelectedItem.ToString();
+            SaveDefaults();
+            SharedFileLocations.SetHtsProject(_settings.project);
+            KLib.Signals.Editor.WavFileNameEditor.WavFolder = Path.Combine(SharedFileLocations.HtsResourcesFolder, "Wav Files");
         }
 
         bool LoadParameterFile(string path)
@@ -390,19 +418,6 @@ namespace Turandot_Editor
             eventsSpecifier.SetData(p.inputEvents, p.flags);
 
             ShowScheduleParameters(p.schedule, p.adapt);
-        }
-
-        private string GetWavFolder()
-        {
-            if (!string.IsNullOrEmpty(_filePath) && string.IsNullOrEmpty(_params.wavFolder))
-            {
-                var folder = Path.GetDirectoryName(_filePath).Replace("Config Files", "Wav Files");
-                if (Directory.Exists(folder))
-                {
-                    return folder;
-                }
-            }
-            return Path.Combine(_settings.wavFolder, _params.wavFolder);
         }
 
         void ShowInstructions(Instructions instructions)
@@ -667,12 +682,12 @@ namespace Turandot_Editor
 
         private static readonly HashSet<string> _expandTriggers = new HashSet<string>
         {
-            "Gate", "Bursted", "BurstRate", "Modulation", "Filter", "BandMode"
+            "Gate", "Bursted", "BurstRate", "Modulation", "Filter", "BandMode", "Filename"
         };
-
 
         private void channelPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
+            Debug.WriteLine($"Property {e.ChangedItem.Label} changed");
             if (_expandTriggers.Contains(e.ChangedItem.Label))
             {
                 channelPropertyGrid.ExpandAllGridItems();
@@ -1232,7 +1247,7 @@ namespace Turandot_Editor
 
         private void PlotSignals(SignalManager sigman, Timeout to)
         {
-            SessionContext.SetWavFolder(Path.Combine(_settings.wavFolder, _params.wavFolder));
+            SessionContext.SetWavFolder(Path.Combine(SharedFileLocations.HtsResourcesFolder, "Wav Files"));
 
             audioErrorTextBox.Text = "";
 
@@ -1250,7 +1265,6 @@ namespace Turandot_Editor
                 npts = (int)(_Fs * T);
 
                 sigman.Initialize(_Fs, npts, SessionContext.Signal);
-                // FIX ME: channelView.UpdateMaxLevel();
 
                 time = new double[npts];
             }
@@ -1376,30 +1390,41 @@ namespace Turandot_Editor
             if (File.Exists(fn))
             {
                 _settings = Files.XmlDeserialize<Settings>(fn);
-
-                calfolderBrowser.Value = _settings.calFolder;
-                audiogramFolderBrowser.Value = _settings.audiogramFolder;
-
-                wavfolderBrowser.Value = _settings.wavFolder;
-                // FIX ME: channelView.WavFolder = GetWavFolder();
-
-                transducerTextBox.Text = _settings.transducer;
-                SessionContext.SetTransducer(_settings.transducer);
-
-                Expressions.Metrics = _settings.metrics;
-                ShowMetrics();
-                if (Directory.Exists(_settings.audiogramFolder)) {
-                    ApplyAudiogramDataToExpressions(_settings.audiogramFolder);
-                }
             }
+            else _settings = new Settings();
+
+            int index = _projectNames.IndexOf(_settings.project);
+            if (index < 0)
+            {
+                index = 0;
+                _settings.project = _projectNames[0];   
+            }
+            projectComboBox.SelectedIndexChanged -= projectComboBox_SelectedIndexChanged;
+            projectComboBox.SelectedIndex = index;
+            projectComboBox.SelectedIndexChanged += projectComboBox_SelectedIndexChanged;
+            SharedFileLocations.SetHtsProject(_settings.project);
+            KLib.Signals.Editor.WavFileNameEditor.WavFolder = Path.Combine(SharedFileLocations.HtsResourcesFolder, "Wav Files");
+
+            index = _transducerNames.IndexOf(_settings.transducer);
+            if (index < 0)
+            { 
+                index = 0;
+                _settings.transducer = _transducerNames[0];
+            }
+            transducerComboBox.SelectedIndexChanged -= transducerComboBox_SelectedIndexChanged;
+            transducerComboBox.SelectedIndex = index;
+            transducerComboBox.SelectedIndexChanged += transducerComboBox_SelectedIndexChanged;
+            SessionContext.SetTransducer(_settings.transducer);
+
+            Expressions.Metrics = _settings.metrics;
+            ShowMetrics();
+            ApplyAudiogramDataToExpressions();
         }
 
-        private void ApplyAudiogramDataToExpressions(string folder)
+        private void ApplyAudiogramDataToExpressions()
         {
-            //Expressions.Audiogram = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "agram.xml");
-            //Expressions.LDL = Audiograms.AudiogramData.LoadPC(_settings.calFolder, "ldlgram.xml");
-            Expressions.Audiogram = Audiograms.AudiogramData.Load(Path.Combine(folder, "agram.xml"));
-            Expressions.LDL = Audiograms.AudiogramData.Load(Path.Combine(folder, "ldlgram.xml"));
+            Expressions.Audiogram = Audiograms.AudiogramData.Load(Path.Combine(SharedFileLocations.SharedFolder, "Calibration", "agram.xml"));
+            Expressions.LDL = Audiograms.AudiogramData.Load(Path.Combine(SharedFileLocations.SharedFolder, "Calibration", "ldlgram.xml"));
         }
 
         private void adaptControl_ValueChanged(object sender, EventArgs e)
@@ -1408,26 +1433,6 @@ namespace Turandot_Editor
             {
                 SetDirty();
             }
-        }
-
-        private void calfolderBrowser_ValueChanged(object sender, EventArgs e)
-        {
-            _settings.calFolder = calfolderBrowser.Value;
-            SaveDefaults();
-            //ApplyAudiogramDataToExpressions();
-        }
-
-        private void wavfolderBrowser_ValueChanged(object sender, EventArgs e)
-        {
-            _settings.wavFolder = wavfolderBrowser.Value;
-            // FIX ME: channelView.WavFolder = GetWavFolder();
-            SaveDefaults();
-        }
-
-        private void audiogramFolderBrowser_ValueChanged(object sender, EventArgs e)
-        {
-            _settings.audiogramFolder = audiogramFolderBrowser.Value;
-            SaveDefaults();
         }
 
         private void fixationPointControl_ValueChanged(object sender, EventArgs e)
@@ -1641,13 +1646,12 @@ namespace Turandot_Editor
 
         }
 
-        private void transducerTextBox_ValueChanged(object sender, EventArgs e)
+        private void transducerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _settings.transducer = transducerTextBox.Text;
+            _settings.transducer = transducerComboBox.SelectedItem.ToString();
             SaveDefaults();
             SessionContext.SetTransducer(_settings.transducer);
         }
-
 
         private void showStateButton_Click(object sender, EventArgs e)
         {

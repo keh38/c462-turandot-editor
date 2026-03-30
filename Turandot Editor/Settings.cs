@@ -17,10 +17,8 @@ namespace Turandot_Editor
         public Rectangle lastPosition = new Rectangle();
         public bool normalize = false;
         public SerializeableDictionary<string> metrics = new SerializeableDictionary<string>();
-        public string wavFolder = "";
-        public string calFolder = "";
-        public string audiogramFolder = Path.Combine(FileLocations.RootFolder, "Calibrations");
         public string lastFile = "";
+        public string project = "Scratch";
         public string transducer = "Bose";
 
         public Settings() { }
