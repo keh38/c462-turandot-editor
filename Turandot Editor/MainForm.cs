@@ -297,14 +297,10 @@ namespace Turandot_Editor
 
             // Set filter options and filter index.
             dlg.Filter = "XML Files (.xml)|*.xml|All Files (*.*)|*.*";
+            dlg.InitialDirectory = SharedFileLocations.HtsConfigFolder;
             dlg.FilterIndex = 1;
             dlg.Multiselect = false;
             dlg.CheckFileExists = true;
-
-            if (Directory.Exists(_settings.lastFolder))
-            {
-                dlg.InitialDirectory = _settings.lastFolder;
-            }
 
             // Call the ShowDialog method to show the dialog box.
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
