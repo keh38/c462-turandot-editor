@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 using FSMGraph;
@@ -10,6 +11,7 @@ using KLib.KGraphics;
 
 namespace Turandot
 {
+    [SupportedOSPlatform("windows")]
     public class GraphViewer : FSMGraphViewer
     {
         public delegate AvailableTransitions GetTransitionsDelegate(string name);
@@ -54,57 +56,62 @@ namespace Turandot
             Invalidate();
         }
 
-        protected override void BuildEdgeContextMenu(ContextMenu cm, string nodeName)
+        protected override void BuildEdgeContextMenu(ContextMenuStrip cms, string nodeName)
         {
             if (OnGetAvailableTransitions == null) return;
 
             AvailableTransitions available = OnGetAvailableTransitions(nodeName);
             if (available == null) return;
 
-            MenuItem mi = new MenuItem();
-            mi.Text = "-";
-            cm.MenuItems.Add(mi);
+            // Separator
+            cms.Items.Add(new ToolStripSeparator());
 
             foreach (TermType termType in Enum.GetValues(typeof(TermType)))
             {
                 if (!available.types.Contains(termType)) continue;
 
                 string typeName = EditorParameters.TermTypeToString(termType);
-                
-                mi = new MenuItem();
-                mi.Text = available.types.Count > 1 ? "Insert " + typeName : "Insert";
+
+                ToolStripMenuItem mi = new ToolStripMenuItem
+                {
+                    Text = available.types.Count > 1 ? "Insert " + typeName : "Insert"
+                };
                 mi.Click += insertEdge_Click;
+                mi.Tag = termType;
 
-                MenuItem sub_mi = new MenuItem();
-                sub_mi.Text = "Timeout";
+                // Timeout sub-item
+                ToolStripMenuItem sub_mi = new ToolStripMenuItem
+                {
+                    Text = "Timeout",
+                    Tag = termType,
+                    Enabled = available.IsTimeoutAvailable(termType)
+                };
                 sub_mi.Click += insertEdge_Click;
-                sub_mi.Tag = termType;
-                sub_mi.Enabled = available.IsTimeoutAvailable(termType);
-                mi.MenuItems.Add(sub_mi);
+                mi.DropDownItems.Add(sub_mi);
 
-                sub_mi = new MenuItem();
-                sub_mi.Text = "-";
-                mi.MenuItems.Add(sub_mi);
+                // Separator in submenu
+                mi.DropDownItems.Add(new ToolStripSeparator());
 
                 foreach (string src in available.sources)
                 {
-                    sub_mi = new MenuItem();
-                    sub_mi.Text = src;
-                    sub_mi.Click += insertEdge_Click;
-                    sub_mi.Tag = termType;
-
-                    sub_mi.Enabled = available.IsSourceAvailable(src, termType);
-                    mi.MenuItems.Add(sub_mi);
+                    ToolStripMenuItem src_mi = new ToolStripMenuItem
+                    {
+                        Text = src,
+                        Tag = termType,
+                        Enabled = available.IsSourceAvailable(src, termType)
+                    };
+                    src_mi.Click += insertEdge_Click;
+                    mi.DropDownItems.Add(src_mi);
                 }
 
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
             }
-
         }
 
+        // Update the event handler to use ToolStripMenuItem
         void insertEdge_Click(object sender, EventArgs e)
         {
-            MenuItem mi = sender as MenuItem;
+            if (sender is not ToolStripMenuItem mi) return;
 
             Edge edge = new Edge(
                 mi.Text == "Timeout" ? "" : mi.Text,
@@ -115,13 +122,13 @@ namespace Turandot
                 mi.Text == "Timeout" ? EdgeEnd.EndStyle.Circle : EdgeEnd.EndStyle.Diamond,
                 GetEdgeColor((TermType)mi.Tag),
                 mi.Text == "Timeout" ? Color.White : Color.Yellow
-                );
+            );
 
             edge.TargetEnd = new EdgeEnd(
                 EdgeEnd.EndStyle.Arrow,
                 GetEdgeColor((TermType)mi.Tag),
-                GetEdgeColor((TermType) mi.Tag)
-                );
+                GetEdgeColor((TermType)mi.Tag)
+            );
 
             StartEdgeInsertion(edge);
             Refresh();

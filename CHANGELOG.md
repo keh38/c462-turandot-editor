@@ -1,5 +1,12 @@
 ## Changelog
 
+### v3.0 (unreleased)
+#### Changed
+- upgraded to shared library
+- replaced stimulus channel control with property grid
+
+---
+
 ### v2.22.1 (2026-03-19)
 #### Fixed
 - error with Update button on Schedule tab

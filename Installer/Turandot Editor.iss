@@ -2,7 +2,7 @@
 
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING .ISS SCRIPT FILES!
 #define SemanticVersion() \
-   GetVersionComponents("..\Turandot Editor\bin\x64\Release\Turandot Editor.exe", Local[0], Local[1], Local[2], Local[3]), \
+   GetVersionComponents("..\Turandot Editor\bin\Release\net8.0-windows\Turandot Editor.exe", Local[0], Local[1], Local[2], Local[3]), \
    Str(Local[0]) + "." + Str(Local[1]) + ((Local[2]>0) ? "." + Str(Local[2]) : "")
     
 
@@ -27,8 +27,7 @@ Name: "{commonappdata}\EPL";
 
 [Files]
 Source: "..\Turandot Editor\Images\Turandot.ico"; DestDir: "{app}"; Flags: replacesameversion;
-Source: "..\Turandot Editor\bin\x64\Release\*.*"; DestDir: "{app}"; Flags: replacesameversion;
-Source: "..\Turandot Editor\bin\x64\Release\Images\*.*"; DestDir: "{app}\Images"; Flags: replacesameversion;
+Source: "..\Turandot Editor\bin\Release\net8.0-windows\*.*"; DestDir: "{app}"; Flags: replacesameversion recursesubdirs
 Source: "..\CHANGELOG.md"; DestDir: "{app}"; Flags: replacesameversion;
 
 [Icons]

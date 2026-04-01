@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Versioning;
 
 using KLib;
 using KLib.Controls;
@@ -19,6 +20,7 @@ using KLib.Expressions;
 
 namespace Turandot_Editor
 {
+    [SupportedOSPlatform("windows")]
     public partial class NestedPropertyGridView : KUserControl
     {
         List<Variable> _varList = null;
@@ -95,7 +97,7 @@ namespace Turandot_Editor
             col.Items.Clear();
             col.Items.AddRange(stateList.ToArray());
 
-            if (_varList!=null && _varList.Count > 0) Debug.WriteLine(_varList[0].state);
+            if (_varList != null && _varList.Count > 0) Debug.WriteLine(_varList[0].state);
 
             ShowFamily(_varList);
         }
@@ -132,7 +134,7 @@ namespace Turandot_Editor
 
                 if (dataGridView.CurrentCell.ColumnIndex == 0)
                 {
-                    if (dataGridView.CurrentCell.RowIndex == _varList.Count && (MaxNumberRows==0 || dataGridView.Rows.Count < MaxNumberRows))
+                    if (dataGridView.CurrentCell.RowIndex == _varList.Count && (MaxNumberRows == 0 || dataGridView.Rows.Count < MaxNumberRows))
                     {
                         AddNewVariable();
                         DisableCells(rowIndex, 2);
@@ -143,7 +145,7 @@ namespace Turandot_Editor
                         DisableCells(rowIndex, 2);
                     }
                     _ignoreEvents = true;
-                    UpdateStateSelection(rowIndex, state); 
+                    UpdateStateSelection(rowIndex, state);
                     _ignoreEvents = false;
                 }
                 else if (dataGridView.CurrentCell.ColumnIndex == 1)
@@ -155,13 +157,13 @@ namespace Turandot_Editor
                     _ignoreEvents = false;
                 }
                 else if (dataGridView.CurrentCell.ColumnIndex == 2)
-                { 
+                {
                     _varList[rowIndex].property = cells["Property"].Value as string;
                     DisableCells(rowIndex, 10);
                 }
                 else if (dataGridView.CurrentCell.ColumnIndex == 3)
                 {
-                    _varList[rowIndex].dim = (VarDimension) Enum.GetNames(typeof(VarDimension)).ToList().IndexOf(cells["Dim"].Value as string);
+                    _varList[rowIndex].dim = (VarDimension)Enum.GetNames(typeof(VarDimension)).ToList().IndexOf(cells["Dim"].Value as string);
                 }
                 else if (dataGridView.CurrentCell.ColumnIndex == 4)
                 {
@@ -284,7 +286,7 @@ namespace Turandot_Editor
 
         private void dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (!_ignoreEvents && dataGridView.CurrentCell.ColumnIndex<3 && dataGridView.IsCurrentCellDirty)
+            if (!_ignoreEvents && dataGridView.CurrentCell.ColumnIndex < 3 && dataGridView.IsCurrentCellDirty)
             {
                 dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
@@ -327,77 +329,71 @@ namespace Turandot_Editor
         {
             if (e.Button == MouseButtons.Right)
             {
-                ContextMenu cm = BuildContextMenu(e.Location);
-                cm.Show(this, e.Location);
+                ContextMenuStrip cms = BuildContextMenu(e.Location);
+                if (cms.Items.Count > 0)
+                    cms.Show(this, e.Location);
             }
         }
 
-        private ContextMenu BuildContextMenu(Point point)
+        private ContextMenuStrip BuildContextMenu(Point point)
         {
-            var cm = new ContextMenu();
-
-            MenuItem mi;
+            var cms = new ContextMenuStrip();
+            ToolStripMenuItem mi;
 
             if (Clipboard.Count > 0)
             {
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Paste";
                 mi.Click += pasteClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
 
                 if (_varList.Count > 0)
                 {
-                    mi = new MenuItem();
-                    mi.Text = "-";
-                    cm.MenuItems.Add(mi);
+                    cms.Items.Add(new ToolStripSeparator());
                 }
             }
 
             if (_varList.Count > 1)
             {
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Sort";
                 mi.Click += sortClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
 
-                mi = new MenuItem();
-                mi.Text = "-";
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(new ToolStripSeparator());
             }
 
             if (_varList.Count > 0)
             {
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Delete selected row(s)";
                 mi.Click += deleteRowClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
 
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Duplicate selected row(s)";
                 mi.Click += duplicateRowClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
 
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Copy selected row(s)";
                 mi.Click += copyRowClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
 
-                mi = new MenuItem();
-                mi.Text = "-";
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(new ToolStripSeparator());
 
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Copy table";
                 mi.Click += copyTableClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
 
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Clear table";
                 mi.Click += clearTableClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
             }
 
-            return cm;
+            return cms;
         }
 
         void deleteRowClick(object sender, EventArgs e)
@@ -480,7 +476,7 @@ namespace Turandot_Editor
 
         private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex > _varList.Count-1 || dataGridView.Columns[e.ColumnIndex].Name != "Expr") return;
+            if (e.RowIndex > _varList.Count - 1 || dataGridView.Columns[e.ColumnIndex].Name != "Expr") return;
 
             _exprCell = dataGridView.Rows[e.RowIndex].Cells["Expr"];
 

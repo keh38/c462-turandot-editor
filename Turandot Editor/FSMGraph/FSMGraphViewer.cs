@@ -16,12 +16,13 @@ using System.Xml.Serialization;
 using FSMGraph;
 
 using Math = System.Math;
+using System.Runtime.Versioning;
 
 namespace KLib.Controls
 {
+    [SupportedOSPlatform("windows")]
     public partial class FSMGraphViewer : UserControl
     {
-
         Graph _graph =  new Graph();
 
         float _currentScale = 1.0f;
@@ -201,27 +202,6 @@ namespace KLib.Controls
                     g.DrawLine(pen, _sourcePort.Location, _currentInsertionEnd);
                 } 
             }
-        }
-
-        private void FSMGraph_MouseDown(object sender, MouseEventArgs e)
-        {
-            Point mousePoint = ScreenToGraph(e.Location);
-
-            if (e.Button == MouseButtons.Right)
-            {
-                ContextMenu cm = BuildContextMenu(e.Location);
-                cm.Show(this, e.Location);
-                return;
-            }
-
-            if (ProcessEdgeInsertionMouseDown(mousePoint)) return;
-            if (ProcessEdgeSelectionMouseDown(mousePoint)) return;
-            if (ProcessPanMouseDown(e.Location)) return;
-            if (ProcessNodeMouseDown(mousePoint)) return;
-
-            _selectionRectangle = new Rectangle(0, 0, 0, 0);
-            _dragStartPoint = mousePoint;
-            _dragMode = DragMode.Select;
         }
 
         bool ProcessEdgeInsertionMouseDown(Point point)
@@ -695,85 +675,108 @@ namespace KLib.Controls
             Cursor = Cursors.Default;
         }
 
-        private ContextMenu BuildContextMenu(Point point)
+        private ContextMenuStrip BuildContextMenu(Point point)
         {
             _rightMouseDownPoint = point;
 
-            ContextMenu cm = BuildEdgeSelectedContextMenu(point);
+            ContextMenuStrip cms = BuildEdgeSelectedContextMenu(point);
 
-            if (cm.MenuItems.Count > 0) return cm;
+            if (cms.Items.Count > 0) return cms;
 
-            MenuItem mi;
+            ToolStripMenuItem mi;
 
-            mi = new MenuItem();
+            mi = new ToolStripMenuItem();
             mi.Text = "Add " + defaultNodeName.ToLower();
             mi.Click += insertNode_Click;
-            cm.MenuItems.Add(mi);
+            cms.Items.Add(mi);
 
             if (_selectedNodes.Count > 0)
             {
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Duplicate selected";
                 mi.Click += duplicateSelectedNodes_Click;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
 
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Delete selected";
                 mi.Click += deleteSelectedNode_Click;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
             }
 
             Node nodeUnder = _graph.NodeUnderMouse(ScreenToGraph(point));
             if (_graph.Nodes.Count > 1 && nodeUnder != null)
             {
-                BuildEdgeContextMenu(cm, nodeUnder.Name);
+                BuildEdgeContextMenu(cms, nodeUnder.Name);
                 _insertEdgeAt = nodeUnder;
             }
 
-            return cm;
+            return cms;
         }
 
-        protected virtual void BuildEdgeContextMenu(ContextMenu cm, string nodeName)
+        protected virtual void BuildEdgeContextMenu(ContextMenuStrip cms, string nodeName)
         {
-            MenuItem mi = new MenuItem();
+            ToolStripMenuItem mi = new ToolStripMenuItem();
             mi.Text = "-";
-            cm.MenuItems.Add(mi);
+            mi.Enabled = false;
+            cms.Items.Add(mi);
 
-            mi = new MenuItem();
+            mi = new ToolStripMenuItem();
             mi.Text = "Add edge";
             mi.Click += insertEdge_Click;
-            cm.MenuItems.Add(mi);
+            cms.Items.Add(mi);
         }
 
-        private ContextMenu BuildEdgeSelectedContextMenu(Point point)
+        private ContextMenuStrip BuildEdgeSelectedContextMenu(Point point)
         {
-            var cm = new ContextMenu();
-
-            MenuItem mi;
+            var cms = new ContextMenuStrip();
+            ToolStripMenuItem mi;
 
             if (_selectedEdge != null)
             {
                 if (_selectedEdge.IsInteriorControlPoint(ScreenToGraph(point)))
                 {
-                    mi = new MenuItem();
+                    mi = new ToolStripMenuItem();
                     mi.Text = "Delete control point";
                     mi.Click += deleteControlPoint_Click;
-                    cm.MenuItems.Add(mi);
+                    cms.Items.Add(mi);
                 }
                 else
                 {
-                    mi = new MenuItem();
+                    mi = new ToolStripMenuItem();
                     mi.Text = "Insert control point";
                     mi.Click += insertControlPoint_Click;
-                    cm.MenuItems.Add(mi);
+                    cms.Items.Add(mi);
 
-                    mi = new MenuItem();
+                    mi = new ToolStripMenuItem();
                     mi.Text = "Delete selected";
                     mi.Click += deleteSelectedEdge_Click;
-                    cm.MenuItems.Add(mi);
+                    cms.Items.Add(mi);
                 }
             }
-            return cm;
+            return cms;
+        }
+
+        // Update MouseDown to show ContextMenuStrip
+        private void FSMGraph_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point mousePoint = ScreenToGraph(e.Location);
+
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenuStrip cms = BuildContextMenu(e.Location);
+                if (cms.Items.Count > 0)
+                    cms.Show(this, e.Location);
+                return;
+            }
+
+            if (ProcessEdgeInsertionMouseDown(mousePoint)) return;
+            if (ProcessEdgeSelectionMouseDown(mousePoint)) return;
+            if (ProcessPanMouseDown(e.Location)) return;
+            if (ProcessNodeMouseDown(mousePoint)) return;
+
+            _selectionRectangle = new Rectangle(0, 0, 0, 0);
+            _dragStartPoint = mousePoint;
+            _dragMode = DragMode.Select;
         }
 
         void insertNode_Click(object sender, EventArgs e)

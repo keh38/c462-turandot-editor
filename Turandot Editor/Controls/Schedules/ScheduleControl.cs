@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Versioning;
 
 using KLib.Controls;
 
@@ -16,6 +17,7 @@ using Turandot.Schedules;
 
 namespace Turandot_Editor.Controls
 {
+    [SupportedOSPlatform("windows")]
     public partial class ScheduleControl : KUserControl
     {
         private Schedule _schedule;
@@ -144,7 +146,7 @@ namespace Turandot_Editor.Controls
                 }
                 else if (groupGridView.CurrentCell.ColumnIndex == 3)
                 {
-                    _schedule.families[rowIndex].order = (VariableOrder) _orderItems.IndexOf(cells["Order"].Value);
+                    _schedule.families[rowIndex].order = (VariableOrder)_orderItems.IndexOf(cells["Order"].Value);
                 }
                 else if (groupGridView.CurrentCell.ColumnIndex == 4)
                 {
@@ -303,30 +305,31 @@ namespace Turandot_Editor.Controls
                 OnValueChanged();
             }
         }
+
         private void dataGridView_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                ContextMenu cm = BuildContextMenu(e.Location);
-                cm.Show(sender as Control, e.Location);
+                ContextMenuStrip cms = BuildContextMenu(e.Location);
+                if (cms.Items.Count > 0)
+                    cms.Show(sender as Control, e.Location);
             }
         }
 
-        private ContextMenu BuildContextMenu(Point point)
+        private ContextMenuStrip BuildContextMenu(Point point)
         {
-            var cm = new ContextMenu();
-
-            MenuItem mi;
+            var cms = new ContextMenuStrip();
+            ToolStripMenuItem mi;
 
             if (_schedule.families.Count > 0)
             {
-                mi = new MenuItem();
+                mi = new ToolStripMenuItem();
                 mi.Text = "Duplicate selected row";
                 mi.Click += duplicateRowClick;
-                cm.MenuItems.Add(mi);
+                cms.Items.Add(mi);
             }
 
-            return cm;
+            return cms;
         }
 
         void duplicateRowClick(object sender, EventArgs e)
@@ -337,7 +340,7 @@ namespace Turandot_Editor.Controls
                 _schedule.families.Add(f);
                 AddFamilyRow(f);
             }
-//            ShowFamily(_varList);
+            //            ShowFamily(_varList);
 
             OnValueChanged();
         }
