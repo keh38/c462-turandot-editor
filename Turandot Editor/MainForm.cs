@@ -342,19 +342,15 @@ namespace Turandot_Editor
             dlg.Filter = "XML Files (.xml)|Turandot.*.xml|All Files (*.*)|*.*";
             dlg.FilterIndex = 1;
             dlg.OverwritePrompt = true;
+            dlg.InitialDirectory = SharedFileLocations.HtsConfigFolder;
 
             if (File.Exists(_filePath))
             {
                 FileInfo fi = new FileInfo(_filePath);
-                dlg.InitialDirectory = fi.DirectoryName;
                 dlg.FileName = Path.GetFileName(_filePath);
             }
             else
             {
-                if (Directory.Exists(_settings.lastFolder))
-                {
-                    dlg.InitialDirectory = _settings.lastFolder;
-                }
                 dlg.FileName = "Untitled.xml";
             }
 

@@ -104,6 +104,7 @@ namespace Turandot_Editor
                 {
                     Debug.WriteLine(ex.Message);
                 }
+                Thread.Sleep(10);
             }
 
             server.CloseListener();

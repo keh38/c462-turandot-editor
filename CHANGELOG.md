@@ -4,6 +4,8 @@
 #### Changed
 - upgraded to shared library
 - replaced stimulus channel control with property grid
+#### Fixed
+- added sleep to TCP listen thread to prevent CPU spinning
 
 ---
 

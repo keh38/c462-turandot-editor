@@ -14,7 +14,7 @@ $vParts          = $Version.Split('.')
 $AssemblyVersion = ($vParts + @('0','0','0'))[ 0..3 ] -join '.'
 $VersionDashed  = $Version -replace '\.', '-'
 $RepoRoot       = "D:\Development\C462\c462-turandot-editor"
-$AssemblyInfo   = "$RepoRoot\Turandot Editor\Properties\AssemblyInfo.cs"
+$CsprojFile     = "$RepoRoot\Turandot Editor\Turandot Editor\Turandot Editor.csproj"
 $Changelog      = "$RepoRoot\CHANGELOG.md"
 $SolutionFile   = "$RepoRoot\c462-turandot-editor.sln"
 $InstallerPath  = "$RepoRoot\Installer\Output\Turandot_Editor_$VersionDashed.exe"
@@ -31,10 +31,11 @@ function Step($msg) {
 # --- Step 1: Update AssemblyInfo.cs ------------------------------------------
 Step "Updating AssemblyInfo.cs to version $Version"
 
-$ai = Get-Content $AssemblyInfo -Raw
-$ai = $ai -replace 'AssemblyVersion\("[^"]*"\)',     "AssemblyVersion(`"$AssemblyVersion`")"
-$ai = $ai -replace 'AssemblyFileVersion\("[^"]*"\)', "AssemblyFileVersion(`"$AssemblyVersion`")"
-Set-Content $AssemblyInfo $ai -NoNewline
+$csproj = Get-Content $CsprojFile -Raw
+$csproj = $csproj -replace '<Version>[^<]*</Version>',         "<Version>$Version</Version>"
+$csproj = $csproj -replace '<AssemblyVersion>[^<]*</AssemblyVersion>', "<AssemblyVersion>$AssemblyVersion</AssemblyVersion>"
+$csproj = $csproj -replace '<FileVersion>[^<]*</FileVersion>',         "<FileVersion>$AssemblyVersion</FileVersion>"
+Set-Content $CsprojFile $csproj -NoNewline
 Write-Host "Done."
 
 # --- Step 2: Update CHANGELOG.md (replace '(unreleased)' with today's date) -
