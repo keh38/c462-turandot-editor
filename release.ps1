@@ -8,13 +8,13 @@ $ErrorActionPreference = "Stop"
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 # --- Configuration -----------------------------------------------------------
-$Version        = "2.22.1"
+$Version        = "3.0"
 # Pad to exactly 4 parts for AssemblyVersion / FileVersion
 $vParts          = $Version.Split('.')
 $AssemblyVersion = ($vParts + @('0','0','0'))[ 0..3 ] -join '.'
 $VersionDashed  = $Version -replace '\.', '-'
 $RepoRoot       = "D:\Development\C462\c462-turandot-editor"
-$CsprojFile     = "$RepoRoot\Turandot Editor\Turandot Editor\Turandot Editor.csproj"
+$CsprojFile     = "$RepoRoot\Turandot Editor\Turandot Editor.csproj"
 $Changelog      = "$RepoRoot\CHANGELOG.md"
 $SolutionFile   = "$RepoRoot\c462-turandot-editor.sln"
 $InstallerPath  = "$RepoRoot\Installer\Output\Turandot_Editor_$VersionDashed.exe"
