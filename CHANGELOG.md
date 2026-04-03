@@ -1,6 +1,6 @@
 ## Changelog
 
-### v3.0 (unreleased)
+### v3.0 (2026-04-03)
 #### Changed
 - upgraded to shared library
 - replaced stimulus channel control with property grid
