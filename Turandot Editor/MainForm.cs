@@ -674,12 +674,11 @@ namespace Turandot_Editor
 
         private static readonly HashSet<string> _expandTriggers = new HashSet<string>
         {
-            "Gate", "Bursted", "BurstRate", "Modulation", "Filter", "BandMode", "Filename"
+            "Gate", "Bursted", "BurstRate", "Modulation", "Filter", "BandMode", "Filename", "Modality"
         };
 
         private void channelPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            Debug.WriteLine($"Property {e.ChangedItem.Label} changed");
             if (_expandTriggers.Contains(e.ChangedItem.Label))
             {
                 channelPropertyGrid.ExpandAllGridItems();
