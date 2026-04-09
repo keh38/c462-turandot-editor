@@ -1,5 +1,11 @@
 ## Changelog
 
+### v3.0.1 (unreleased)
+#### Fixed
+- empty transducer list was causing application to crash before starting
+
+---
+
 ### v3.0 (2026-04-03)
 #### Changed
 - upgraded to shared library

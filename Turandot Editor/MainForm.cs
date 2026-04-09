@@ -1397,15 +1397,18 @@ namespace Turandot_Editor
             SharedFileLocations.SetHtsProject(_settings.project);
             KLib.Signals.Editor.WavFileNameEditor.WavFolder = Path.Combine(SharedFileLocations.HtsResourcesFolder, "Wav Files");
 
-            index = _transducerNames.IndexOf(_settings.transducer);
-            if (index < 0)
-            { 
-                index = 0;
-                _settings.transducer = _transducerNames[0];
+            if (_transducerNames.Count > 0)
+            {
+                index = _transducerNames.IndexOf(_settings.transducer);
+                if (index < 0)
+                {
+                    index = 0;
+                    _settings.transducer = _transducerNames[0];
+                }
+                transducerComboBox.SelectedIndexChanged -= transducerComboBox_SelectedIndexChanged;
+                transducerComboBox.SelectedIndex = index;
+                transducerComboBox.SelectedIndexChanged += transducerComboBox_SelectedIndexChanged;
             }
-            transducerComboBox.SelectedIndexChanged -= transducerComboBox_SelectedIndexChanged;
-            transducerComboBox.SelectedIndex = index;
-            transducerComboBox.SelectedIndexChanged += transducerComboBox_SelectedIndexChanged;
             SessionContext.SetTransducer(_settings.transducer);
 
             Expressions.Metrics = _settings.metrics;
