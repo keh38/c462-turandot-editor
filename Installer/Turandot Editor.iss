@@ -27,7 +27,12 @@ Name: "{commonappdata}\EPL";
 
 [Files]
 Source: "..\Turandot Editor\Images\Turandot.ico"; DestDir: "{app}"; Flags: replacesameversion;
-Source: "..\Turandot Editor\bin\Release\net8.0-windows\*.*"; DestDir: "{app}"; Flags: replacesameversion recursesubdirs
+Source: "..\Turandot Editor\bin\Release\net8.0-windows\*.*"; DestDir: "{app}"; Flags: replacesameversion
+Source: "..\Turandot Editor\bin\Release\net8.0-windows\Images\*.*"; DestDir: "{app}"; Flags: replacesameversion
+Source: "..\Turandot Editor\bin\Release\net8.0-windows\runtimes\win\*.*"; DestDir: "{app}"; Flags: replacesameversion recursesubdirs
+Source: "..\Turandot Editor\bin\Release\net8.0-windows\runtimes\win-arm64\*.*"; DestDir: "{app}"; Flags: replacesameversion recursesubdirs
+Source: "..\Turandot Editor\bin\Release\net8.0-windows\runtimes\win-x64\*.*"; DestDir: "{app}"; Flags: replacesameversion recursesubdirs
+Source: "..\Turandot Editor\bin\Release\net8.0-windows\runtimes\win-x86\*.*"; DestDir: "{app}"; Flags: replacesameversion recursesubdirs
 Source: "..\CHANGELOG.md"; DestDir: "{app}"; Flags: replacesameversion;
 
 [Icons]

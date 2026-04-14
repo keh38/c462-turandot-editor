@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-	<AssemblyVersion>3.0.0.0</AssemblyVersion>
-	  <FileVersion>3.0.0.0</FileVersion>
-	  <Version>3.0</Version>
+	<AssemblyVersion>3.0.1.0</AssemblyVersion>
+	  <FileVersion>3.0.1.0</FileVersion>
+	  <Version>3.0.1</Version>
 	  <RootNamespace>Turandot_Editor</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
