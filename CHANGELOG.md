@@ -1,5 +1,11 @@
 ## Changelog
 
+### v3.1 (unreleased)
+#### Fixed
+- gating of FM sweeps
+
+---
+
 ### v3.0.1 (2026-04-14)
 #### Fixed
 - empty transducer list was causing application to crash before starting
