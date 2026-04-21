@@ -61,6 +61,11 @@ namespace Turandot
                 .Replace("modulation", "Modulation")
                 .Replace("Duration_ms", "Width_ms")
                 .Replace("fileName", "Filename")
+                .Replace("filter", "Filter")
+                .Replace("shape", "Shape")
+                .Replace("bandwidthMethod", "BandMode")
+                .Replace("sweepable", "Sweepable")
+                .Replace("brickwall", "Brickwall")
                 .Replace("oneShot", "OneShot")
                 .Replace("canComputeReference", "CanComputeReference");
 
