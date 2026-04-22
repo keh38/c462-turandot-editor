@@ -614,6 +614,7 @@ namespace Turandot_Editor
             startCheckBox.Checked = state.name == _params.firstState;
             startCheckBox.Enabled = !startCheckBox.Checked;
             hideCursorCheckBox.Checked = state.hideCursor;
+            disableInputsCheckBox.Checked = state.disableInputs;
 
             bool endActionVisible = _params.allowExpertOptions && state.term.Count == 0 && state.timeOuts.Count == 1 && string.IsNullOrEmpty(state.timeOuts[0].linkTo);
 
@@ -701,7 +702,7 @@ namespace Turandot_Editor
 
             EvaluateTimeoutExpression(t.expr);
 
-            transitionLabel.Visible = _selectedState!= null && !_selectedState.isAction;
+            transitionLabel.Visible = _selectedState != null && !_selectedState.isAction;
             transitionLabel.Text = (t.termType != TermType.Any ? (EditorParameters.TermTypeToString(t.termType) + " ") : "") + "Timeout";
             transitionLabel.ForeColor = GraphViewer.GetEdgeColor(t.termType);
             TransitionTabs.Visible = _selectedState != null && !_selectedState.isAction;
@@ -747,7 +748,7 @@ namespace Turandot_Editor
             _selectedState = null;
         }
 
-        void InsertTabPage(TabControl tab, TabPage page, int insertAt=-1)
+        void InsertTabPage(TabControl tab, TabPage page, int insertAt = -1)
         {
             if (!tab.TabPages.Contains(page))
                 tab.TabPages.Insert(insertAt < 0 ? tabControl.TabPages.Count : insertAt, page);
@@ -833,7 +834,7 @@ namespace Turandot_Editor
         {
             if (!_ignoreEvents)
             {
-                _selectedState.endAction = (EndAction) endActionDropDown.Value;
+                _selectedState.endAction = (EndAction)endActionDropDown.Value;
                 Turandot.Layout.AddBadges(_selectedState, graphViewer);
 
                 SetDirty();
@@ -1277,12 +1278,12 @@ namespace Turandot_Editor
                     ch.Create();
 
                     double[] y = new double[npts];
-                    double scaleFactor = 1/ch.Data.Max();
+                    double scaleFactor = 1 / ch.Data.Max();
 
                     for (int k = 0; k < npts; k++)
                     {
                         time[k] = k / _Fs;
-                        y[k] = ch.Data[k]*scaleFactor + 2 * irow;
+                        y[k] = ch.Data[k] * scaleFactor + 2 * irow;
                     }
                     signalGraph.Plot.Add.SignalXY(time, y);
                 }
@@ -1388,7 +1389,7 @@ namespace Turandot_Editor
             if (index < 0)
             {
                 index = 0;
-                _settings.project = _projectNames[0];   
+                _settings.project = _projectNames[0];
             }
             projectComboBox.SelectedIndexChanged -= projectComboBox_SelectedIndexChanged;
             projectComboBox.SelectedIndex = index;
@@ -1479,7 +1480,7 @@ namespace Turandot_Editor
         {
             // Called after list of active input controls is changed. Nulls criteria for which the inputs have disappeared.
             // User needs to be warned that the event has become invalid--I see no good way to correct it automatically.
-             
+
             bool isOK = true;
 
             var activeControls = _params.GetActiveInputControls();
@@ -1669,13 +1670,13 @@ namespace Turandot_Editor
                     Debug.WriteLine($"filepath = {filePath}");
                     RpcOpenFile(filePath);
                     break;
-                //case "SetMetrics":
-                //    Invoke(new Action(() => { RpcSetMetrics(parts[1]); }));
-                //    break;
-                //case "SetSubjectFolder":
-                //    FileLocations.SubjectDataFolder = parts[1];
-                //    ApplyAudiogramDataToExpressions(Path.Combine(FileLocations.SubjectDataFolder, "meta"));
-                //    break;
+                    //case "SetMetrics":
+                    //    Invoke(new Action(() => { RpcSetMetrics(parts[1]); }));
+                    //    break;
+                    //case "SetSubjectFolder":
+                    //    FileLocations.SubjectDataFolder = parts[1];
+                    //    ApplyAudiogramDataToExpressions(Path.Combine(FileLocations.SubjectDataFolder, "meta"));
+                    //    break;
             }
         }
 
@@ -1802,6 +1803,17 @@ namespace Turandot_Editor
             }
         }
 
+
+        private void disableInputsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreEvents && _selectedState != null)
+            {
+                _selectedState.disableInputs = disableInputsCheckBox.Checked;
+                SetDirty();
+            }
+
+        }
+
         private void overrideColorCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (!_ignoreEvents)
@@ -1815,7 +1827,7 @@ namespace Turandot_Editor
         {
             if (!_ignoreEvents)
             {
-                _params.screen.Color = (int) screenColorBox.ValueAsUInt;
+                _params.screen.Color = (int)screenColorBox.ValueAsUInt;
                 SetDirty();
             }
         }
@@ -1840,6 +1852,5 @@ namespace Turandot_Editor
                 SetDirty();
             }
         }
-
     }
 }
