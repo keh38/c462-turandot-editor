@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="C462.Shared" Version="1.6.0" />
-    <PackageReference Include="C462.Turandot" Version="1.0.0" />
+    <PackageReference Include="C462.Turandot" Version="1.2.0" />
     <PackageReference Include="HarfBuzzSharp" Version="8.3.1.1" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="8.3.1.1" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.macOS" Version="8.3.1.1" />
