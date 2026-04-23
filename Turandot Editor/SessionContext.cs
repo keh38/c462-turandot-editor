@@ -32,6 +32,7 @@ namespace Turandot_Editor
                 Debug.WriteLine("SessionContext not initialized. Call Initialize() before setting transducer.");
                 return;
             }
+            Signal.AdapterMap.AudioTransducer = transducer;
             Signal.Transducer = transducer;
             Signal.CalibrationFolder = Path.Combine(SharedFileLocations.SharedFolder, "Calibration");
         }
