@@ -1,6 +1,6 @@
 ## Changelog
 
-### v3.1 (unreleased)
+### v3.1 (2026-04-23)
 #### Fixed
 - gating of FM sweeps
 - various improvements to the UX
