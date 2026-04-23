@@ -403,7 +403,7 @@ namespace Turandot_Editor
             ShowInstructions(p.instructions);
 
             _ignoreEvents = false;
-
+            
             eventsSpecifier.UpdateInputSources(p.screen.Inputs.Select(x => x.Name).ToList(), null);
             eventsSpecifier.SetData(p.inputEvents, p.flags);
 
@@ -1296,6 +1296,7 @@ namespace Turandot_Editor
             signalGraph.Visible = true;
             signalGraph.Plot.Axes.AutoScale();
             signalGraph.Refresh();
+            channelPropertyGrid.Refresh();  
 
             graphTabControl.SelectedTab = string.IsNullOrEmpty(audioErrorTextBox.Text) ? graphPage : errorPage;
         }

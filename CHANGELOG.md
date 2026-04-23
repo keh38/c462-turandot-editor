@@ -4,6 +4,8 @@
 #### Fixed
 - gating of FM sweeps
 - various improvements to the UX
+#### Changed
+- can use metric expressions for Level and Filenames
 
 ---
 
