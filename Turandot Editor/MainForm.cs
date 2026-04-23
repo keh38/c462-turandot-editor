@@ -381,8 +381,6 @@ namespace Turandot_Editor
             tagTextBox.Text = p.tag ?? "";
             wavFolderTextBox.Text = p.wavFolder;
 
-            // FIX ME: channelView.WavFolder = GetWavFolder();
-
             trialLogOptionEnum.SetEnumValue(p.trialLogOption);
 
             expertCheckBox.Checked = p.allowExpertOptions;

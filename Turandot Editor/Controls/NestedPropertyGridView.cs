@@ -1,12 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.Versioning;
 
@@ -23,12 +19,12 @@ namespace Turandot_Editor
     [SupportedOSPlatform("windows")]
     public partial class NestedPropertyGridView : KUserControl
     {
-        List<Variable> _varList = null;
-        EditorParameters _params;
-        bool _showDim = true;
-        bool _showExpr = true;
-        DataGridViewCell _exprCell = null;
-        List<Expressions.PropVal> _propVals = null;
+        private List<Variable> _varList = null;
+        private EditorParameters _params;
+        private bool _showDim = true;
+        private bool _showExpr = true;
+        private DataGridViewCell _exprCell = null;
+        private List<Expressions.PropVal> _propVals = null;
 
         public static List<Variable> Clipboard = new List<Variable>();
 
@@ -37,9 +33,13 @@ namespace Turandot_Editor
             InitializeComponent();
         }
 
+        // -----------------------------------------------------------------------
+        // Public API
+        // -----------------------------------------------------------------------
+
         public List<Variable> Value
         {
-            get { return _varList; }
+            get => _varList;
             set
             {
                 _varList = value;
@@ -61,7 +61,7 @@ namespace Turandot_Editor
 
         public bool ShowDim
         {
-            get { return _showDim; }
+            get => _showDim;
             set
             {
                 _showDim = value;
@@ -71,15 +71,15 @@ namespace Turandot_Editor
 
         public bool AllowUserToDeleteRows
         {
-            get { return dataGridView.AllowUserToDeleteRows; }
-            set { dataGridView.AllowUserToDeleteRows = value; }
+            get => dataGridView.AllowUserToDeleteRows;
+            set => dataGridView.AllowUserToDeleteRows = value;
         }
 
         public int MaxNumberRows { get; set; }
 
         public bool ShowExpr
         {
-            get { return _showExpr; }
+            get => _showExpr;
             set
             {
                 _showExpr = value;
@@ -89,11 +89,11 @@ namespace Turandot_Editor
 
         public void UpdateAvailableStates()
         {
-            List<string> stateList = _params.GetStateNames();
+            var stateList = _params.GetStateNames();
 
             dataGridView.Rows.Clear();
 
-            DataGridViewComboBoxColumn col = dataGridView.Columns["State"] as DataGridViewComboBoxColumn;
+            var col = dataGridView.Columns["State"] as DataGridViewComboBoxColumn;
             col.Items.Clear();
             col.Items.AddRange(stateList.ToArray());
 
@@ -102,164 +102,24 @@ namespace Turandot_Editor
             ShowFamily(_varList);
         }
 
+        // -----------------------------------------------------------------------
+        // Display
+        // -----------------------------------------------------------------------
+
         private void ShowFamily(List<Variable> vlist)
         {
             if (vlist == null) return;
 
             _ignoreEvents = true;
-
             dataGridView.Rows.Clear();
-            foreach (Variable v in vlist) AddFamilyRow(v);
+            foreach (var v in vlist) AddFamilyRow(v);
 
-            if (MaxNumberRows == 0) DisableCells(dataGridView.RowCount - 1, 1);
+            // The empty new-row placeholder should start with only State editable,
+            // so the user is forced to fill in the hierarchy top-down.
+            if (dataGridView.AllowUserToAddRows)
+                LockNewRowPlaceholder();
 
             _ignoreEvents = false;
-        }
-
-        private void DisableCells(int rowIndex, int from)
-        {
-            if (rowIndex >= 0)
-            {
-                for (int k = 1; k < 5; k++) dataGridView.Rows[rowIndex].Cells[k].ReadOnly = k >= from;
-            }
-        }
-
-        private void propGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!_ignoreEvents && _varList != null)
-            {
-                int rowIndex = dataGridView.CurrentCell.RowIndex;
-                var cells = dataGridView.Rows[rowIndex].Cells;
-                string state = cells[0].Value as string;
-
-                if (dataGridView.CurrentCell.ColumnIndex == 0)
-                {
-                    if (dataGridView.CurrentCell.RowIndex == _varList.Count && (MaxNumberRows == 0 || dataGridView.Rows.Count < MaxNumberRows))
-                    {
-                        AddNewVariable();
-                        DisableCells(rowIndex, 2);
-                    }
-                    else
-                    {
-                        _varList[rowIndex].state = cells["State"].Value as string;
-                        DisableCells(rowIndex, 2);
-                    }
-                    _ignoreEvents = true;
-                    UpdateStateSelection(rowIndex, state);
-                    _ignoreEvents = false;
-                }
-                else if (dataGridView.CurrentCell.ColumnIndex == 1)
-                {
-                    _varList[rowIndex].chan = cells["Channel"].Value as string;
-                    _ignoreEvents = true;
-                    DisableCells(rowIndex, 10);
-                    UpdateChannelSelection(rowIndex);
-                    _ignoreEvents = false;
-                }
-                else if (dataGridView.CurrentCell.ColumnIndex == 2)
-                {
-                    _varList[rowIndex].property = cells["Property"].Value as string;
-                    DisableCells(rowIndex, 10);
-                }
-                else if (dataGridView.CurrentCell.ColumnIndex == 3)
-                {
-                    _varList[rowIndex].dim = (VarDimension)Enum.GetNames(typeof(VarDimension)).ToList().IndexOf(cells["Dim"].Value as string);
-                }
-                else if (dataGridView.CurrentCell.ColumnIndex == 4)
-                {
-                    _varList[rowIndex].expression = cells["Expr"].Value as string;
-                    TestExpression(cells["Expr"]);
-                }
-                OnValueChanged();
-            }
-        }
-
-        private void TestExpression(DataGridViewCell cell)
-        {
-            try
-            {
-                string xvector = "";
-                string yvector = "";
-                for (int k = 0; k < _varList.Count; k++)
-                {
-                    //if (k != cell.RowIndex && _varList[k].dim == VarDimension.X && string.IsNullOrEmpty(xvector))
-                    if (string.IsNullOrEmpty(xvector) && _varList[k].dim == VarDimension.X)
-                    {
-                        float[] xvec = Expressions.Evaluate(_varList[k].expression);
-                        xvector = Expressions.ToVectorString(xvec);
-                    }
-
-                    if (k != cell.RowIndex && _varList[k].dim == VarDimension.Y && string.IsNullOrEmpty(yvector))
-                    {
-                        string yexpr = _varList[k].expression;
-                        if (yexpr.Contains("X") && !string.IsNullOrEmpty(xvector)) yexpr = yexpr.Replace("X", xvector);
-
-                        float[] yvec = Expressions.Evaluate(yexpr);
-                        yvector = Expressions.ToVectorString(yvec);
-                    }
-                }
-
-                string expr = cell.Value as string;
-                if (expr.Contains("X") && !string.IsNullOrEmpty(xvector)) expr = expr.Replace("X", xvector);
-                if (expr.Contains("Y") && !string.IsNullOrEmpty(yvector)) expr = expr.Replace("Y", yvector);
-
-                if (!Expressions.TryEvaluate(expr, _propVals))
-                {
-                    cell.ErrorText = Expressions.LastError;
-                }
-                else cell.ErrorText = "";
-            }
-            catch (Exception ex)
-            {
-                cell.ErrorText = ex.Message;
-            }
-        }
-
-        private void UpdateStateSelection(int rowIndex, string stateName)
-        {
-            dataGridView.Rows[rowIndex].Cells["Channel"].Value = null;
-            dataGridView.Rows[rowIndex].Cells["Property"].Value = null;
-            dataGridView.Rows[rowIndex].Cells["Expr"].Value = null;
-
-            DataGridViewComboBoxCell cbCell = (DataGridViewComboBoxCell)dataGridView.Rows[rowIndex].Cells[1];
-            cbCell.Items.Clear();
-            cbCell.Items.AddRange(_params.GetChannelNames(stateName).ToArray());
-
-            _varList[rowIndex].chan = "";
-            _varList[rowIndex].property = "";
-            _varList[rowIndex].expression = "";
-        }
-
-        private void UpdateChannelSelection(int rowIndex)
-        {
-            DataGridViewComboBoxCell cbCell = (DataGridViewComboBoxCell)dataGridView.Rows[rowIndex].Cells[2];
-            cbCell.Value = null;
-            cbCell.Items.Clear();
-
-            List<string> props = _params.GetChannelProperties(_varList[rowIndex].state, _varList[rowIndex].chan);
-            cbCell.Items.AddRange(props.ToArray());
-
-            if (props.Count == 1)
-            {
-                cbCell.Value = props[0];
-                _varList[rowIndex].property = props[0];
-                DisableCells(rowIndex, 10);
-            }
-            else if (props.Contains(_varList[rowIndex].property)) cbCell.Value = _varList[rowIndex].property;
-        }
-
-        private void AddNewVariable()
-        {
-            var cells = dataGridView.Rows[dataGridView.CurrentCell.RowIndex].Cells;
-
-            Variable v = new Variable();
-            v.state = cells["State"].Value as string;
-
-            _ignoreEvents = true;
-            cells["Dim"].Value = v.dim.ToString();
-            _ignoreEvents = false;
-
-            _varList.Add(v);
         }
 
         private void AddFamilyRow(Variable v)
@@ -267,11 +127,16 @@ namespace Turandot_Editor
             int rowIndex = dataGridView.Rows.Add();
             var cells = dataGridView.Rows[rowIndex].Cells;
 
-            DataGridViewComboBoxCell cbCell = (DataGridViewComboBoxCell)cells["Channel"];
-            cbCell.Items.Clear();
-            cbCell.Items.AddRange(_params.GetChannelNames(v.state).ToArray());
+            // Populate channel dropdown for this state
+            var chanCell = (DataGridViewComboBoxCell)cells["Channel"];
+            chanCell.Items.AddRange(_params.GetChannelNames(v.state).ToArray());
 
-            UpdateChannelSelection(rowIndex);
+            // Populate property dropdown for this state+channel (if channel is set)
+            if (!string.IsNullOrEmpty(v.chan))
+            {
+                var propCell = (DataGridViewComboBoxCell)cells["Property"];
+                propCell.Items.AddRange(_params.GetChannelProperties(v.state, v.chan).ToArray());
+            }
 
             cells["State"].Value = v.state;
             cells["Channel"].Value = v.chan;
@@ -281,15 +146,193 @@ namespace Turandot_Editor
 
             dataGridView.AllowUserToAddRows = MaxNumberRows == 0 || dataGridView.Rows.Count < MaxNumberRows;
 
-            DisableCells(rowIndex, 10);
+            RefreshRowEditability(rowIndex);
+        }
+
+        // -----------------------------------------------------------------------
+        // Row editability
+        // -----------------------------------------------------------------------
+
+        /// <summary>
+        /// Enables cells in the row based on how far the user has filled in the hierarchy.
+        /// State is always editable. Channel requires State. Property / Dim / Expr require Channel.
+        /// </summary>
+        private void RefreshRowEditability(int rowIndex)
+        {
+            if (rowIndex < 0 || _varList == null || rowIndex >= _varList.Count) return;
+
+            var v = _varList[rowIndex];
+            var cells = dataGridView.Rows[rowIndex].Cells;
+
+            bool hasState = !string.IsNullOrEmpty(v.state);
+            bool hasChannel = !string.IsNullOrEmpty(v.chan);
+
+            cells["Channel"].ReadOnly = !hasState;
+            cells["Property"].ReadOnly = !hasChannel;
+            cells["Dim"].ReadOnly = !hasChannel;
+            cells["Expr"].ReadOnly = !hasChannel;
+        }
+
+        /// <summary>
+        /// Disables all cells except State on the DataGridView's new-row placeholder row.
+        /// </summary>
+        private void LockNewRowPlaceholder()
+        {
+            // AllowUserToAddRows keeps a blank row at the end that has no backing variable.
+            int placeholderIndex = dataGridView.Rows.Count - 1;
+            if (placeholderIndex < 0) return;
+
+            var cells = dataGridView.Rows[placeholderIndex].Cells;
+            cells["Channel"].ReadOnly = true;
+            cells["Property"].ReadOnly = true;
+            cells["Dim"].ReadOnly = true;
+            cells["Expr"].ReadOnly = true;
+        }
+
+        // -----------------------------------------------------------------------
+        // Cascade updates — preserve downstream selections when still valid
+        // -----------------------------------------------------------------------
+
+        /// <summary>
+        /// Called after the State value changes on an existing row.
+        /// Refreshes the Channel dropdown. If the previously selected channel still
+        /// exists in the new state's channel list it is preserved and the cascade
+        /// continues into <see cref="CascadeFromChannel"/>; otherwise channel,
+        /// property, and expression are cleared.
+        /// </summary>
+        private void CascadeFromState(int rowIndex)
+        {
+            var v = _varList[rowIndex];
+            var cells = dataGridView.Rows[rowIndex].Cells;
+
+            var chanCell = (DataGridViewComboBoxCell)cells["Channel"];
+            chanCell.Items.Clear();
+            var channelNames = _params.GetChannelNames(v.state);
+            chanCell.Items.AddRange(channelNames.ToArray());
+
+            if (!channelNames.Contains(v.chan))
+            {
+                // Previous channel is no longer valid — clear everything downstream.
+                v.chan = "";
+                v.property = "";
+                v.expression = "";
+                cells["Channel"].Value = null;
+                cells["Property"].Value = null;
+                cells["Expr"].Value = null;
+            }
+            // If the channel is still valid, leave Channel / Property / Expr cells
+            // as they are and let CascadeFromChannel re-validate the property.
+
+            CascadeFromChannel(rowIndex);
+        }
+
+        /// <summary>
+        /// Called after the Channel value changes (or after <see cref="CascadeFromState"/>).
+        /// Refreshes the Property dropdown. Auto-selects if only one option is available.
+        /// Preserves the existing property if it remains valid; clears it otherwise.
+        /// </summary>
+        private void CascadeFromChannel(int rowIndex)
+        {
+            var v = _varList[rowIndex];
+            var cells = dataGridView.Rows[rowIndex].Cells;
+
+            var propCell = (DataGridViewComboBoxCell)cells["Property"];
+            propCell.Items.Clear();
+
+            if (string.IsNullOrEmpty(v.chan))
+            {
+                RefreshRowEditability(rowIndex);
+                return;
+            }
+
+            var props = _params.GetChannelProperties(v.state, v.chan);
+            propCell.Items.AddRange(props.ToArray());
+
+            if (props.Count == 1)
+            {
+                // Only one option — auto-select it.
+                v.property = props[0];
+                propCell.Value = props[0];
+            }
+            else if (props.Contains(v.property))
+            {
+                // Existing selection is still valid — keep it.
+                propCell.Value = v.property;
+            }
+            else
+            {
+                // Previous property is no longer valid.
+                v.property = "";
+                propCell.Value = null;
+            }
+
+            RefreshRowEditability(rowIndex);
+        }
+
+        // -----------------------------------------------------------------------
+        // Event handlers — grid
+        // -----------------------------------------------------------------------
+
+        private void propGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_ignoreEvents || _varList == null || e.RowIndex < 0) return;
+
+            int rowIndex = e.RowIndex;
+            var cells = dataGridView.Rows[rowIndex].Cells;
+            string columnName = dataGridView.Columns[e.ColumnIndex].Name;
+
+            switch (columnName)
+            {
+                case "State":
+                    if (rowIndex == _varList.Count)
+                    {
+                        // User filled in the new-row placeholder — create the backing variable.
+                        if (MaxNumberRows == 0 || dataGridView.Rows.Count <= MaxNumberRows)
+                            AddNewVariable(rowIndex);
+                    }
+                    else
+                    {
+                        _varList[rowIndex].state = cells["State"].Value as string;
+                    }
+                    _ignoreEvents = true;
+                    CascadeFromState(rowIndex);
+                    _ignoreEvents = false;
+                    break;
+
+                case "Channel":
+                    _varList[rowIndex].chan = cells["Channel"].Value as string;
+                    _ignoreEvents = true;
+                    CascadeFromChannel(rowIndex);
+                    _ignoreEvents = false;
+                    break;
+
+                case "Property":
+                    _varList[rowIndex].property = cells["Property"].Value as string;
+                    RefreshRowEditability(rowIndex);
+                    break;
+
+                case "Dim":
+                    _varList[rowIndex].dim = ParseDimension(cells["Dim"].Value as string);
+                    break;
+
+                case "Expr":
+                    _varList[rowIndex].expression = cells["Expr"].Value as string;
+                    TestExpression(cells["Expr"]);
+                    break;
+
+                default:
+                    return; // Unknown column — don't fire OnValueChanged.
+            }
+
+            OnValueChanged();
         }
 
         private void dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
+            // Commit combo-box selections immediately so CellValueChanged fires
+            // before the user moves to the next cell.
             if (!_ignoreEvents && dataGridView.CurrentCell.ColumnIndex < 3 && dataGridView.IsCurrentCellDirty)
-            {
                 dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
         }
 
         private void dataGridView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -303,121 +346,186 @@ namespace Turandot_Editor
 
         private void dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
-            if (MaxNumberRows > 0 && dataGridView.Rows != null) dataGridView.AllowUserToAddRows = dataGridView.Rows.Count < MaxNumberRows;
+            if (MaxNumberRows > 0 && dataGridView.Rows != null)
+                dataGridView.AllowUserToAddRows = dataGridView.Rows.Count < MaxNumberRows;
         }
 
         private void dataGridView_Leave(object sender, EventArgs e)
         {
+            // The expression editor is a popup that legitimately steals focus from
+            // the grid while a row is still being filled in. Don't treat that as
+            // the user abandoning the row.
+            if (expressionEditor.Visible) return;
+
             if (_varList == null) return;
 
-            List<Variable> toDelete = new List<Variable>();
-            foreach (Variable v in _varList)
+            var incomplete = _varList
+                .Where(v => string.IsNullOrEmpty(v.state)
+                         || string.IsNullOrEmpty(v.chan)
+                         || string.IsNullOrEmpty(v.property)
+                         || string.IsNullOrEmpty(v.expression))
+                .ToList();
+
+            if (incomplete.Count > 0)
             {
-                if (string.IsNullOrEmpty(v.state) ||
-                    string.IsNullOrEmpty(v.chan) ||
-                    string.IsNullOrEmpty(v.property) ||
-                    string.IsNullOrEmpty(v.expression))
-                {
-                    toDelete.Add(v);
-                }
+                foreach (var v in incomplete) _varList.Remove(v);
+                ShowFamily(_varList);
             }
-            foreach (Variable v in toDelete) _varList.Remove(v);
-            if (toDelete.Count > 0) ShowFamily(_varList);
         }
+        private void dataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // Suppress DataGridView's built-in error dialog for combo box validation.
+        }
+
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly) return;
+
+            string colName = dataGridView.Columns[e.ColumnIndex].Name;
+            if (colName != "State" && colName != "Channel" && colName != "Property" && colName != "Dim")
+                return;
+
+            dataGridView.BeginEdit(true);
+
+            if (dataGridView.EditingControl is ComboBox combo)
+                combo.DroppedDown = true;
+        }
+
+        // -----------------------------------------------------------------------
+        // Helpers
+        // -----------------------------------------------------------------------
+
+        private void AddNewVariable(int rowIndex)
+        {
+            string stateName = dataGridView.Rows[rowIndex].Cells["State"].Value as string;
+            var v = new Variable { state = stateName };
+            _varList.Add(v);
+
+            // Populate the Dim cell with the default without re-triggering the handler.
+            _ignoreEvents = true;
+            dataGridView.Rows[rowIndex].Cells["Dim"].Value = v.dim.ToString();
+            _ignoreEvents = false;
+        }
+
+        private static VarDimension ParseDimension(string value)
+        {
+            var names = Enum.GetNames(typeof(VarDimension)).ToList();
+            int index = names.IndexOf(value);
+            return index >= 0 ? (VarDimension)index : default;
+        }
+
+        // -----------------------------------------------------------------------
+        // Expression testing
+        // -----------------------------------------------------------------------
+
+        private void TestExpression(DataGridViewCell cell)
+        {
+            try
+            {
+                string xvector = "";
+                string yvector = "";
+                for (int k = 0; k < _varList.Count; k++)
+                {
+                    if (string.IsNullOrEmpty(xvector) && _varList[k].dim == VarDimension.X)
+                    {
+                        float[] xvec = Expressions.Evaluate(_varList[k].expression);
+                        xvector = Expressions.ToVectorString(xvec);
+                    }
+
+                    if (k != cell.RowIndex && string.IsNullOrEmpty(yvector) && _varList[k].dim == VarDimension.Y)
+                    {
+                        string yexpr = _varList[k].expression;
+                        if (yexpr.Contains("X") && !string.IsNullOrEmpty(xvector))
+                            yexpr = yexpr.Replace("X", xvector);
+                        float[] yvec = Expressions.Evaluate(yexpr);
+                        yvector = Expressions.ToVectorString(yvec);
+                    }
+                }
+
+                string expr = cell.Value as string;
+                if (expr.Contains("X") && !string.IsNullOrEmpty(xvector)) expr = expr.Replace("X", xvector);
+                if (expr.Contains("Y") && !string.IsNullOrEmpty(yvector)) expr = expr.Replace("Y", yvector);
+
+                cell.ErrorText = Expressions.TryEvaluate(expr, _propVals) ? "" : Expressions.LastError;
+            }
+            catch (Exception ex)
+            {
+                cell.ErrorText = ex.Message;
+            }
+        }
+
+        // -----------------------------------------------------------------------
+        // Context menu
+        // -----------------------------------------------------------------------
 
         private void dataGridView_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                ContextMenuStrip cms = BuildContextMenu(e.Location);
-                if (cms.Items.Count > 0)
-                    cms.Show(this, e.Location);
+                var cms = BuildContextMenu();
+                if (cms.Items.Count > 0) cms.Show(this, e.Location);
             }
         }
 
-        private ContextMenuStrip BuildContextMenu(Point point)
+        private ContextMenuStrip BuildContextMenu()
         {
             var cms = new ContextMenuStrip();
-            ToolStripMenuItem mi;
 
             if (Clipboard.Count > 0)
             {
-                mi = new ToolStripMenuItem();
-                mi.Text = "Paste";
-                mi.Click += pasteClick;
-                cms.Items.Add(mi);
-
-                if (_varList.Count > 0)
-                {
-                    cms.Items.Add(new ToolStripSeparator());
-                }
+                cms.Items.Add(MakeMenuItem("Paste", pasteClick));
+                if (_varList.Count > 0) cms.Items.Add(new ToolStripSeparator());
             }
 
             if (_varList.Count > 1)
             {
-                mi = new ToolStripMenuItem();
-                mi.Text = "Sort";
-                mi.Click += sortClick;
-                cms.Items.Add(mi);
-
+                cms.Items.Add(MakeMenuItem("Sort", sortClick));
                 cms.Items.Add(new ToolStripSeparator());
             }
 
             if (_varList.Count > 0)
             {
-                mi = new ToolStripMenuItem();
-                mi.Text = "Delete selected row(s)";
-                mi.Click += deleteRowClick;
-                cms.Items.Add(mi);
-
-                mi = new ToolStripMenuItem();
-                mi.Text = "Duplicate selected row(s)";
-                mi.Click += duplicateRowClick;
-                cms.Items.Add(mi);
-
-                mi = new ToolStripMenuItem();
-                mi.Text = "Copy selected row(s)";
-                mi.Click += copyRowClick;
-                cms.Items.Add(mi);
-
+                cms.Items.Add(MakeMenuItem("Delete selected row(s)", deleteRowClick));
+                cms.Items.Add(MakeMenuItem("Duplicate selected row(s)", duplicateRowClick));
+                cms.Items.Add(MakeMenuItem("Copy selected row(s)", copyRowClick));
                 cms.Items.Add(new ToolStripSeparator());
-
-                mi = new ToolStripMenuItem();
-                mi.Text = "Copy table";
-                mi.Click += copyTableClick;
-                cms.Items.Add(mi);
-
-                mi = new ToolStripMenuItem();
-                mi.Text = "Clear table";
-                mi.Click += clearTableClick;
-                cms.Items.Add(mi);
+                cms.Items.Add(MakeMenuItem("Copy table", copyTableClick));
+                cms.Items.Add(MakeMenuItem("Clear table", clearTableClick));
             }
 
             return cms;
         }
 
+        private static ToolStripMenuItem MakeMenuItem(string text, EventHandler handler)
+        {
+            var mi = new ToolStripMenuItem { Text = text };
+            mi.Click += handler;
+            return mi;
+        }
+
         void deleteRowClick(object sender, EventArgs e)
         {
-            List<Variable> toDelete = new List<Variable>();
-            foreach (DataGridViewRow row in dataGridView.SelectedRows)
-                toDelete.Add(_varList[row.Index]);
+            var toDelete = dataGridView.SelectedRows
+                .Cast<DataGridViewRow>()
+                .Select(r => _varList[r.Index])
+                .ToList();
 
-            foreach (Variable v in toDelete) _varList.Remove(v);
-
-            foreach (DataGridViewRow row in dataGridView.SelectedRows)
-                dataGridView.Rows.Remove(row);
+            foreach (var v in toDelete) _varList.Remove(v);
+            foreach (DataGridViewRow row in dataGridView.SelectedRows) dataGridView.Rows.Remove(row);
 
             OnValueChanged();
         }
 
         void duplicateRowClick(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView.SelectedRows)
-            {
-                _varList.Add(new Variable(_varList[row.Index]));
-            }
-            ShowFamily(_varList);
+            var copies = dataGridView.SelectedRows
+                .Cast<DataGridViewRow>()
+                .Select(r => new Variable(_varList[r.Index]))
+                .ToList();
 
+            foreach (var v in copies) _varList.Add(v);
+            ShowFamily(_varList);
             OnValueChanged();
         }
 
@@ -425,54 +533,44 @@ namespace Turandot_Editor
         {
             Clipboard.Clear();
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
-            {
-                Variable v = new Variable(_varList[row.Index]);
-                Clipboard.Add(v);
-            }
+                Clipboard.Add(new Variable(_varList[row.Index]));
         }
 
         void copyTableClick(object sender, EventArgs e)
         {
             Clipboard.Clear();
-            foreach (Variable v in _varList)
-            {
-                Clipboard.Add(new Variable(v));
-            }
+            foreach (var v in _varList) Clipboard.Add(new Variable(v));
         }
 
         void clearTableClick(object sender, EventArgs e)
         {
             _varList.Clear();
             ShowFamily(_varList);
-
             OnValueChanged();
         }
 
         void pasteClick(object sender, EventArgs e)
         {
-            foreach (Variable v in Clipboard)
-            {
-                _varList.Add(new Variable(v));
-            }
+            foreach (var v in Clipboard) _varList.Add(new Variable(v));
             ShowFamily(_varList);
-
             OnValueChanged();
         }
 
         void sortClick(object sender, EventArgs e)
         {
-            List<Variable> tmp = new List<Variable>();
-            foreach (Variable v in _varList) tmp.Add(new Variable(v));
-
+            var snapshot = _varList.Select(v => new Variable(v)).ToList();
             _varList.Clear();
-            foreach (Variable v in tmp.FindAll(o => o.dim == VarDimension.X)) _varList.Add(new Variable(v));
-            foreach (Variable v in tmp.FindAll(o => o.dim == VarDimension.Y)) _varList.Add(new Variable(v));
-            foreach (Variable v in tmp.FindAll(o => o.dim == VarDimension.Ind)) _varList.Add(new Variable(v));
+            foreach (var v in snapshot.Where(v => v.dim == VarDimension.X)) _varList.Add(v);
+            foreach (var v in snapshot.Where(v => v.dim == VarDimension.Y)) _varList.Add(v);
+            foreach (var v in snapshot.Where(v => v.dim == VarDimension.Ind)) _varList.Add(v);
 
             ShowFamily(_varList);
-
             OnValueChanged();
         }
+
+        // -----------------------------------------------------------------------
+        // Expression editor popup
+        // -----------------------------------------------------------------------
 
         private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -481,7 +579,6 @@ namespace Turandot_Editor
             _exprCell = dataGridView.Rows[e.RowIndex].Cells["Expr"];
 
             Rectangle r = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-
             expressionEditor.Top = r.Top;
             expressionEditor.Left = r.Right - expressionEditor.Width;
 
@@ -489,22 +586,19 @@ namespace Turandot_Editor
             string yvector = "";
             for (int k = 0; k < e.RowIndex; k++)
             {
-                if (_varList[k].dim == VarDimension.X && string.IsNullOrEmpty(xvector))
+                if (string.IsNullOrEmpty(xvector) && _varList[k].dim == VarDimension.X)
                 {
-                    var xvec = Expressions.Evaluate(_varList[k].expression);
-                    xvector = Expressions.ToVectorString(xvec);
+                    xvector = Expressions.ToVectorString(Expressions.Evaluate(_varList[k].expression));
                 }
-                if (_varList[k].dim == VarDimension.Y && string.IsNullOrEmpty(yvector))
+                if (string.IsNullOrEmpty(yvector) && _varList[k].dim == VarDimension.Y)
                 {
-                    var yvec = Expressions.Evaluate(_varList[k].expression);
-                    yvector = Expressions.ToVectorString(yvec);
+                    yvector = Expressions.ToVectorString(Expressions.Evaluate(_varList[k].expression));
                 }
             }
 
             expressionEditor.XVector = xvector;
             expressionEditor.YVector = yvector;
             expressionEditor.Value = _varList[e.RowIndex].expression;
-
             expressionEditor.Visible = true;
             expressionEditor.Focus();
         }
@@ -512,18 +606,16 @@ namespace Turandot_Editor
         private void expressionEditor_ValueChanged(object sender, EventArgs e)
         {
             if (_exprCell.RowIndex < 0) return;
+
             _varList[_exprCell.RowIndex].expression = expressionEditor.Value;
+
+            _ignoreEvents = true;
             _exprCell.Value = expressionEditor.Value;
+            _ignoreEvents = false;
 
             expressionEditor.Visible = false;
-
             TestExpression(_exprCell);
+            OnValueChanged();
         }
-
-        private void dataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-
-        }
-
     }
 }

@@ -3,6 +3,7 @@
 ### v3.1 (unreleased)
 #### Fixed
 - gating of FM sweeps
+- various improvements to the UX
 
 ---
 

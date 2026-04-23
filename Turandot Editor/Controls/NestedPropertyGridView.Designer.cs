@@ -34,149 +34,149 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.State = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Property = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Dim = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Expr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expressionEditor = new Turandot_Editor.Controls.ExpressionEditor();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.SuspendLayout();
+            dataGridView = new System.Windows.Forms.DataGridView();
+            State = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            Channel = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            Property = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            Dim = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            Expr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            expressionEditor = new Turandot_Editor.Controls.ExpressionEditor();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            SuspendLayout();
             // 
             // dataGridView
             // 
-            this.dataGridView.AllowUserToResizeColumns = false;
-            this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridView.AllowUserToResizeColumns = false;
+            dataGridView.AllowUserToResizeRows = false;
+            dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView.ColumnHeadersHeight = 21;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.State,
-            this.Channel,
-            this.Property,
-            this.Dim,
-            this.Expr});
-            this.dataGridView.EnableHeadersVisualStyles = false;
-            this.dataGridView.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView.ColumnHeadersHeight = 21;
+            dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { State, Channel, Property, Dim, Expr });
+            dataGridView.EnableHeadersVisualStyles = false;
+            dataGridView.Location = new System.Drawing.Point(4, 5);
+            dataGridView.Margin = new System.Windows.Forms.Padding(0, 5, 4, 5);
+            dataGridView.Name = "dataGridView";
+            dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView.RowHeadersWidth = 20;
-            this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(590, 203);
-            this.dataGridView.TabIndex = 7;
-            this.dataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
-            this.dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.propGridView_CellValueChanged);
-            this.dataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView_CurrentCellDirtyStateChanged);
-            this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
-            this.dataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserAddedRow);
-            this.dataGridView.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView_UserDeletingRow);
-            this.dataGridView.Leave += new System.EventHandler(this.dataGridView_Leave);
-            this.dataGridView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseUp);
+            dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridView.RowHeadersWidth = 20;
+            dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            dataGridView.Size = new System.Drawing.Size(787, 312);
+            dataGridView.TabIndex = 7;
+            dataGridView.CellClick += dataGridView_CellClick;
+            dataGridView.CellMouseDoubleClick += dataGridView_CellMouseDoubleClick;
+            dataGridView.CellValueChanged += propGridView_CellValueChanged;
+            dataGridView.CurrentCellDirtyStateChanged += dataGridView_CurrentCellDirtyStateChanged;
+            dataGridView.DataError += dataGridView_DataError;
+            dataGridView.UserAddedRow += dataGridView_UserAddedRow;
+            dataGridView.UserDeletingRow += dataGridView_UserDeletingRow;
+            dataGridView.Leave += dataGridView_Leave;
+            dataGridView.MouseUp += dataGridView_MouseUp;
             // 
             // State
             // 
-            this.State.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.State.HeaderText = "State";
-            this.State.Name = "State";
-            this.State.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.State.Width = 75;
+            State.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            State.HeaderText = "State";
+            State.MinimumWidth = 6;
+            State.Name = "State";
+            State.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            State.Width = 75;
             // 
             // Channel
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Channel.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Channel.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Channel.HeaderText = "Channel";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.Width = 75;
+            Channel.DefaultCellStyle = dataGridViewCellStyle2;
+            Channel.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            Channel.HeaderText = "Channel";
+            Channel.MinimumWidth = 6;
+            Channel.Name = "Channel";
+            Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Channel.Width = 75;
             // 
             // Property
             // 
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Property.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Property.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Property.HeaderText = "Property";
-            this.Property.Items.AddRange(new object[] {
-            "",
-            "true"});
-            this.Property.Name = "Property";
-            this.Property.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Property.Width = 150;
+            Property.DefaultCellStyle = dataGridViewCellStyle3;
+            Property.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            Property.HeaderText = "Property";
+            Property.Items.AddRange(new object[] { "", "true" });
+            Property.MinimumWidth = 6;
+            Property.Name = "Property";
+            Property.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Property.Width = 150;
             // 
             // Dim
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Dim.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Dim.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Dim.HeaderText = "Dim";
-            this.Dim.Items.AddRange(new object[] {
-            "X",
-            "Y",
-            "Ind"});
-            this.Dim.Name = "Dim";
-            this.Dim.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dim.Width = 50;
+            Dim.DefaultCellStyle = dataGridViewCellStyle4;
+            Dim.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            Dim.HeaderText = "Dim";
+            Dim.Items.AddRange(new object[] { "X", "Y", "Ind" });
+            Dim.MinimumWidth = 6;
+            Dim.Name = "Dim";
+            Dim.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Dim.Width = 50;
             // 
             // Expr
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Expr.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Expr.HeaderText = "Expression";
-            this.Expr.Name = "Expr";
-            this.Expr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Expr.Width = 200;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Expr.DefaultCellStyle = dataGridViewCellStyle5;
+            Expr.HeaderText = "Expression";
+            Expr.MinimumWidth = 6;
+            Expr.Name = "Expr";
+            Expr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            Expr.Width = 200;
             // 
             // expressionEditor
             // 
-            this.expressionEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.expressionEditor.Location = new System.Drawing.Point(94, 77);
-            this.expressionEditor.MaximumSize = new System.Drawing.Size(575, 350);
-            this.expressionEditor.MinimumSize = new System.Drawing.Size(200, 100);
-            this.expressionEditor.Name = "expressionEditor";
-            this.expressionEditor.Padding = new System.Windows.Forms.Padding(3, 0, 0, 3);
-            this.expressionEditor.PropValPairs = null;
-            this.expressionEditor.Sizable.Bottom = true;
-            this.expressionEditor.Sizable.Left = true;
-            this.expressionEditor.Sizable.Right = false;
-            this.expressionEditor.Sizable.Top = false;
-            this.expressionEditor.Size = new System.Drawing.Size(483, 108);
-            this.expressionEditor.TabIndex = 8;
-            this.expressionEditor.Value = "";
-            this.expressionEditor.Visible = false;
-            this.expressionEditor.ValueChanged += new System.EventHandler(this.expressionEditor_ValueChanged);
+            expressionEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            expressionEditor.Location = new System.Drawing.Point(125, 118);
+            expressionEditor.Margin = new System.Windows.Forms.Padding(7, 12, 7, 12);
+            expressionEditor.MaximumSize = new System.Drawing.Size(766, 537);
+            expressionEditor.MinimumSize = new System.Drawing.Size(266, 153);
+            expressionEditor.Name = "expressionEditor";
+            expressionEditor.Padding = new System.Windows.Forms.Padding(4, 0, 0, 5);
+            expressionEditor.PropValPairs = null;
+            expressionEditor.Sizable.Bottom = true;
+            expressionEditor.Sizable.Left = true;
+            expressionEditor.Sizable.Right = false;
+            expressionEditor.Sizable.Top = false;
+            expressionEditor.Size = new System.Drawing.Size(643, 165);
+            expressionEditor.TabIndex = 8;
+            expressionEditor.Value = "";
+            expressionEditor.Visible = false;
+            expressionEditor.XVector = null;
+            expressionEditor.YVector = null;
+            expressionEditor.ValueChanged += expressionEditor_ValueChanged;
             // 
             // NestedPropertyGridView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.expressionEditor);
-            this.Controls.Add(this.dataGridView);
-            this.Name = "NestedPropertyGridView";
-            this.Size = new System.Drawing.Size(603, 209);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(expressionEditor);
+            Controls.Add(dataGridView);
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Name = "NestedPropertyGridView";
+            Size = new System.Drawing.Size(804, 322);
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            ResumeLayout(false);
 
         }
 
