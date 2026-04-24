@@ -400,6 +400,7 @@ namespace Turandot_Editor
             stateCuesControl.SetAvailableCues(p.screen.Cues);
             stateInputsControl.SetAvailableInputs(p.screen.Inputs);
 
+            UpdateAllowableLevelUnits();
             ShowInstructions(p.instructions);
 
             _ignoreEvents = false;
@@ -1630,15 +1631,22 @@ namespace Turandot_Editor
                 termFlagExprBox.Visible = _params.allowExpertOptions;
 
                 if (!_params.allowExpertOptions) _params.ClearExpertOptions();
+                UpdateAllowableLevelUnits();
 
                 SetDirty();
             }
         }
 
-        private void metricGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void UpdateAllowableLevelUnits()
         {
+            var units = new List<LevelUnits> { LevelUnits.dB_attenuation, LevelUnits.dB_SPL, LevelUnits.dB_Vrms, LevelUnits.dB_SL, LevelUnits.PercentDR };
+            if (_params.allowExpertOptions)
+                units.Add(LevelUnits.dB_SPL_noLDL);
 
+            KLib.Signals.Editor.LevelUnitsConverter.Allowable = units.ToArray();
         }
+
+        private void metricGridView_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void transducerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {

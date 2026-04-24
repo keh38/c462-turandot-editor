@@ -1,5 +1,13 @@
 ## Changelog
 
+### v3.1.2 (unreleased)
+#### Fixed
+- bug selecting multiple rows of schedule table
+#### Added
+- restored noise filtering options
+
+---
+
 ### v3.1 (2026-04-23)
 #### Fixed
 - gating of FM sweeps
