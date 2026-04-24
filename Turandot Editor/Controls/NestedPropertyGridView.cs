@@ -379,7 +379,7 @@ namespace Turandot_Editor
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             if (dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly) return;
 
             string colName = dataGridView.Columns[e.ColumnIndex].Name;
