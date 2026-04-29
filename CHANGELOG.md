@@ -6,7 +6,7 @@
 #### Added
 - restored noise filtering options
 #### Changed
-- made "no LDL" option separate and explicit
+- made 'no LDL' option separate and explicit
 - audiogram expressions can take a frequency vector, metrics for ear
 
 ---
