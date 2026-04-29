@@ -104,7 +104,7 @@ Write-Host "Pushed to GitHub."
 Step "Creating GitHub release v$Version"
 
 Push-Location $RepoRoot
-gh release create $TagName $InstallerPath $CsprojFile "$RepoRoot\release.ps1"`
+gh release create $TagName $InstallerPath $CsprojFile "$RepoRoot\release.ps1" `
     --title $ReleaseTitle `
     --notes $ReleaseNotes
 Pop-Location
