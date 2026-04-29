@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 # --- Configuration -----------------------------------------------------------
-$Version        = "3.1"
+$Version        = "3.1.2"
 # Pad to exactly 4 parts for AssemblyVersion / FileVersion
 $vParts          = $Version.Split('.')
 $AssemblyVersion = ($vParts + @('0','0','0'))[ 0..3 ] -join '.'
@@ -72,7 +72,7 @@ Step "Building solution in Release mode"
 & "${env:ProgramFiles}\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
     $SolutionFile `
     /p:Configuration=Release `
-    /p:Platform=x64 `
+    /p:Platform="Any CPU" `
     /v:quiet
 
 if ($LASTEXITCODE -ne 0) {
@@ -104,7 +104,7 @@ Write-Host "Pushed to GitHub."
 Step "Creating GitHub release v$Version"
 
 Push-Location $RepoRoot
-gh release create $TagName $InstallerPath `
+gh release create $TagName $InstallerPath $CsprojFile "$RepoRoot\release.ps1"`
     --title $ReleaseTitle `
     --notes $ReleaseNotes
 Pop-Location
