@@ -94,7 +94,7 @@ Write-Host "Installer found."
 Step "Committing and pushing changes"
 
 Push-Location $RepoRoot
-git add "$AssemblyInfo" "$Changelog"
+git add "$AssemblyInfo" "$Changelog"  $CsprojFile "$RepoRoot\release.ps1" 
 git commit -m $CommitMessage
 git push
 Pop-Location
@@ -104,7 +104,7 @@ Write-Host "Pushed to GitHub."
 Step "Creating GitHub release v$Version"
 
 Push-Location $RepoRoot
-gh release create $TagName $InstallerPath $CsprojFile "$RepoRoot\release.ps1" `
+gh release create $TagName $InstallerPath `
     --title $ReleaseTitle `
     --notes $ReleaseNotes
 Pop-Location
