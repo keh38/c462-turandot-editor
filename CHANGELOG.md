@@ -1,10 +1,13 @@
 ## Changelog
 
-### v3.1.2 (unreleased)
+### v3.1.2 (2026-04-29)
 #### Fixed
 - bug selecting multiple rows of schedule table
 #### Added
 - restored noise filtering options
+#### Changed
+- made "no LDL" option separate and explicit
+- audiogram expressions can take a frequency vector, metrics for ear
 
 ---
 
