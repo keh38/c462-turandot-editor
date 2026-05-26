@@ -1,5 +1,11 @@
 ## Changelog
 
+### v3.1.3 (unreleased)
+#### Added
+- Param slider custom tick mark option
+
+---
+
 ### v3.1.2 (2026-04-29)
 #### Fixed
 - bug selecting multiple rows of schedule table
