@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 # --- Configuration -----------------------------------------------------------
-$Version        = "3.1.2"
+$Version        = "3.1.3"
 # Pad to exactly 4 parts for AssemblyVersion / FileVersion
 $vParts          = $Version.Split('.')
 $AssemblyVersion = ($vParts + @('0','0','0'))[ 0..3 ] -join '.'
