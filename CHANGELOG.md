@@ -1,5 +1,11 @@
 ## Changelog
 
+### v3.1.4 (2026-06-29)
+#### Fixed
+- right-clicking to pop up edge context menu was clearing the edge
+
+---
+
 ### v3.1.3 (2026-05-27)
 #### Added
 - Param slider custom tick mark option

@@ -212,6 +212,8 @@ namespace FSMGraph
 
         public void RemoveEdge(Edge edgeToRemove)
         {
+            if (edgeToRemove == null) return;
+
             Nodes.Find(n => n.Name == edgeToRemove.SourceName).RemoveOutgoing(edgeToRemove);
             Nodes.Find(n => n.Name == edgeToRemove.TargetName).RemoveIncoming(edgeToRemove);
             Edges.Remove(edgeToRemove);

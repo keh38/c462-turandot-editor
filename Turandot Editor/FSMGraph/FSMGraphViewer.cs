@@ -262,6 +262,7 @@ namespace KLib.Controls
         private void FSMGraph_MouseUp(object sender, MouseEventArgs e)
         {
             if (_graph == null) return;
+            if (e.Button == MouseButtons.Right) return;
 
             Point mousePoint = ScreenToGraph(e.Location);
 
@@ -841,8 +842,8 @@ namespace KLib.Controls
         {
             _graph.RemoveEdge(_selectedEdge);
 
-            if (OnEdgeDeleted != null)
-                OnEdgeDeleted(_selectedEdge.SourceName, _selectedEdge.TargetName, _selectedEdge.Label.Text, _selectedEdge.UserData);
+            if (_selectedEdge != null)
+                OnEdgeDeleted?.Invoke(_selectedEdge.SourceName, _selectedEdge.TargetName, _selectedEdge.Label.Text, _selectedEdge.UserData);
 
             _selectedEdge = null;
             Refresh();
