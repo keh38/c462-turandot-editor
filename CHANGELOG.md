@@ -1,5 +1,11 @@
 ## Changelog
 
+### v3.1.5 (unreleased)
+#### Fixed
+- LDL Inf's were not getting replaced with max SPL
+
+---
+
 ### v3.1.4 (2026-06-29)
 #### Fixed
 - right-clicking to pop up edge context menu was clearing the edge

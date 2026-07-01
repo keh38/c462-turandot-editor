@@ -1275,6 +1275,7 @@ namespace Turandot_Editor
                 {
                     chanName = ch.Name;
                     ch.Create();
+                    Debug.WriteLine($"{chanName}: {ch.Level.MaxLevel}");
 
                     double[] y = new double[npts];
                     double scaleFactor = 1 / ch.Data.Max();
@@ -1420,6 +1421,9 @@ namespace Turandot_Editor
         {
             Expressions.Audiogram = Audiograms.AudiogramData.Load(Path.Combine(SharedFileLocations.SharedFolder, "Calibration", "agram.xml"));
             Expressions.LDL = Audiograms.AudiogramData.Load(Path.Combine(SharedFileLocations.SharedFolder, "Calibration", "ldlgram.xml"));
+
+            SessionContext.SetAudiogram(Path.Combine(SharedFileLocations.SharedFolder, "Calibration", "agram.xml"));
+            SessionContext.SetLDL(Path.Combine(SharedFileLocations.SharedFolder, "Calibration", "ldlgram.xml"));
         }
 
         private void adaptControl_ValueChanged(object sender, EventArgs e)
